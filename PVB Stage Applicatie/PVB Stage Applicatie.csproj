@@ -146,6 +146,7 @@
     <Compile Include="Models\Login.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginForm.cs" />
     <Compile Include="Models\Opleiding.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
@@ -297,7 +298,7 @@
     <Content Include="Views\Bedrijf\Edit.cshtml" />
     <Content Include="Views\Bedrijf\Delete.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Login\LoginScherm.cshtml" />
+    <Content Include="Views\Login\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
