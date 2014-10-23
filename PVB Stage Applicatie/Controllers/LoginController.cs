@@ -11,7 +11,7 @@ namespace PVB_Stage_Applicatie.Controllers
         //
         // GET: /Login/
 
-        public ActionResult LoginScherm()
+        public ActionResult Index()
         {
             return View();
         }
