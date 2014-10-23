@@ -1,0 +1,578 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StageApplicatieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Bedrijf">
+    <Key>
+      <PropertyRef Name="BedrijfID" />
+    </Key>
+    <Property Name="BedrijfID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Naam" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Actief" Type="Boolean" Nullable="false" />
+    <Property Name="NonActiefReden" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Persoonsgegevens" Relationship="Self.FK_Persoonsgegevens_Bedrijf" FromRole="Bedrijf" ToRole="Persoonsgegevens" />
+  </EntityType>
+  <EntityType Name="Beoordeling">
+    <Key>
+      <PropertyRef Name="BeoordelingID" />
+    </Key>
+    <Property Name="BeoordelingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Stage" Type="Int32" Nullable="false" />
+    <Property Name="Datum" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Beoordeling1" Type="Int32" Nullable="false" />
+    <Property Name="VoorbereidWerk" Type="Int32" Nullable="false" />
+    <Property Name="VoorbereidWerkOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="PlanEnOrganiserenWerk" Type="Int32" Nullable="false" />
+    <Property Name="PlanEnOrganiserenWerkOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="TheoretischInzicht" Type="Int32" Nullable="false" />
+    <Property Name="TheoretischInzichtOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="KwalGeleverdWerk" Type="Int32" Nullable="false" />
+    <Property Name="KwalGeleverdWerkOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="RapportWerk" Type="Int32" Nullable="false" />
+    <Property Name="RapportWerkOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="HoudtBedrRegels" Type="Int32" Nullable="false" />
+    <Property Name="HoudtBedrRegelsOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="HoudtARBORegels" Type="Int32" Nullable="false" />
+    <Property Name="HoudtARBORegelsOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="WerkTempo" Type="Int32" Nullable="false" />
+    <Property Name="WerkTempoOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="BeoordelingTechAspect" Type="Int32" Nullable="false" />
+    <Property Name="BeoordelingTechAspectOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="VerloopEersteContact" Type="Int32" Nullable="false" />
+    <Property Name="VerloopEersteContactOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="HoudingTAVCollegas" Type="Int32" Nullable="false" />
+    <Property Name="HoudingTAVCollegasOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="HoudingTAVLeiding" Type="Int32" Nullable="false" />
+    <Property Name="HoudingTAVLeidingOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="HoudingTAVDerden" Type="Int32" Nullable="false" />
+    <Property Name="HoudingTAVDerdenOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="OmgaanKritiek" Type="Int32" Nullable="false" />
+    <Property Name="OmgaanKritiekOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="OpTijd" Type="Int32" Nullable="false" />
+    <Property Name="OpTijdOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="ToontInitiatief" Type="Int32" Nullable="false" />
+    <Property Name="ToontInitiatiefOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="Inzet" Type="Int32" Nullable="false" />
+    <Property Name="IntzetOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="ToontBelangstellingVak" Type="Int32" Nullable="false" />
+    <Property Name="ToontBelangstellingVakOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="GrenzenAangeven" Type="Int32" Nullable="false" />
+    <Property Name="GrenzenAangevenOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="KomtAfsprakenNa" Type="Int32" Nullable="false" />
+    <Property Name="KomtAfsprakenNaOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="ZelfstandigWerken" Type="Int32" Nullable="false" />
+    <Property Name="ZelfstandigWerkenOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="Gemotiveerd" Type="Int32" Nullable="false" />
+    <Property Name="GemotiveerdOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="HoudingsAspecten" Type="Int32" Nullable="false" />
+    <Property Name="HoudingAspectenOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="Verslag" Type="Int32" Nullable="false" />
+    <Property Name="VerslagOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="HandtekeningDocent" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="HandtekeningStudent" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="HandtekeningBegeleider" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="EindBeoordeling" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Stage1" Relationship="Self.FK_Beoordeling_Stage" FromRole="Beoordeling" ToRole="Stage" />
+  </EntityType>
+  <EntityType Name="Gespreksformulier">
+    <Key>
+      <PropertyRef Name="GespreksformulierID" />
+    </Key>
+    <Property Name="GespreksformulierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Stage" Type="Int32" Nullable="false" />
+    <Property Name="Datum" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ContactType" Type="Int32" Nullable="false" />
+    <Property Name="Gesprek" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="HandtekeningStudent" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="HandtekeningDocent" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="HandtekeningBegeleider" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Stage1" Relationship="Self.FK_Gespreksformulier_Stage" FromRole="Gespreksformulier" ToRole="Stage" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="Gebruikersnaam" />
+    </Key>
+    <Property Name="Gebruikersnaam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Wachtwoord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Persoonsgegevens" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Persoonsgegevens1" Relationship="Self.FK_Login_Persoonsgegevens" FromRole="Login" ToRole="Persoonsgegevens" />
+  </EntityType>
+  <EntityType Name="Opleiding">
+    <Key>
+      <PropertyRef Name="OpleidingID" />
+    </Key>
+    <Property Name="OpleidingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Naam" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Niveau" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OpleidingPersoon" Relationship="Self.FK_OpleidingPersoon_Opleiding" FromRole="Opleiding" ToRole="OpleidingPersoon" />
+  </EntityType>
+  <EntityType Name="OpleidingPersoon">
+    <Key>
+      <PropertyRef Name="OpleidingID" />
+      <PropertyRef Name="PersoonsgegevensID" />
+      <PropertyRef Name="BeginDatum" />
+      <PropertyRef Name="EindDatum" />
+    </Key>
+    <Property Name="OpleidingID" Type="Int32" Nullable="false" />
+    <Property Name="PersoonsgegevensID" Type="Int32" Nullable="false" />
+    <Property Name="BeginDatum" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EindDatum" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Opleiding" Relationship="Self.FK_OpleidingPersoon_Opleiding" FromRole="OpleidingPersoon" ToRole="Opleiding" />
+    <NavigationProperty Name="Persoonsgegevens" Relationship="Self.FK_OpleidingPersoon_Persoonsgegevens" FromRole="OpleidingPersoon" ToRole="Persoonsgegevens" />
+  </EntityType>
+  <EntityType Name="Periode">
+    <Key>
+      <PropertyRef Name="Periode1" />
+    </Key>
+    <Property Name="Periode1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Begindatum" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Einddatum" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Stage" Relationship="Self.FK_Stage_Periode" FromRole="Periode" ToRole="Stage" />
+  </EntityType>
+  <EntityType Name="Persoonsgegevens">
+    <Key>
+      <PropertyRef Name="PersoonsgegevensID" />
+    </Key>
+    <Property Name="PersoonsgegevensID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rol" Type="Int32" Nullable="false" />
+    <Property Name="Voornaam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Achternaam" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Tussenvoegsel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Straat" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Huisnummer" Type="Int32" Nullable="false" />
+    <Property Name="Toevoeging" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Postcode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Plaats" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Actief" Type="Boolean" Nullable="false" />
+    <Property Name="NonActiefReden" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="MedewerkerID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StudentNummer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Opleiding" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Opleidingsniveau" Type="Int32" />
+    <Property Name="Bedrijf" Type="Int32" />
+    <NavigationProperty Name="Bedrijf1" Relationship="Self.FK_Persoonsgegevens_Bedrijf" FromRole="Persoonsgegevens" ToRole="Bedrijf" />
+    <NavigationProperty Name="Login" Relationship="Self.FK_Login_Persoonsgegevens" FromRole="Persoonsgegevens" ToRole="Login" />
+    <NavigationProperty Name="OpleidingPersoon" Relationship="Self.FK_OpleidingPersoon_Persoonsgegevens" FromRole="Persoonsgegevens" ToRole="OpleidingPersoon" />
+    <NavigationProperty Name="Stage" Relationship="Self.FK_Stage_Persoonsgegevens" FromRole="Persoonsgegevens" ToRole="Stage" />
+    <NavigationProperty Name="Stage1" Relationship="Self.FK_Stage_Persoonsgegevens1" FromRole="Persoonsgegevens" ToRole="Stage" />
+    <NavigationProperty Name="Stage2" Relationship="Self.FK_Stage_Persoonsgegevens2" FromRole="Persoonsgegevens" ToRole="Stage" />
+  </EntityType>
+  <EntityType Name="RedenOnderwijsinstelling">
+    <Key>
+      <PropertyRef Name="RedenID" />
+    </Key>
+    <Property Name="RedenID" Type="Int32" Nullable="false" />
+    <Property Name="Reden" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TussentijdseBeindeging" Relationship="Self.RedenenOnderwijsinstelling" FromRole="RedenOnderwijsinstelling" ToRole="TussentijdseBeindeging" />
+  </EntityType>
+  <EntityType Name="RedenOrganisatie">
+    <Key>
+      <PropertyRef Name="RedenOrganisatie1" />
+    </Key>
+    <Property Name="RedenOrganisatie1" Type="Int32" Nullable="false" />
+    <Property Name="Reden" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TussentijdseBeindeging" Relationship="Self.RedenenOrganisatie" FromRole="RedenOrganisatie" ToRole="TussentijdseBeindeging" />
+  </EntityType>
+  <EntityType Name="RedenStudent">
+    <Key>
+      <PropertyRef Name="RedenID" />
+    </Key>
+    <Property Name="RedenID" Type="Int32" Nullable="false" />
+    <Property Name="Reden" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TussentijdseBeindeging" Relationship="Self.RedenenStudent" FromRole="RedenStudent" ToRole="TussentijdseBeindeging" />
+  </EntityType>
+  <EntityType Name="Stage">
+    <Key>
+      <PropertyRef Name="StageID" />
+    </Key>
+    <Property Name="StageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Student" Type="Int32" Nullable="false" />
+    <Property Name="Stagedocent" Type="Int32" Nullable="false" />
+    <Property Name="Stageperiode" Type="Int32" Nullable="false" />
+    <Property Name="Stagebegeleider" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Beoordeling" Relationship="Self.FK_Beoordeling_Stage" FromRole="Stage" ToRole="Beoordeling" />
+    <NavigationProperty Name="Gespreksformulier" Relationship="Self.FK_Gespreksformulier_Stage" FromRole="Stage" ToRole="Gespreksformulier" />
+    <NavigationProperty Name="Periode" Relationship="Self.FK_Stage_Periode" FromRole="Stage" ToRole="Periode" />
+    <NavigationProperty Name="Persoonsgegevens" Relationship="Self.FK_Stage_Persoonsgegevens" FromRole="Stage" ToRole="Persoonsgegevens" />
+    <NavigationProperty Name="Persoonsgegevens1" Relationship="Self.FK_Stage_Persoonsgegevens1" FromRole="Stage" ToRole="Persoonsgegevens" />
+    <NavigationProperty Name="Persoonsgegevens2" Relationship="Self.FK_Stage_Persoonsgegevens2" FromRole="Stage" ToRole="Persoonsgegevens" />
+    <NavigationProperty Name="TussentijdseBeindeging" Relationship="Self.FK_TussentijdseBeindeging_Stage" FromRole="Stage" ToRole="TussentijdseBeindeging" />
+  </EntityType>
+  <EntityType Name="TussentijdseBeindeging">
+    <Key>
+      <PropertyRef Name="TussentijdsebeoordelingID" />
+    </Key>
+    <Property Name="TussentijdsebeoordelingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Stage" Type="Int32" Nullable="false" />
+    <Property Name="Einddatum" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CREBO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Leerweg" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Stage1" Relationship="Self.FK_TussentijdseBeindeging_Stage" FromRole="TussentijdseBeindeging" ToRole="Stage" />
+    <NavigationProperty Name="RedenOnderwijsinstelling" Relationship="Self.RedenenOnderwijsinstelling" FromRole="TussentijdseBeindeging" ToRole="RedenOnderwijsinstelling" />
+    <NavigationProperty Name="RedenOrganisatie" Relationship="Self.RedenenOrganisatie" FromRole="TussentijdseBeindeging" ToRole="RedenOrganisatie" />
+    <NavigationProperty Name="RedenStudent" Relationship="Self.RedenenStudent" FromRole="TussentijdseBeindeging" ToRole="RedenStudent" />
+  </EntityType>
+  <Association Name="FK_Persoonsgegevens_Bedrijf">
+    <End Role="Bedrijf" Type="Self.Bedrijf" Multiplicity="0..1" />
+    <End Role="Persoonsgegevens" Type="Self.Persoonsgegevens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bedrijf">
+        <PropertyRef Name="BedrijfID" />
+      </Principal>
+      <Dependent Role="Persoonsgegevens">
+        <PropertyRef Name="Bedrijf" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Beoordeling_Stage">
+    <End Role="Stage" Type="Self.Stage" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Beoordeling" Type="Self.Beoordeling" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stage">
+        <PropertyRef Name="StageID" />
+      </Principal>
+      <Dependent Role="Beoordeling">
+        <PropertyRef Name="Stage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Gespreksformulier_Stage">
+    <End Role="Stage" Type="Self.Stage" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Gespreksformulier" Type="Self.Gespreksformulier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stage">
+        <PropertyRef Name="StageID" />
+      </Principal>
+      <Dependent Role="Gespreksformulier">
+        <PropertyRef Name="Stage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Login_Persoonsgegevens">
+    <End Role="Persoonsgegevens" Type="Self.Persoonsgegevens" Multiplicity="1" />
+    <End Role="Login" Type="Self.Login" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persoonsgegevens">
+        <PropertyRef Name="PersoonsgegevensID" />
+      </Principal>
+      <Dependent Role="Login">
+        <PropertyRef Name="Persoonsgegevens" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OpleidingPersoon_Opleiding">
+    <End Role="Opleiding" Type="Self.Opleiding" Multiplicity="1" />
+    <End Role="OpleidingPersoon" Type="Self.OpleidingPersoon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Opleiding">
+        <PropertyRef Name="OpleidingID" />
+      </Principal>
+      <Dependent Role="OpleidingPersoon">
+        <PropertyRef Name="OpleidingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OpleidingPersoon_Persoonsgegevens">
+    <End Role="Persoonsgegevens" Type="Self.Persoonsgegevens" Multiplicity="1" />
+    <End Role="OpleidingPersoon" Type="Self.OpleidingPersoon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persoonsgegevens">
+        <PropertyRef Name="PersoonsgegevensID" />
+      </Principal>
+      <Dependent Role="OpleidingPersoon">
+        <PropertyRef Name="PersoonsgegevensID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stage_Periode">
+    <End Role="Periode" Type="Self.Periode" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Stage" Type="Self.Stage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Periode">
+        <PropertyRef Name="Periode1" />
+      </Principal>
+      <Dependent Role="Stage">
+        <PropertyRef Name="Stageperiode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stage_Persoonsgegevens">
+    <End Role="Persoonsgegevens" Type="Self.Persoonsgegevens" Multiplicity="1" />
+    <End Role="Stage" Type="Self.Stage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persoonsgegevens">
+        <PropertyRef Name="PersoonsgegevensID" />
+      </Principal>
+      <Dependent Role="Stage">
+        <PropertyRef Name="Student" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stage_Persoonsgegevens1">
+    <End Role="Persoonsgegevens" Type="Self.Persoonsgegevens" Multiplicity="1" />
+    <End Role="Stage" Type="Self.Stage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persoonsgegevens">
+        <PropertyRef Name="PersoonsgegevensID" />
+      </Principal>
+      <Dependent Role="Stage">
+        <PropertyRef Name="Stagedocent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stage_Persoonsgegevens2">
+    <End Role="Persoonsgegevens" Type="Self.Persoonsgegevens" Multiplicity="1" />
+    <End Role="Stage" Type="Self.Stage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persoonsgegevens">
+        <PropertyRef Name="PersoonsgegevensID" />
+      </Principal>
+      <Dependent Role="Stage">
+        <PropertyRef Name="Stagebegeleider" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TussentijdseBeindeging_Stage">
+    <End Role="Stage" Type="Self.Stage" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="TussentijdseBeindeging" Type="Self.TussentijdseBeindeging" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stage">
+        <PropertyRef Name="StageID" />
+      </Principal>
+      <Dependent Role="TussentijdseBeindeging">
+        <PropertyRef Name="Stage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RedenenOnderwijsinstelling">
+    <End Role="RedenOnderwijsinstelling" Type="Self.RedenOnderwijsinstelling" Multiplicity="*" />
+    <End Role="TussentijdseBeindeging" Type="Self.TussentijdseBeindeging" Multiplicity="*" />
+  </Association>
+  <Association Name="RedenenOrganisatie">
+    <End Role="RedenOrganisatie" Type="Self.RedenOrganisatie" Multiplicity="*" />
+    <End Role="TussentijdseBeindeging" Type="Self.TussentijdseBeindeging" Multiplicity="*" />
+  </Association>
+  <Association Name="RedenenStudent">
+    <End Role="RedenStudent" Type="Self.RedenStudent" Multiplicity="*" />
+    <End Role="TussentijdseBeindeging" Type="Self.TussentijdseBeindeging" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="StageApplicatieEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bedrijf" EntityType="Self.Bedrijf" />
+    <EntitySet Name="Beoordeling" EntityType="Self.Beoordeling" />
+    <EntitySet Name="Gespreksformulier" EntityType="Self.Gespreksformulier" />
+    <EntitySet Name="Login" EntityType="Self.Login" />
+    <EntitySet Name="Opleiding" EntityType="Self.Opleiding" />
+    <EntitySet Name="OpleidingPersoon" EntityType="Self.OpleidingPersoon" />
+    <EntitySet Name="Periode" EntityType="Self.Periode" />
+    <EntitySet Name="Persoonsgegevens" EntityType="Self.Persoonsgegevens" />
+    <EntitySet Name="RedenOnderwijsinstelling" EntityType="Self.RedenOnderwijsinstelling" />
+    <EntitySet Name="RedenOrganisatie" EntityType="Self.RedenOrganisatie" />
+    <EntitySet Name="RedenStudent" EntityType="Self.RedenStudent" />
+    <EntitySet Name="Stage" EntityType="Self.Stage" />
+    <EntitySet Name="TussentijdseBeindeging" EntityType="Self.TussentijdseBeindeging" />
+    <AssociationSet Name="FK_Persoonsgegevens_Bedrijf" Association="Self.FK_Persoonsgegevens_Bedrijf">
+      <End Role="Bedrijf" EntitySet="Bedrijf" />
+      <End Role="Persoonsgegevens" EntitySet="Persoonsgegevens" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Beoordeling_Stage" Association="Self.FK_Beoordeling_Stage">
+      <End Role="Stage" EntitySet="Stage" />
+      <End Role="Beoordeling" EntitySet="Beoordeling" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Gespreksformulier_Stage" Association="Self.FK_Gespreksformulier_Stage">
+      <End Role="Stage" EntitySet="Stage" />
+      <End Role="Gespreksformulier" EntitySet="Gespreksformulier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Login_Persoonsgegevens" Association="Self.FK_Login_Persoonsgegevens">
+      <End Role="Persoonsgegevens" EntitySet="Persoonsgegevens" />
+      <End Role="Login" EntitySet="Login" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OpleidingPersoon_Opleiding" Association="Self.FK_OpleidingPersoon_Opleiding">
+      <End Role="Opleiding" EntitySet="Opleiding" />
+      <End Role="OpleidingPersoon" EntitySet="OpleidingPersoon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OpleidingPersoon_Persoonsgegevens" Association="Self.FK_OpleidingPersoon_Persoonsgegevens">
+      <End Role="Persoonsgegevens" EntitySet="Persoonsgegevens" />
+      <End Role="OpleidingPersoon" EntitySet="OpleidingPersoon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stage_Periode" Association="Self.FK_Stage_Periode">
+      <End Role="Periode" EntitySet="Periode" />
+      <End Role="Stage" EntitySet="Stage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stage_Persoonsgegevens" Association="Self.FK_Stage_Persoonsgegevens">
+      <End Role="Persoonsgegevens" EntitySet="Persoonsgegevens" />
+      <End Role="Stage" EntitySet="Stage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stage_Persoonsgegevens1" Association="Self.FK_Stage_Persoonsgegevens1">
+      <End Role="Persoonsgegevens" EntitySet="Persoonsgegevens" />
+      <End Role="Stage" EntitySet="Stage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stage_Persoonsgegevens2" Association="Self.FK_Stage_Persoonsgegevens2">
+      <End Role="Persoonsgegevens" EntitySet="Persoonsgegevens" />
+      <End Role="Stage" EntitySet="Stage" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TussentijdseBeindeging_Stage" Association="Self.FK_TussentijdseBeindeging_Stage">
+      <End Role="Stage" EntitySet="Stage" />
+      <End Role="TussentijdseBeindeging" EntitySet="TussentijdseBeindeging" />
+    </AssociationSet>
+    <AssociationSet Name="RedenenOnderwijsinstelling" Association="Self.RedenenOnderwijsinstelling">
+      <End Role="RedenOnderwijsinstelling" EntitySet="RedenOnderwijsinstelling" />
+      <End Role="TussentijdseBeindeging" EntitySet="TussentijdseBeindeging" />
+    </AssociationSet>
+    <AssociationSet Name="RedenenOrganisatie" Association="Self.RedenenOrganisatie">
+      <End Role="RedenOrganisatie" EntitySet="RedenOrganisatie" />
+      <End Role="TussentijdseBeindeging" EntitySet="TussentijdseBeindeging" />
+    </AssociationSet>
+    <AssociationSet Name="RedenenStudent" Association="Self.RedenenStudent">
+      <End Role="RedenStudent" EntitySet="RedenStudent" />
+      <End Role="TussentijdseBeindeging" EntitySet="TussentijdseBeindeging" />
+    </AssociationSet>
+    <FunctionImport Name="sp_BedrijfNonActief">
+      <Parameter Name="BedrijfID" Mode="In" Type="Int32" />
+      <Parameter Name="Actief" Mode="In" Type="Boolean" />
+      <Parameter Name="NonActiefReden" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_BedrijfToevoegen">
+      <Parameter Name="naam" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_BedrijfUpdaten">
+      <Parameter Name="Naam" Mode="In" Type="String" />
+      <Parameter Name="Actief" Mode="In" Type="Boolean" />
+      <Parameter Name="NonActiefReden" Mode="In" Type="String" />
+      <Parameter Name="BedrijfID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_BeoordelingToevoegen">
+      <Parameter Name="Stage" Mode="In" Type="Int32" />
+      <Parameter Name="Datum" Mode="In" Type="DateTime" />
+      <Parameter Name="Beoordeling" Mode="In" Type="Int32" />
+      <Parameter Name="VoorbereidWerk" Mode="In" Type="Int32" />
+      <Parameter Name="VoorbereidWerkOpm" Mode="In" Type="String" />
+      <Parameter Name="PlanEnOrganiserenWerk" Mode="In" Type="Int32" />
+      <Parameter Name="PlanEnOrganiserenWerkOpm" Mode="In" Type="String" />
+      <Parameter Name="TheoretischInzicht" Mode="In" Type="Int32" />
+      <Parameter Name="TheoretischInzichtOpm" Mode="In" Type="String" />
+      <Parameter Name="KwalGeleverdWerk" Mode="In" Type="Int32" />
+      <Parameter Name="KwalGeleverdWerkOpm" Mode="In" Type="String" />
+      <Parameter Name="RapportWerk" Mode="In" Type="Int32" />
+      <Parameter Name="RapportWerkOpm" Mode="In" Type="String" />
+      <Parameter Name="HoudtBedrRegels" Mode="In" Type="Int32" />
+      <Parameter Name="HoudtBedrRegelsOpm" Mode="In" Type="String" />
+      <Parameter Name="HoudtARBORegels" Mode="In" Type="Int32" />
+      <Parameter Name="HoudtARBORegelsOpm" Mode="In" Type="String" />
+      <Parameter Name="WerkTempo" Mode="In" Type="Int32" />
+      <Parameter Name="WerkTempoOpm" Mode="In" Type="String" />
+      <Parameter Name="BeoordelingTechAspect" Mode="In" Type="Int32" />
+      <Parameter Name="BeoordelingTechAspectOpm" Mode="In" Type="String" />
+      <Parameter Name="VerloopEersteContact" Mode="In" Type="Int32" />
+      <Parameter Name="VerloopEersteContactOpm" Mode="In" Type="String" />
+      <Parameter Name="HoudingTAVCollegas" Mode="In" Type="Int32" />
+      <Parameter Name="HoudingTAVCollegasOpm" Mode="In" Type="String" />
+      <Parameter Name="HoudingTAVLeiding" Mode="In" Type="Int32" />
+      <Parameter Name="HoudingTAVLeidingOpm" Mode="In" Type="String" />
+      <Parameter Name="HoudingTAVDerden" Mode="In" Type="Int32" />
+      <Parameter Name="HoudingTAVDerdenOpm" Mode="In" Type="String" />
+      <Parameter Name="OmgaanKritiek" Mode="In" Type="Int32" />
+      <Parameter Name="OmgaanKritiekOpm" Mode="In" Type="String" />
+      <Parameter Name="OpTijd" Mode="In" Type="Int32" />
+      <Parameter Name="OpTijdOpm" Mode="In" Type="String" />
+      <Parameter Name="ToontInitiatief" Mode="In" Type="Int32" />
+      <Parameter Name="ToontInitiatiefOpm" Mode="In" Type="String" />
+      <Parameter Name="Inzet" Mode="In" Type="Int32" />
+      <Parameter Name="IntzetOpm" Mode="In" Type="String" />
+      <Parameter Name="ToontBelangstellingVak" Mode="In" Type="Int32" />
+      <Parameter Name="ToontBelangstellingVakOpm" Mode="In" Type="String" />
+      <Parameter Name="GrenzenAangeven" Mode="In" Type="Int32" />
+      <Parameter Name="GrenzenAangevenOpm" Mode="In" Type="String" />
+      <Parameter Name="KomtAfsprakenNa" Mode="In" Type="Int32" />
+      <Parameter Name="KomtAfsprakenNaOpm" Mode="In" Type="String" />
+      <Parameter Name="ZelfstandigWerken" Mode="In" Type="Int32" />
+      <Parameter Name="ZelfstandigWerkenOpm" Mode="In" Type="String" />
+      <Parameter Name="Gemotiveerd" Mode="In" Type="Int32" />
+      <Parameter Name="GemotiveerdOpm" Mode="In" Type="String" />
+      <Parameter Name="HoudingsAspecten" Mode="In" Type="Int32" />
+      <Parameter Name="HoudingAspectenOpm" Mode="In" Type="String" />
+      <Parameter Name="Verslag" Mode="In" Type="Int32" />
+      <Parameter Name="VerslagOpm" Mode="In" Type="String" />
+      <Parameter Name="HandtekeningDocent" Mode="In" Type="Binary" />
+      <Parameter Name="HandtekeningStudent" Mode="In" Type="Binary" />
+      <Parameter Name="HandtekeningBegeleider" Mode="In" Type="Binary" />
+      <Parameter Name="EindeBeoordeling" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GespreksformulierToevoegen">
+      <Parameter Name="Stage" Mode="In" Type="Int32" />
+      <Parameter Name="Datum" Mode="In" Type="DateTime" />
+      <Parameter Name="ContactType" Mode="In" Type="Int32" />
+      <Parameter Name="Gesprek" Mode="In" Type="String" />
+      <Parameter Name="HandtekeningStudent" Mode="In" Type="Binary" />
+      <Parameter Name="HandtekeningDocent" Mode="In" Type="Binary" />
+      <Parameter Name="HandtekeningBegeleider" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Login" ReturnType="Collection(Int32)">
+      <Parameter Name="Gebruikersnaam" Mode="In" Type="String" />
+      <Parameter Name="Wachtwoord" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_LoginToevoegen">
+      <Parameter Name="Gebruikersnaam" Mode="In" Type="String" />
+      <Parameter Name="Wachtwoord" Mode="In" Type="String" />
+      <Parameter Name="Persoonsgegevens" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PeriodeToevoegen">
+      <Parameter Name="Begindatum" Mode="In" Type="DateTime" />
+      <Parameter Name="Eindatum" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PeriodeUpdaten">
+      <Parameter Name="Periode" Mode="In" Type="Int32" />
+      <Parameter Name="BeginDatum" Mode="In" Type="DateTime" />
+      <Parameter Name="EindDatum" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PeriodeVerwijderen">
+      <Parameter Name="StagePeriodeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PersoonNonActief">
+      <Parameter Name="PersoonID" Mode="In" Type="Int32" />
+      <Parameter Name="Actief" Mode="In" Type="Boolean" />
+      <Parameter Name="NonActiefReden" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PersoonToevoegen">
+      <Parameter Name="Rol" Mode="In" Type="Int32" />
+      <Parameter Name="Voornaam" Mode="In" Type="String" />
+      <Parameter Name="Achternaam" Mode="In" Type="String" />
+      <Parameter Name="Tussenvoegsel" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Straat" Mode="In" Type="String" />
+      <Parameter Name="Huisnummer" Mode="In" Type="Int32" />
+      <Parameter Name="Toevoeging" Mode="In" Type="String" />
+      <Parameter Name="Postcode" Mode="In" Type="String" />
+      <Parameter Name="Plaats" Mode="In" Type="String" />
+      <Parameter Name="NonActiefReden" Mode="In" Type="String" />
+      <Parameter Name="MedewerkerID" Mode="In" Type="Int32" />
+      <Parameter Name="StudentNummer" Mode="In" Type="Int32" />
+      <Parameter Name="Opleiding" Mode="In" Type="Int32" />
+      <Parameter Name="Opleidingsniveau" Mode="In" Type="Int32" />
+      <Parameter Name="Bedrijf" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_PersoonUpdaten">
+      <Parameter Name="PersoonsgegevensID" Mode="In" Type="Int32" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Straat" Mode="In" Type="String" />
+      <Parameter Name="Huisnummer" Mode="In" Type="Int32" />
+      <Parameter Name="Toevoeging" Mode="In" Type="String" />
+      <Parameter Name="Postcode" Mode="In" Type="String" />
+      <Parameter Name="Plaats" Mode="In" Type="String" />
+      <Parameter Name="Actief" Mode="In" Type="Boolean" />
+      <Parameter Name="NonActiefReden" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_StageToevoegen">
+      <Parameter Name="Student" Mode="In" Type="Int32" />
+      <Parameter Name="Stagedocent" Mode="In" Type="Int32" />
+      <Parameter Name="Stageperiode" Mode="In" Type="Int32" />
+      <Parameter Name="tagebegeleider" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

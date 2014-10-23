@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StageApplicatieModelStoreContainer" CdmEntityContainer="StageApplicatieEntities">
+    <EntitySetMapping Name="Bedrijf">
+      <EntityTypeMapping TypeName="StageApplicatieModel.Bedrijf">
+        <MappingFragment StoreEntitySet="Bedrijf">
+          <ScalarProperty Name="BedrijfID" ColumnName="BedrijfID" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
+          <ScalarProperty Name="NonActiefReden" ColumnName="NonActiefReden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Beoordeling">
+      <EntityTypeMapping TypeName="StageApplicatieModel.Beoordeling">
+        <MappingFragment StoreEntitySet="Beoordeling">
+          <ScalarProperty Name="BeoordelingID" ColumnName="BeoordelingID" />
+          <ScalarProperty Name="Stage" ColumnName="Stage" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="Beoordeling1" ColumnName="Beoordeling" />
+          <ScalarProperty Name="VoorbereidWerk" ColumnName="VoorbereidWerk" />
+          <ScalarProperty Name="VoorbereidWerkOpm" ColumnName="VoorbereidWerkOpm" />
+          <ScalarProperty Name="PlanEnOrganiserenWerk" ColumnName="PlanEnOrganiserenWerk" />
+          <ScalarProperty Name="PlanEnOrganiserenWerkOpm" ColumnName="PlanEnOrganiserenWerkOpm" />
+          <ScalarProperty Name="TheoretischInzicht" ColumnName="TheoretischInzicht" />
+          <ScalarProperty Name="TheoretischInzichtOpm" ColumnName="TheoretischInzichtOpm" />
+          <ScalarProperty Name="KwalGeleverdWerk" ColumnName="KwalGeleverdWerk" />
+          <ScalarProperty Name="KwalGeleverdWerkOpm" ColumnName="KwalGeleverdWerkOpm" />
+          <ScalarProperty Name="RapportWerk" ColumnName="RapportWerk" />
+          <ScalarProperty Name="RapportWerkOpm" ColumnName="RapportWerkOpm" />
+          <ScalarProperty Name="HoudtBedrRegels" ColumnName="HoudtBedrRegels" />
+          <ScalarProperty Name="HoudtBedrRegelsOpm" ColumnName="HoudtBedrRegelsOpm" />
+          <ScalarProperty Name="HoudtARBORegels" ColumnName="HoudtARBORegels" />
+          <ScalarProperty Name="HoudtARBORegelsOpm" ColumnName="HoudtARBORegelsOpm" />
+          <ScalarProperty Name="WerkTempo" ColumnName="WerkTempo" />
+          <ScalarProperty Name="WerkTempoOpm" ColumnName="WerkTempoOpm" />
+          <ScalarProperty Name="BeoordelingTechAspect" ColumnName="BeoordelingTechAspect" />
+          <ScalarProperty Name="BeoordelingTechAspectOpm" ColumnName="BeoordelingTechAspectOpm" />
+          <ScalarProperty Name="VerloopEersteContact" ColumnName="VerloopEersteContact" />
+          <ScalarProperty Name="VerloopEersteContactOpm" ColumnName="VerloopEersteContactOpm" />
+          <ScalarProperty Name="HoudingTAVCollegas" ColumnName="HoudingTAVCollegas" />
+          <ScalarProperty Name="HoudingTAVCollegasOpm" ColumnName="HoudingTAVCollegasOpm" />
+          <ScalarProperty Name="HoudingTAVLeiding" ColumnName="HoudingTAVLeiding" />
+          <ScalarProperty Name="HoudingTAVLeidingOpm" ColumnName="HoudingTAVLeidingOpm" />
+          <ScalarProperty Name="HoudingTAVDerden" ColumnName="HoudingTAVDerden" />
+          <ScalarProperty Name="HoudingTAVDerdenOpm" ColumnName="HoudingTAVDerdenOpm" />
+          <ScalarProperty Name="OmgaanKritiek" ColumnName="OmgaanKritiek" />
+          <ScalarProperty Name="OmgaanKritiekOpm" ColumnName="OmgaanKritiekOpm" />
+          <ScalarProperty Name="OpTijd" ColumnName="OpTijd" />
+          <ScalarProperty Name="OpTijdOpm" ColumnName="OpTijdOpm" />
+          <ScalarProperty Name="ToontInitiatief" ColumnName="ToontInitiatief" />
+          <ScalarProperty Name="ToontInitiatiefOpm" ColumnName="ToontInitiatiefOpm" />
+          <ScalarProperty Name="Inzet" ColumnName="Inzet" />
+          <ScalarProperty Name="IntzetOpm" ColumnName="IntzetOpm" />
+          <ScalarProperty Name="ToontBelangstellingVak" ColumnName="ToontBelangstellingVak" />
+          <ScalarProperty Name="ToontBelangstellingVakOpm" ColumnName="ToontBelangstellingVakOpm" />
+          <ScalarProperty Name="GrenzenAangeven" ColumnName="GrenzenAangeven" />
+          <ScalarProperty Name="GrenzenAangevenOpm" ColumnName="GrenzenAangevenOpm" />
+          <ScalarProperty Name="KomtAfsprakenNa" ColumnName="KomtAfsprakenNa" />
+          <ScalarProperty Name="KomtAfsprakenNaOpm" ColumnName="KomtAfsprakenNaOpm" />
+          <ScalarProperty Name="ZelfstandigWerken" ColumnName="ZelfstandigWerken" />
+          <ScalarProperty Name="ZelfstandigWerkenOpm" ColumnName="ZelfstandigWerkenOpm" />
+          <ScalarProperty Name="Gemotiveerd" ColumnName="Gemotiveerd" />
+          <ScalarProperty Name="GemotiveerdOpm" ColumnName="GemotiveerdOpm" />
+          <ScalarProperty Name="HoudingsAspecten" ColumnName="HoudingsAspecten" />
+          <ScalarProperty Name="HoudingAspectenOpm" ColumnName="HoudingAspectenOpm" />
+          <ScalarProperty Name="Verslag" ColumnName="Verslag" />
+          <ScalarProperty Name="VerslagOpm" ColumnName="VerslagOpm" />
+          <ScalarProperty Name="HandtekeningDocent" ColumnName="HandtekeningDocent" />
+          <ScalarProperty Name="HandtekeningStudent" ColumnName="HandtekeningStudent" />
+          <ScalarProperty Name="HandtekeningBegeleider" ColumnName="HandtekeningBegeleider" />
+          <ScalarProperty Name="EindBeoordeling" ColumnName="EindBeoordeling" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gespreksformulier">
+      <EntityTypeMapping TypeName="StageApplicatieModel.Gespreksformulier">
+        <MappingFragment StoreEntitySet="Gespreksformulier">
+          <ScalarProperty Name="GespreksformulierID" ColumnName="GespreksformulierID" />
+          <ScalarProperty Name="Stage" ColumnName="Stage" />
+          <ScalarProperty Name="Datum" ColumnName="Datum" />
+          <ScalarProperty Name="ContactType" ColumnName="ContactType" />
+          <ScalarProperty Name="Gesprek" ColumnName="Gesprek" />
+          <ScalarProperty Name="HandtekeningStudent" ColumnName="HandtekeningStudent" />
+          <ScalarProperty Name="HandtekeningDocent" ColumnName="HandtekeningDocent" />
+          <ScalarProperty Name="HandtekeningBegeleider" ColumnName="HandtekeningBegeleider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Login">
+      <EntityTypeMapping TypeName="StageApplicatieModel.Login">
+        <MappingFragment StoreEntitySet="Login">
+          <ScalarProperty Name="Gebruikersnaam" ColumnName="Gebruikersnaam" />
+          <ScalarProperty Name="Wachtwoord" ColumnName="Wachtwoord" />
+          <ScalarProperty Name="Persoonsgegevens" ColumnName="Persoonsgegevens" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Opleiding">
+      <EntityTypeMapping TypeName="StageApplicatieModel.Opleiding">
+        <MappingFragment StoreEntitySet="Opleiding">
+          <ScalarProperty Name="OpleidingID" ColumnName="OpleidingID" />
+          <ScalarProperty Name="Naam" ColumnName="Naam" />
+          <ScalarProperty Name="Niveau" ColumnName="Niveau" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OpleidingPersoon">
+      <EntityTypeMapping TypeName="StageApplicatieModel.OpleidingPersoon">
+        <MappingFragment StoreEntitySet="OpleidingPersoon">
+          <ScalarProperty Name="OpleidingID" ColumnName="OpleidingID" />
+          <ScalarProperty Name="PersoonsgegevensID" ColumnName="PersoonsgegevensID" />
+          <ScalarProperty Name="BeginDatum" ColumnName="BeginDatum" />
+          <ScalarProperty Name="EindDatum" ColumnName="EindDatum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Periode">
+      <EntityTypeMapping TypeName="StageApplicatieModel.Periode">
+        <MappingFragment StoreEntitySet="Periode">
+          <ScalarProperty Name="Periode1" ColumnName="Periode" />
+          <ScalarProperty Name="Begindatum" ColumnName="Begindatum" />
+          <ScalarProperty Name="Einddatum" ColumnName="Einddatum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persoonsgegevens">
+      <EntityTypeMapping TypeName="StageApplicatieModel.Persoonsgegevens">
+        <MappingFragment StoreEntitySet="Persoonsgegevens">
+          <ScalarProperty Name="PersoonsgegevensID" ColumnName="PersoonsgegevensID" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+          <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+          <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Straat" ColumnName="Straat" />
+          <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
+          <ScalarProperty Name="Toevoeging" ColumnName="Toevoeging" />
+          <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+          <ScalarProperty Name="Plaats" ColumnName="Plaats" />
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
+          <ScalarProperty Name="NonActiefReden" ColumnName="NonActiefReden" />
+          <ScalarProperty Name="MedewerkerID" ColumnName="MedewerkerID" />
+          <ScalarProperty Name="StudentNummer" ColumnName="StudentNummer" />
+          <ScalarProperty Name="Opleiding" ColumnName="Opleiding" />
+          <ScalarProperty Name="Opleidingsniveau" ColumnName="Opleidingsniveau" />
+          <ScalarProperty Name="Bedrijf" ColumnName="Bedrijf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RedenOnderwijsinstelling">
+      <EntityTypeMapping TypeName="StageApplicatieModel.RedenOnderwijsinstelling">
+        <MappingFragment StoreEntitySet="RedenOnderwijsinstelling">
+          <ScalarProperty Name="RedenID" ColumnName="RedenID" />
+          <ScalarProperty Name="Reden" ColumnName="Reden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RedenOrganisatie">
+      <EntityTypeMapping TypeName="StageApplicatieModel.RedenOrganisatie">
+        <MappingFragment StoreEntitySet="RedenOrganisatie">
+          <ScalarProperty Name="RedenOrganisatie1" ColumnName="RedenOrganisatie" />
+          <ScalarProperty Name="Reden" ColumnName="Reden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RedenStudent">
+      <EntityTypeMapping TypeName="StageApplicatieModel.RedenStudent">
+        <MappingFragment StoreEntitySet="RedenStudent">
+          <ScalarProperty Name="RedenID" ColumnName="RedenID" />
+          <ScalarProperty Name="Reden" ColumnName="Reden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stage">
+      <EntityTypeMapping TypeName="StageApplicatieModel.Stage">
+        <MappingFragment StoreEntitySet="Stage">
+          <ScalarProperty Name="StageID" ColumnName="StageID" />
+          <ScalarProperty Name="Student" ColumnName="Student" />
+          <ScalarProperty Name="Stagedocent" ColumnName="Stagedocent" />
+          <ScalarProperty Name="Stageperiode" ColumnName="Stageperiode" />
+          <ScalarProperty Name="Stagebegeleider" ColumnName="Stagebegeleider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TussentijdseBeindeging">
+      <EntityTypeMapping TypeName="StageApplicatieModel.TussentijdseBeindeging">
+        <MappingFragment StoreEntitySet="TussentijdseBeindeging">
+          <ScalarProperty Name="TussentijdsebeoordelingID" ColumnName="TussentijdsebeoordelingID" />
+          <ScalarProperty Name="Stage" ColumnName="Stage" />
+          <ScalarProperty Name="Einddatum" ColumnName="Einddatum" />
+          <ScalarProperty Name="CREBO" ColumnName="CREBO" />
+          <ScalarProperty Name="Leerweg" ColumnName="Leerweg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="RedenenOnderwijsinstelling" TypeName="StageApplicatieModel.RedenenOnderwijsinstelling" StoreEntitySet="RedenenOnderwijsinstelling">
+      <EndProperty Name="RedenOnderwijsinstelling">
+        <ScalarProperty Name="RedenID" ColumnName="RedenID" />
+      </EndProperty>
+      <EndProperty Name="TussentijdseBeindeging">
+        <ScalarProperty Name="TussentijdsebeoordelingID" ColumnName="TussentijdseEindbeoordelingID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RedenenOrganisatie" TypeName="StageApplicatieModel.RedenenOrganisatie" StoreEntitySet="RedenenOrganisatie">
+      <EndProperty Name="RedenOrganisatie">
+        <ScalarProperty Name="RedenOrganisatie1" ColumnName="RedenID" />
+      </EndProperty>
+      <EndProperty Name="TussentijdseBeindeging">
+        <ScalarProperty Name="TussentijdsebeoordelingID" ColumnName="TussentijdsebeoordelingID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RedenenStudent" TypeName="StageApplicatieModel.RedenenStudent" StoreEntitySet="RedenenStudent">
+      <EndProperty Name="RedenStudent">
+        <ScalarProperty Name="RedenID" ColumnName="RedenID" />
+      </EndProperty>
+      <EndProperty Name="TussentijdseBeindeging">
+        <ScalarProperty Name="TussentijdsebeoordelingID" ColumnName="TussentijdseEindbeoordelingID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="sp_BedrijfNonActief" FunctionName="StageApplicatieModel.Store.sp_BedrijfNonActief" />
+    <FunctionImportMapping FunctionImportName="sp_BedrijfToevoegen" FunctionName="StageApplicatieModel.Store.sp_BedrijfToevoegen" />
+    <FunctionImportMapping FunctionImportName="sp_BedrijfUpdaten" FunctionName="StageApplicatieModel.Store.sp_BedrijfUpdaten" />
+    <FunctionImportMapping FunctionImportName="sp_BeoordelingToevoegen" FunctionName="StageApplicatieModel.Store.sp_BeoordelingToevoegen" />
+    <FunctionImportMapping FunctionImportName="sp_GespreksformulierToevoegen" FunctionName="StageApplicatieModel.Store.sp_GespreksformulierToevoegen" />
+    <FunctionImportMapping FunctionImportName="sp_Login" FunctionName="StageApplicatieModel.Store.sp_Login" />
+    <FunctionImportMapping FunctionImportName="sp_LoginToevoegen" FunctionName="StageApplicatieModel.Store.sp_LoginToevoegen" />
+    <FunctionImportMapping FunctionImportName="sp_PeriodeToevoegen" FunctionName="StageApplicatieModel.Store.sp_PeriodeToevoegen" />
+    <FunctionImportMapping FunctionImportName="sp_PeriodeUpdaten" FunctionName="StageApplicatieModel.Store.sp_PeriodeUpdaten" />
+    <FunctionImportMapping FunctionImportName="sp_PeriodeVerwijderen" FunctionName="StageApplicatieModel.Store.sp_PeriodeVerwijderen" />
+    <FunctionImportMapping FunctionImportName="sp_PersoonNonActief" FunctionName="StageApplicatieModel.Store.sp_PersoonNonActief" />
+    <FunctionImportMapping FunctionImportName="sp_PersoonToevoegen" FunctionName="StageApplicatieModel.Store.sp_PersoonToevoegen" />
+    <FunctionImportMapping FunctionImportName="sp_PersoonUpdaten" FunctionName="StageApplicatieModel.Store.sp_PersoonUpdaten" />
+    <FunctionImportMapping FunctionImportName="sp_StageToevoegen" FunctionName="StageApplicatieModel.Store.sp_StageToevoegen" />
+  </EntityContainerMapping>
+</Mapping>
