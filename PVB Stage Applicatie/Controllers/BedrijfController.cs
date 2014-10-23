@@ -15,7 +15,6 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Bedrijf/
-
         public ActionResult Index()
         {
             return View(db.Bedrijf.ToList());
