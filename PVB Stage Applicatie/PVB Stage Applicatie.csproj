@@ -148,6 +148,7 @@
     <Compile Include="Models\Beoordeling.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Gespreksformulier.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
