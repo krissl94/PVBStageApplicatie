@@ -1,4 +1,21 @@
 ﻿@model PVB_Stage_Applicatie.Models.Bedrijf
+<script>
+    $(document).ready(function () {
+        $("#Actief").prop('checked', true);
+        $("#NonActiefReden")[0].disabled = true;
+    });
+
+    $("#Actief").live("click", function () {
+        if ($("#Actief")[0].checked) {
+            debugger;
+            $("#NonActiefReden")[0].disabled = true;
+            $("#NonActiefReden")[0].value = "";
+        }
+        else {
+            $("#NonActiefReden")[0].disabled = false;
+        }
+    });
+</script>
 
 @{
     ViewBag.Title = "Create";
@@ -14,29 +31,12 @@
         <legend>Bedrijf</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Naam)
+            Bedrijfsnaam
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.Naam)
             @Html.ValidationMessageFor(model => model.Naam)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Actief)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Actief)
-            @Html.ValidationMessageFor(model => model.Actief)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NonActiefReden)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NonActiefReden)
-            @Html.ValidationMessageFor(model => model.NonActiefReden)
-        </div>
-
         <p>
             <input type="submit" value="Create" />
         </p>

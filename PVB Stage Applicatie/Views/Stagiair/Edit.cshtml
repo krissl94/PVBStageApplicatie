@@ -15,36 +15,32 @@
 
         @Html.HiddenFor(model => model.PersoonsgegevensID)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Rol)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Rol)
-            @Html.ValidationMessageFor(model => model.Rol)
-        </div>
+
+        @Html.HiddenFor(model => model.Rol)
+
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Voornaam)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Voornaam)
-            @Html.ValidationMessageFor(model => model.Voornaam)
+            @Html.DisplayFor(model => model.Voornaam)
+            @Html.HiddenFor(model => model.Voornaam)
         </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Achternaam)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Achternaam)
-            @Html.ValidationMessageFor(model => model.Achternaam)
+            @Html.DisplayFor(model => model.Achternaam)
+            @Html.HiddenFor(model => model.Achternaam)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Tussenvoegsel)
+            @Html.DisplayFor(model => model.Tussenvoegsel)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Tussenvoegsel)
-            @Html.ValidationMessageFor(model => model.Tussenvoegsel)
+            @Html.DisplayFor(model => model.Tussenvoegsel)
+            @Html.HiddenFor(model => model.Tussenvoegsel)
         </div>
 
         <div class="editor-label">
@@ -112,18 +108,10 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.MedewerkerID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MedewerkerID)
-            @Html.ValidationMessageFor(model => model.MedewerkerID)
-        </div>
-
-        <div class="editor-label">
             @Html.LabelFor(model => model.StudentNummer)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StudentNummer)
+            @Html.DisplayFor(model => model.StudentNummer)
             @Html.ValidationMessageFor(model => model.StudentNummer)
         </div>
 
@@ -141,14 +129,6 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.Opleidingsniveau)
             @Html.ValidationMessageFor(model => model.Opleidingsniveau)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Bedrijf, "Bedrijf1")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Bedrijf", String.Empty)
-            @Html.ValidationMessageFor(model => model.Bedrijf)
         </div>
 
         <p>

@@ -51,6 +51,7 @@ namespace PVB_Stage_Applicatie.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Persoonsgegevens persoonsgegevens)
         {
+            persoonsgegevens.Rol = 4;
             if (ModelState.IsValid)
             {
                 db.Persoonsgegevens.Add(persoonsgegevens);

@@ -1,5 +1,28 @@
 ﻿@model PVB_Stage_Applicatie.Models.Bedrijf
+<script>
+    $(document).ready(function () {
+        debugger;
+        if($("#Actief")[0].checked)
+        {
+            $("#NonActiefReden")[0].disabled = true;
+        }
+        else
+        {
+            $("#NonActiefReden")[0].disabled = false;
+        }
+    });
 
+    $("#Actief").live("click", function () {
+        if ($("#Actief")[0].checked) {
+            debugger;
+            $("#NonActiefReden")[0].disabled = true;
+            $("#NonActiefReden")[0].value = "";
+        }
+        else {
+            $("#NonActiefReden")[0].disabled = false;
+        }
+    });
+</script>
 @{
     ViewBag.Title = "Edit";
 }
@@ -14,13 +37,13 @@
         <legend>Bedrijf</legend>
 
         @Html.HiddenFor(model => model.BedrijfID)
+        @Html.HiddenFor(model => model.Naam)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Naam)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Naam)
-            @Html.ValidationMessageFor(model => model.Naam)
+            @Html.DisplayFor(model => model.Naam)
         </div>
 
         <div class="editor-label">
