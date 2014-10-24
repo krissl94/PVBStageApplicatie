@@ -154,6 +154,7 @@
     <Compile Include="Models\Login.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginForm.cs" />
     <Compile Include="Models\Opleiding.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
