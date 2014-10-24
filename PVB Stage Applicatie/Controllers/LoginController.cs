@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace PVB_Stage_Applicatie.Controllers
 {
@@ -13,7 +14,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Login/
-
+         
         public ActionResult Index()
         {
             return View();
@@ -22,13 +23,25 @@ namespace PVB_Stage_Applicatie.Controllers
         [HttpPost]
         public ActionResult Index(LoginForm InLogForm)
         {
-            var persoonsgegevens = db.sp_Login(InLogForm.Gebruikersnaam, InLogForm.Wachtwoord).ToList();
+            var id = db.sp_Login(InLogForm.Gebruikersnaam, InLogForm.Wachtwoord).ToList();
 
-            if (persoonsgegevens.Count == 1)
+            if (id.Count == 1)
             {
-                return View("Jawel, ingelogd. Heuj");
-            }
+                Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id[0]);
 
+                if (persoonsgegevens == null)
+                {
+                    return HttpNotFound();
+                }
+
+                Session.Add("persoonsgegevens", persoonsgegevens);
+
+                Session.Add("Rol", persoonsgegevens.Rol);
+                FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, persoonsgegevens.PersoonsgegevensID.ToString(), DateTime.Now, DateTime.Now.AddMinutes(20), false, persoonsgegevens.Rol.ToString(), "/");
+                HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
+
+                Response.Cookies.Add(cookie);
+            }
 
             return View(InLogForm);
         }
