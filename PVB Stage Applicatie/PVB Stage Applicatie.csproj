@@ -136,6 +136,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KoppelingController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PeriodeController.cs" />
     <Compile Include="Controllers\StagiairController.cs" />
     <Compile Include="Controllers\TussentijdseBeeindigingController.cs" />
@@ -347,9 +348,12 @@
     <Content Include="Views\Periode\Create.cshtml" />
     <Content Include="Views\Periode\Edit.cshtml" />
     <Content Include="Views\Periode\Delete.cshtml" />
+    <Content Include="Views\Home\AdminMenuPartial.cshtml" />
+    <Content Include="Views\Home\DocentMenuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Menu\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

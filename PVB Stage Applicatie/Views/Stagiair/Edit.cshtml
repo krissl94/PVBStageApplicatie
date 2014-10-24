@@ -1,5 +1,28 @@
 ﻿@model PVB_Stage_Applicatie.Models.Persoonsgegevens
 
+<script>
+    $(document).ready(function () {
+        debugger;
+        if ($("#Actief")[0].checked) {
+            $("#NonActiefReden")[0].disabled = true;
+        }
+        else {
+            $("#NonActiefReden")[0].disabled = false;
+        }
+    });
+
+    $("#Actief").live("click", function () {
+        if ($("#Actief")[0].checked) {
+            debugger;
+            $("#NonActiefReden")[0].disabled = true;
+            $("#NonActiefReden")[0].value = "";
+        }
+        else {
+            $("#NonActiefReden")[0].disabled = false;
+        }
+    });
+</script>
+
 @{
     ViewBag.Title = "Edit";
 }
@@ -17,6 +40,7 @@
 
 
         @Html.HiddenFor(model => model.Rol)
+        @Html.HiddenFor(model => model.StudentNummer)
 
 
         <div class="editor-label">
@@ -36,7 +60,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.DisplayFor(model => model.Tussenvoegsel)
+            @Html.LabelFor(model => model.Tussenvoegsel)
         </div>
         <div class="editor-field">
             @Html.DisplayFor(model => model.Tussenvoegsel)
