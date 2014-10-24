@@ -82,3 +82,6 @@ D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Razor.xml
 D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.xml
 D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Deployment.xml
 D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Razor.xml
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.csprojResolveAssemblyReference.cache
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.pdb
