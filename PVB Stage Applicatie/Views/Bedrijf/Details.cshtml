@@ -1,4 +1,13 @@
 ﻿@model PVB_Stage_Applicatie.Models.Bedrijf
+<script>
+    $(document).ready(function () {
+        debugger;
+        if($(".display-field .check-box")[0].checked)
+        {
+            $("#NonActiefReden")[0].hidden = true;
+        }
+    });
+</script>
 
 @{
     ViewBag.Title = "Details";
@@ -17,14 +26,14 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Actief)
+         Actief
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Actief)
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.NonActiefReden)
+    <div id="NonActiefReden" class="display-label">
+         Non-actief reden
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.NonActiefReden)

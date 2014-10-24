@@ -48,6 +48,7 @@ namespace PVB_Stage_Applicatie.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Bedrijf bedrijf)
         {
+            bedrijf.Actief = true;
             if (ModelState.IsValid)
             {
                 db.Bedrijf.Add(bedrijf);
