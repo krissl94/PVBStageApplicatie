@@ -82,3 +82,29 @@ D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Razor.xml
 D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.xml
 D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Deployment.xml
 D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Razor.xml
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\PVB Stage Applicatie.dll.config
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\PVB Stage Applicatie.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\PVB Stage Applicatie.pdb
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\Antlr3.Runtime.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\EntityFramework.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\Microsoft.Web.Infrastructure.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\Newtonsoft.Json.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Mvc.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Optimization.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Providers.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Razor.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Deployment.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Razor.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\WebGrease.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\EntityFramework.xml
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\Newtonsoft.Json.xml
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Mvc.xml
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Razor.xml
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.xml
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Deployment.xml
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Razor.xml
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.csprojResolveAssemblyReference.cache
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.dll
+D:\GitHub\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.pdb
