@@ -50,3 +50,35 @@ D:\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Razor.xml
 D:\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.csprojResolveAssemblyReference.cache
 D:\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.dll
 D:\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.pdb
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.csprojResolveAssemblyReference.cache
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.pdb
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\PVB Stage Applicatie.dll.config
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\PVB Stage Applicatie.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\PVB Stage Applicatie.pdb
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\Antlr3.Runtime.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\EntityFramework.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\Microsoft.Web.Infrastructure.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\Newtonsoft.Json.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Net.Http.Formatting.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Http.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Http.WebHost.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Mvc.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Optimization.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Providers.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Razor.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Deployment.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Razor.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\WebGrease.dll
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\EntityFramework.xml
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\Newtonsoft.Json.xml
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Net.Http.Formatting.xml
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Http.xml
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Http.WebHost.xml
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Mvc.xml
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Razor.xml
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.xml
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Deployment.xml
+D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Razor.xml
