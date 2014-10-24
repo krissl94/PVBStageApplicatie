@@ -1,0 +1,40 @@
+﻿@model PVB_Stage_Applicatie.Models.Periode
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Periode</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Periode1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Periode1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Begindatum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Begindatum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Einddatum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Einddatum)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

@@ -1,0 +1,62 @@
+﻿@model PVB_Stage_Applicatie.Models.Stage
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Stage</legend>
+
+        @Html.HiddenFor(model => model.StageID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Student, "Persoonsgegevens")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Student", String.Empty)
+            @Html.ValidationMessageFor(model => model.Student)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Stagedocent, "Persoonsgegevens1")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Stagedocent", String.Empty)
+            @Html.ValidationMessageFor(model => model.Stagedocent)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Stageperiode, "Periode")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Stageperiode", String.Empty)
+            @Html.ValidationMessageFor(model => model.Stageperiode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Stagebegeleider, "Persoonsgegevens2")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Stagebegeleider", String.Empty)
+            @Html.ValidationMessageFor(model => model.Stagebegeleider)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

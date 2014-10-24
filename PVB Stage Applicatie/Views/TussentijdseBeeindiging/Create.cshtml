@@ -1,0 +1,68 @@
+﻿@model PVB_Stage_Applicatie.Models.TussentijdseBeindeging
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>TussentijdseBeindeging</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TussentijdsebeoordelingID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TussentijdsebeoordelingID)
+            @Html.ValidationMessageFor(model => model.TussentijdsebeoordelingID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Stage, "Stage1")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Stage", String.Empty)
+            @Html.ValidationMessageFor(model => model.Stage)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Einddatum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Einddatum)
+            @Html.ValidationMessageFor(model => model.Einddatum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CREBO)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CREBO)
+            @Html.ValidationMessageFor(model => model.CREBO)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Leerweg)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Leerweg)
+            @Html.ValidationMessageFor(model => model.Leerweg)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

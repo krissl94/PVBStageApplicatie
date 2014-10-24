@@ -129,8 +129,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BedrijfController.cs" />
+    <Compile Include="Controllers\BegeleiderController.cs" />
+    <Compile Include="Controllers\BeoordelingController.cs" />
+    <Compile Include="Controllers\DocentController.cs" />
+    <Compile Include="Controllers\GespreksFormulierController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KoppelingController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PeriodeController.cs" />
+    <Compile Include="Controllers\StagiairController.cs" />
+    <Compile Include="Controllers\TussentijdseBeeindigingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -298,6 +306,46 @@
     <Content Include="Views\Bedrijf\Delete.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\LoginScherm.cshtml" />
+    <Content Include="Views\Stagiair\Index.cshtml" />
+    <Content Include="Views\Stagiair\Details.cshtml" />
+    <Content Include="Views\Stagiair\Create.cshtml" />
+    <Content Include="Views\Stagiair\Edit.cshtml" />
+    <Content Include="Views\Stagiair\Delete.cshtml" />
+    <Content Include="Views\Docent\Index.cshtml" />
+    <Content Include="Views\Docent\Details.cshtml" />
+    <Content Include="Views\Docent\Create.cshtml" />
+    <Content Include="Views\Docent\Edit.cshtml" />
+    <Content Include="Views\Docent\Delete.cshtml" />
+    <Content Include="Views\Begeleider\Index.cshtml" />
+    <Content Include="Views\Begeleider\Details.cshtml" />
+    <Content Include="Views\Begeleider\Create.cshtml" />
+    <Content Include="Views\Begeleider\Edit.cshtml" />
+    <Content Include="Views\Begeleider\Delete.cshtml" />
+    <Content Include="Views\GespreksFormulier\Index.cshtml" />
+    <Content Include="Views\GespreksFormulier\Details.cshtml" />
+    <Content Include="Views\GespreksFormulier\Create.cshtml" />
+    <Content Include="Views\GespreksFormulier\Edit.cshtml" />
+    <Content Include="Views\GespreksFormulier\Delete.cshtml" />
+    <Content Include="Views\Beoordeling\Index.cshtml" />
+    <Content Include="Views\Beoordeling\Details.cshtml" />
+    <Content Include="Views\Beoordeling\Create.cshtml" />
+    <Content Include="Views\Beoordeling\Edit.cshtml" />
+    <Content Include="Views\Beoordeling\Delete.cshtml" />
+    <Content Include="Views\TussentijdseBeeindiging\Index.cshtml" />
+    <Content Include="Views\TussentijdseBeeindiging\Details.cshtml" />
+    <Content Include="Views\TussentijdseBeeindiging\Create.cshtml" />
+    <Content Include="Views\TussentijdseBeeindiging\Edit.cshtml" />
+    <Content Include="Views\TussentijdseBeeindiging\Delete.cshtml" />
+    <Content Include="Views\Koppeling\Index.cshtml" />
+    <Content Include="Views\Koppeling\Details.cshtml" />
+    <Content Include="Views\Koppeling\Create.cshtml" />
+    <Content Include="Views\Koppeling\Edit.cshtml" />
+    <Content Include="Views\Koppeling\Delete.cshtml" />
+    <Content Include="Views\Periode\Index.cshtml" />
+    <Content Include="Views\Periode\Details.cshtml" />
+    <Content Include="Views\Periode\Create.cshtml" />
+    <Content Include="Views\Periode\Edit.cshtml" />
+    <Content Include="Views\Periode\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

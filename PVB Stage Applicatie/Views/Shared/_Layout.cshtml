@@ -10,12 +10,13 @@
 <body>
     <div id="menubalk" class="systeembeheerder">
         <ul id="menuItems">
-            <a href='@Url ("Index", "Bedrijf")'><li>Beheren Bedrijf</li></a>
-            <a href=""><li>Beheren Stagiair</li></a>
-            <a href=""><li>Beheren Stagedocent</li></a>
-            <a href=""><li>Beheren Stagebegeleider</li></a>
-            <a href=""><li>Beheren Stageperiode</li></a>
-            <a href=""><li>Beheren Koppelingen</li></a>
+            <a href='@Url.Action("Index", "Home")'><li>Home</li></a>
+            <a href='@Url.Action("Index", "Bedrijf")'><li>Beheren Bedrijf</li></a>
+            <a href='@Url.Action("Index", "Stagiair")'><li>Beheren Stagiair</li></a>
+            <a href='@Url.Action("Index", "Docent")'><li>Beheren Stagedocent</li></a>
+            <a href='@Url.Action("Index", "Begeleider")'><li>Beheren Stagebegeleider</li></a>
+            <a href='@Url.Action("Index", "Periode")'><li>Beheren Stageperiode</li></a>
+            <a href='@Url.Action("Index", "Koppeling")'><li>Beheren Koppelingen</li></a>
         </ul>
     </div>
     <div id="subMenuLinks"></div>

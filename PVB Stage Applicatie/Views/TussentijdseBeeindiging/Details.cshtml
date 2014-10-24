@@ -1,0 +1,50 @@
+﻿@model PVB_Stage_Applicatie.Models.TussentijdseBeindeging
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>TussentijdseBeindeging</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TussentijdsebeoordelingID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TussentijdsebeoordelingID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Stage1.StageID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Stage1.StageID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Einddatum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Einddatum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CREBO)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CREBO)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Leerweg)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Leerweg)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

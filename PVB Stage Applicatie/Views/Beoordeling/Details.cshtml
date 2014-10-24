@@ -1,0 +1,379 @@
+﻿@model PVB_Stage_Applicatie.Models.Beoordeling
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Beoordeling</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Stage1.StageID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Stage1.StageID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Datum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Datum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Beoordeling1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Beoordeling1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VoorbereidWerk)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VoorbereidWerk)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VoorbereidWerkOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VoorbereidWerkOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PlanEnOrganiserenWerk)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PlanEnOrganiserenWerk)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PlanEnOrganiserenWerkOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PlanEnOrganiserenWerkOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TheoretischInzicht)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TheoretischInzicht)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TheoretischInzichtOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TheoretischInzichtOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.KwalGeleverdWerk)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.KwalGeleverdWerk)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.KwalGeleverdWerkOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.KwalGeleverdWerkOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RapportWerk)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RapportWerk)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RapportWerkOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RapportWerkOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HoudtBedrRegels)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoudtBedrRegels)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HoudtBedrRegelsOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoudtBedrRegelsOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HoudtARBORegels)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoudtARBORegels)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HoudtARBORegelsOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoudtARBORegelsOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WerkTempo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WerkTempo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WerkTempoOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WerkTempoOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BeoordelingTechAspect)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BeoordelingTechAspect)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BeoordelingTechAspectOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BeoordelingTechAspectOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VerloopEersteContact)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VerloopEersteContact)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VerloopEersteContactOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VerloopEersteContactOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HoudingTAVCollegas)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoudingTAVCollegas)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HoudingTAVCollegasOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoudingTAVCollegasOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HoudingTAVLeiding)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoudingTAVLeiding)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HoudingTAVLeidingOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoudingTAVLeidingOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HoudingTAVDerden)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoudingTAVDerden)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HoudingTAVDerdenOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoudingTAVDerdenOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OmgaanKritiek)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OmgaanKritiek)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OmgaanKritiekOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OmgaanKritiekOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OpTijd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OpTijd)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OpTijdOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OpTijdOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ToontInitiatief)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ToontInitiatief)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ToontInitiatiefOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ToontInitiatiefOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Inzet)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Inzet)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IntzetOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IntzetOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ToontBelangstellingVak)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ToontBelangstellingVak)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ToontBelangstellingVakOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ToontBelangstellingVakOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GrenzenAangeven)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GrenzenAangeven)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GrenzenAangevenOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GrenzenAangevenOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.KomtAfsprakenNa)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.KomtAfsprakenNa)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.KomtAfsprakenNaOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.KomtAfsprakenNaOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ZelfstandigWerken)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ZelfstandigWerken)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ZelfstandigWerkenOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ZelfstandigWerkenOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Gemotiveerd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Gemotiveerd)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GemotiveerdOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GemotiveerdOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HoudingsAspecten)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoudingsAspecten)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.HoudingAspectenOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.HoudingAspectenOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Verslag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Verslag)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VerslagOpm)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VerslagOpm)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EindBeoordeling)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EindBeoordeling)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.BeoordelingID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
