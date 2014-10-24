@@ -1,0 +1,339 @@
+﻿@model IEnumerable<PVB_Stage_Applicatie.Models.Beoordeling>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Stage1.StageID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Datum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Beoordeling1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VoorbereidWerk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VoorbereidWerkOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlanEnOrganiserenWerk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlanEnOrganiserenWerkOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TheoretischInzicht)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TheoretischInzichtOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KwalGeleverdWerk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KwalGeleverdWerkOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RapportWerk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RapportWerkOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoudtBedrRegels)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoudtBedrRegelsOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoudtARBORegels)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoudtARBORegelsOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WerkTempo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WerkTempoOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BeoordelingTechAspect)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BeoordelingTechAspectOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VerloopEersteContact)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VerloopEersteContactOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoudingTAVCollegas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoudingTAVCollegasOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoudingTAVLeiding)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoudingTAVLeidingOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoudingTAVDerden)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoudingTAVDerdenOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OmgaanKritiek)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OmgaanKritiekOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpTijd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OpTijdOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToontInitiatief)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToontInitiatiefOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Inzet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IntzetOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToontBelangstellingVak)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToontBelangstellingVakOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GrenzenAangeven)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GrenzenAangevenOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KomtAfsprakenNa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KomtAfsprakenNaOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZelfstandigWerken)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZelfstandigWerkenOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gemotiveerd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GemotiveerdOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoudingsAspecten)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoudingAspectenOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Verslag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VerslagOpm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EindBeoordeling)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stage1.StageID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Datum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Beoordeling1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VoorbereidWerk)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VoorbereidWerkOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlanEnOrganiserenWerk)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PlanEnOrganiserenWerkOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TheoretischInzicht)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TheoretischInzichtOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KwalGeleverdWerk)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KwalGeleverdWerkOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RapportWerk)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RapportWerkOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoudtBedrRegels)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoudtBedrRegelsOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoudtARBORegels)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoudtARBORegelsOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WerkTempo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WerkTempoOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BeoordelingTechAspect)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BeoordelingTechAspectOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VerloopEersteContact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VerloopEersteContactOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoudingTAVCollegas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoudingTAVCollegasOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoudingTAVLeiding)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoudingTAVLeidingOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoudingTAVDerden)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoudingTAVDerdenOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OmgaanKritiek)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OmgaanKritiekOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpTijd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OpTijdOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToontInitiatief)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToontInitiatiefOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Inzet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IntzetOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToontBelangstellingVak)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToontBelangstellingVakOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrenzenAangeven)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GrenzenAangevenOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KomtAfsprakenNa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KomtAfsprakenNaOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZelfstandigWerken)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZelfstandigWerkenOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gemotiveerd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GemotiveerdOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoudingsAspecten)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoudingAspectenOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Verslag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VerslagOpm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EindBeoordeling)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BeoordelingID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BeoordelingID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BeoordelingID })
+        </td>
+    </tr>
+}
+
+</table>
