@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
 using System.Web.Security;
 
 namespace PVB_Stage_Applicatie.Controllers
@@ -42,8 +44,14 @@ namespace PVB_Stage_Applicatie.Controllers
 
                 Response.Cookies.Add(cookie);
             }
-
+           
             return View(InLogForm);
+        }
+
+        [Authorize(Roles="1,2,3,4,5,6,7,8,9,0")]
+        public ActionResult LoggedIn()
+        {
+            return View();
         }
 
     }
