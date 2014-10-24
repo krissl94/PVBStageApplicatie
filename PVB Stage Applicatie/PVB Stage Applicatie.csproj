@@ -154,6 +154,7 @@
     <Compile Include="Models\Login.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginForm.cs" />
     <Compile Include="Models\Opleiding.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
@@ -309,7 +310,6 @@
     <Content Include="Views\Stagiair\Details.cshtml" />
     <Content Include="Views\Stagiair\Create.cshtml" />
     <Content Include="Views\Stagiair\Edit.cshtml" />
-    <Content Include="Views\Stagiair\Delete.cshtml" />
     <Content Include="Views\Docent\Index.cshtml" />
     <Content Include="Views\Docent\Details.cshtml" />
     <Content Include="Views\Docent\Create.cshtml" />
@@ -319,7 +319,6 @@
     <Content Include="Views\Begeleider\Details.cshtml" />
     <Content Include="Views\Begeleider\Create.cshtml" />
     <Content Include="Views\Begeleider\Edit.cshtml" />
-    <Content Include="Views\Begeleider\Delete.cshtml" />
     <Content Include="Views\GespreksFormulier\Index.cshtml" />
     <Content Include="Views\GespreksFormulier\Details.cshtml" />
     <Content Include="Views\GespreksFormulier\Create.cshtml" />

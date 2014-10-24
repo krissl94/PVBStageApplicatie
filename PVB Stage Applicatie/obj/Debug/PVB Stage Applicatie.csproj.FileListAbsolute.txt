@@ -85,3 +85,26 @@ D:\GitShit\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Razor
 C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.csprojResolveAssemblyReference.cache
 C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.dll
 C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\obj\Debug\PVB Stage Applicatie.pdb
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\PVB Stage Applicatie.dll.config
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\PVB Stage Applicatie.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\PVB Stage Applicatie.pdb
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\Antlr3.Runtime.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\EntityFramework.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\Newtonsoft.Json.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Mvc.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Optimization.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Providers.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Razor.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Razor.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\WebGrease.dll
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\EntityFramework.xml
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\Newtonsoft.Json.xml
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Mvc.xml
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.Razor.xml
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.xml
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Kris\Desktop\PVB\PVBStageApplicatie\PVB Stage Applicatie\bin\System.Web.WebPages.Razor.xml
