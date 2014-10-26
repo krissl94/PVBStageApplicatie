@@ -12,7 +12,8 @@
                    //Menu Docent
                    new { LinkText="Mijn Bedrijven", ActionName="Index",ControllerName="Bedrijf",Roles= Rollen.Docent },
                    //Algemeen
-                   new { LinkText="Uitloggen", ActionName="logUit",ControllerName="Login",Roles= Rollen.Beheerder+ ","+ Rollen.Docent }
+                   new { LinkText="Uitloggen", ActionName="logUit",ControllerName="Login",Roles= Rollen.Beheerder+ ","+ Rollen.Docent },
+                   new { LinkText="Inloggen", ActionName="Index",ControllerName="Login",Roles= "Anonymous"}
                 };
 } 
 <ul id="menuItems">
