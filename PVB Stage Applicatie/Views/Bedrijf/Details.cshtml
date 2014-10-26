@@ -8,7 +8,12 @@
         }
     });
 </script>
-
+@section zijMenu{
+    <ul>
+    <li>@Html.ActionLink("Edit", "Edit", new { id = Model.BedrijfID })</li>
+    <li>@Html.ActionLink("Back to List", "Index")</li>
+</ul>
+}
 @{
     ViewBag.Title = "Details";
 }
@@ -39,7 +44,3 @@
         @Html.DisplayFor(model => model.NonActiefReden)
     </div>
 </fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.BedrijfID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

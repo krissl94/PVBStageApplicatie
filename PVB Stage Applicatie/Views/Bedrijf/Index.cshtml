@@ -6,9 +6,13 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+    @section zijMenu{
+    <ul>
+        <li>@Html.ActionLink("Nieuw bedrijf", "Create")</li>
+        <li>@Html.ActionLink("Bulk invoer", "")</li>
+    </ul>
+    }
 <table>
     <tr>
         <th>
@@ -18,7 +22,7 @@
             @Html.DisplayNameFor(model => model.Actief)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NonActiefReden)
+            Reden non-actief
         </th>
         <th></th>
     </tr>
@@ -26,19 +30,29 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Naam)
+            @Html.ActionLink(""+item.Naam, "Details", new { id = item.BedrijfID })
+
         </td>
         <td>
-            @Html.EditorFor(modelItem => item.Actief)
+            @Html.DisplayFor(modelItem => item.Actief)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.NonActiefReden)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BedrijfID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.BedrijfID }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.BedrijfID })
         </td>
     </tr>
-}
 
+}
+    <tr>
+        <td></td>
+    <td>
+    </td>
+    <td>
+        
+    </td>
+        <td></td>
+    </tr>
 </table>
+

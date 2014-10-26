@@ -5,7 +5,12 @@
 }
 
 <h2>Index</h2>
-
+@section zijMenu{
+    <ul>
+        <li>@Html.ActionLink("Nieuwe begeleider", "Create")</li>
+        <li>@Html.ActionLink("Bulk invoer", "")</li>
+    </ul>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>

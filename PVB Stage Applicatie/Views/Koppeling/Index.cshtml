@@ -3,7 +3,12 @@
 @{
     ViewBag.Title = "Index";
 }
-
+@section zijMenu{
+    <ul>
+        <li>@Html.ActionLink("Nieuwe koppeling", "Create")</li>
+        <li>@Html.ActionLink("Bulk invoer", "")</li>
+    </ul>
+}
 <h2>Index</h2>
 
 <p>

@@ -264,6 +264,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>StageApplicatieModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Images\logo.png" />
     <Content Include="Models\StageApplicatieModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>StageApplicatieModel.edmx</DependentUpon>

@@ -60,22 +60,38 @@ textarea {
     display: none;
 }
 
-#menubalk{
-    background-color: lightblue;
+#bovenbalk{
+    background-color: #526675;
+}
+
+#menubalk {
+    height:40px;
+    background-color: #ddd;
+    padding-left:150px;
 }
 #menuItems {
     list-style: none;
 }
-#menuItems li{
-    display: inline;
-    border: solid 1px;
+.menuItem{
+    display:inline-block;
+    border-right:solid 4px white;
+    padding: 10px;
+    height:40px;
 }
+
 #subMenuLinks{
-    position:relative;
+    position:absolute;
+    float:left;
     padding-left:10px;
+    margin-right:50px;
     width:150px;
-    background-color:blue;
+    background-color:#788895;
     height: 100%;
+}
+
+#content{
+    position:absolute;
+    margin-left:200px;
 }
 
 .display-label{

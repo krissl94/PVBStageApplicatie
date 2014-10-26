@@ -5,6 +5,12 @@
 }
 
 <h2>Create</h2>
+@section zijMenu{
+    <ul>
+        <li>@Html.ActionLink("Terug", "Index")</li>
+    </ul>
+}
+
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()

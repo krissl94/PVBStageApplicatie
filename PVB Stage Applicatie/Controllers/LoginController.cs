@@ -49,13 +49,24 @@ namespace PVB_Stage_Applicatie.Controllers
                 Response.Cookies.Add(cookie);
             }
            
-            return View(inLogForm);
+            return View("~/Views/Home/Index.cshtml");
         }
 
         [Authorize(Roles=Rollen.Beheerder)]
         public ActionResult LoggedIn()
         {
             return View();
+        }
+
+        public ActionResult logUit()
+        {
+            HttpCookie authCookie = HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
+            FormsAuthentication.SignOut();
+            HttpContext.Session.Abandon();
+            authCookie = null;
+            Session.Remove("Persoonsgegevens");
+            Session.Remove("Rol");
+            return View("/Views/Login/Index.cshtml");
         }
     }
 }

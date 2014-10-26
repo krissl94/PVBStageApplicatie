@@ -1,13 +1,21 @@
-﻿@{
+﻿@using PVB_Stage_Applicatie.Models;
+@{
     var menus = new[]
                 {
-                   new { LinkText="Home", ActionName="Index",ControllerName="Home",Roles= PVB_Stage_Applicatie.Models.Rollen.Beheerder},
-                   new { LinkText="Beheren Bedrijf", ActionName="Index",ControllerName="Bedrijf",Roles=""  },
-                   new { LinkText="Mijn Bedrijven", ActionName="Index",ControllerName="Bedrijf",Roles=PVB_Stage_Applicatie.Models.Rollen.Docent },
-                   new { LinkText="Beheren Stagiair", ActionName="Index",ControllerName="Stagiair",Roles=""  },
+                   new { LinkText="Home", ActionName="Index",ControllerName="Home",Roles= Rollen.Beheerder + "," + Rollen.Docent},
+                    //Menu Beheerder                   
+                   new { LinkText="Beheren Bedrijf", ActionName="Index",ControllerName="Bedrijf",Roles= Rollen.Beheerder},
+                   new { LinkText="Beheren Stagiair", ActionName="Index",ControllerName="Stagiair",Roles= Rollen.Beheerder},                 
+                   new { LinkText="Beheren Docent", ActionName="Index",ControllerName="Docent",Roles= Rollen.Beheerder},
+                   new { LinkText="Beheren Periodes", ActionName="Index",ControllerName="Periode",Roles= Rollen.Beheerder},
+                   new { LinkText="Beheren Koppelingen", ActionName="Index",ControllerName="Koppeling",Roles= Rollen.Beheerder},
+                   //Menu Docent
+                   new { LinkText="Mijn Bedrijven", ActionName="Index",ControllerName="Bedrijf",Roles= Rollen.Docent },
+                   //Algemeen
+                   new { LinkText="Uitloggen", ActionName="logUit",ControllerName="Login",Roles= Rollen.Beheerder+ ","+ Rollen.Docent }
                 };
 } 
-<ul id="menu">menu
+<ul id="menuItems">
     @if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
         PVB_Stage_Applicatie.Models.RolVerdeler rv = new PVB_Stage_Applicatie.Models.RolVerdeler();
@@ -21,8 +29,9 @@
         foreach (var link in links)
         {
             @:
-            <li> @Html.ActionLink(link.LinkText, link.ActionName, link.ControllerName)</li>
-    }
+            <li class="menuItem"> @Html.ActionLink(link.LinkText, link.ActionName, link.ControllerName)</li>
+        }
+        
     }
     else
     {
@@ -34,6 +43,6 @@
         {
             @:
             <li> @Html.ActionLink(link.LinkText, link.ActionName, link.ControllerName)</li>
-     }
+        }
     }
 </ul> 
