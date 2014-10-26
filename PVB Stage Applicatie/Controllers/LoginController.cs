@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -23,9 +25,11 @@ namespace PVB_Stage_Applicatie.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(LoginForm InLogForm)
+        public ActionResult Index(LoginForm inLogForm)
         {
-            var id = db.sp_Login(InLogForm.Gebruikersnaam, InLogForm.Wachtwoord).ToList();
+            string wachtwoord = Hashing.HashString(inLogForm.Gebruikersnaam, inLogForm.Wachtwoord);
+
+            var id = db.sp_Login(inLogForm.Gebruikersnaam, wachtwoord).ToList();
 
             if (id.Count == 1)
             {
@@ -45,7 +49,7 @@ namespace PVB_Stage_Applicatie.Controllers
                 Response.Cookies.Add(cookie);
             }
            
-            return View(InLogForm);
+            return View(inLogForm);
         }
 
         [Authorize(Roles=Rollen.Beheerder)]
