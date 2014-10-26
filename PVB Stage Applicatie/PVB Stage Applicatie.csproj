@@ -179,6 +179,7 @@
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rollen.cs" />
+    <Compile Include="Models\RolVerdeler.cs" />
     <Compile Include="Models\Stage.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
@@ -351,6 +352,8 @@
     <Content Include="Views\Periode\Delete.cshtml" />
     <Content Include="Views\Home\AdminMenuPartial.cshtml" />
     <Content Include="Views\Home\DocentMenuPartial.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Login\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

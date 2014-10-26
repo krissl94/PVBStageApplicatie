@@ -563,5 +563,14 @@ namespace PVB_Stage_Applicatie.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_StageToevoegen", studentParameter, stagedocentParameter, stageperiodeParameter, tagebegeleiderParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> sp_ZoekRol(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_ZoekRol", iDParameter);
+        }
     }
 }

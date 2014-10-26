@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StageApplicatieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="StageApplicatieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bedrijf">
           <Key>
             <PropertyRef Name="BedrijfID" />
@@ -512,7 +512,7 @@
         </Function>
         <Function Name="sp_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Gebruikersnaam" Type="varchar" Mode="In" />
-          <Parameter Name="Wachtwoord" Type="varchar" Mode="In" />
+          <Parameter Name="Wachtwoord" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="sp_LoginToevoegen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Gebruikersnaam" Type="varchar" Mode="In" />
@@ -570,6 +570,9 @@
           <Parameter Name="Stagedocent" Type="int" Mode="In" />
           <Parameter Name="Stageperiode" Type="int" Mode="In" />
           <Parameter Name="tagebegeleider" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_ZoekRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="StageApplicatieModelStoreContainer">
           <EntitySet Name="Bedrijf" EntityType="Self.Bedrijf" Schema="dbo" store:Type="Tables" />
@@ -657,8 +660,7 @@
             <End Role="TussentijdseBeindeging" EntitySet="TussentijdseBeindeging" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StageApplicatieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1101,7 +1103,7 @@
             <Parameter Name="NonActiefReden" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_BedrijfToevoegen">
-            <Parameter Name="naam" Mode="In" Type="String" />
+          <Parameter Name="naam" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_BedrijfUpdaten">
             <Parameter Name="Naam" Mode="In" Type="String" />
@@ -1194,7 +1196,7 @@
             <Parameter Name="EindDatum" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_PeriodeVerwijderen">
-            <Parameter Name="StagePeriodeID" Mode="In" Type="Int32" />
+          <Parameter Name="StagePeriodeID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_PersoonNonActief">
             <Parameter Name="PersoonID" Mode="In" Type="Int32" />
@@ -1235,6 +1237,9 @@
             <Parameter Name="Stagedocent" Mode="In" Type="Int32" />
             <Parameter Name="Stageperiode" Mode="In" Type="Int32" />
             <Parameter Name="tagebegeleider" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ZoekRol" ReturnType="Collection(Int32)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -1474,6 +1479,7 @@
           <FunctionImportMapping FunctionImportName="sp_PersoonToevoegen" FunctionName="StageApplicatieModel.Store.sp_PersoonToevoegen" />
           <FunctionImportMapping FunctionImportName="sp_PersoonUpdaten" FunctionName="StageApplicatieModel.Store.sp_PersoonUpdaten" />
           <FunctionImportMapping FunctionImportName="sp_StageToevoegen" FunctionName="StageApplicatieModel.Store.sp_StageToevoegen" />
+          <FunctionImportMapping FunctionImportName="sp_ZoekRol" FunctionName="StageApplicatieModel.Store.sp_ZoekRol" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
