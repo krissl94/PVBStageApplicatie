@@ -9,7 +9,7 @@ namespace PVB_Stage_Applicatie.Models
     {
         private StageApplicatieEntities db = new StageApplicatieEntities();
 
-        public string ZoekRolGebruiker(string id)
+        public String ZoekRolGebruiker(string id)
         {
             try
             {
@@ -30,7 +30,8 @@ namespace PVB_Stage_Applicatie.Models
                         return null;
                 }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 return null;
             };           
         }

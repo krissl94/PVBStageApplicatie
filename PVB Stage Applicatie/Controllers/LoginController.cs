@@ -48,8 +48,10 @@ namespace PVB_Stage_Applicatie.Controllers
 
                 Response.Cookies.Add(cookie);
             }
-           
-            return View("~/Views/Home/Index.cshtml");
+            Response.Redirect("/Home/Index");
+
+            //return View("~/Views/Home/Index.cshtml");
+            return null;
         }
 
         [Authorize(Roles=Rollen.Beheerder)]
@@ -66,7 +68,8 @@ namespace PVB_Stage_Applicatie.Controllers
             authCookie = null;
             Session.Remove("Persoonsgegevens");
             Session.Remove("Rol");
-            return View("/Views/Login/Index.cshtml");
+            Response.Redirect("/Login/Index");
+            return null;
         }
     }
 }
