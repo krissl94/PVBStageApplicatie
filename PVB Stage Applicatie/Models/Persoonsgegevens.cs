@@ -20,9 +20,9 @@ namespace PVB_Stage_Applicatie.Models
         {
             this.Login = new HashSet<Login>();
             this.OpleidingPersoon = new HashSet<OpleidingPersoon>();
-            this.Stage = new HashSet<Stage>();
-            this.Stage1 = new HashSet<Stage>();
-            this.Stage2 = new HashSet<Stage>();
+            this.Stagiair = new HashSet<Stage>();
+            this.StageDocent = new HashSet<Stage>();
+            this.StageBegeleider = new HashSet<Stage>();
         }
     
         public int PersoonsgegevensID { get; set; }
@@ -47,9 +47,9 @@ namespace PVB_Stage_Applicatie.Models
         public virtual Bedrijf Bedrijf1 { get; set; }
         public virtual ICollection<Login> Login { get; set; }
         public virtual ICollection<OpleidingPersoon> OpleidingPersoon { get; set; }
-        public virtual ICollection<Stage> Stage { get; set; }
-        public virtual ICollection<Stage> Stage1 { get; set; }
-        public virtual ICollection<Stage> Stage2 { get; set; }
+        public virtual ICollection<Stage> Stagiair { get; set; }
+        public virtual ICollection<Stage> StageDocent { get; set; }
+        public virtual ICollection<Stage> StageBegeleider { get; set; }
 
     }
 
