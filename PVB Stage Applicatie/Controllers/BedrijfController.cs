@@ -17,6 +17,7 @@ namespace PVB_Stage_Applicatie.Controllers
         // GET: /Bedrijf/
         public ActionResult Index()
         {
+            bool i = HttpContext.User.IsInRole("1");
             return View(db.Bedrijf.ToList());
         }
 
@@ -82,7 +83,20 @@ namespace PVB_Stage_Applicatie.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(bedrijf).State = EntityState.Modified;
+                //Zet begeleiders van bedrijf op non-actief
+                if(bedrijf.Actief == false)
+                {
+                    var begeleiders = db.Persoonsgegevens.Where(p => p.Bedrijf1.BedrijfID == bedrijf.BedrijfID);
+                    foreach (var item in begeleiders)
+                    {
+                        item.Actief = false;
+                        item.NonActiefReden = "Bedrijf is non-actief gesteld";
+                        item.Bedrijf1 = null;
+                        db.Entry(item).State = EntityState.Modified;
+                    }
+                }
                 db.SaveChanges();
+                
                 return RedirectToAction("Index");
             }
             return View(bedrijf);

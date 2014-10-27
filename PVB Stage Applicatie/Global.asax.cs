@@ -34,10 +34,9 @@ namespace PVB_Stage_Applicatie
             {
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
                 string[] rol = {authTicket.UserData};
-
                 GenericPrincipal userPrincipal = new GenericPrincipal(new GenericIdentity(authTicket.Name), rol);
-                
                 Context.User = userPrincipal;
+                
             }
 
         }

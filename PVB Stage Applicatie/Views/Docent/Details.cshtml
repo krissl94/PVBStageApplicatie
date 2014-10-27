@@ -1,5 +1,16 @@
 ﻿@model PVB_Stage_Applicatie.Models.Persoonsgegevens
+@section zijMenu{
+    <ul>
+        <li>
+            @Html.ActionLink("Aanpassen", "Edit", new { id = Model.PersoonsgegevensID })
+        </li>
+        <li>
+            @Html.ActionLink("Terug", "Index")
 
+
+        </li>
+    </ul>
+}
 @{
     ViewBag.Title = "Details";
 }
@@ -8,14 +19,6 @@
 
 <fieldset>
     <legend>Persoonsgegevens</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Rol)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Rol)
-    </div>
-
     <div class="display-label">
          @Html.DisplayNameFor(model => model.Voornaam)
     </div>
@@ -100,35 +103,5 @@
         @Html.DisplayFor(model => model.MedewerkerID)
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.StudentNummer)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.StudentNummer)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Opleiding)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Opleiding)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Opleidingsniveau)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Opleidingsniveau)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Bedrijf1.Naam)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Bedrijf1.Naam)
-    </div>
 </fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.PersoonsgegevensID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

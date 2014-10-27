@@ -3,34 +3,41 @@
 @{
     ViewBag.Title = "Details";
 }
-
+@section zijMenu{
+    <ul>
+        <li>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Periode1 })
+        </li>
+        <li>
+            @Html.ActionLink("Back to List", "Index")
+        </li>
+    </ul>
+}
 <h2>Details</h2>
 
 <fieldset>
     <legend>Periode</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Periode1)
+        @Html.DisplayNameFor(model => model.Periode1)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Periode1)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Begindatum)
+        @Html.DisplayNameFor(model => model.Begindatum)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Begindatum)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Einddatum)
+        @Html.DisplayNameFor(model => model.Einddatum)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Einddatum)
     </div>
 </fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
+
 </p>

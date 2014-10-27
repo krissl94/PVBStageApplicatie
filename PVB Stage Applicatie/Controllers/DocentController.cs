@@ -18,7 +18,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         public ActionResult Index()
         {
-            var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1);
+            var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 2);
             return View(persoonsgegevens.ToList());
         }
 
