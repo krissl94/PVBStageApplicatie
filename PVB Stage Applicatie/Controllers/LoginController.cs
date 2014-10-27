@@ -27,6 +27,8 @@ namespace PVB_Stage_Applicatie.Controllers
         [HttpPost]
         public ActionResult Index(LoginForm inLogForm)
         {
+            inLogForm.Gebruikersnaam = inLogForm.Gebruikersnaam.ToLower();
+
             string wachtwoord = Hashing.HashString(inLogForm.Gebruikersnaam, inLogForm.Wachtwoord);
 
             var id = db.sp_Login(inLogForm.Gebruikersnaam, wachtwoord).ToList();
@@ -50,14 +52,8 @@ namespace PVB_Stage_Applicatie.Controllers
             }
             Response.Redirect("/Home/Index");
 
-            //return View("~/Views/Home/Index.cshtml");
-            return null;
-        }
 
-        [Authorize(Roles=Rollen.Beheerder)]
-        public ActionResult LoggedIn()
-        {
-            return View();
+            return null;
         }
 
         public ActionResult logUit()

@@ -33,13 +33,22 @@ namespace PVB_Stage_Applicatie
             if (authCookie != null)
             {
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
-                string[] rol = {authTicket.UserData};
+                string[] rol = { authTicket.UserData };
 
                 GenericPrincipal userPrincipal = new GenericPrincipal(new GenericIdentity(authTicket.Name), rol);
-                
-                Context.User = userPrincipal;
-            }
 
+                Context.User = userPrincipal;
+
+                if (!Roles.RoleExists(rol[0]))
+                {
+                    Roles.CreateRole(rol[0]);
+                }
+
+                if (Roles.GetRolesForUser(Context.User.Identity.Name).Count() == 0)
+                { 
+                    Roles.AddUserToRole(Context.User.Identity.Name, "1");
+                }
+            }
         }
     }
 }
