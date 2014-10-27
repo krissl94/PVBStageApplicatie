@@ -52,10 +52,10 @@ namespace PVB_Stage_Applicatie.Controllers
             }
             Response.Redirect("/Home/Index");
 
-
             return null;
         }
 
+        [Authorize(Roles = Rollen.Beheerder + "," + Rollen.Docent)]
         public ActionResult logUit()
         {
             HttpCookie authCookie = HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
