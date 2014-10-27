@@ -18,7 +18,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         public ActionResult Index()
         {
-            var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1);
+            var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 3);
             return View(persoonsgegevens.ToList());
         }
 
@@ -51,6 +51,8 @@ namespace PVB_Stage_Applicatie.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Persoonsgegevens persoonsgegevens)
         {
+            persoonsgegevens.Rol = 3;
+            persoonsgegevens.Actief = true;
             if (ModelState.IsValid)
             {
                 db.Persoonsgegevens.Add(persoonsgegevens);
@@ -72,7 +74,8 @@ namespace PVB_Stage_Applicatie.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
+
+            ViewBag.Bedrijf = new SelectList(db.Bedrijf.Where(p => p.Actief) , "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
             return View(persoonsgegevens);
         }
 
@@ -83,6 +86,7 @@ namespace PVB_Stage_Applicatie.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Persoonsgegevens persoonsgegevens)
         {
+            persoonsgegevens.Rol = 3;
             if (ModelState.IsValid)
             {
                 db.Entry(persoonsgegevens).State = EntityState.Modified;

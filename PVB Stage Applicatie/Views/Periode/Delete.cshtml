@@ -1,40 +1,46 @@
 ﻿@model PVB_Stage_Applicatie.Models.Periode
-
+@section zijMenu{
+    <ul>
+        <li>
+            @Html.ActionLink("Terug", "Index")
+        </li>
+    </ul>
+}
 @{
     ViewBag.Title = "Delete";
 }
 
 <h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Weet je zeker dat je dit wil verwijderen? Alle onderliggende data wordt ook verwijderd!</h3>
 <fieldset>
     <legend>Periode</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Periode1)
+        @Html.DisplayNameFor(model => model.Periode1)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Periode1)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Begindatum)
+        @Html.DisplayNameFor(model => model.Begindatum)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Begindatum)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Einddatum)
+        @Html.DisplayNameFor(model => model.Einddatum)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Einddatum)
     </div>
 </fieldset>
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
+        <input type="submit" value="Verwijderen" onclick="return confirm('Weet je het zeker? Dit is een onomkeerbare actie!')" /> 
     </p>
 }

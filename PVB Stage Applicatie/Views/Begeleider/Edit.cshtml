@@ -1,4 +1,32 @@
 ﻿@model PVB_Stage_Applicatie.Models.Persoonsgegevens
+<script>
+    $(document).ready(function () {
+        if ($("#Actief")[0].checked) {
+            $("#NonActiefReden")[0].disabled = true;
+            $("#Bedrijf")[0].disabled = false;
+
+        }
+        else {
+            $("#NonActiefReden")[0].disabled = false;
+            $("#Bedrijf")[0].disabled = true;
+        }
+    });
+
+    $("#Actief").live("click", function () {
+        if ($("#Actief")[0].checked) {
+            debugger;
+            $("#NonActiefReden")[0].disabled = true;
+            $("#NonActiefReden")[0].value = "";
+            $("#Bedrijf")[0].disabled = false;
+
+        }
+        else {
+            $("#NonActiefReden")[0].disabled = false;
+            $("#Bedrijf")[0].disabled = true;
+            $("#Bedrijf")[0].value = "";
+        }
+    });
+</script>
 
 @{
     ViewBag.Title = "Edit";
@@ -14,20 +42,14 @@
         <legend>Persoonsgegevens</legend>
 
         @Html.HiddenFor(model => model.PersoonsgegevensID)
+        @Html.HiddenFor(model => model.Rol)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Rol)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Rol)
-            @Html.ValidationMessageFor(model => model.Rol)
-        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Voornaam)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Voornaam)
+            @Html.DisplayFor(model => model.Voornaam)
             @Html.ValidationMessageFor(model => model.Voornaam)
         </div>
 
@@ -35,7 +57,7 @@
             @Html.LabelFor(model => model.Achternaam)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Achternaam)
+            @Html.DisplayFor(model => model.Achternaam)
             @Html.ValidationMessageFor(model => model.Achternaam)
         </div>
 
@@ -43,7 +65,7 @@
             @Html.LabelFor(model => model.Tussenvoegsel)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Tussenvoegsel)
+            @Html.DisplayFor(model => model.Tussenvoegsel)
             @Html.ValidationMessageFor(model => model.Tussenvoegsel)
         </div>
 
@@ -102,45 +124,12 @@
             @Html.EditorFor(model => model.Actief)
             @Html.ValidationMessageFor(model => model.Actief)
         </div>
-
         <div class="editor-label">
             @Html.LabelFor(model => model.NonActiefReden)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.NonActiefReden)
             @Html.ValidationMessageFor(model => model.NonActiefReden)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MedewerkerID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MedewerkerID)
-            @Html.ValidationMessageFor(model => model.MedewerkerID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StudentNummer)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.StudentNummer)
-            @Html.ValidationMessageFor(model => model.StudentNummer)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Opleiding)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Opleiding)
-            @Html.ValidationMessageFor(model => model.Opleiding)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Opleidingsniveau)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Opleidingsniveau)
-            @Html.ValidationMessageFor(model => model.Opleidingsniveau)
         </div>
 
         <div class="editor-label">

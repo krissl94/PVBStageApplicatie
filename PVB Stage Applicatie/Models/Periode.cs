@@ -21,10 +21,9 @@ namespace PVB_Stage_Applicatie.Models
         }
     
         public int Periode1 { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime Begindatum { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMMMM-yyyy}")]
-
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public System.DateTime Einddatum { get; set; }
     
         public virtual ICollection<Stage> Stage { get; set; }

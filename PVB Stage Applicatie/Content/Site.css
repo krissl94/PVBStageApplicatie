@@ -94,7 +94,7 @@ textarea {
     margin-left:200px;
 }
 
-.display-label{
+.display-label, 
+.editor-label{
     font-weight:bold;
-  
 }

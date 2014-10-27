@@ -1,12 +1,36 @@
 ﻿@model PVB_Stage_Applicatie.Models.Periode
+@section zijMenu{
+    <ul>
+        <li>
+            @Html.ActionLink("Terug", "Index")
+        </li>
+    </ul>
+}
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".calendar").datepicker();
+$(function () {
+    $(".begin").datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        dateFormat: "mm-dd-yy",
+        onClose: function (selectedDate) {
+            $(".eind").datepicker("option", "minDate", selectedDate);
+        }
     });
+    $(".eind").datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        dateFormat: "mm-dd-yy",
+        onClose: function (selectedDate) {
+            $(".begin").datepicker("option", "maxDate", selectedDate);
+        }
+    });
+});
 </script>
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Periode aanmaken";
 }
 
 <h2>Create</h2>
@@ -19,32 +43,25 @@
         <legend>Periode</legend>
         <div class="editor-label">
             Begindatum
-            ("MM-DD-YYYY")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Begindatum)
+            @Html.TextBoxFor(model => model.Begindatum, new { @class="kalender begin", @readonly="true"})
             @Html.ValidationMessageFor(model => model.Begindatum)
         </div>
 
         <div class="editor-label">
             Einddatum
-            ("MM-DD-YYYY")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Einddatum)
+            @Html.TextBoxFor(model => model.Einddatum, new { @class = "kalender eind", @readonly = "true" })
             @Html.ValidationMessageFor(model => model.Einddatum)
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Aanmaken" />
         </p>
     </fieldset>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
