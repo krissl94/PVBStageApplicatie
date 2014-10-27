@@ -15,7 +15,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Koppeling/
-
+        [Authorize(Roles = Rollen.Beheerder + "," + Rollen.Docent)]
         public ActionResult Index()
         {
             var stage = db.Stage.Include(s => s.Periode).Include(s => s.Persoonsgegevens).Include(s => s.Persoonsgegevens1).Include(s => s.Persoonsgegevens2);
@@ -24,7 +24,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Koppeling/Details/5
-
+        [Authorize(Roles = Rollen.Beheerder + "," + Rollen.Docent)]
         public ActionResult Details(int id = 0)
         {
             Stage stage = db.Stage.Find(id);
@@ -37,7 +37,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Koppeling/Create
-
+        [Authorize(Roles = Rollen.Beheerder)]
         public ActionResult Create()
         {
 
@@ -50,9 +50,9 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // POST: /Koppeling/Create
-
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Rollen.Beheerder)]
         public ActionResult Create(Stage stage)
         {
             if (ModelState.IsValid)
@@ -71,7 +71,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Koppeling/Edit/5
-
+        [Authorize(Roles = Rollen.Beheerder)]
         public ActionResult Edit(int id = 0)
         {
             Stage stage = db.Stage.Find(id);
@@ -90,9 +90,9 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // POST: /Koppeling/Edit/5
-
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Rollen.Beheerder)]
         public ActionResult Edit(Stage stage)
         {
             if (ModelState.IsValid)
@@ -110,7 +110,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Koppeling/Delete/5
-
+        [Authorize(Roles = Rollen.Beheerder)]
         public ActionResult Delete(int id = 0)
         {
             Stage stage = db.Stage.Find(id);
@@ -123,9 +123,9 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // POST: /Koppeling/Delete/5
-
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Rollen.Beheerder)]
         public ActionResult DeleteConfirmed(int id)
         {
             Stage stage = db.Stage.Find(id);
