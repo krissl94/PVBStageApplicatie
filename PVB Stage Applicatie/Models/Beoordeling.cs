@@ -70,6 +70,8 @@ namespace PVB_Stage_Applicatie.Models
         public byte[] HandtekeningStudent { get; set; }
         public byte[] HandtekeningBegeleider { get; set; }
         public bool EindBeoordeling { get; set; }
+        public int TechnischInzicht { get; set; }
+        public string TechnischInzichtOpm { get; set; }
     
         public virtual Stage Stage1 { get; set; }
     }

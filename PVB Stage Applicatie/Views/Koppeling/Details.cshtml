@@ -3,7 +3,15 @@
 @{
     ViewBag.Title = "Details";
 }
-
+@section zijMenu{
+    <ul>
+        @if (User.IsInRole("Beheerder"))
+        {
+            <li>@Html.ActionLink("Edit", "Edit", new { id = Model.StageID })</li>
+        }
+        <li>@Html.ActionLink("Terug", "Index")</li>
+    </ul>
+}
 <h2>Details</h2>
 
 <fieldset class="stage-field">
@@ -91,8 +99,3 @@
 </fieldset>
 
 
-@section zijMenu{
-    <ul>
-        <li>@Html.ActionLink("Edit", "Edit", new { id = Model.StageID })</li>
-        <li>@Html.ActionLink("Terug", "Index")</li>
-    </ul>}

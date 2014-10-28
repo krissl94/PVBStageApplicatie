@@ -16,18 +16,44 @@ namespace PVB_Stage_Applicatie.Controllers
         //
         // GET: /Bedrijf/
         [Authorize(Roles = "Docent,Beheerder")]
-
         public ActionResult Index()
         {
-            return View(db.Bedrijf.ToList());
+            if(HttpContext.User.IsInRole("Docent"))
+            {
+                var bedrijfResultDocent = db.sp_BedrijfPerDocent(Convert.ToInt32(HttpContext.User.Identity.Name));
+                List<Bedrijf> bedrijvenDocent = new List<Bedrijf>();
+                foreach (var item in bedrijfResultDocent)
+                {
+                    bedrijvenDocent.Add(db.Bedrijf.Where(x => x.BedrijfID == item.BedrijfID).FirstOrDefault());
+                }
+                return View(bedrijvenDocent);
+            };
+            return View();
         }
 
         //
         // GET: /Bedrijf/Details/5
+        [HttpPost]
         [Authorize(Roles = "Docent,Beheerder")]
         public ActionResult Details(int id = 0)
         {
             Bedrijf bedrijf = db.Bedrijf.Find(id);
+            bool bekendBedrijf = false;
+            if (HttpContext.User.IsInRole("Docent"))
+            {
+                var bedrijfResultDocent = db.sp_BedrijfPerDocent(Convert.ToInt32(HttpContext.User.Identity.Name));
+                foreach (var item in bedrijfResultDocent)
+                {
+                    if(item.BedrijfID == id)
+                    {
+                        bekendBedrijf = true;
+                    }
+                }
+                if (bekendBedrijf)
+                    return View(bedrijf);
+                else
+                    return HttpNotFound();
+            }
             if (bedrijf == null)
             {
                 return HttpNotFound();

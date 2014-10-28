@@ -1110,7 +1110,8 @@ $.extend($.validator, {
 		},
 
 		// http://docs.jquery.com/Plugins/Validation/Methods/date
-		date: function(value, element) {
+		date: function (value, element) {
+		    debugger;
 			return this.optional(element) || !/Invalid|NaN/.test(new Date(value));
 		},
 

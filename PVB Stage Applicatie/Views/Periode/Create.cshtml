@@ -1,4 +1,9 @@
 ﻿@model PVB_Stage_Applicatie.Models.Periode
+<script>
+    $.validator.methods.date = function (value, element) {
+        return this.optional(element) || Globalize.parseDate(value);
+    }
+</script>
 @section zijMenu{
     <ul>
         <li>
@@ -12,7 +17,7 @@ $(function () {
         defaultDate: "+1w",
         changeMonth: true,
         numberOfMonths: 1,
-        dateFormat: "mm-dd-yy",
+        dateFormat: "dd-mm-yy",
         onClose: function (selectedDate) {
             $(".eind").datepicker("option", "minDate", selectedDate);
         }
@@ -21,11 +26,14 @@ $(function () {
         defaultDate: "+1w",
         changeMonth: true,
         numberOfMonths: 1,
-        dateFormat: "mm-dd-yy",
+        dateFormat: "dd-mm-yy",
         onClose: function (selectedDate) {
             $(".begin").datepicker("option", "maxDate", selectedDate);
         }
     });
+    $.validator.methods.date = function (value, element) {
+        return this.optional(element) || Globalize.parseDate(value, "dd-mm-yyyy") !== null;
+    }
 });
 </script>
 
@@ -39,7 +47,7 @@ $(function () {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
+    <fieldset class="datum">
         <legend>Periode</legend>
         <div class="editor-label">
             Begindatum

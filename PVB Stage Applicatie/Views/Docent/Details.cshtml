@@ -4,11 +4,14 @@
         <li>
             @Html.ActionLink("Aanpassen", "Edit", new { id = Model.PersoonsgegevensID })
         </li>
+@if (User.IsInRole("Beheerder"))
+{
         <li>
             @Html.ActionLink("Terug", "Index")
 
 
         </li>
+}
     </ul>
 }
 @{

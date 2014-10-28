@@ -18,6 +18,9 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
+            if(HttpContext.User.IsInRole("Docent")){
+                return RedirectToAction("Details/" + HttpContext.User.Identity.Name);
+            };
             var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 2);
             return View(persoonsgegevens.ToList());
         }
@@ -64,10 +67,18 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Docent/Edit/5
-        [Authorize(Roles = "Beheerder")]
+        [Authorize(Roles = "Beheerder, Docent")]
         public ActionResult Edit(int id = 0)
         {
             Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
+            if (HttpContext.User.IsInRole("Docent") && persoonsgegevens.PersoonsgegevensID.ToString() == HttpContext.User.Identity.Name)
+            {
+                return View(persoonsgegevens);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
             if (persoonsgegevens == null)
             {
                 return HttpNotFound();
@@ -80,7 +91,7 @@ namespace PVB_Stage_Applicatie.Controllers
         // POST: /Docent/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Beheerder")]
+        [Authorize(Roles = "Beheerder, Docent")]
         public ActionResult Edit(Persoonsgegevens persoonsgegevens)
         {
             if (ModelState.IsValid)

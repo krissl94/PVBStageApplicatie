@@ -25,7 +25,6 @@ namespace PVB_Stage_Applicatie.Models
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Role>().ToTable("Role");
             throw new UnintentionalCodeFirstException();
         }
     
@@ -574,9 +573,37 @@ namespace PVB_Stage_Applicatie.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_ZoekRol", iDParameter);
         }
-        public Persoonsgegevens ZoekPersoon(int id)
+    
+        public virtual ObjectResult<sp_BedrijfPerDocent_Result> sp_BedrijfPerDocent(Nullable<int> docent)
         {
-            return Persoonsgegevens.SingleOrDefault(p => p.PersoonsgegevensID == id);
+            var docentParameter = docent.HasValue ?
+                new ObjectParameter("Docent", docent) :
+                new ObjectParameter("Docent", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_BedrijfPerDocent_Result>("sp_BedrijfPerDocent", docentParameter);
+        }
+    
+        public virtual ObjectResult<sp_BegeleiderPerDocent_Result> sp_BegeleiderPerDocent(Nullable<int> docent)
+        {
+            var docentParameter = docent.HasValue ?
+                new ObjectParameter("Docent", docent) :
+                new ObjectParameter("Docent", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_BegeleiderPerDocent_Result>("sp_BegeleiderPerDocent", docentParameter);
+        }
+    
+        public virtual ObjectResult<sp_StagiairPerDocent_Result> sp_StagiairPerDocent(Nullable<int> stagedocent)
+        {
+            var stagedocentParameter = stagedocent.HasValue ?
+                new ObjectParameter("Stagedocent", stagedocent) :
+                new ObjectParameter("Stagedocent", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_StagiairPerDocent_Result>("sp_StagiairPerDocent", stagedocentParameter);
+        }
+
+        public virtual Persoonsgegevens ZoekPersoon(int id)
+        {
+            return Persoonsgegevens.Where(x => x.PersoonsgegevensID == id).SingleOrDefault();
         }
     }
 }

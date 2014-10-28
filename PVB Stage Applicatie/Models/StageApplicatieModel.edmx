@@ -28,6 +28,8 @@
           <Property Name="PlanEnOrganiserenWerkOpm" Type="varchar" MaxLength="70" />
           <Property Name="TheoretischInzicht" Type="int" Nullable="false" />
           <Property Name="TheoretischInzichtOpm" Type="varchar" MaxLength="70" />
+          <Property Name="TechnischInzicht" Type="int" Nullable="false" />
+          <Property Name="TechnischInzichtOpm" Type="varchar" MaxLength="70" />
           <Property Name="KwalGeleverdWerk" Type="int" Nullable="false" />
           <Property Name="KwalGeleverdWerkOpm" Type="varchar" MaxLength="70" />
           <Property Name="RapportWerk" Type="int" Nullable="false" />
@@ -454,6 +456,9 @@
           <Parameter Name="Actief" Type="bit" Mode="In" />
           <Parameter Name="NonActiefReden" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="sp_BedrijfPerDocent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Docent" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_BedrijfToevoegen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="naam" Type="varchar" Mode="In" />
         </Function>
@@ -462,6 +467,9 @@
           <Parameter Name="Actief" Type="bit" Mode="In" />
           <Parameter Name="NonActiefReden" Type="varchar" Mode="In" />
           <Parameter Name="BedrijfID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_BegeleiderPerDocent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Docent" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_BeoordelingToevoegen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Stage" Type="int" Mode="In" />
@@ -589,6 +597,9 @@
           <Parameter Name="Stagedocent" Type="int" Mode="In" />
           <Parameter Name="Stageperiode" Type="int" Mode="In" />
           <Parameter Name="tagebegeleider" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_StagiairPerDocent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Stagedocent" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_ZoekRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
@@ -759,6 +770,8 @@
           <Property Name="HandtekeningBegeleider" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="EindBeoordeling" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Stage1" Relationship="Self.FK_Beoordeling_Stage" FromRole="Beoordeling" ToRole="Stage" />
+          <Property Name="TechnischInzicht" Type="Int32" Nullable="false" />
+          <Property Name="TechnischInzichtOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Gespreksformulier">
           <Key>
@@ -1271,6 +1284,15 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="Persoonsgegevens" EntitySet="Persoonsgegevens" />
           </AssociationSet>
+          <FunctionImport Name="sp_BedrijfPerDocent" ReturnType="Collection(StageApplicatieModel.sp_BedrijfPerDocent_Result)">
+          <Parameter Name="Docent" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_BegeleiderPerDocent" ReturnType="Collection(StageApplicatieModel.sp_BegeleiderPerDocent_Result)">
+          <Parameter Name="Docent" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_StagiairPerDocent" ReturnType="Collection(StageApplicatieModel.sp_StagiairPerDocent_Result)">
+          <Parameter Name="Stagedocent" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Role">
           <Key>
@@ -1292,6 +1314,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="sp_BedrijfPerDocent_Result">
+          <Property Type="Int32" Name="BedrijfID" Nullable="false" />
+          <Property Type="String" Name="Naam" Nullable="false" MaxLength="70" />
+          <Property Type="Boolean" Name="Actief" Nullable="false" />
+          <Property Type="String" Name="NonActiefReden" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="sp_BegeleiderPerDocent_Result">
+          <Property Type="Int32" Name="PersoonsgegevensID" Nullable="false" />
+          <Property Type="Int32" Name="Rol" Nullable="false" />
+          <Property Type="String" Name="Voornaam" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Achternaam" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Tussenvoegsel" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Straat" Nullable="false" MaxLength="70" />
+          <Property Type="Int32" Name="Huisnummer" Nullable="false" />
+          <Property Type="String" Name="Toevoeging" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="Postcode" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="Plaats" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Actief" Nullable="false" />
+          <Property Type="String" Name="NonActiefReden" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="MedewerkerID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="StudentNummer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Opleiding" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Opleidingsniveau" Nullable="true" />
+          <Property Type="Int32" Name="Bedrijf" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_StagiairPerDocent_Result">
+          <Property Type="Int32" Name="PersoonsgegevensID" Nullable="false" />
+          <Property Type="Int32" Name="Rol" Nullable="false" />
+          <Property Type="String" Name="Voornaam" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Achternaam" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Tussenvoegsel" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Straat" Nullable="false" MaxLength="70" />
+          <Property Type="Int32" Name="Huisnummer" Nullable="false" />
+          <Property Type="String" Name="Toevoeging" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="Postcode" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="Plaats" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Actief" Nullable="false" />
+          <Property Type="String" Name="NonActiefReden" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="MedewerkerID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="StudentNummer" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Opleiding" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Opleidingsniveau" Nullable="true" />
+          <Property Type="Int32" Name="Bedrijf" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1311,6 +1379,8 @@
           <EntitySetMapping Name="Beoordeling">
             <EntityTypeMapping TypeName="StageApplicatieModel.Beoordeling">
               <MappingFragment StoreEntitySet="Beoordeling">
+                <ScalarProperty Name="TechnischInzichtOpm" ColumnName="TechnischInzichtOpm" />
+                <ScalarProperty Name="TechnischInzicht" ColumnName="TechnischInzicht" />
                 <ScalarProperty Name="BeoordelingID" ColumnName="BeoordelingID" />
                 <ScalarProperty Name="Stage" ColumnName="Stage" />
                 <ScalarProperty Name="Datum" ColumnName="Datum" />
@@ -1538,6 +1608,64 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_BedrijfPerDocent" FunctionName="StageApplicatieModel.Store.sp_BedrijfPerDocent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StageApplicatieModel.sp_BedrijfPerDocent_Result">
+                <ScalarProperty Name="BedrijfID" ColumnName="BedrijfID" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Actief" ColumnName="Actief" />
+                <ScalarProperty Name="NonActiefReden" ColumnName="NonActiefReden" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_BegeleiderPerDocent" FunctionName="StageApplicatieModel.Store.sp_BegeleiderPerDocent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StageApplicatieModel.sp_BegeleiderPerDocent_Result">
+                <ScalarProperty Name="PersoonsgegevensID" ColumnName="PersoonsgegevensID" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+                <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+                <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Straat" ColumnName="Straat" />
+                <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
+                <ScalarProperty Name="Toevoeging" ColumnName="Toevoeging" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Plaats" ColumnName="Plaats" />
+                <ScalarProperty Name="Actief" ColumnName="Actief" />
+                <ScalarProperty Name="NonActiefReden" ColumnName="NonActiefReden" />
+                <ScalarProperty Name="MedewerkerID" ColumnName="MedewerkerID" />
+                <ScalarProperty Name="StudentNummer" ColumnName="StudentNummer" />
+                <ScalarProperty Name="Opleiding" ColumnName="Opleiding" />
+                <ScalarProperty Name="Opleidingsniveau" ColumnName="Opleidingsniveau" />
+                <ScalarProperty Name="Bedrijf" ColumnName="Bedrijf" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_StagiairPerDocent" FunctionName="StageApplicatieModel.Store.sp_StagiairPerDocent">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StageApplicatieModel.sp_StagiairPerDocent_Result">
+                <ScalarProperty Name="PersoonsgegevensID" ColumnName="PersoonsgegevensID" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+                <ScalarProperty Name="Achternaam" ColumnName="Achternaam" />
+                <ScalarProperty Name="Tussenvoegsel" ColumnName="Tussenvoegsel" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Straat" ColumnName="Straat" />
+                <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
+                <ScalarProperty Name="Toevoeging" ColumnName="Toevoeging" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Plaats" ColumnName="Plaats" />
+                <ScalarProperty Name="Actief" ColumnName="Actief" />
+                <ScalarProperty Name="NonActiefReden" ColumnName="NonActiefReden" />
+                <ScalarProperty Name="MedewerkerID" ColumnName="MedewerkerID" />
+                <ScalarProperty Name="StudentNummer" ColumnName="StudentNummer" />
+                <ScalarProperty Name="Opleiding" ColumnName="Opleiding" />
+                <ScalarProperty Name="Opleidingsniveau" ColumnName="Opleidingsniveau" />
+                <ScalarProperty Name="Bedrijf" ColumnName="Bedrijf" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

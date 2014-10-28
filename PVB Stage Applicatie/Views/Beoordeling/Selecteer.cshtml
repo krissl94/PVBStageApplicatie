@@ -1,0 +1,16 @@
+﻿@model IEnumerable<PVB_Stage_Applicatie.Models.StudentViewModel>
+<script type="text/javascript">
+    var myArray = [];
+    debugger;
+    @foreach (var d in Model)
+    {
+        @:myArray.push("@d.Voornaam" + " " + "@d.Achternaam" + "@d.PersoonsgegevensID");
+    }
+</script>
+
+@{
+    ViewBag.Title = "Selecteer";
+}
+@Html.Hidden("Studenten", string.Join(",", (object)ViewBag.student))
+@Html.Hidden("Periodes", string.Join(",", (object)ViewBag.stageperiode))
+<h2>Selecteer voor wie u een beoordeling toe wil voegen</h2>

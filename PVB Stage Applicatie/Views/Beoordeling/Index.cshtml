@@ -5,11 +5,18 @@
 }
 
 <h2>Index</h2>
+@section zijMenu{
+    <ul>
+        @if (User.IsInRole("Docent"))
+        {
+            <li>@Html.ActionLink("Formulier invullen", "Selecteer")</li>
+        }
+        <li>@Html.ActionLink("Beoordelingen inzien", "Details")</li>
+        
+    </ul>}
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
+
+@*<table>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Stage1.StageID)
@@ -336,4 +343,4 @@
     </tr>
 }
 
-</table>
+</table>*@
