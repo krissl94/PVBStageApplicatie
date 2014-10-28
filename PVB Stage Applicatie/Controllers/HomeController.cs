@@ -13,10 +13,20 @@ namespace PVB_Stage_Applicatie.Controllers
         //
         // GET: /Home/
 
-        [Authorize(Roles = Rollen.Beheerder + "," + Rollen.Docent)]
+        [Authorize(Roles = "1,2,3,4")]
         public ActionResult Index()
         {
+            MenuSelector();
+
             return View();
         }
+        public ActionResult MenuSelector()
+        {
+            RolePrincipal rp = (RolePrincipal)User;
+            var rol = rp.GetRoles();
+            return View("/Menu/AdminMenuPartial.cshtml");
+        }
+
+
     }
 }

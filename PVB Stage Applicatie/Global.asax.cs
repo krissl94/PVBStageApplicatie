@@ -45,15 +45,8 @@ namespace PVB_Stage_Applicatie
                 }
 
                 if (Roles.GetRolesForUser(Context.User.Identity.Name).Count() == 0)
-                {
-                    Roles.AddUserToRole(Context.User.Identity.Name, rol[0]);
-                }
-
-                var sjaak = Roles.GetAllRoles();
-
-                foreach (string item in sjaak)
-                {
-                    var temp = Roles.GetUsersInRole(item);
+                { 
+                    Roles.AddUserToRole(Context.User.Identity.Name, "1");
                 }
             }
         }
