@@ -92,9 +92,36 @@ textarea {
 #content{
     position:absolute;
     margin-left:200px;
+    width:1000px;
 }
 
 .display-label, 
 .editor-label{
     font-weight:bold;
+
+}
+.display-label{
+    width:40%;
+    max-width:200px;
+}
+.display-field,
+.display-label{
+    display:inline-block;
+    vertical-align:top;
+}
+
+.display-field{
+    display:inline-block;
+    width:50%;
+    margin: auto;
+}
+
+.stage-field{
+    display:inline;
+    width:200px;
+    vertical-align:top;    
+}
+
+.details-field{
+           width:400px;
 }

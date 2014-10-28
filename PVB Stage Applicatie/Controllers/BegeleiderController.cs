@@ -59,8 +59,8 @@ namespace PVB_Stage_Applicatie.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Bedrijf = new SelectList(db.Bedrijf.Where(p => p.Actief), "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
 
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
             return View(persoonsgegevens);
         }
 

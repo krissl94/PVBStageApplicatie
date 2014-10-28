@@ -40,10 +40,11 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = Rollen.Beheerder)]
         public ActionResult Create()
         {
-            ViewBag.Stageperiode = new SelectList(db.Periode, "Periode1", "Periode1");
-            ViewBag.Student = new SelectList(db.Persoonsgegevens.Where(p => p.Rol == 4), "PersoonsgegevensID", "Voornaam");
-            ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens.Where(p => p.Rol == 2), "PersoonsgegevensID", "Voornaam");
-            ViewBag.Stagebegeleider = new SelectList(db.Persoonsgegevens.Where(p => p.Rol == 3), "PersoonsgegevensID", "Voornaam");
+
+            ViewBag.Stageperiode = new SelectList(db.Periode.Where(x => x.Begindatum > DateTime.Now), "Periode1", "Periode1");
+            ViewBag.Student = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x=>x.Rol == 4), "PersoonsgegevensID", "Voornaam");
+            ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2), "PersoonsgegevensID", "Voornaam");
+            ViewBag.Stagebegeleider = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 3), "PersoonsgegevensID", "Voornaam");
             return View();
         }
 
@@ -61,10 +62,10 @@ namespace PVB_Stage_Applicatie.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Stageperiode = new SelectList(db.Periode, "Periode1", "Periode1", stage.Stageperiode);
-            ViewBag.Student = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Student);
-            ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Stagedocent);
-            ViewBag.Stagebegeleider = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Stagebegeleider);
+            //ViewBag.Stageperiode = new SelectList(db.Periode.Where(x=> x.Einddatum < DateTime.Now), "Periode1", "Periode1", stage.Stageperiode);
+            //ViewBag.Student = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true), "PersoonsgegevensID", "Voornaam", stage.Student);
+            //ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true), "PersoonsgegevensID", "Voornaam", stage.Stagedocent);
+            //ViewBag.Stagebegeleider = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true), "PersoonsgegevensID", "Voornaam", stage.Stagebegeleider);
             return View(stage);
         }
 
@@ -78,10 +79,12 @@ namespace PVB_Stage_Applicatie.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Stageperiode = new SelectList(db.Periode, "Periode1", "Periode1", stage.Stageperiode);
-            ViewBag.Student = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Student);
-            ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Stagedocent);
-            ViewBag.Stagebegeleider = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Stagebegeleider);
+
+            ViewBag.Stageperiode = new SelectList(db.Periode.Where(x => x.Begindatum > DateTime.Now), "Periode1", "Periode1");
+            ViewBag.Student = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 4), "PersoonsgegevensID", "Voornaam");
+            ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2), "PersoonsgegevensID", "Voornaam");
+            ViewBag.Stagebegeleider = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 3), "PersoonsgegevensID", "Voornaam");
+          
             return View(stage);
         }
 
@@ -98,10 +101,10 @@ namespace PVB_Stage_Applicatie.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Stageperiode = new SelectList(db.Periode, "Periode1", "Periode1", stage.Stageperiode);
-            ViewBag.Student = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Student);
-            ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Stagedocent);
-            ViewBag.Stagebegeleider = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Stagebegeleider);
+            //ViewBag.Stageperiode = new SelectList(db.Periode, "Periode1", "Periode1", stage.Stageperiode);
+            //ViewBag.Student = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Student);
+            //ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Stagedocent);
+            //ViewBag.Stagebegeleider = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Stagebegeleider);
             return View(stage);
         }
 
