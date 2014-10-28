@@ -11,6 +11,7 @@ namespace PVB_Stage_Applicatie.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Periode
     {
@@ -20,7 +21,9 @@ namespace PVB_Stage_Applicatie.Models
         }
     
         public int Periode1 { get; set; }
+        [DisplayFormat(DataFormatString="{0:dd-MM-yy}")]
         public System.DateTime Begindatum { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime Einddatum { get; set; }
     
         public virtual ICollection<Stage> Stage { get; set; }

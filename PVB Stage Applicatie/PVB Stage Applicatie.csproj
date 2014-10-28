@@ -169,6 +169,7 @@
     <Compile Include="Models\Periode.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PeriodeViewModel.cs" />
     <Compile Include="Models\Persoonsgegevens.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
@@ -203,6 +204,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StageApplicatieModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\StudentViewModel.cs" />
     <Compile Include="Models\TussentijdseBeindeging.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
@@ -359,6 +361,8 @@
     <Content Include="Views\Home\DocentMenuPartial.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Login\index.cshtml" />
+    <Content Include="Views\Beoordeling\Selecteer.cshtml" />
+    <Content Include="Views\Beoordeling\View1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

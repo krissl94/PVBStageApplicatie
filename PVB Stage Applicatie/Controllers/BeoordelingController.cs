@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PVB_Stage_Applicatie.Models;
+using System.Web.Script.Serialization;
+using System.Runtime.Serialization.Json;
 
 namespace PVB_Stage_Applicatie.Controllers
 {
@@ -35,6 +37,38 @@ namespace PVB_Stage_Applicatie.Controllers
             return View(beoordeling);
         }
 
+
+        public ActionResult Selecteer(string medewerkerID)
+        {
+            List<Periode> Periodelijst = 
+                new List<Periode>(db.Periode
+                .Where(x => x.Begindatum < DateTime.Now)
+                .Where(x => x.Einddatum > DateTime.Now));
+
+            List<PeriodeViewModel> PeriodeViewLijst = new List<PeriodeViewModel>();
+            List<StudentViewModel> Studentlijstje = new List<StudentViewModel>();
+
+            foreach (var item in Periodelijst)
+	        {
+		        PeriodeViewLijst.Add( new PeriodeViewModel(item.Periode1, item.Begindatum, item.Einddatum));
+                foreach(var stageItem in item.Stage)
+                {
+                    Studentlijstje.Add(new StudentViewModel(stageItem.Persoonsgegevens.PersoonsgegevensID, stageItem.Persoonsgegevens.Voornaam, stageItem.Persoonsgegevens.Achternaam, stageItem.StageID));
+                }
+	        }
+            var jSerializer = new JavaScriptSerializer();
+            ViewBag.periode = jSerializer.Serialize(PeriodeViewLijst);
+            ViewBag.student = jSerializer.Serialize(Studentlijstje);
+
+
+            //ist<Persoonsgegevens> Studentlijst = new List<Persoonsgegevens>(db.Persoonsgegevens.Where(s => s.Rol == 4).Where(s => s.Stage1.FirstOrDefault().Persoonsgegevens.MedewerkerID == medewerkerID));
+            
+            //ViewBag.Student = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x=>x.Rol == 4), "PersoonsgegevensID", "Voornaam");
+            //ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2), "PersoonsgegevensID", "Voornaam");
+            //ViewBag.Bedrijven = new SelectList(db.Bedrijf.Where(b => b.Actief == true), "Bedrijf", "Bedrijf");
+           
+            return View(Studentlijstje);
+        }
         //
         // GET: /Beoordeling/Create
 

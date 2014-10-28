@@ -28,6 +28,8 @@
           <Property Name="PlanEnOrganiserenWerkOpm" Type="varchar" MaxLength="70" />
           <Property Name="TheoretischInzicht" Type="int" Nullable="false" />
           <Property Name="TheoretischInzichtOpm" Type="varchar" MaxLength="70" />
+          <Property Name="TechnischInzicht" Type="int" Nullable="false" />
+          <Property Name="TechnischInzichtOpm" Type="varchar" MaxLength="70" />
           <Property Name="KwalGeleverdWerk" Type="int" Nullable="false" />
           <Property Name="KwalGeleverdWerkOpm" Type="varchar" MaxLength="70" />
           <Property Name="RapportWerk" Type="int" Nullable="false" />
@@ -759,6 +761,8 @@
           <Property Name="HandtekeningBegeleider" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="EindBeoordeling" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Stage1" Relationship="Self.FK_Beoordeling_Stage" FromRole="Beoordeling" ToRole="Stage" />
+          <Property Name="TechnischInzicht" Type="Int32" Nullable="false" />
+          <Property Name="TechnischInzichtOpm" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Gespreksformulier">
           <Key>
@@ -1311,6 +1315,8 @@
           <EntitySetMapping Name="Beoordeling">
             <EntityTypeMapping TypeName="StageApplicatieModel.Beoordeling">
               <MappingFragment StoreEntitySet="Beoordeling">
+                <ScalarProperty Name="TechnischInzichtOpm" ColumnName="TechnischInzichtOpm" />
+                <ScalarProperty Name="TechnischInzicht" ColumnName="TechnischInzicht" />
                 <ScalarProperty Name="BeoordelingID" ColumnName="BeoordelingID" />
                 <ScalarProperty Name="Stage" ColumnName="Stage" />
                 <ScalarProperty Name="Datum" ColumnName="Datum" />

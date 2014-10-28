@@ -25,7 +25,6 @@ namespace PVB_Stage_Applicatie.Models
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Role>().ToTable("Role");
             throw new UnintentionalCodeFirstException();
         }
     
@@ -574,9 +573,10 @@ namespace PVB_Stage_Applicatie.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_ZoekRol", iDParameter);
         }
-        public Persoonsgegevens ZoekPersoon(int id)
+
+        public virtual Persoonsgegevens ZoekPersoon(int id)
         {
-            return Persoonsgegevens.SingleOrDefault(p => p.PersoonsgegevensID == id);
+            return Persoonsgegevens.Where(x => x.PersoonsgegevensID == id).SingleOrDefault();
         }
     }
 }

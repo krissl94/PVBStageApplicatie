@@ -41,7 +41,7 @@ namespace PVB_Stage_Applicatie.Controllers
         public ActionResult Create()
         {
 
-            ViewBag.Stageperiode = new SelectList(db.Periode.Where(x => x.Begindatum > DateTime.Now), "Periode1", "Periode1");
+            ViewBag.Stageperiode = new SelectList(db.Periode, "Periode1", "Periode1");
             ViewBag.Student = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x=>x.Rol == 4), "PersoonsgegevensID", "Voornaam");
             ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2), "PersoonsgegevensID", "Voornaam");
             ViewBag.Stagebegeleider = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 3), "PersoonsgegevensID", "Voornaam");
