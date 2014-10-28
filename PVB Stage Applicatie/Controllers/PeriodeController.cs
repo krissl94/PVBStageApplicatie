@@ -15,7 +15,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Periode/
-        [Authorize(Roles = Rollen.Beheerder + "," + Rollen.Docent)]
+        [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
             return View(db.Periode.ToList());
@@ -23,7 +23,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Periode/Details/5
-        [Authorize(Roles = Rollen.Beheerder + "," + Rollen.Docent)]
+        [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Details(int id = 0)
         {
             Periode periode = db.Periode.Find(id);
@@ -36,7 +36,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Periode/Create
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Create()
         {
             return View();
@@ -46,7 +46,7 @@ namespace PVB_Stage_Applicatie.Controllers
         // POST: /Periode/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Create(Periode periode)
         {
             if (ModelState.IsValid)
@@ -61,7 +61,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Periode/Edit/5
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(int id = 0)
         {
             Periode periode = db.Periode.Find(id);
@@ -76,7 +76,7 @@ namespace PVB_Stage_Applicatie.Controllers
         // POST: /Periode/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(Periode periode)
         {
             if (ModelState.IsValid)
@@ -90,7 +90,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Periode/Delete/5
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Delete(int id = 0)
         {
             Periode periode = db.Periode.Find(id);
@@ -105,7 +105,7 @@ namespace PVB_Stage_Applicatie.Controllers
         // POST: /Periode/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult DeleteConfirmed(int id)
         {
             Periode periode = db.Periode.Find(id);

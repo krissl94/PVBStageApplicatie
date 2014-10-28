@@ -25,6 +25,7 @@ namespace PVB_Stage_Applicatie.Models
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Role>().ToTable("Role");
             throw new UnintentionalCodeFirstException();
         }
     
@@ -41,6 +42,7 @@ namespace PVB_Stage_Applicatie.Models
         public DbSet<RedenStudent> RedenStudent { get; set; }
         public DbSet<Stage> Stage { get; set; }
         public DbSet<TussentijdseBeindeging> TussentijdseBeindeging { get; set; }
+        public DbSet<Role> Role { get; set; }
     
         public virtual int sp_BedrijfNonActief(Nullable<int> bedrijfID, Nullable<bool> actief, string nonActiefReden)
         {
@@ -571,6 +573,10 @@ namespace PVB_Stage_Applicatie.Models
                 new ObjectParameter("ID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_ZoekRol", iDParameter);
+        }
+        public Persoonsgegevens ZoekPersoon(int id)
+        {
+            return Persoonsgegevens.SingleOrDefault(p => p.PersoonsgegevensID == id);
         }
     }
 }

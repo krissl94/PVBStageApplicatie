@@ -55,7 +55,7 @@ namespace PVB_Stage_Applicatie.Controllers
             return null;
         }
 
-        [Authorize(Roles = Rollen.Beheerder + "," + Rollen.Docent)]
+        [Authorize(Roles = "Beheerder, Rollen.Docent")]
         public ActionResult logUit()
         {
             HttpCookie authCookie = HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];

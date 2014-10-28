@@ -13,7 +13,7 @@ namespace PVB_Stage_Applicatie.Controllers
         //
         // GET: /Home/
 
-        [Authorize(Roles = Rollen.Beheerder + "," + Rollen.Docent)]
+        [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
             return View();

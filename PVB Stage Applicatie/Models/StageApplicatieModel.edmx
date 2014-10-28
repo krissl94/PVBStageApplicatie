@@ -192,6 +192,13 @@
           <Property Name="RedenID" Type="int" Nullable="false" />
           <Property Name="Reden" Type="varchar" MaxLength="75" Nullable="false" />
         </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RolID" />
+          </Key>
+          <Property Name="RolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RolNaam" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Stage">
           <Key>
             <PropertyRef Name="StageID" />
@@ -285,6 +292,18 @@
             </Principal>
             <Dependent Role="Persoonsgegevens">
               <PropertyRef Name="Bedrijf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persoonsgegevens_Rollen">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Persoonsgegevens" Type="Self.Persoonsgegevens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RolID" />
+            </Principal>
+            <Dependent Role="Persoonsgegevens">
+              <PropertyRef Name="Rol" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -589,6 +608,7 @@
           <EntitySet Name="RedenOnderwijsinstelling" EntityType="Self.RedenOnderwijsinstelling" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RedenOrganisatie" EntityType="Self.RedenOrganisatie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RedenStudent" EntityType="Self.RedenStudent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stage" EntityType="Self.Stage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TussentijdseBeindeging" EntityType="Self.TussentijdseBeindeging" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Beoordeling_Stage" Association="Self.FK_Beoordeling_Stage">
@@ -613,6 +633,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Persoonsgegevens_Bedrijf" Association="Self.FK_Persoonsgegevens_Bedrijf">
             <End Role="Bedrijf" EntitySet="Bedrijf" />
+            <End Role="Persoonsgegevens" EntitySet="Persoonsgegevens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persoonsgegevens_Rollen" Association="Self.FK_Persoonsgegevens_Rollen">
+            <End Role="Role" EntitySet="Role" />
             <End Role="Persoonsgegevens" EntitySet="Persoonsgegevens" />
           </AssociationSet>
           <AssociationSet Name="FK_RedenenOnderwijsinstelling_RedenOnderwijsinstelling" Association="Self.FK_RedenenOnderwijsinstelling_RedenOnderwijsinstelling">
@@ -819,6 +843,7 @@
           <NavigationProperty Name="Stage" Relationship="Self.FK_Stage_Persoonsgegevens" FromRole="Persoonsgegevens" ToRole="Stage" />
           <NavigationProperty Name="Stage1" Relationship="Self.FK_Stage_Persoonsgegevens1" FromRole="Persoonsgegevens" ToRole="Stage" />
           <NavigationProperty Name="Stage2" Relationship="Self.FK_Stage_Persoonsgegevens2" FromRole="Persoonsgegevens" ToRole="Stage" />
+          <NavigationProperty Name="Role" Relationship="StageApplicatieModel.FK_Persoonsgegevens_Rollen2" FromRole="Persoonsgegevens" ToRole="Role" />
         </EntityType>
         <EntityType Name="RedenOnderwijsinstelling">
           <Key>
@@ -1239,9 +1264,34 @@
             <Parameter Name="tagebegeleider" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ZoekRol" ReturnType="Collection(Int32)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Role" EntityType="StageApplicatieModel.Role" />
+          <AssociationSet Name="FK_Persoonsgegevens_Rollen2" Association="StageApplicatieModel.FK_Persoonsgegevens_Rollen2">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Persoonsgegevens" EntitySet="Persoonsgegevens" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RolID" />
+          </Key>
+          <Property Name="RolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RolNaam" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Persoonsgegevens" Relationship="StageApplicatieModel.FK_Persoonsgegevens_Rollen2" FromRole="Role" ToRole="Persoonsgegevens" />
+        </EntityType>
+        <Association Name="FK_Persoonsgegevens_Rollen2">
+          <End Type="StageApplicatieModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="StageApplicatieModel.Persoonsgegevens" Role="Persoonsgegevens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RolID" />
+            </Principal>
+            <Dependent Role="Persoonsgegevens">
+              <PropertyRef Name="Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1480,6 +1530,14 @@
           <FunctionImportMapping FunctionImportName="sp_PersoonUpdaten" FunctionName="StageApplicatieModel.Store.sp_PersoonUpdaten" />
           <FunctionImportMapping FunctionImportName="sp_StageToevoegen" FunctionName="StageApplicatieModel.Store.sp_StageToevoegen" />
           <FunctionImportMapping FunctionImportName="sp_ZoekRol" FunctionName="StageApplicatieModel.Store.sp_ZoekRol" />
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="StageApplicatieModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RolNaam" ColumnName="RolNaam" />
+                <ScalarProperty Name="RolID" ColumnName="RolID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

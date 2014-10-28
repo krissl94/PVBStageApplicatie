@@ -12,17 +12,16 @@ namespace PVB_Stage_Applicatie.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Periode
+    public partial class Role
     {
-        public Periode()
+        public Role()
         {
-            this.Stage = new HashSet<Stage>();
+            this.Persoonsgegevens = new HashSet<Persoonsgegevens>();
         }
     
-        public int Periode1 { get; set; }
-        public System.DateTime Begindatum { get; set; }
-        public System.DateTime Einddatum { get; set; }
+        public int RolID { get; set; }
+        public string RolNaam { get; set; }
     
-        public virtual ICollection<Stage> Stage { get; set; }
+        public virtual ICollection<Persoonsgegevens> Persoonsgegevens { get; set; }
     }
 }

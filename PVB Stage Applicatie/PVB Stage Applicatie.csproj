@@ -128,6 +128,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BedrijfController.cs" />
     <Compile Include="Controllers\BegeleiderController.cs" />
     <Compile Include="Controllers\BeoordelingController.cs" />
@@ -148,10 +149,12 @@
     <Compile Include="Models\Beoordeling.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomRoleProvider.cs" />
     <Compile Include="Models\Gespreksformulier.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hashing.cs" />
+    <Compile Include="Models\Identiteit.cs" />
     <Compile Include="Models\Login.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
@@ -177,7 +180,9 @@
     <Compile Include="Models\RedenStudent.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Rollen.cs" />
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>StageApplicatieModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RolVerdeler.cs" />
     <Compile Include="Models\Stage.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>

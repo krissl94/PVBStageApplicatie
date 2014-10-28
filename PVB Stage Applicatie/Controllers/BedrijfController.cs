@@ -15,7 +15,8 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Bedrijf/
-        [Authorize(Roles=Rollen.Docent + "," + Rollen.Beheerder)]
+        [Authorize(Roles = "Docent,Beheerder")]
+
         public ActionResult Index()
         {
             return View(db.Bedrijf.ToList());
@@ -23,7 +24,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Bedrijf/Details/5
-        [Authorize(Roles = Rollen.Docent + "," + Rollen.Beheerder)]
+        [Authorize(Roles = "Docent,Beheerder")]
         public ActionResult Details(int id = 0)
         {
             Bedrijf bedrijf = db.Bedrijf.Find(id);
@@ -36,7 +37,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Bedrijf/Create
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Create()
         {
             return View();
@@ -47,7 +48,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Create(Bedrijf bedrijf)
         {
             bedrijf.Actief = true;
@@ -63,7 +64,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Bedrijf/Edit/5
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(int id = 0)
         {
             Bedrijf bedrijf = db.Bedrijf.Find(id);
@@ -79,7 +80,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(Bedrijf bedrijf)
         {
             if (ModelState.IsValid)
@@ -106,7 +107,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Bedrijf/Delete/5
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Delete(int id = 0)
         {
             Bedrijf bedrijf = db.Bedrijf.Find(id);
@@ -122,7 +123,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult DeleteConfirmed(int id)
         {
             Bedrijf bedrijf = db.Bedrijf.Find(id);

@@ -11,9 +11,7 @@ namespace PVB_Stage_Applicatie.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-
+    
     public partial class Persoonsgegevens
     {
         public Persoonsgegevens()
@@ -50,7 +48,6 @@ namespace PVB_Stage_Applicatie.Models
         public virtual ICollection<Stage> Stage { get; set; }
         public virtual ICollection<Stage> Stage1 { get; set; }
         public virtual ICollection<Stage> Stage2 { get; set; }
-
+        public virtual Role Role { get; set; }
     }
-
 }

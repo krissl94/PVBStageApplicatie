@@ -19,13 +19,13 @@ namespace PVB_Stage_Applicatie.Models
                 switch (rol)
                 {
                     case (1):
-                        return Rollen.Beheerder;
+                        return "Beheerder";
                     case (2):
-                        return Rollen.Docent;
+                        return "Docent";
                     case (3):
-                        return Rollen.Begeleider;
+                        return "Begeleider";
                     case (4):
-                        return Rollen.Student;
+                        return "Student";
                     default:
                         return null;
                 }
@@ -33,7 +33,7 @@ namespace PVB_Stage_Applicatie.Models
             catch (Exception ex)
             {
                 return null;
-            };           
+            };
         }
     }
 }

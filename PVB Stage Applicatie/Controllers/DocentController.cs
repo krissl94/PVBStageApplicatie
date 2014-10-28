@@ -15,7 +15,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Docent/
-        [Authorize(Roles = Rollen.Beheerder + "," + Rollen.Docent)]
+        [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
             var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 2);
@@ -24,7 +24,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Docent/Details/5
-        [Authorize(Roles = Rollen.Beheerder + "," + Rollen.Docent)]
+        [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Details(int id = 0)
         {
             Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
@@ -37,7 +37,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Docent/Create
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Create()
         {
             ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam");
@@ -48,7 +48,7 @@ namespace PVB_Stage_Applicatie.Controllers
         // POST: /Docent/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Create(Persoonsgegevens persoonsgegevens)
         {
             if (ModelState.IsValid)
@@ -64,7 +64,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Docent/Edit/5
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(int id = 0)
         {
             Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
@@ -80,7 +80,7 @@ namespace PVB_Stage_Applicatie.Controllers
         // POST: /Docent/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(Persoonsgegevens persoonsgegevens)
         {
             if (ModelState.IsValid)
@@ -95,7 +95,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Docent/Delete/5
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult Delete(int id = 0)
         {
             Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
@@ -110,7 +110,7 @@ namespace PVB_Stage_Applicatie.Controllers
         // POST: /Docent/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = Rollen.Beheerder)]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult DeleteConfirmed(int id)
         {
             Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);

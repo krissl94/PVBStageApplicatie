@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="795d9cb739594284abf3ffd1f755da00" Name="Diagram1">
+      <Diagram DiagramId="795d9cb739594284abf3ffd1f755da00" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="StageApplicatieModel.Bedrijf" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
         <EntityTypeShape EntityType="StageApplicatieModel.Beoordeling" Width="1.5" PointX="10.5" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="StageApplicatieModel.Gespreksformulier" Width="1.5" PointX="10.5" PointY="6.5" IsExpanded="true" />
@@ -32,6 +32,8 @@
         <AssociationConnector Association="StageApplicatieModel.RedenenOnderwijsinstelling" ManuallyRouted="false" />
         <AssociationConnector Association="StageApplicatieModel.RedenenOrganisatie" ManuallyRouted="false" />
         <AssociationConnector Association="StageApplicatieModel.RedenenStudent" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="StageApplicatieModel.Role" Width="1.5" PointX="0.75" PointY="7.75" />
+        <AssociationConnector Association="StageApplicatieModel.FK_Persoonsgegevens_Rollen2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
