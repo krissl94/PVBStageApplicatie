@@ -18,16 +18,43 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
+            if (HttpContext.User.IsInRole("Docent"))
+            {
+                var studentResultDocent = db.sp_StagiairPerDocent(Convert.ToInt32(HttpContext.User.Identity.Name));
+                List<Persoonsgegevens> studentenDocent = new List<Persoonsgegevens>();
+                foreach (var item in studentResultDocent)
+                {
+                    studentenDocent.Add(db.Persoonsgegevens.Where(x => x.PersoonsgegevensID == item.PersoonsgegevensID).FirstOrDefault());
+                }
+                return View(studentenDocent);
+            };
             var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 4);
             return View(persoonsgegevens.ToList());
         }
 
         //
         // GET: /Stagiair/Details/5
+        [HttpPost]
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Details(int id = 0)
         {
             Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
+            bool bekendStudent = false;
+            if (HttpContext.User.IsInRole("Docent"))
+            {
+                var studentResultDocent = db.sp_StagiairPerDocent(Convert.ToInt32(HttpContext.User.Identity.Name));
+                foreach (var item in studentResultDocent)
+                {
+                    if (item.PersoonsgegevensID == id)
+                    {
+                        bekendStudent = true;
+                    }
+                }
+                if (bekendStudent)
+                    return View(persoonsgegevens);
+                else
+                    return HttpNotFound();
+            }
             if (persoonsgegevens == null)
             {
                 return HttpNotFound();
@@ -92,32 +119,6 @@ namespace PVB_Stage_Applicatie.Controllers
             }
             ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
             return View(persoonsgegevens);
-        }
-
-        //
-        // GET: /Stagiair/Delete/5
-        [Authorize(Roles = "Beheerder")]
-        public ActionResult Delete(int id = 0)
-        {
-            Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            if (persoonsgegevens == null)
-            {
-                return HttpNotFound();
-            }
-            return View(persoonsgegevens);
-        }
-
-        //
-        // POST: /Stagiair/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Beheerder")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            db.Persoonsgegevens.Remove(persoonsgegevens);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

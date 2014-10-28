@@ -186,6 +186,15 @@
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RolVerdeler.cs" />
+    <Compile Include="Models\sp_BedrijfPerDocent_Result.cs">
+      <DependentUpon>StageApplicatieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_BegeleiderPerDocent_Result.cs">
+      <DependentUpon>StageApplicatieModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_StagiairPerDocent_Result.cs">
+      <DependentUpon>StageApplicatieModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Stage.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
@@ -323,7 +332,6 @@
     <Content Include="Views\Stagiair\Details.cshtml" />
     <Content Include="Views\Stagiair\Create.cshtml" />
     <Content Include="Views\Stagiair\Edit.cshtml" />
-    <Content Include="Views\Stagiair\Delete.cshtml" />
     <Content Include="Views\Docent\Index.cshtml" />
     <Content Include="Views\Docent\Details.cshtml" />
     <Content Include="Views\Docent\Create.cshtml" />
@@ -341,7 +349,6 @@
     <Content Include="Views\Beoordeling\Details.cshtml" />
     <Content Include="Views\Beoordeling\Create.cshtml" />
     <Content Include="Views\Beoordeling\Edit.cshtml" />
-    <Content Include="Views\Beoordeling\Delete.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\Index.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\Details.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\Create.cshtml" />
@@ -350,8 +357,6 @@
     <Content Include="Views\Koppeling\Index.cshtml" />
     <Content Include="Views\Koppeling\Details.cshtml" />
     <Content Include="Views\Koppeling\Create.cshtml" />
-    <Content Include="Views\Koppeling\Edit.cshtml" />
-    <Content Include="Views\Koppeling\Delete.cshtml" />
     <Content Include="Views\Periode\Index.cshtml" />
     <Content Include="Views\Periode\Details.cshtml" />
     <Content Include="Views\Periode\Create.cshtml" />
@@ -362,7 +367,6 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Login\index.cshtml" />
     <Content Include="Views\Beoordeling\Selecteer.cshtml" />
-    <Content Include="Views\Beoordeling\View1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

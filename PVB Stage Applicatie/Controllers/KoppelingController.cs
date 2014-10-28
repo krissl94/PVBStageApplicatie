@@ -18,7 +18,16 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
-            var stage = db.Stage.Include(s => s.Periode).Include(s => s.Persoonsgegevens).Include(s => s.Persoonsgegevens1).Include(s => s.Persoonsgegevens2);
+            IQueryable<PVB_Stage_Applicatie.Models.Stage> stage;
+            if (User.IsInRole("Docent"))
+            {
+                int userId = Convert.ToInt32(User.Identity.Name);
+                stage = db.Stage.Include(s => s.Periode).Include(s => s.Persoonsgegevens).Include(s => s.Persoonsgegevens1).Include(s => s.Persoonsgegevens2).Where(s => s.Persoonsgegevens1.PersoonsgegevensID == userId);                
+            }
+            else
+            {
+                stage = db.Stage.Include(s => s.Periode).Include(s => s.Persoonsgegevens).Include(s => s.Persoonsgegevens1).Include(s => s.Persoonsgegevens2);
+            }
             return View(stage.ToList());
         }
 
@@ -69,70 +78,7 @@ namespace PVB_Stage_Applicatie.Controllers
             return View(stage);
         }
 
-        //
-        // GET: /Koppeling/Edit/5
-        [Authorize(Roles = "Beheerder")]
-        public ActionResult Edit(int id = 0)
-        {
-            Stage stage = db.Stage.Find(id);
-            if (stage == null)
-            {
-                return HttpNotFound();
-            }
-
-            ViewBag.Stageperiode = new SelectList(db.Periode.Where(x => x.Begindatum > DateTime.Now), "Periode1", "Periode1");
-            ViewBag.Student = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 4), "PersoonsgegevensID", "Voornaam");
-            ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2), "PersoonsgegevensID", "Voornaam");
-            ViewBag.Stagebegeleider = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 3), "PersoonsgegevensID", "Voornaam");
-          
-            return View(stage);
-        }
-
-        //
-        // POST: /Koppeling/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Beheerder")]
-        public ActionResult Edit(Stage stage)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(stage).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            //ViewBag.Stageperiode = new SelectList(db.Periode, "Periode1", "Periode1", stage.Stageperiode);
-            //ViewBag.Student = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Student);
-            //ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Stagedocent);
-            //ViewBag.Stagebegeleider = new SelectList(db.Persoonsgegevens, "PersoonsgegevensID", "Voornaam", stage.Stagebegeleider);
-            return View(stage);
-        }
-
-        //
-        // GET: /Koppeling/Delete/5
-        [Authorize(Roles = "Beheerder")]
-        public ActionResult Delete(int id = 0)
-        {
-            Stage stage = db.Stage.Find(id);
-            if (stage == null)
-            {
-                return HttpNotFound();
-            }
-            return View(stage);
-        }
-
-        //
-        // POST: /Koppeling/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Beheerder")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Stage stage = db.Stage.Find(id);
-            db.Stage.Remove(stage);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+       
 
         protected override void Dispose(bool disposing)
         {

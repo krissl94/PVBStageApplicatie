@@ -10,19 +10,12 @@
 namespace PVB_Stage_Applicatie.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Periode
+    public partial class sp_BedrijfPerDocent_Result
     {
-        public Periode()
-        {
-            this.Stage = new HashSet<Stage>();
-        }
-    
-        public int Periode1 { get; set; }
-        public System.DateTime Begindatum { get; set; }
-        public System.DateTime Einddatum { get; set; }
-    
-        public virtual ICollection<Stage> Stage { get; set; }
+        public int BedrijfID { get; set; }
+        public string Naam { get; set; }
+        public bool Actief { get; set; }
+        public string NonActiefReden { get; set; }
     }
 }

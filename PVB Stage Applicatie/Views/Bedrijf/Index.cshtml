@@ -6,13 +6,15 @@
 
 <h2>Index</h2>
 
-
+@if (User.IsInRole("Beheerder"))
+{
     @section zijMenu{
-    <ul>
-        <li>@Html.ActionLink("Nieuw bedrijf", "Create")</li>
-        <li>@Html.ActionLink("Bulk invoer", "")</li>
-    </ul>
+        <ul>
+            <li>@Html.ActionLink("Nieuw bedrijf", "Create")</li>
+            <li>@Html.ActionLink("Bulk invoer", "")</li>
+        </ul>
     }
+}
 <table>
     <tr>
         <th>
@@ -24,34 +26,39 @@
         <th>
             Reden non-actief
         </th>
+@if (User.IsInRole("Beheerder"))
+{
         <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(""+item.Naam, "Details", new { id = item.BedrijfID })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Actief)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NonActiefReden)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.BedrijfID })
-        </td>
-    </tr>
-
 }
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("" + item.Naam, "Details", new { id = item.BedrijfID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Actief)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NonActiefReden)
+            </td>
+            @if (User.IsInRole("Beheerder"))
+            {
+                <td>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.BedrijfID })
+                </td>
+            }
+
+        </tr>
+
+    }
     <tr>
         <td></td>
-    <td>
-    </td>
-    <td>
-        
-    </td>
+        <td></td>
+        <td></td>
         <td></td>
     </tr>
 </table>
-

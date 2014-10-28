@@ -130,28 +130,7 @@ namespace PVB_Stage_Applicatie.Controllers
         //
         // GET: /Beoordeling/Delete/5
 
-        public ActionResult Delete(int id = 0)
-        {
-            Beoordeling beoordeling = db.Beoordeling.Find(id);
-            if (beoordeling == null)
-            {
-                return HttpNotFound();
-            }
-            return View(beoordeling);
-        }
-
-        //
-        // POST: /Beoordeling/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Beoordeling beoordeling = db.Beoordeling.Find(id);
-            db.Beoordeling.Remove(beoordeling);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        
 
         protected override void Dispose(bool disposing)
         {

@@ -5,10 +5,16 @@
 }
 
 <h2>Index</h2>
+@section zijMenu{
+    <ul>
+        @if (User.IsInRole("Docent"))
+        {
+            <li>@Html.ActionLink("Formulier invullen", "Selecteer")</li>
+        }
+        <li>@Html.ActionLink("Beoordelingen inzien", "Details")</li>
+        
+    </ul>}
 
-<p>
-    @Html.ActionLink("Create New", "Selecteer")
-</p>
 
 @*<table>
     <tr>
