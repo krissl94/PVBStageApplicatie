@@ -4,436 +4,330 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<style type="text/css">
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    th, td {
+        padding: 5px;
+    }
 
-    <fieldset>
-        <legend>Beoordeling</legend>
+    cvsmaster {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+    }
+</style>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Stage, "Stage1")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Stage", String.Empty)
-            @Html.ValidationMessageFor(model => model.Stage)
-        </div>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<script src="~/Scripts/canvas2image.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Datum)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Datum)
-            @Html.ValidationMessageFor(model => model.Datum)
-        </div>
+Beoordeling1
+<input name="Beoordeling1" type="radio" value="1"> O Onvoldoende</input>
+<input name="Beoordeling1" type="radio" value="2"> M Matig</input>
+<input name="Beoordeling1" type="radio" value="3"> V Voldoende</input>
+<input name="Beoordeling1" type="radio" value="4"> G Goed</input>
+<input name="Beoordeling1" type="radio" value="5"> X Niet van toepassing</input>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Beoordeling1)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Beoordeling1)
-            @Html.ValidationMessageFor(model => model.Beoordeling1)
-        </div>
+</br>
+</br>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.VoorbereidWerk)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.VoorbereidWerk)
-            @Html.ValidationMessageFor(model => model.VoorbereidWerk)
-        </div>
+<table>
+    <thead>
+        <tr>
+            <th>Technische aspecten</th>
+            <th>O</th>
+            <th>M</th>
+            <th>V</th>
+            <th>G</th>
+            <th>X</th>
+            <th>Opmerking</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Voorbereding werkzaamheden</td>
+            <td><input name="VoorbereidWerk" type="radio" value="o" /></td>
+            <td><input name="VoorbereidWerk" type="radio" value="m" /></td>
+            <td><input name="VoorbereidWerk" type="radio" value="v" /></td>
+            <td><input name="VoorbereidWerk" type="radio" value="g" /></td>
+            <td><input name="VoorbereidWerk" type="radio" value="n" /></td>
+            <td><textarea id="VoorbereidWerkOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Plannen en organiseren werkzaamheden</td>
+            <td><input name="PlanEnOrganiserenWerk" type="radio" value="o" /></td>
+            <td><input name="PlanEnOrganiserenWerk" type="radio" value="m" /></td>
+            <td><input name="PlanEnOrganiserenWerk" type="radio" value="v" /></td>
+            <td><input name="PlanEnOrganiserenWerk" type="radio" value="g" /></td>
+            <td><input name="PlanEnOrganiserenWerk" type="radio" value="n" /></td>
+            <td><textarea id="PlanEnOrganiserenWerkOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Theoretisch inzicht</td>
+            <td><input name="TheoretischInzicht" type="radio" value="o" /></td>
+            <td><input name="TheoretischInzicht" type="radio" value="m" /></td>
+            <td><input name="TheoretischInzicht" type="radio" value="v" /></td>
+            <td><input name="TheoretischInzicht" type="radio" value="g" /></td>
+            <td><input name="TheoretischInzicht" type="radio" value="n" /></td>
+            <td><textarea id="TheoretischInzichtOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Technisch inzicht</td>
+            <td><input name="TechnischInzicht" type="radio" value="o" /></td>
+            <td><input name="TechnischInzicht" type="radio" value="m" /></td>
+            <td><input name="TechnischInzicht" type="radio" value="v" /></td>
+            <td><input name="TechnischInzicht" type="radio" value="g" /></td>
+            <td><input name="TechnischInzicht" type="radio" value="n" /></td>
+            <td><textarea id="TechnischInzichtOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Kwaliteit geleverd werk</td>
+            <td><input name="KwalGeleverdWerk" type="radio" value="o" /></td>
+            <td><input name="KwalGeleverdWerk" type="radio" value="m" /></td>
+            <td><input name="KwalGeleverdWerk" type="radio" value="v" /></td>
+            <td><input name="KwalGeleverdWerk" type="radio" value="g" /></td>
+            <td><input name="KwalGeleverdWerk" type="radio" value="n" /></td>
+            <td><textarea id="KwalGeleverdWerkOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Rapporterem werkzaamheden</td>
+            <td><input name="RapportWerk" type="radio" value="o" /></td>
+            <td><input name="RapportWerk" type="radio" value="m" /></td>
+            <td><input name="RapportWerk" type="radio" value="v" /></td>
+            <td><input name="RapportWerk" type="radio" value="g" /></td>
+            <td><input name="RapportWerk" type="radio" value="n" /></td>
+            <td><textarea id="RapportWerkOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Houdt zich aan bedrijfsregels</td>
+            <td><input name="HoudtBedrRegels" type="radio" value="o" /></td>
+            <td><input name="HoudtBedrRegels" type="radio" value="m" /></td>
+            <td><input name="HoudtBedrRegels" type="radio" value="v" /></td>
+            <td><input name="HoudtBedrRegels" type="radio" value="g" /></td>
+            <td><input name="HoudtBedrRegels" type="radio" value="n" /></td>
+            <td><textarea id="HoudtBedrRegelsOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Houdt zich aan ARBO regels</td>
+            <td><input name="HoudtARBORegels" type="radio" value="o" /></td>
+            <td><input name="HoudtARBORegels" type="radio" value="m" /></td>
+            <td><input name="HoudtARBORegels" type="radio" value="v" /></td>
+            <td><input name="HoudtARBORegels" type="radio" value="g" /></td>
+            <td><input name="HoudtARBORegels" type="radio" value="n" /></td>
+            <td><textarea id="HoudtARBORegelsOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Werktempo</td>
+            <td><input name="WerkTempo" type="radio" value="o" /></td>
+            <td><input name="WerkTempo" type="radio" value="m" /></td>
+            <td><input name="WerkTempo" type="radio" value="v" /></td>
+            <td><input name="WerkTempo" type="radio" value="g" /></td>
+            <td><input name="WerkTempo" type="radio" value="n" /></td>
+            <td><textarea id="WerkTempoOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Beoordeling Technische aspecten</td>
+            <td colspan="6"><textarea id="BeoordelingTechAspect" rows="1" cols="73"></textarea></td>
+        </tr>
+        <tr>
+            <td>Mogelijke opmerking en/of aandachtspunbten met betrekking tot de technische aspecten</td>
+            <td colspan="6"><textarea id="BeoordelingTechAspectOpm" rows="1" cols="73"></textarea></td>
+        </tr>
+    </tbody>
+</table>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.VoorbereidWerkOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.VoorbereidWerkOpm)
-            @Html.ValidationMessageFor(model => model.VoorbereidWerkOpm)
-        </div>
+<br/>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PlanEnOrganiserenWerk)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PlanEnOrganiserenWerk)
-            @Html.ValidationMessageFor(model => model.PlanEnOrganiserenWerk)
-        </div>
+<table>
+    <thead>
+        <tr>
+            <th>Houdingsaspecten</th>
+            <th>O</th>
+            <th>M</th>
+            <th>V</th>
+            <th>G</th>
+            <th>X</th>
+            <th>Opmerking</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Verloop eerste contacten bedrijf</td>
+            <td><input name="VerloopEersteContact" type="radio" value="o" /></td>
+            <td><input name="VerloopEersteContact" type="radio" value="m" /></td>
+            <td><input name="VerloopEersteContact" type="radio" value="v" /></td>
+            <td><input name="VerloopEersteContact" type="radio" value="g" /></td>
+            <td><input name="VerloopEersteContact" type="radio" value="n" /></td>
+            <td><textarea id="VerloopEersteContactOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Houdingen ten aanzien van collega's</td>
+            <td><input name="HoudingTAVCollegas" type="radio" value="o" /></td>
+            <td><input name="HoudingTAVCollegas" type="radio" value="m" /></td>
+            <td><input name="HoudingTAVCollegas" type="radio" value="v" /></td>
+            <td><input name="HoudingTAVCollegas" type="radio" value="g" /></td>
+            <td><input name="HoudingTAVCollegas" type="radio" value="n" /></td>
+            <td><textarea id="HoudingTAVCollegasOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Houding ten aanzien van leidinggevenden</td>
+            <td><input name="HoudingTAVLeiding" type="radio" value="o" /></td>
+            <td><input name="HoudingTAVLeiding" type="radio" value="m" /></td>
+            <td><input name="HoudingTAVLeiding" type="radio" value="v" /></td>
+            <td><input name="HoudingTAVLeiding" type="radio" value="g" /></td>
+            <td><input name="HoudingTAVLeiding" type="radio" value="n" /></td>
+            <td><textarea id="HoudingTAVLeidingOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Houding ten aanzien van derden</td>
+            <td><input name="HoudingTAVDerden" type="radio" value="o" /></td>
+            <td><input name="HoudingTAVDerden" type="radio" value="m" /></td>
+            <td><input name="HoudingTAVDerden" type="radio" value="v" /></td>
+            <td><input name="HoudingTAVDerden" type="radio" value="g" /></td>
+            <td><input name="HoudingTAVDerden" type="radio" value="n" /></td>
+            <td><textarea id="HoudingTAVDerdenOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Omgaan met kritiek</td>
+            <td><input name="OmgaanKritiek" type="radio" value="o" /></td>
+            <td><input name="OmgaanKritiek" type="radio" value="m" /></td>
+            <td><input name="OmgaanKritiek" type="radio" value="v" /></td>
+            <td><input name="OmgaanKritiek" type="radio" value="g" /></td>
+            <td><input name="OmgaanKritiek" type="radio" value="n" /></td>
+            <td><textarea id="OmgaanKritiekOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Komt op tijd</td>
+            <td><input name="OpTijd" type="radio" value="o" /></td>
+            <td><input name="OpTijd" type="radio" value="m" /></td>
+            <td><input name="OpTijd" type="radio" value="v" /></td>
+            <td><input name="OpTijd" type="radio" value="g" /></td>
+            <td><input name="OpTijd" type="radio" value="n" /></td>
+            <td><textarea id="OpTijdOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Toont eigen initiatief</td>
+            <td><input name="ToontInitiatief" type="radio" value="o" /></td>
+            <td><input name="ToontInitiatief" type="radio" value="m" /></td>
+            <td><input name="ToontInitiatief" type="radio" value="v" /></td>
+            <td><input name="ToontInitiatief" type="radio" value="g" /></td>
+            <td><input name="ToontInitiatief" type="radio" value="n" /></td>
+            <td><textarea id="ToontInitiatiefOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Inzet</td>
+            <td><input name="Inzet" type="radio" value="o" /></td>
+            <td><input name="Inzet" type="radio" value="m" /></td>
+            <td><input name="Inzet" type="radio" value="v" /></td>
+            <td><input name="Inzet" type="radio" value="g" /></td>
+            <td><input name="Inzet" type="radio" value="n" /></td>
+            <td><textarea id="IntzetOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Toont belangstelling voor het vak</td>
+            <td><input name="ToontBelangstellingVak" type="radio" value="o" /></td>
+            <td><input name="ToontBelangstellingVak" type="radio" value="m" /></td>
+            <td><input name="ToontBelangstellingVak" type="radio" value="v" /></td>
+            <td><input name="ToontBelangstellingVak" type="radio" value="g" /></td>
+            <td><input name="ToontBelangstellingVak" type="radio" value="n" /></td>
+            <td><textarea id="ToontBelangstellingVakOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Grenzen aangeven</td>
+            <td><input name="GrenzenAangeven" type="radio" value="o" /></td>
+            <td><input name="GrenzenAangeven" type="radio" value="m" /></td>
+            <td><input name="GrenzenAangeven" type="radio" value="v" /></td>
+            <td><input name="GrenzenAangeven" type="radio" value="g" /></td>
+            <td><input name="GrenzenAangeven" type="radio" value="n" /></td>
+            <td><textarea id="GrenzenAangevenOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Komt afspraken na</td>
+            <td><input name="KomtAfsprakenNa" type="radio" value="o" /></td>
+            <td><input name="KomtAfsprakenNa" type="radio" value="m" /></td>
+            <td><input name="KomtAfsprakenNa" type="radio" value="v" /></td>
+            <td><input name="KomtAfsprakenNa" type="radio" value="g" /></td>
+            <td><input name="KomtAfsprakenNa" type="radio" value="n" /></td>
+            <td><textarea id="KomtAfsprakenNaOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Kan zelfstandig werken</td>
+            <td><input name="ZelfstandigWerken" type="radio" value="o" /></td>
+            <td><input name="ZelfstandigWerken" type="radio" value="m" /></td>
+            <td><input name="ZelfstandigWerken" type="radio" value="v" /></td>
+            <td><input name="ZelfstandigWerken" type="radio" value="g" /></td>
+            <td><input name="ZelfstandigWerken" type="radio" value="n" /></td>
+            <td><textarea id="ZelfstandigWerkenOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>Gemotiveerd</td>
+            <td><input name="Gemotiveerd" type="radio" value="o" /></td>
+            <td><input name="Gemotiveerd" type="radio" value="m" /></td>
+            <td><input name="Gemotiveerd" type="radio" value="v" /></td>
+            <td><input name="Gemotiveerd" type="radio" value="g" /></td>
+            <td><input name="Gemotiveerd" type="radio" value="n" /></td>
+            <td><textarea id="GemotiveerdOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+        <tr>
+            <td>HoudingsAspecten</td>
+            <td colspan="6"><textarea id="HoudingsAspecten" rows="1" cols="73"></textarea></td>
+        </tr>
+        <tr>
+            <td>HoudingAspectenOpm</td>
+            <td colspan="6"><textarea id="HoudingAspectenOpm" rows="1" cols="73"></textarea></td>
+        </tr>
+    </tbody>
+</table>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.PlanEnOrganiserenWerkOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.PlanEnOrganiserenWerkOpm)
-            @Html.ValidationMessageFor(model => model.PlanEnOrganiserenWerkOpm)
-        </div>
+<br/>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TheoretischInzicht)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TheoretischInzicht)
-            @Html.ValidationMessageFor(model => model.TheoretischInzicht)
-        </div>
+<table>
+    <thead>
+        <tr>
+            <th>Technische aspecten</th>
+            <th>O</th>
+            <th>M</th>
+            <th>V</th>
+            <th>G</th>
+            <th>X</th>
+            <th>Opmerking</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Verslag</td>
+            <td><input name="Verslag" type="radio" value="o" /></td>
+            <td><input name="Verslag" type="radio" value="m" /></td>
+            <td><input name="Verslag" type="radio" value="v" /></td>
+            <td><input name="Verslag" type="radio" value="g" /></td>
+            <td><input name="Verslag" type="radio" value="n" /></td>
+            <td><textarea id="VerslagOpm" rows="1" cols="50"></textarea></td>
+        </tr>
+    </tbody>
+</table>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.TheoretischInzichtOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.TheoretischInzichtOpm)
-            @Html.ValidationMessageFor(model => model.TheoretischInzichtOpm)
-        </div>
+<br/>
+<table>
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        <td><canvas id="d" width="200" height="100" class="cvs"></canvas></td>
+        <td><canvas id="b" width="200" height="100" class="cvs"></canvas></td>
+        <td><canvas id="s" width="200" height="100" class="cvs"></canvas></td>
+    </tr>
+</table>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.KwalGeleverdWerk)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.KwalGeleverdWerk)
-            @Html.ValidationMessageFor(model => model.KwalGeleverdWerk)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.KwalGeleverdWerkOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.KwalGeleverdWerkOpm)
-            @Html.ValidationMessageFor(model => model.KwalGeleverdWerkOpm)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.RapportWerk)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.RapportWerk)
-            @Html.ValidationMessageFor(model => model.RapportWerk)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.RapportWerkOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.RapportWerkOpm)
-            @Html.ValidationMessageFor(model => model.RapportWerkOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HoudtBedrRegels)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HoudtBedrRegels)
-            @Html.ValidationMessageFor(model => model.HoudtBedrRegels)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HoudtBedrRegelsOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HoudtBedrRegelsOpm)
-            @Html.ValidationMessageFor(model => model.HoudtBedrRegelsOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HoudtARBORegels)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HoudtARBORegels)
-            @Html.ValidationMessageFor(model => model.HoudtARBORegels)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HoudtARBORegelsOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HoudtARBORegelsOpm)
-            @Html.ValidationMessageFor(model => model.HoudtARBORegelsOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.WerkTempo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.WerkTempo)
-            @Html.ValidationMessageFor(model => model.WerkTempo)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.WerkTempoOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.WerkTempoOpm)
-            @Html.ValidationMessageFor(model => model.WerkTempoOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.BeoordelingTechAspect)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.BeoordelingTechAspect)
-            @Html.ValidationMessageFor(model => model.BeoordelingTechAspect)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.BeoordelingTechAspectOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.BeoordelingTechAspectOpm)
-            @Html.ValidationMessageFor(model => model.BeoordelingTechAspectOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.VerloopEersteContact)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.VerloopEersteContact)
-            @Html.ValidationMessageFor(model => model.VerloopEersteContact)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.VerloopEersteContactOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.VerloopEersteContactOpm)
-            @Html.ValidationMessageFor(model => model.VerloopEersteContactOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HoudingTAVCollegas)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HoudingTAVCollegas)
-            @Html.ValidationMessageFor(model => model.HoudingTAVCollegas)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HoudingTAVCollegasOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HoudingTAVCollegasOpm)
-            @Html.ValidationMessageFor(model => model.HoudingTAVCollegasOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HoudingTAVLeiding)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HoudingTAVLeiding)
-            @Html.ValidationMessageFor(model => model.HoudingTAVLeiding)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HoudingTAVLeidingOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HoudingTAVLeidingOpm)
-            @Html.ValidationMessageFor(model => model.HoudingTAVLeidingOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HoudingTAVDerden)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HoudingTAVDerden)
-            @Html.ValidationMessageFor(model => model.HoudingTAVDerden)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HoudingTAVDerdenOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HoudingTAVDerdenOpm)
-            @Html.ValidationMessageFor(model => model.HoudingTAVDerdenOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.OmgaanKritiek)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.OmgaanKritiek)
-            @Html.ValidationMessageFor(model => model.OmgaanKritiek)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.OmgaanKritiekOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.OmgaanKritiekOpm)
-            @Html.ValidationMessageFor(model => model.OmgaanKritiekOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.OpTijd)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.OpTijd)
-            @Html.ValidationMessageFor(model => model.OpTijd)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.OpTijdOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.OpTijdOpm)
-            @Html.ValidationMessageFor(model => model.OpTijdOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ToontInitiatief)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ToontInitiatief)
-            @Html.ValidationMessageFor(model => model.ToontInitiatief)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ToontInitiatiefOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ToontInitiatiefOpm)
-            @Html.ValidationMessageFor(model => model.ToontInitiatiefOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Inzet)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Inzet)
-            @Html.ValidationMessageFor(model => model.Inzet)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IntzetOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IntzetOpm)
-            @Html.ValidationMessageFor(model => model.IntzetOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ToontBelangstellingVak)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ToontBelangstellingVak)
-            @Html.ValidationMessageFor(model => model.ToontBelangstellingVak)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ToontBelangstellingVakOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ToontBelangstellingVakOpm)
-            @Html.ValidationMessageFor(model => model.ToontBelangstellingVakOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.GrenzenAangeven)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.GrenzenAangeven)
-            @Html.ValidationMessageFor(model => model.GrenzenAangeven)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.GrenzenAangevenOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.GrenzenAangevenOpm)
-            @Html.ValidationMessageFor(model => model.GrenzenAangevenOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.KomtAfsprakenNa)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.KomtAfsprakenNa)
-            @Html.ValidationMessageFor(model => model.KomtAfsprakenNa)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.KomtAfsprakenNaOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.KomtAfsprakenNaOpm)
-            @Html.ValidationMessageFor(model => model.KomtAfsprakenNaOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ZelfstandigWerken)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ZelfstandigWerken)
-            @Html.ValidationMessageFor(model => model.ZelfstandigWerken)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ZelfstandigWerkenOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ZelfstandigWerkenOpm)
-            @Html.ValidationMessageFor(model => model.ZelfstandigWerkenOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Gemotiveerd)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Gemotiveerd)
-            @Html.ValidationMessageFor(model => model.Gemotiveerd)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.GemotiveerdOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.GemotiveerdOpm)
-            @Html.ValidationMessageFor(model => model.GemotiveerdOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HoudingsAspecten)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HoudingsAspecten)
-            @Html.ValidationMessageFor(model => model.HoudingsAspecten)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HoudingAspectenOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HoudingAspectenOpm)
-            @Html.ValidationMessageFor(model => model.HoudingAspectenOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Verslag)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Verslag)
-            @Html.ValidationMessageFor(model => model.Verslag)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.VerslagOpm)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.VerslagOpm)
-            @Html.ValidationMessageFor(model => model.VerslagOpm)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EindBeoordeling)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EindBeoordeling)
-            @Html.ValidationMessageFor(model => model.EindBeoordeling)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
+<script src="~/Scripts/mousecontroller.js"></script>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
