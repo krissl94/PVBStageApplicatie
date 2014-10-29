@@ -353,7 +353,6 @@
     <Content Include="Views\GespreksFormulier\Delete.cshtml" />
     <Content Include="Views\Beoordeling\Index.cshtml" />
     <Content Include="Views\Beoordeling\Details.cshtml" />
-    <Content Include="Views\Beoordeling\Create.cshtml" />
     <Content Include="Views\Beoordeling\Edit.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\Index.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\Details.cshtml" />
