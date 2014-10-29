@@ -45,28 +45,18 @@ namespace PVB_Stage_Applicatie.Controllers
                 .Where(x => x.Begindatum < DateTime.Now)
                 .Where(x => x.Einddatum > DateTime.Now));
 
-            List<PeriodeViewModel> PeriodeViewLijst = new List<PeriodeViewModel>();
             List<StudentViewModel> Studentlijstje = new List<StudentViewModel>();
 
             foreach (var item in Periodelijst)
 	        {
-		        PeriodeViewLijst.Add( new PeriodeViewModel(item.Periode1, item.Begindatum, item.Einddatum));
                 foreach(var stageItem in item.Stage)
                 {
-                    Studentlijstje.Add(new StudentViewModel(stageItem.Persoonsgegevens.PersoonsgegevensID, stageItem.Persoonsgegevens.Voornaam, stageItem.Persoonsgegevens.Achternaam, stageItem.StageID));
+                    if (stageItem.Stagedocent.ToString() == User.Identity.Name)
+                        Studentlijstje.Add(new StudentViewModel(stageItem.Persoonsgegevens.PersoonsgegevensID, stageItem.Persoonsgegevens.Voornaam, stageItem.Persoonsgegevens.Achternaam, stageItem.StageID, stageItem.Persoonsgegevens.Toevoeging, stageItem.Persoonsgegevens.StudentNummer));
                 }
 	        }
             var jSerializer = new JavaScriptSerializer();
-            ViewBag.periode = jSerializer.Serialize(PeriodeViewLijst);
-            ViewBag.student = jSerializer.Serialize(Studentlijstje);
-
-
-            //ist<Persoonsgegevens> Studentlijst = new List<Persoonsgegevens>(db.Persoonsgegevens.Where(s => s.Rol == 4).Where(s => s.Stage1.FirstOrDefault().Persoonsgegevens.MedewerkerID == medewerkerID));
             
-            //ViewBag.Student = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x=>x.Rol == 4), "PersoonsgegevensID", "Voornaam");
-            //ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2), "PersoonsgegevensID", "Voornaam");
-            //ViewBag.Bedrijven = new SelectList(db.Bedrijf.Where(b => b.Actief == true), "Bedrijf", "Bedrijf");
-           
             return View(Studentlijstje);
         }
         //
@@ -79,21 +69,29 @@ namespace PVB_Stage_Applicatie.Controllers
         }
 
         //
+        // POST: /Beoordeling/CreateFormulier
+        [HttpPost]
+        public ActionResult CreateFormulier(string stage)
+        {
+            return View();
+        }
+
+        //
         // POST: /Beoordeling/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Beoordeling beoordeling)
         {
-            if (ModelState.IsValid)
-            {
-                db.Beoordeling.Add(beoordeling);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    db.Beoordeling.Add(beoordeling);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID", beoordeling.Stage);
-            return View(beoordeling);
+                ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID", beoordeling.Stage);
+                return View(beoordeling);
         }
 
         //
