@@ -37,6 +37,10 @@
     var TechnischeAspecten =
         [
             {
+                Beoordeling: "Beoordeling1",
+                Opmerking: "Beoordeling1opm"
+            },
+            {
                 Beoordeling: "VoorbereidWerk",
                 Opmerking: "VoorbereidWerkOpm"
             },
@@ -136,68 +140,70 @@
     var Verslagen =
     [
             {
-                Verslag: "BeoordelingTechAspect",
-                Beoordeling: "BeoordelingTechAspectOpm"
+                Beoordeling: "BeoordelingTechAspect",
+                Opmerking: "BeoordelingTechAspectOpm"
             },
             {
-                Verslag: "Verslag",
-                Beoordeling: "VerslagOpm"
+                Beoordeling: "Verslag",
+                Opmerking: "VerslagOpm"
             }
     ];
 
-    var Handtekeningen =
-    [
-    {HandtekeningDocent: "HandtekeningDocent"},
-    {HandtekeningStudent: "HandtekeningStudent"},
-    {HandtekeningBegeleider: "HandtekeningBegeleider"}
-    ];
+    var Handtekeningen = ["d", "b", "s"];
 
     var EindBeoordeling = false;
-    
 
     $("#klikje").live('click', function () {
 
-        var technischeAspectenToPost = [];
+        var technischeAspectenToPost = {};
         TechnischeAspecten.forEach(function (item) {
             var aspect = item.Beoordeling;
             var aspectOpm = item.Opmerking;
 
             if ($("input[name=" + item.Opmerking + "]").val() != undefined && $("input[name=" + item.Beoordeling + "]:checked").val() != "") {
                 var temp = {};
-                temp[aspect] = $("input[name=" + item.Beoordeling + "]:checked").val();
-                temp[aspectOpm] = $("input[name=" + item.Opmerking + "]").val();
-                technischeAspectenToPost.push(temp);
+
+                temp.beoordeling = parseInt($("input[name=" + item.Beoordeling + "]:checked").val());
+                temp.opmerking = $("input[name=" + item.Opmerking + "]").val();
+
+                technischeAspectenToPost[item.Beoordeling] = temp;
             }
             else if ($("input[name=" + item.Opmerking + "]").val() == undefined && $("input[name=" + item.Beoordeling + "]:checked").val() != "") {
                 var temp = {};
-                temp[aspect] = $("input[name=" + item.Beoordeling + "]:checked").val();
-                temp[aspectOpm] = "Geen opmerkingen";
-                technischeAspectenToPost.push(temp);
+
+                temp.beoordeling = parseInt($("input[name=" + item.Beoordeling + "]:checked").val());
+                temp.opmerking = "Geen opmerkingen";
+
+                technischeAspectenToPost[item.Beoordeling] = temp;
             }
             else
             {
-                $("input[name=" + item.Beoordeling + "]:checked").focus();
+                $("input[name=" + item.Beoordeling + "]").focus();
                 //Moet aborten en foutmelding geven
             }
 
         });
 
-        var houdingsAspectenToPost = [];
+        var houdingsAspectenToPost = {};
         HoudingsAspecten.forEach(function (item) {
             var aspect = item.Beoordeling;
             var aspectOpm = item.Opmerking;
 
             if ($("input[name=" + item.Opmerking + "]").val() != undefined && $("input[name=" + item.Beoordeling + "]:checked").val() != "") {
                 var temp = {};
-                temp[aspect] = $("input[name=" + item.Beoordeling + "]:checked").val();
-                temp[aspectOpm] = $("input[name=" + item.Opmerking + "]").val();
-                houdingsAspectenToPost.push(temp);
+
+                temp.beoordeling = parseInt($("input[name=" + item.Beoordeling + "]:checked").val());
+                temp.opmerking = $("input[name=" + item.Opmerking + "]").val();
+
+                houdingsAspectenToPost[item.Beoordeling] = temp;
             }
             else if ($("input[name=" + item.Opmerking + "]").val() == undefined && $("input[name=" + item.Beoordeling + "]:checked").val() != "") {
                 var temp = {};
-                temp[aspect] = $("input[name=" + item.Beoordeling + "]:checked").val();
-                temp[aspectOpm] = "Geen opmerkingen";
-                houdingsAspectenToPost.push(temp);
+
+                temp.beoordeling = parseInt($("input[name=" + item.Beoordeling + "]:checked").val());
+                temp.opmerking = "Geen opmerkingen";
+
+                houdingsAspectenToPost[item.Beoordeling] = temp;
             }
             else {
                 $("input[name=" + item.Beoordeling + "]:checked").focus();
@@ -205,22 +211,26 @@
             }
         });
 
-        var VerslagToPost = [];
+        var VerslagToPost = {};
         Verslagen.forEach(function (item) {
                 var aspect = item.Beoordeling;
                 var aspectOpm = item.Opmerking;
 
                 if ($("input[name=" + item.Opmerking + "]").val() != undefined && $("input[name=" + item.Beoordeling + "]:checked").val() != "") {
                     var temp = {};
-                    temp[aspect] = $("input[name=" + item.Beoordeling + "]:checked").val();
-                    temp[aspectOpm] = $("input[name=" + item.Opmerking + "]").val();
-                    VerslagToPost.push(temp);
+
+                    temp.beoordeling = parseInt($("input[name=" + item.Beoordeling + "]:checked").val());
+                    temp.opmerking = $("input[name=" + item.Opmerking + "]").val();
+
+                    VerslagToPost[item.Beoordeling] = temp;
                 }
                 else if ($("input[name=" + item.Opmerking + "]").val() == undefined && $("input[name=" + item.Beoordeling + "]:checked").val() != "") {
                     var temp = {};
-                    temp[aspect] = $("input[name=" + item.Beoordeling + "]:checked").val();
-                    temp[aspectOpm] = "Geen opmerkingen";
-                    VerslagToPost.push(temp);
+
+                    temp.beoordeling = parseInt($("input[name=" + item.Beoordeling + "]:checked").val());
+                    temp.opmerking = "Geen opmerkingen";
+
+                    VerslagToPost[item.Beoordeling] = temp;
                 }
                 else {
                     $("input[name=" + item.Beoordeling + "]:checked").focus();
@@ -228,11 +238,16 @@
                 }
         });
 
-        var handtekeningenToPost = [];
+        var handtekeningenToPost = {};
         Handtekeningen.forEach(function (item) {
-            $("input[name=" + item.Beoordeling + "]").val();
-            houdingsAspectenToPost.push(item);
+            var temp = {}
+
+            temp.handtekening = Canvas2Image.convertToImage(d3.select("#" + item).node(), 200, 100, "png").src
+
+            handtekeningenToPost[item] = temp;
         });
+
+
         technischeAspectenToPost = JSON.stringify(technischeAspectenToPost);
         houdingsAspectenToPost = JSON.stringify(houdingsAspectenToPost);
         VerslagToPost = JSON.stringify(VerslagToPost);
