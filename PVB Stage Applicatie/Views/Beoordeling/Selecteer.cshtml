@@ -10,10 +10,6 @@
 <h2>Selecteer voor wie u een beoordeling toe wil voegen</h2>
 @using (Html.BeginForm())
 {
-        @*@foreach (var d in ViewBag.DropDownList)
-            {
-                @:<option value="@d.stageId">@d.StudentNummer : @d.Voornaam @d.Tussenvoegsel @d.Achternaam</option>
-            }*@
         @Html.DropDownListFor(model => model.stageId,
    (IEnumerable<SelectListItem>)ViewBag.DropDownList, "---Select a value---")
 

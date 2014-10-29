@@ -11,11 +11,11 @@ namespace PVB_Stage_Applicatie.Models
         public int PersoonsgegevensID { get; set; }
         public string Voornaam { get; set; }
         public string Achternaam { get; set; }
-        public string Naam { get { return Voornaam + " " + Achternaam; } }
         public int stageId { get; set; }
 
         public string Tussenvoegsel { get; set; }
         public string StudentNummer { get; set; }
+        public string Naam { get { return StudentNummer + " : " + Voornaam + " " + Achternaam; } }
 
         public StudentViewModel()
         { }
