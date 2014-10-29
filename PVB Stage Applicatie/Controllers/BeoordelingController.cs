@@ -138,14 +138,20 @@ namespace PVB_Stage_Applicatie.Controllers
         // GET: /Beoordeling/Delete/5
 
 
-        public void Opsturen(string technischeAspecten, string houdingsaspecten, string verslag, string handtekeningen)
+        public void Opsturen(string technischeAspectenJson, string houdingsaspectenJson, string verslagJson, string handtekeningenJson)
         {
-            JavaScriptSerializer ser = new JavaScriptSerializer();
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
 
-           var Handtekeningen = ser.Deserialize<BeoordelingsJson.Handtekeningen>(handtekeningen);
-           var Verslag = ser.Deserialize<BeoordelingsJson.Verslagen>(verslag);
-           var Houdingsaspecten = ser.Deserialize<BeoordelingsJson.Houdingsaspecten>(houdingsaspecten);
-           var TechnischeAspecten = ser.Deserialize<BeoordelingsJson.TechnischeAspecten>(technischeAspecten);
+            BeoordelingsJson.Handtekeningen handtekeningen = serializer.Deserialize<BeoordelingsJson.Handtekeningen>(handtekeningenJson);
+            BeoordelingsJson.Verslagen verslag = serializer.Deserialize<BeoordelingsJson.Verslagen>(verslagJson);
+            BeoordelingsJson.Houdingsaspecten houdingsaspecten = serializer.Deserialize<BeoordelingsJson.Houdingsaspecten>(houdingsaspectenJson);
+            BeoordelingsJson.TechnischeAspecten technischeAspecten = serializer.Deserialize<BeoordelingsJson.TechnischeAspecten>(technischeAspectenJson);
+
+            Beoordeling beoordeling = new Beoordeling();
+
+            //beoordeling.Beoordeling1 = technischeAspecten.Beoordeling1.beoordeling;
+            //beoordeling.BeoordelingTechAspect = technischeAspecten.
+
         }
 
         protected override void Dispose(bool disposing)
