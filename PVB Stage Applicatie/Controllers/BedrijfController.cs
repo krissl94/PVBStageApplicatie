@@ -28,15 +28,16 @@ namespace PVB_Stage_Applicatie.Controllers
                 }
                 return View(bedrijvenDocent);
             };
-            return View();
+
+            return View(db.Bedrijf);
         }
 
         //
         // GET: /Bedrijf/Details/5
-        [HttpPost]
         [Authorize(Roles = "Docent,Beheerder")]
         public ActionResult Details(int id = 0)
         {
+            //Bedrijf bedrijf = db.Bedrijf.Where(b => b.BedrijfID == id).FirstOrDefault();
             Bedrijf bedrijf = db.Bedrijf.Find(id);
             bool bekendBedrijf = false;
             if (HttpContext.User.IsInRole("Docent"))
@@ -54,6 +55,7 @@ namespace PVB_Stage_Applicatie.Controllers
                 else
                     return HttpNotFound();
             }
+            
             if (bedrijf == null)
             {
                 return HttpNotFound();

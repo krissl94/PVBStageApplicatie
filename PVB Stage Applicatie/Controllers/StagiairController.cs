@@ -34,7 +34,6 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Stagiair/Details/5
-        [HttpPost]
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Details(int id = 0)
         {
