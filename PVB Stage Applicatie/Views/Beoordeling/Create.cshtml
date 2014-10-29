@@ -20,6 +20,13 @@
         -ms-user-select:none;
         user-select:none;
     }
+
+
+
+    .clsbtn {
+        text-align: center;
+        vertical-align: middle;
+    }
 </style>
 
 <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
@@ -314,18 +321,21 @@ Beoordeling1
 <br/>
 <table>
     <tr>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th align="center" valign="middle">Handtekening Docent</th>
+        <th align="center" valign="middle">Handtekening Begeleider</th>
+        <th align="center" valign="middle">Handtekening Stagiair</th>
     </tr>
     <tr>
-        <td><canvas id="d" width="200" height="100" class="cvs"></canvas></td>
-        <td><canvas id="b" width="200" height="100" class="cvs"></canvas></td>
-        <td><canvas id="s" width="200" height="100" class="cvs"></canvas></td>
+        <td ><canvas id="b" width="200" height="100" class="cvs"></canvas> </td>
+        <td ><canvas id="s" width="200" height="100" class="cvs"></canvas> </td>
+        <td ><canvas id="d" width="200" height="100" class="cvs"></canvas> </td>
+    </tr>
+    <tr>
+        <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('b')" /></td>
+        <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('s')" /></td>
+        <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('d')" /></td>
     </tr>
 </table>
-
-
 
 <script src="~/Scripts/mousecontroller.js"></script>
 
