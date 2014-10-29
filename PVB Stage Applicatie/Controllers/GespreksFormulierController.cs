@@ -76,11 +76,25 @@ namespace PVB_Stage_Applicatie.Controllers
         }
         
         [HttpPost]
-        public ActionResult CreateGespreksFormulier(object formulier)
-        {
+        public ActionResult CreateGespreksFormulier(GespreksformulierViewModel formulier)
+         {
+             Stage stageToAdd = db.Stage.Where(s => s.StageID == formulier.StageID.StageID).FirstOrDefault();
             if (ModelState.IsValid)
             {
-
+                Gespreksformulier toAdd = (new Gespreksformulier
+                
+                {
+                    GespreksformulierID = 0,
+                    ContactType = formulier.Type,
+                    Datum = formulier.Datum,
+                    Gesprek = formulier.Gesprek,
+                    HandtekeningBegeleider = System.Text.Encoding.ASCII.GetBytes(formulier.HandtekeningBegeleider),
+                    HandtekeningDocent = System.Text.Encoding.ASCII.GetBytes(formulier.HandtekeningDocent),
+                    HandtekeningStudent = System.Text.Encoding.ASCII.GetBytes(formulier.HandtekeningStudent),
+                    Stage1 = stageToAdd,
+                    Stage = formulier.StageID.StageID
+                });
+                db.Gespreksformulier.Add(toAdd);
 
                 
                 db.SaveChanges();

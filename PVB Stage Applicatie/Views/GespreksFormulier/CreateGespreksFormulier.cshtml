@@ -31,11 +31,21 @@
     }
 </style>
 <h2>CreateGespreksFormulier</h2>
-
-@using (Html.BeginForm("CreateGespreksFormulier", "GespreksFormulier" ))
+<script>
+    $(document).ready(function () {
+        $("#snelwatdoen").on('click', function () {
+            debugger;
+            $("#HandtekeningStudent")[0].value = Canvas2Image.convertToImage(d3.select("#s").node(), 200, 100, "png").src
+            $("#HandtekeningBegeleider")[0].value = Canvas2Image.convertToImage(d3.select("#b").node(), 200, 100, "png").src
+            $("#HandtekeningDocent")[0].value = Canvas2Image.convertToImage(d3.select("#d").node(), 200, 100, "png").src
+        })
+    });
+</script>
+@using (Html.BeginForm("CreateGespreksFormulier", "GespreksFormulier", FormMethod.Post, new { id = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.StageID.StageID)
     <table>
         <tr>
             <td>
@@ -81,8 +91,8 @@
                     @Html.DisplayFor(m => m.Datum)
                 </td>
                 <td colspan="2">
-                    <input name="PlanEnOrganiserenWerk" type="radio" value="1" /> Telefonisch
-                    <input name="PlanEnOrganiserenWerk" type="radio" value="2" /> Bezoek
+                    @Html.RadioButtonFor(m => m.Type, 1) Telefonisch
+                    @Html.RadioButtonFor(m => m.Type, 2) Bezoek
                     @Html.ValidationMessageFor(model => model.Type)
                 </td>
             </tr>
@@ -98,6 +108,11 @@
                 <th align="center" valign="middle">Handtekening Stagiair</th>
             </tr>
             <tr>
+                @Html.HiddenFor(m => m.HandtekeningDocent)
+                @Html.HiddenFor(m => m.HandtekeningBegeleider)
+                @Html.HiddenFor(m => m.HandtekeningStudent)
+
+
                 <td><canvas id="b" width="200" height="100" class="cvs"></canvas> </td>
                 <td><canvas id="s" width="200" height="100" class="cvs"></canvas> </td>
                 <td><canvas id="d" width="200" height="100" class="cvs"></canvas> </td>
@@ -111,7 +126,7 @@
         </table>
 <script src="~/Scripts/mousecontroller.js"></script>
     
-                <input type="submit" value="Create" />
+                <input type="submit" value="Create" id="snelwatdoen"/>
     
 }
 <input type="button" id="klikje" />
@@ -124,3 +139,4 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+`

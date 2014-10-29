@@ -151,7 +151,6 @@
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BeoordelingsJson.cs" />
-    <Compile Include="Models\byteArrayHelper.cs" />
     <Compile Include="Models\CustomRoleProvider.cs" />
     <Compile Include="Models\Gespreksformulier.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
@@ -376,6 +375,7 @@
     <Content Include="Views\GespreksFormulier\CreateGespreksFormulier.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\Selecteer.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\CreateBeeindeging.cshtml" />
+    <Content Include="Views\Beoordeling\CreateEindbeoordeling.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
