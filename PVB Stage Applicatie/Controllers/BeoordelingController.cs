@@ -37,8 +37,7 @@ namespace PVB_Stage_Applicatie.Controllers
             return View(beoordeling);
         }
 
-
-        public ActionResult Selecteer(string medewerkerID)
+        public ActionResult Selecteer()
         {
             List<Periode> Periodelijst = 
                 new List<Periode>(db.Periode
@@ -46,7 +45,7 @@ namespace PVB_Stage_Applicatie.Controllers
                 .Where(x => x.Einddatum > DateTime.Now));
 
             List<StudentViewModel> Studentlijstje = new List<StudentViewModel>();
-
+            StudentViewModel svm = new StudentViewModel();
             foreach (var item in Periodelijst)
 	        {
                 foreach(var stageItem in item.Stage)
@@ -55,9 +54,15 @@ namespace PVB_Stage_Applicatie.Controllers
                         Studentlijstje.Add(new StudentViewModel(stageItem.Persoonsgegevens.PersoonsgegevensID, stageItem.Persoonsgegevens.Voornaam, stageItem.Persoonsgegevens.Achternaam, stageItem.StageID, stageItem.Persoonsgegevens.Toevoeging, stageItem.Persoonsgegevens.StudentNummer));
                 }
 	        }
-            var jSerializer = new JavaScriptSerializer();
-            
-            return View(Studentlijstje);
+            ViewBag.DropDownList = new SelectList(Studentlijstje, "StageId", "Naam");
+            return View(svm);
+        }
+
+        [HttpPost]
+        public ActionResult Selecteer(StudentViewModel student)
+        {
+            Stage Stage = db.Stage.Where(s => s.StageID == student.stageId).FirstOrDefault();
+            return View("~/Views/Beoordeling/CreateFormulier.cshtml", Stage);
         }
         //
         // GET: /Beoordeling/Create
@@ -71,9 +76,13 @@ namespace PVB_Stage_Applicatie.Controllers
         //
         // POST: /Beoordeling/CreateFormulier
         [HttpPost]
-        public ActionResult CreateFormulier(string stage)
+        public ActionResult CreateFormulier(StudentViewModel stage)
         {
-            return View();
+            int stageId = Convert.ToInt32(stage);
+            Stage Stage = db.Stage.Find(stageId);
+            return View("~/Views/Beoordeling/CreateFormulier", stage);
+
+
         }
 
         //
