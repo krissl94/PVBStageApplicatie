@@ -1,9 +1,15 @@
-﻿function init() {
-    var mouseIsDown = false, last = {};
-
-    var canvas = d3.selectAll(".cvs").each(function () {
-        last[this.id] = {};
-    });
+﻿function init(id) {
+    var mouseIsDown = false, last = {}, canvas;
+    
+    if (id) {
+        canvas = d3.select("#" + id)
+        last[id] = {};
+    }
+    else {
+        canvas = d3.selectAll(".cvs").each(function () {
+            last[this.id] = {};
+        });
+    }
 
     canvas.on("mousedown", function () {
         mouseIsDown = true;
@@ -28,19 +34,20 @@
             last[this.id].y = iY;
         }
     });
-
-    canvas.each(function () {
-            var c = this.getContext('2d');
-
-            c.fillStyle = '#fff';
-            c.fillRect(0, 0, 200, 100);
-            c.fillStyle = 'red';
-            c.fillRect(0, 0, 5, 5);
-            c.fillRect(195, 95, 5, 5);
-            c.fillRect(0, 95, 5, 5);
-            c.fillRect(195, 0, 5, 5);
-        }
-    );
 }
 
-onload = init;
+function ClearCanvas(id){
+    var parent = d3.select(d3.select("#" + id).node().parentNode);
+
+    d3.select("#" + id).remove();
+
+    parent.append("canvas")
+        .attr("id", id)
+        .attr("width", 200)
+        .attr("height", 100)
+        .attr("class", "cvs");
+
+    init(id);
+}
+
+onload = init();
