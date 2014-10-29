@@ -369,6 +369,7 @@
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Login\index.cshtml" />
     <Content Include="Views\Beoordeling\Selecteer.cshtml" />
+    <Content Include="Views\Beoordeling\CreateFormulier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

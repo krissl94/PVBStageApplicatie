@@ -1,43 +1,25 @@
-﻿@model IEnumerable<PVB_Stage_Applicatie.Models.StudentViewModel>
+﻿@model PVB_Stage_Applicatie.Models.StudentViewModel
 
 @{
     ViewBag.Title = "Selecteer";
 }
+
 @Html.Hidden("Studenten", string.Join(",", (object)ViewBag.student))
 @Html.Hidden("Periodes", string.Join(",", (object)ViewBag.stageperiode))
 
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-
-@*<script type="text/javascript">
-    var myArray = [];
-    debugger;
-    @foreach (var d in Model)
-    {
-        @:myArray.push({ Voornaam: "@d.Voornaam", Tussenvoegsels: "@d.Tussenvoegsel", Achternaam: "@d.Achternaam", StudentID: "@d.StudentNummer", PersoonsgegevensID: "@d.PersoonsgegevensID" });
-    }
-</script>*@
-
 <h2>Selecteer voor wie u een beoordeling toe wil voegen</h2>
+@using (Html.BeginForm())
+{
+        @*@foreach (var d in ViewBag.DropDownList)
+            {
+                @:<option value="@d.stageId">@d.StudentNummer : @d.Voornaam @d.Tussenvoegsel @d.Achternaam</option>
+            }*@
+        @Html.DropDownListFor(model => model.stageId,
+   (IEnumerable<SelectListItem>)ViewBag.DropDownList, "---Select a value---")
 
-<select>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
 
-    @foreach (var d in Model)
-    {
-        @:<option value="@d.stageId">@d.StudentNummer : @d.Voornaam @d.Tussenvoegsel @d.Achternaam</option>
-    }
-</select>
+}
 
-<input type="button" onclick="NavigateTo()" value="Selecteer"/>
-
-<script type="text/javascript">
-    function NavigateTo() {
-        var val = d3.select("select").node().value;
-
-        var request = $.ajax({
-            url: "/Beoordeling/CreateFormulier",
-            type: "POST",
-            data: { stage: val },
-            dataType: "json"
-        });
-    }
-</script>
