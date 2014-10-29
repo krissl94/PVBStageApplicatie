@@ -137,21 +137,77 @@ namespace PVB_Stage_Applicatie.Controllers
         //
         // GET: /Beoordeling/Delete/5
 
-
-        public void Opsturen(string technischeAspectenJson, string houdingsaspectenJson, string verslagJson, string handtekeningenJson)
+        public void Opsturen(string beoordelingenJson, string handtekeningenJson, string stageID)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
 
-            BeoordelingsJson.Handtekeningen handtekeningen = serializer.Deserialize<BeoordelingsJson.Handtekeningen>(handtekeningenJson);
-            BeoordelingsJson.Verslagen verslag = serializer.Deserialize<BeoordelingsJson.Verslagen>(verslagJson);
-            BeoordelingsJson.Houdingsaspecten houdingsaspecten = serializer.Deserialize<BeoordelingsJson.Houdingsaspecten>(houdingsaspectenJson);
-            BeoordelingsJson.TechnischeAspecten technischeAspecten = serializer.Deserialize<BeoordelingsJson.TechnischeAspecten>(technischeAspectenJson);
+            Beoordelingen b = serializer.Deserialize<Beoordelingen>(beoordelingenJson);
+            Handetekeningen h = serializer.Deserialize<Handetekeningen>(handtekeningenJson);
 
-            Beoordeling beoordeling = new Beoordeling();
+            Beoordeling bobj = new Beoordeling();
 
-            //beoordeling.Beoordeling1 = technischeAspecten.Beoordeling1.beoordeling;
-            //beoordeling.BeoordelingTechAspect = technischeAspecten.
+            bobj.Datum = DateTime.Today;
+            bobj.EindBeoordeling = false;
+            bobj.Stage = Convert.ToInt32(stageID);
 
+            bobj.Beoordeling1 = b.Beoordeling1.beoordeling;
+            bobj.BeoordelingTechAspect = b.BeoordelingTechAspect.beoordeling;
+            bobj.BeoordelingTechAspectOpm = b.BeoordelingTechAspect.opmerking;
+            bobj.Gemotiveerd = b.Gemotiveerd.beoordeling;
+            bobj.GemotiveerdOpm = b.Gemotiveerd.opmerking;
+            bobj.GrenzenAangeven = b.GrenzenAangeven.beoordeling;
+            bobj.GrenzenAangevenOpm = b.GrenzenAangeven.opmerking;
+            bobj.HoudingAspectenOpm = b.HoudingsAspecten.opmerking;
+            bobj.HoudingsAspecten = b.HoudingsAspecten.beoordeling;
+            bobj.HoudingTAVCollegas = b.HoudingTAVCollegas.beoordeling;
+            bobj.HoudingTAVCollegasOpm = b.HoudingTAVCollegas.opmerking;
+            bobj.HoudingTAVDerden = b.HoudingTAVDerden.beoordeling;
+            bobj.HoudingTAVDerdenOpm = b.HoudingTAVDerden.opmerking;
+            bobj.HoudingTAVLeiding = b.HoudingTAVLeiding.beoordeling;
+            bobj.HoudingTAVLeidingOpm = b.HoudingTAVLeiding.opmerking;
+            bobj.HoudtARBORegels =  b.HoudtARBORegels.beoordeling;
+            bobj.HoudtARBORegelsOpm = b.HoudtARBORegels.opmerking;
+            bobj.HoudtBedrRegels = b.HoudtBedrRegels.beoordeling;
+            bobj.HoudtBedrRegelsOpm = b.HoudtBedrRegels.opmerking;
+            bobj.IntzetOpm = b.Inzet.opmerking;
+            bobj.Inzet = b.Inzet.beoordeling;
+            bobj.KomtAfsprakenNa = b.KomtAfsprakenNa.beoordeling;
+            bobj.KomtAfsprakenNaOpm = b.KomtAfsprakenNa.opmerking;
+            bobj.KwalGeleverdWerk = b.KwalGeleverdWerk.beoordeling;
+            bobj.KwalGeleverdWerkOpm = b.KwalGeleverdWerk.opmerking;
+            bobj.OmgaanKritiek = b.OmgaanKritiek.beoordeling;
+            bobj.OmgaanKritiekOpm = b.OmgaanKritiek.opmerking;
+            bobj.OpTijd = b.OpTijd.beoordeling;
+            bobj.OpTijdOpm = b.OpTijd.opmerking;
+            bobj.PlanEnOrganiserenWerk = b.PlanEnOrganiserenWerk.beoordeling;
+            bobj.PlanEnOrganiserenWerkOpm = b.PlanEnOrganiserenWerk.opmerking;
+            bobj.RapportWerk = b.RapportWerk.beoordeling;
+            bobj.RapportWerkOpm = b.RapportWerk.opmerking;
+            bobj.TechnischInzicht = b.TechnischInzicht.beoordeling;
+            bobj.TechnischInzichtOpm = b.TheoretischInzicht.opmerking;
+            bobj.TheoretischInzicht = b.TheoretischInzicht.beoordeling;
+            bobj.TheoretischInzichtOpm = b.TheoretischInzicht.opmerking;
+            bobj.ToontBelangstellingVak = b.ToontBelangstellingVak.beoordeling;
+            bobj.ToontBelangstellingVakOpm = b.ToontBelangstellingVak.opmerking;
+            bobj.ToontInitiatief = b.ToontInitiatief.beoordeling;
+            bobj.ToontInitiatiefOpm = b.ToontInitiatief.opmerking;
+            bobj.VerloopEersteContact = b.VerloopEersteContact.beoordeling;
+            bobj.VerloopEersteContactOpm = b.VerloopEersteContact.opmerking;
+            bobj.Verslag = b.Verslag.beoordeling;
+            bobj.VerslagOpm = b.Verslag.opmerking;
+            bobj.VoorbereidWerk = b.VoorbereidWerk.beoordeling;
+            bobj.VoorbereidWerkOpm = b.VoorbereidWerk.opmerking;
+            bobj.WerkTempo = b.WerkTempo.beoordeling;
+            bobj.WerkTempoOpm = b.WerkTempo.opmerking;
+            bobj.ZelfstandigWerken = b.ZelfstandigWerken.beoordeling;
+            bobj.ZelfstandigWerkenOpm = b.ZelfstandigWerken.opmerking;
+
+            bobj.HandtekeningBegeleider = System.Text.Encoding.ASCII.GetBytes(h.b.handtekening);
+            bobj.HandtekeningDocent = System.Text.Encoding.ASCII.GetBytes(h.d.handtekening);
+            bobj.HandtekeningStudent = System.Text.Encoding.ASCII.GetBytes(h.s.handtekening);
+
+            db.Beoordeling.Add(bobj);
+            db.SaveChanges();
         }
 
         protected override void Dispose(bool disposing)

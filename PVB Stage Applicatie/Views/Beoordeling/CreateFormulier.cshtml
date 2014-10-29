@@ -29,12 +29,7 @@
         }
     </style>
 <script>
-    var BeoordelingID;
-    var Stage;
-    var Datum;
-    var Beoordeling1;
-
-    var TechnischeAspecten =
+    var beoordelingen =
         [
             {
                 Beoordeling: "Beoordeling1",
@@ -75,10 +70,7 @@
             {
                 Beoordeling: "WerkTempo",
                 Opmerking: "WerkTempoOpm"
-            }
-        ];
-
-    var HoudingsAspecten = [
+            },
             {
                 Beoordeling: "VerloopEersteContact",
                 Opmerking: "VerloopEersteContactOpm"
@@ -135,10 +127,6 @@
                 Beoordeling: "HoudingsAspecten",
                 Opmerking: "HoudingAspectenOpm"
             },
-    ];
-
-    var Verslagen =
-    [
             {
                 Beoordeling: "BeoordelingTechAspect",
                 Opmerking: "BeoordelingTechAspectOpm"
@@ -151,88 +139,23 @@
 
     var Handtekeningen = ["d", "b", "s"];
 
-    var EindBeoordeling = false;
-
     $("#klikje").live('click', function () {
 
-        var technischeAspectenToPost = {};
-        TechnischeAspecten.forEach(function (item) {
-            var aspect = item.Beoordeling;
-            var aspectOpm = item.Opmerking;
+        var beoordelingenToPost = {};
+        beoordelingen.forEach(function (item) {
+            var radio = $("input[name=" + item.Beoordeling + "]:checked").val();
+            var opmerking = $("#" + item.Opmerking).val();
 
-            if ($("input[name=" + item.Opmerking + "]").val() != undefined && $("input[name=" + item.Beoordeling + "]:checked").val() != "") {
+            if (radio) {
                 var temp = {};
 
-                temp.beoordeling = parseInt($("input[name=" + item.Beoordeling + "]:checked").val());
-                temp.opmerking = $("input[name=" + item.Opmerking + "]").val();
+                temp.beoordeling = parseInt(radio);
 
-                technischeAspectenToPost[item.Beoordeling] = temp;
-            }
-            else if ($("input[name=" + item.Opmerking + "]").val() == undefined && $("input[name=" + item.Beoordeling + "]:checked").val() != "") {
-                var temp = {};
+                temp.opmerking = opmerking ? opmerking : "Geen opmerkingen";
 
-                temp.beoordeling = parseInt($("input[name=" + item.Beoordeling + "]:checked").val());
-                temp.opmerking = "Geen opmerkingen";
-
-                technischeAspectenToPost[item.Beoordeling] = temp;
+                beoordelingenToPost[item.Beoordeling] = temp;
             }
             else {
-                $("input[name=" + item.Beoordeling + "]").focus();
-                //Moet aborten en foutmelding geven
-            }
-
-        });
-
-        var houdingsAspectenToPost = {};
-        HoudingsAspecten.forEach(function (item) {
-            var aspect = item.Beoordeling;
-            var aspectOpm = item.Opmerking;
-
-            if ($("input[name=" + item.Opmerking + "]").val() != undefined && $("input[name=" + item.Beoordeling + "]:checked").val() != "") {
-                var temp = {};
-
-                temp.beoordeling = parseInt($("input[name=" + item.Beoordeling + "]:checked").val());
-                temp.opmerking = $("input[name=" + item.Opmerking + "]").val();
-
-                houdingsAspectenToPost[item.Beoordeling] = temp;
-            }
-            else if ($("input[name=" + item.Opmerking + "]").val() == undefined && $("input[name=" + item.Beoordeling + "]:checked").val() != "") {
-                var temp = {};
-
-                temp.beoordeling = parseInt($("input[name=" + item.Beoordeling + "]:checked").val());
-                temp.opmerking = "Geen opmerkingen";
-
-                houdingsAspectenToPost[item.Beoordeling] = temp;
-            }
-            else {
-                $("input[name=" + item.Beoordeling + "]:checked").focus();
-                //Moet aborten en foutmelding geven
-            }
-        });
-
-        var VerslagToPost = {};
-        Verslagen.forEach(function (item) {
-            var aspect = item.Beoordeling;
-            var aspectOpm = item.Opmerking;
-
-            if ($("input[name=" + item.Opmerking + "]").val() != undefined && $("input[name=" + item.Beoordeling + "]:checked").val() != "") {
-                var temp = {};
-
-                temp.beoordeling = parseInt($("input[name=" + item.Beoordeling + "]:checked").val());
-                temp.opmerking = $("input[name=" + item.Opmerking + "]").val();
-
-                VerslagToPost[item.Beoordeling] = temp;
-            }
-            else if ($("input[name=" + item.Opmerking + "]").val() == undefined && $("input[name=" + item.Beoordeling + "]:checked").val() != "") {
-                var temp = {};
-
-                temp.beoordeling = parseInt($("input[name=" + item.Beoordeling + "]:checked").val());
-                temp.opmerking = "Geen opmerkingen";
-
-                VerslagToPost[item.Beoordeling] = temp;
-            }
-            else {
-                $("input[name=" + item.Beoordeling + "]:checked").focus();
                 //Moet aborten en foutmelding geven
             }
         });
@@ -246,10 +169,7 @@
             handtekeningenToPost[item] = temp;
         });
 
-
-        technischeAspectenToPost = JSON.stringify(technischeAspectenToPost);
-        houdingsAspectenToPost = JSON.stringify(houdingsAspectenToPost);
-        VerslagToPost = JSON.stringify(VerslagToPost);
+        beoordelingenToPost = JSON.stringify(beoordelingenToPost);
         handtekeningenToPost = JSON.stringify(handtekeningenToPost);
 
         $.ajax({
@@ -257,10 +177,9 @@
             type: 'POST',
             data:
             {
-                TechnischeAspecten: technischeAspectenToPost,
-                HoudingsAspecten: houdingsAspectenToPost,
-                Verslag: VerslagToPost,
-                Handtekeningen: handtekeningenToPost
+                beoordelingenJson: beoordelingenToPost,
+                handtekeningenJson: handtekeningenToPost,
+                stageID: "@Model.StageID"
             }
         });
     });
