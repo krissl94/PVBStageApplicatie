@@ -3,6 +3,10 @@
 @{
     ViewBag.Title = "CreateGespreksFormulier";
 }
+<script src="~/Scripts/canvas2image.js"></script>
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
 
 <style type="text/css">
     table, th, td {
@@ -21,8 +25,6 @@
         user-select: none;
     }
 
-
-
     .clsbtn {
         text-align: center;
         vertical-align: middle;
@@ -30,58 +32,90 @@
 </style>
 <h2>CreateGespreksFormulier</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("CreateGespreksFormulier", "GespreksFormulier" ))
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+    <table>
+        <tr>
+            <td>
+                Student:
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.StageID.Persoonsgegevens.Voornaam) @Html.DisplayFor(m => m.StageID.Persoonsgegevens.Achternaam)
+            </td>
+            <td>
+                Bedrijf:
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.StageID.Persoonsgegevens2.Bedrijf1.Naam)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Stagedocent:
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.StageID.Persoonsgegevens1.Voornaam) @Html.DisplayFor(m => m.StageID.Persoonsgegevens1.Achternaam)
+            </td>
+            <td>
+                Stagebegeleider:
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.StageID.Persoonsgegevens2.Voornaam) @Html.DisplayFor(m => m.StageID.Persoonsgegevens2.Achternaam)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Periode
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.StageID.Periode.Begindatum) @Html.DisplayFor(m => m.StageID.Periode.Einddatum) 
+            </td>
+        </tr>
+    </table>
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Datum)
+                    @Html.DisplayFor(m => m.Datum)
+                </td>
+                <td colspan="2">
+                    <input name="PlanEnOrganiserenWerk" type="radio" value="1" /> Telefonisch
+                    <input name="PlanEnOrganiserenWerk" type="radio" value="2" /> Bezoek
+                    @Html.ValidationMessageFor(model => model.Type)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                        @Html.TextAreaFor(model => model.Gesprek, new { @rows = 10, @cols = 75 })
+                        @Html.ValidationMessageFor(model => model.Gesprek)
+                </td>
+            </tr>
+            <tr>
+                <th align="center" valign="middle">Handtekening Docent</th>
+                <th align="center" valign="middle">Handtekening Begeleider</th>
+                <th align="center" valign="middle">Handtekening Stagiair</th>
+            </tr>
+            <tr>
+                <td><canvas id="b" width="200" height="100" class="cvs"></canvas> </td>
+                <td><canvas id="s" width="200" height="100" class="cvs"></canvas> </td>
+                <td><canvas id="d" width="200" height="100" class="cvs"></canvas> </td>
+            </tr>
+            <tr>
+                <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('b')" /></td>
+                <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('s')" /></td>
+                <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('d')" /></td>
+            </tr>
 
-    <fieldset>
-        <legend>GespreksformulierViewModel</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Gesprek)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Gesprek)
-            @Html.ValidationMessageFor(model => model.Gesprek)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Type)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Type)
-            @Html.ValidationMessageFor(model => model.Type)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HandtekeningStudent)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HandtekeningStudent)
-            @Html.ValidationMessageFor(model => model.HandtekeningStudent)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HandtekeningDocent)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HandtekeningDocent)
-            @Html.ValidationMessageFor(model => model.HandtekeningDocent)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.HandtekeningBegeleider)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.HandtekeningBegeleider)
-            @Html.ValidationMessageFor(model => model.HandtekeningBegeleider)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
+        </table>
+<script src="~/Scripts/mousecontroller.js"></script>
+    
+                <input type="submit" value="Create" />
+    
 }
+<input type="button" id="klikje" />
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")

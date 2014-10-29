@@ -81,26 +81,6 @@ namespace PVB_Stage_Applicatie.Controllers
             int stageId = Convert.ToInt32(stage);
             Stage Stage = db.Stage.Find(stageId);
             return View("~/Views/Beoordeling/CreateFormulier", stage);
-
-
-        }
-
-        //
-        // POST: /Beoordeling/Create
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Beoordeling beoordeling)
-        {
-                if (ModelState.IsValid)
-                {
-                    db.Beoordeling.Add(beoordeling);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-
-                ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID", beoordeling.Stage);
-                return View(beoordeling);
         }
 
         //

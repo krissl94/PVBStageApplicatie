@@ -124,5 +124,33 @@ namespace PVB_Stage_Applicatie.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        public ActionResult Selecteer()
+        {
+            List<Periode> Periodelijst =
+                new List<Periode>(db.Periode
+                .Where(x => x.Begindatum < DateTime.Now)
+                .Where(x => x.Einddatum > DateTime.Now));
+
+            List<StudentViewModel> Studentlijstje = new List<StudentViewModel>();
+            StudentViewModel svm = new StudentViewModel();
+            foreach (var item in Periodelijst)
+            {
+                foreach (var stageItem in item.Stage)
+                {
+                    if (stageItem.Stagedocent.ToString() == User.Identity.Name)
+                        Studentlijstje.Add(new StudentViewModel(stageItem.Persoonsgegevens.PersoonsgegevensID, stageItem.Persoonsgegevens.Voornaam, stageItem.Persoonsgegevens.Achternaam, stageItem.StageID, stageItem.Persoonsgegevens.Toevoeging, stageItem.Persoonsgegevens.StudentNummer));
+                }
+            }
+            ViewBag.DropDownList = new SelectList(Studentlijstje, "StageId", "Naam");
+            return View(svm);
+        }
+
+        [HttpPost]
+        public ActionResult Selecteer(StudentViewModel student)
+        {
+            Stage Stage = db.Stage.Where(s => s.StageID == student.stageId).FirstOrDefault();
+            return View("~/Views/TussentijdseBeeindiging/Create.cshtml", Stage);
+        }
     }
 }

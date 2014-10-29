@@ -37,12 +37,58 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /GespreksFormulier/Create
+        public ActionResult Selecteer()
+        {
+            List<Periode> Periodelijst =
+                new List<Periode>(db.Periode
+                .Where(x => x.Begindatum < DateTime.Now)
+                .Where(x => x.Einddatum > DateTime.Now));
 
-        public ActionResult Create()
+            List<StudentViewModel> Studentlijstje = new List<StudentViewModel>();
+            StudentViewModel svm = new StudentViewModel();
+            foreach (var item in Periodelijst)
+            {
+                foreach (var stageItem in item.Stage)
+                {
+                    if (stageItem.Stagedocent.ToString() == User.Identity.Name)
+                        Studentlijstje.Add(new StudentViewModel(stageItem.Persoonsgegevens.PersoonsgegevensID, stageItem.Persoonsgegevens.Voornaam, stageItem.Persoonsgegevens.Achternaam, stageItem.StageID, stageItem.Persoonsgegevens.Toevoeging, stageItem.Persoonsgegevens.StudentNummer));
+                }
+            }
+            ViewBag.DropDownList = new SelectList(Studentlijstje, "StageId", "Naam");
+            return View(svm); 
+        }
+
+        [HttpPost]
+        public ActionResult Selecteer(StudentViewModel student)
+        {
+            Stage stage = db.Stage.Where(s => s.StageID == student.stageId).FirstOrDefault();
+            GespreksformulierViewModel GespreksFormulierStage = new GespreksformulierViewModel();
+            GespreksFormulierStage.StageID = stage;
+
+            return View("~/Views/GespreksFormulier/CreateGespreksFormulier.cshtml", GespreksFormulierStage);
+        }
+
+
+        public ActionResult CreateGespreksFormulier()
         {
             ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID");
             return View();
         }
+        
+        [HttpPost]
+        public ActionResult CreateGespreksFormulier(object formulier)
+        {
+            if (ModelState.IsValid)
+            {
+
+
+                
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+        
 
         //
         // POST: /GespreksFormulier/Create

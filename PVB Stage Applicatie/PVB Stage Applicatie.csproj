@@ -151,6 +151,7 @@
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BeoordelingsJson.cs" />
+    <Compile Include="Models\byteArrayHelper.cs" />
     <Compile Include="Models\CustomRoleProvider.cs" />
     <Compile Include="Models\Gespreksformulier.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
@@ -347,7 +348,7 @@
     <Content Include="Views\Begeleider\Edit.cshtml" />
     <Content Include="Views\GespreksFormulier\Index.cshtml" />
     <Content Include="Views\GespreksFormulier\Details.cshtml" />
-    <Content Include="Views\GespreksFormulier\Create.cshtml" />
+    <Content Include="Views\GespreksFormulier\Selecteer.cshtml" />
     <Content Include="Views\GespreksFormulier\Edit.cshtml" />
     <Content Include="Views\GespreksFormulier\Delete.cshtml" />
     <Content Include="Views\Beoordeling\Index.cshtml" />
@@ -374,6 +375,7 @@
     <Content Include="Views\Beoordeling\Selecteer.cshtml" />
     <Content Include="Views\Beoordeling\CreateFormulier.cshtml" />
     <Content Include="Views\GespreksFormulier\CreateGespreksFormulier.cshtml" />
+    <Content Include="Views\TussentijdseBeeindiging\Selecteer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
