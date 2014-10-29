@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "CreateBeeindeging";
+    
+    PVB_Stage_Applicatie.Models.StageApplicatieEntities db = new PVB_Stage_Applicatie.Models.StageApplicatieEntities();
+}
+
+<h2>CreateBeeindeging</h2>
+
+Beëindigings datum<input id="WerkelijkeEindDatum" type="date" value="WerkelijkeEindDatum" /> <br />
+Opleiding <input id="opleiding" type="text" /> <br />
+Leerweg <input id="leerweg" type="text" /> <br />
+CREBO <input id="crebo" type="text" /> <br />
+<br />
+<div>
+    <h1>Redenen onderwijsinstelling</h1>
+    @foreach (PVB_Stage_Applicatie.Models.RedenOnderwijsinstelling item in db.RedenOnderwijsinstelling)
+    {
+        @:<input id="@item.Reden.Replace(" ", "").Replace("/","")" type="checkbox" data-id="@item.RedenID" /> @item.Reden <br />
+    }
+</div>
+
+<br />
+
+<div id="organisatie">
+    <h1>Redenen praktijkbiedende organisatie</h1>
+    @foreach (PVB_Stage_Applicatie.Models.RedenOrganisatie item in db.RedenOrganisatie)
+    {
+        @:<input id="@item.Reden.Replace(" ", "").Replace("/", "")" type="checkbox" data-id="@item.RedenOrganisatie1" /> @item.Reden <br />
+    }
+</div>
+
+<br />
+
+<div id="student">
+    <h1>Redenen student</h1>
+    @foreach (PVB_Stage_Applicatie.Models.RedenStudent item in db.RedenStudent)
+    {
+        @:<input id="@item.Reden.Replace(" ", "").Replace("/", "")" type="checkbox" data-id="@item.RedenID"/> @item.Reden <br />
+    }
+</div>
+
+<br />
+
+<input type="button" value="Submit" onclick="JahoorStuurMaar()"/>
+
+<script type="text/javascript">
+
+    function JahoorStuurMaar() {
+
+    }
+
+</script>

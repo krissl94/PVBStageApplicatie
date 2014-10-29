@@ -375,6 +375,7 @@
     <Content Include="Views\Beoordeling\CreateFormulier.cshtml" />
     <Content Include="Views\GespreksFormulier\CreateGespreksFormulier.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\Selecteer.cshtml" />
+    <Content Include="Views\TussentijdseBeeindiging\CreateBeeindeging.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -35,10 +35,21 @@ namespace PVB_Stage_Applicatie.Controllers
             return View(tussentijdsebeindeging);
         }
 
+
+
         //
         // GET: /TussentijdseBeeindiging/Create
 
         public ActionResult Create()
+        {
+            ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID");
+            return View();
+        }
+
+        //
+        // GET: /TussentijdseBeeindiging/CreateBeindeging
+
+        public ActionResult CreateBeeindeging(Stage stage)
         {
             ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID");
             return View();
@@ -150,7 +161,7 @@ namespace PVB_Stage_Applicatie.Controllers
         public ActionResult Selecteer(StudentViewModel student)
         {
             Stage Stage = db.Stage.Where(s => s.StageID == student.stageId).FirstOrDefault();
-            return View("~/Views/TussentijdseBeeindiging/Create.cshtml", Stage);
+            return View("~/Views/TussentijdseBeeindiging/CreateBeeindeging.cshtml", Stage);
         }
     }
 }
