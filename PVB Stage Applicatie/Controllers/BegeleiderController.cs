@@ -81,7 +81,6 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // POST: /Begeleider/Edit/5
-        [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(Persoonsgegevens persoonsgegevens)
