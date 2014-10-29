@@ -1,0 +1,92 @@
+﻿@model PVB_Stage_Applicatie.Models.GespreksformulierViewModel
+
+@{
+    ViewBag.Title = "CreateGespreksFormulier";
+}
+
+<style type="text/css">
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    cvsmaster {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+
+
+    .clsbtn {
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+<h2>CreateGespreksFormulier</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>GespreksformulierViewModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Gesprek)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Gesprek)
+            @Html.ValidationMessageFor(model => model.Gesprek)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Type)
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HandtekeningStudent)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HandtekeningStudent)
+            @Html.ValidationMessageFor(model => model.HandtekeningStudent)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HandtekeningDocent)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HandtekeningDocent)
+            @Html.ValidationMessageFor(model => model.HandtekeningDocent)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HandtekeningBegeleider)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HandtekeningBegeleider)
+            @Html.ValidationMessageFor(model => model.HandtekeningBegeleider)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

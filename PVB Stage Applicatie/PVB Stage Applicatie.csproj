@@ -155,6 +155,7 @@
     <Compile Include="Models\Gespreksformulier.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GespreksformulierViewModel.cs" />
     <Compile Include="Models\Hashing.cs" />
     <Compile Include="Models\Identiteit.cs" />
     <Compile Include="Models\Login.cs">
@@ -372,6 +373,7 @@
     <Content Include="Views\Login\index.cshtml" />
     <Content Include="Views\Beoordeling\Selecteer.cshtml" />
     <Content Include="Views\Beoordeling\CreateFormulier.cshtml" />
+    <Content Include="Views\GespreksFormulier\CreateGespreksFormulier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
