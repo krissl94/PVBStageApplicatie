@@ -1,0 +1,58 @@
+﻿Doen:
+ Leraar aanmaken login 
+ Gek behavour login
+ Gek behaviour loguit - refresh,  nog ingelogd?
+ Periode aanpassen
+ Formulieren invoer chek0n
+ Gespreks formulier editen
+ Return na het aanmaken van een formulier
+ Een einde beoordeling of Tussentijdsbeeindiging
+ Views doorwerken
+ Link bar
+ Handtekeningen verbergen bij telefonisch
+ Gesprekformulier return, fout
+ Naamgevingen en in tekst
+ Invullen entity voor tussentijdstebeeindiging
+ Details pagina style
+ Bedrijf, unieke naam afvangen
+ Stagiair create new in sidebar
+ Stagiair edit & create unieke velden
+ Stagiair create velden
+ Stagiair bulk invoer link
+ Docent login creatie
+ Docent bulk invoerlink
+ Docent edit 404
+ Periode edit alleen als die leeg is
+ Periode details link achterin
+ Koppeling index periode
+ Koppeling details info
+ Koppeling create new sidebar
+ Koppeling Namen dropdown
+ Alle bulk invoer links na gaan
+ Begeleider edit
+
+ ^ als admin
+ Als leraar	
+ mijnstage > formulierindex
+ mijnperiode edit en delete
+ mijnperiode periode toevoegen
+ linkjes 
+
+ Alle formulieren weergeven voor wie de formulieren zijn
+ Alle roles na gaan
+ Unotherized pagina's
+
+Formulier index -
+ Beoordeling / eind - 
+ Vroegtijdig -
+ Gespreksformulier -
+
+Mooi maken:
+ Student aanmaken
+ Controllers & views, onnodige shit
+ Alle datum format Kris
+ Styling sidebar
+
+Optioneel:
+  Periode uniek
+  Werknemers bij bedrijven (mijn bedrijf en als admin)
