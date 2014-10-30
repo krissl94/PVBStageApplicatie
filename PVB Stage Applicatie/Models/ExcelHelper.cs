@@ -14,66 +14,72 @@ namespace PVB_Stage_Applicatie.Models
 
         public DataSet excelToDS(HttpPostedFileBase file, HttpServerUtilityBase Server)
         {
-            DataSet ds = new DataSet();
-            if (file.ContentLength > 0)
+            try
             {
-                string fileExtension =
-                                     System.IO.Path.GetExtension(file.FileName);
-
-                if (fileExtension == ".xls" || fileExtension == ".xlsx")
+                DataSet ds = new DataSet();
+                if (file.ContentLength > 0)
                 {
-                    string fileLocation = Server.MapPath("~/App_Data/uploads") + file.FileName;
-                    if (System.IO.File.Exists(fileLocation))
-                    {
+                    string fileExtension =
+                                         System.IO.Path.GetExtension(file.FileName);
 
-                        System.IO.File.Delete(fileLocation);
-                    }
-                    file.SaveAs(fileLocation);
-                    string excelConnectionString = string.Empty;
-                    excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
-                    fileLocation + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
-                    //connection String for xls file format.
-                    if (fileExtension == ".xls")
+                    if (fileExtension == ".xls" || fileExtension == ".xlsx")
                     {
-                        excelConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
-                        fileLocation + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
-                    }
-                    //connection String for xlsx file format.
-                    else if (fileExtension == ".xlsx")
-                    {
+                        string fileLocation = Server.MapPath("~/App_Data/uploads") + file.FileName;
+                        if (System.IO.File.Exists(fileLocation))
+                        {
+                            System.IO.File.Delete(fileLocation);
+                        }
+                        file.SaveAs(fileLocation);
+                        string excelConnectionString = string.Empty;
                         excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
                         fileLocation + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
-                    }
-                    //Create Connection to Excel work book and add oledb namespace
-                    OleDbConnection excelConnection = new OleDbConnection(excelConnectionString);
-                    excelConnection.Open();
-                    DataTable dt = new DataTable();
+                        //connection String for xls file format.
+                        if (fileExtension == ".xls")
+                        {
+                            excelConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
+                            fileLocation + ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=2\"";
+                        }
+                        //connection String for xlsx file format.
+                        else if (fileExtension == ".xlsx")
+                        {
+                            excelConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+                            fileLocation + ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+                        }
+                        //Create Connection to Excel work book and add oledb namespace
+                        OleDbConnection excelConnection = new OleDbConnection(excelConnectionString);
+                        excelConnection.Open();
+                        DataTable dt = new DataTable();
 
-                    dt = excelConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
-                    if (dt == null)
-                    {
-                        return null;
-                    }
-                    var Sheet1 = dt.Rows[0].Field<string>("TABLE_NAME");
-                    String[] excelSheets = new String[dt.Rows.Count];
-                    int t = 0;
-                    //excel data saves in temp file here.
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        excelSheets[t] = row["TABLE_NAME"].ToString();
-                        t++;
-                    }
-                    OleDbConnection excelConnection1 = new OleDbConnection(excelConnectionString);
+                        dt = excelConnection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
+                        if (dt == null)
+                        {
+                            return null;
+                        }
+                        var Sheet1 = dt.Rows[0].Field<string>("TABLE_NAME");
+                        String[] excelSheets = new String[dt.Rows.Count];
+                        int t = 0;
+                        //excel data saves in temp file here.
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            excelSheets[t] = row["TABLE_NAME"].ToString();
+                            t++;
+                        }
+                        OleDbConnection excelConnection1 = new OleDbConnection(excelConnectionString);
 
 
-                    string query = string.Format("Select * from [{0}]", excelSheets[0]);
-                    using (OleDbDataAdapter dataAdapter = new OleDbDataAdapter(query, excelConnection1))
-                    {
-                        dataAdapter.Fill(ds);
+                        string query = string.Format("Select * from [{0}]", excelSheets[0]);
+                        using (OleDbDataAdapter dataAdapter = new OleDbDataAdapter(query, excelConnection1))
+                        {
+                            dataAdapter.Fill(ds);
+                        }
                     }
                 }
+                return ds;
             }
-            return ds;
+            catch(Exception ex)
+            {  
+            }
+            return null;
         }
 
         public String dataSetToStudent(DataSet ds)
