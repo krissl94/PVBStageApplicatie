@@ -179,7 +179,10 @@
             {
                 beoordelingenJson: beoordelingenToPost,
                 handtekeningenJson: handtekeningenToPost,
-                stageID: "@Model.StageID"
+                stageID: @Model.StageID
+            },
+            success:function(dataresponse){
+                window.location = '/Formulier/StudentIndex?StageID=' + dataresponse
             }
         });
     });

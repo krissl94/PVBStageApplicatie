@@ -179,9 +179,11 @@
             {
                 beoordelingenJson: beoordelingenToPost,
                 handtekeningenJson: handtekeningenToPost,
-                stageID: "@Model.StageID"
-            }
-        });
+                stageID: @Model.StageID
+                },
+            success:function(dataresponse){
+                window.location = '/Formulier/StudentIndex?StageID=' + dataresponse
+        }});
     });
 </script>
 <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>

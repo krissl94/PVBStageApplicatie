@@ -17,98 +17,30 @@ namespace PVB_Stage_Applicatie.Controllers
         private StageApplicatieEntities db = new StageApplicatieEntities();
 
         //
-        // GET: /Beoordeling/
-
-        //public ActionResult Index()
-        //{
-        //    var beoordeling = db.Beoordeling.Include(b => b.Stage1);
-        //    return View(beoordeling.ToList());
-        //}
-
-        //
         // GET: /Beoordeling/Details/5
 
         public ActionResult Details(int id = 0)
         {
             Beoordeling beoordeling = db.Beoordeling.Find(id);
+            
             if (beoordeling == null)
             {
                 return HttpNotFound();
             }
+
             return View(beoordeling);
         }
-
-        public ActionResult Index()
-        {
-            List<Periode> Periodelijst = 
-                new List<Periode>(db.Periode
-                .Where(x => x.Begindatum < DateTime.Now)
-                .Where(x => x.Einddatum > DateTime.Now));
-
-            List<StudentViewModel> Studentlijstje = new List<StudentViewModel>();
-            StudentViewModel svm = new StudentViewModel();
-            foreach (var item in Periodelijst)
-	        {
-                foreach(var stageItem in item.Stage)
-                {
-                    if (User.IsInRole("docent"))
-                    {
-                        if (stageItem.Stagedocent.ToString() == User.Identity.Name)
-                            Studentlijstje.Add(new StudentViewModel(
-                                stageItem.Persoonsgegevens.PersoonsgegevensID,
-                                stageItem.Persoonsgegevens.Voornaam,
-                                stageItem.Persoonsgegevens.Achternaam,
-                                stageItem.StageID,
-                                stageItem.Persoonsgegevens.Toevoeging,
-                                stageItem.Persoonsgegevens.StudentNummer));
-                    }
-                    else
-                    {
-                        Studentlijstje.Add(new StudentViewModel(
-                            stageItem.Persoonsgegevens.PersoonsgegevensID,
-                            stageItem.Persoonsgegevens.Voornaam,
-                            stageItem.Persoonsgegevens.Achternaam,
-                            stageItem.StageID,
-                            stageItem.Persoonsgegevens.Toevoeging,
-                            stageItem.Persoonsgegevens.StudentNummer));
-                    }
-                }
-	        }
-
-            ViewBag.DropDownList = new SelectList(Studentlijstje, "StageId", "Naam");
-            return View(svm);
-        }
-
-        [HttpPost]
-        public ActionResult Index(StudentViewModel student)
-        {
-            Stage stage = db.Stage.Where(s => s.StageID == student.stageId).FirstOrDefault();
-            
-            ViewData["Stage"] = stage;
-
-            var beoordelingen = db.Beoordeling.Where(s => s.Stage == stage.StageID).ToList();
-
-
-            return View("~/Views/Beoordeling/StudentIndex.cshtml", beoordelingen);
-        }
-
-        public ActionResult StudentIndex()
-        {
-            return View();
-        }
-
-        //
-        // GET: /Beoordeling/Create
-
-        //public ActionResult Create()
-        //{
-        //    ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID");
-        //    return View();
-        //}
 
         //
         // POST: /Beoordeling/CreateFormulier
         public ActionResult CreateFormulier(int stageID = 0)
+        {
+            return View(db.Stage.Where(i => i.StageID == stageID).FirstOrDefault());
+        }
+
+        //
+        // POST: /Beoordeling/CreateEindbeoordeling
+        public ActionResult CreateEindbeoordeling(int stageID = 0)
         {
             return View(db.Stage.Where(i => i.StageID == stageID).FirstOrDefault());
         }
@@ -147,7 +79,7 @@ namespace PVB_Stage_Applicatie.Controllers
         //
         // GET: /Beoordeling/Delete/5
         [HttpPost]
-        public void OpsturenEind(string beoordelingenJson, string handtekeningenJson, string stageID)
+        public int OpsturenEind(string beoordelingenJson, string handtekeningenJson, int stageID)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
 
@@ -157,8 +89,8 @@ namespace PVB_Stage_Applicatie.Controllers
             Beoordeling bobj = new Beoordeling();
 
             bobj.Datum = DateTime.Today;
-            bobj.EindBeoordeling = false;
-            bobj.Stage = Convert.ToInt32(stageID);
+            bobj.EindBeoordeling = true;
+            bobj.Stage = stageID;
 
             bobj.Beoordeling1 = b.Beoordeling1.beoordeling;
             bobj.BeoordelingTechAspect = b.BeoordelingTechAspect.beoordeling;
@@ -218,10 +150,14 @@ namespace PVB_Stage_Applicatie.Controllers
 
             db.Beoordeling.Add(bobj);
             db.SaveChanges();
+
+            Stage stageToPost = db.Stage.Where(i => i.StageID == stageID).FirstOrDefault();
+            RedirectToAction("StudentIndex", "Formulier", stageToPost);
+            return stageToPost.StageID;
         }
 
         [HttpPost]
-        public void Opsturen(string beoordelingenJson, string handtekeningenJson, string stageID)
+        public int Opsturen(string beoordelingenJson, string handtekeningenJson, int stageID)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
 
@@ -232,7 +168,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
             bobj.Datum = DateTime.Today;
             bobj.EindBeoordeling = false;
-            bobj.Stage = Convert.ToInt32(stageID);
+            bobj.Stage = stageID;
 
             bobj.Beoordeling1 = b.Beoordeling1.beoordeling;
             bobj.BeoordelingTechAspect = b.BeoordelingTechAspect.beoordeling;
@@ -292,6 +228,10 @@ namespace PVB_Stage_Applicatie.Controllers
 
             db.Beoordeling.Add(bobj);
             db.SaveChanges();
+
+            Stage stageToPost = db.Stage.Where(i => i.StageID == stageID).FirstOrDefault();
+            RedirectToAction("StudentIndex", "Formulier", stageToPost);
+            return stageToPost.StageID;
         }
 
         protected override void Dispose(bool disposing)

@@ -146,6 +146,7 @@
     <Compile Include="Controllers\BedrijfController.cs" />
     <Compile Include="Controllers\BegeleiderController.cs" />
     <Compile Include="Controllers\BeoordelingController.cs" />
+    <Compile Include="Controllers\FormulierController.cs" />
     <Compile Include="Controllers\DocentController.cs" />
     <Compile Include="Controllers\GespreksFormulierController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -366,7 +367,7 @@
     <Content Include="Views\GespreksFormulier\Selecteer.cshtml" />
     <Content Include="Views\GespreksFormulier\Edit.cshtml" />
     <Content Include="Views\GespreksFormulier\Delete.cshtml" />
-    <Content Include="Views\Beoordeling\StudentIndex.cshtml" />
+    <Content Include="Views\Formulier\StudentIndex.cshtml" />
     <Content Include="Views\Beoordeling\Details.cshtml" />
     <Content Include="Views\Beoordeling\Edit.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\Index.cshtml" />
@@ -386,7 +387,6 @@
     <Content Include="Views\Home\DocentMenuPartial.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Login\index.cshtml" />
-    <Content Include="Views\Beoordeling\Index.cshtml" />
     <Content Include="Views\Beoordeling\CreateFormulier.cshtml" />
     <Content Include="Views\GespreksFormulier\CreateGespreksFormulier.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\Selecteer.cshtml" />
@@ -395,6 +395,7 @@
     <Content Include="Views\Stagiair\BulkInvoerStagiair.cshtml" />
     <Content Include="Views\Stagiair\BulkNonActiefStagiair.cshtml" />
     <Content Include="Views\Bedrijf\BulkInvoerBedrijf.cshtml" />
+    <Content Include="Views\Formulier\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
