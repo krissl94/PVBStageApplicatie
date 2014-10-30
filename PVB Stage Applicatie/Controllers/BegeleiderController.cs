@@ -122,6 +122,23 @@ namespace PVB_Stage_Applicatie.Controllers
             return RedirectToAction("Index");
         }
 
+        //
+        // GET: /Begeleider/BulkInvoerBegeleider
+        [Authorize(Roles = "Beheerder")]
+        public ActionResult BulkInvoerBegeleider()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult BulkInvoer(HttpPostedFileBase file)
+        {
+            ExcelHelper eh = new ExcelHelper();
+            DataSet Begeleiders = eh.excelToDS(file, Server);
+            ViewData["feedback"] = eh.dataSetToBegeleider(Begeleiders);
+            return View("~/Views/Begeleider/BulkInvoerBegeleider.cshtml");
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

@@ -168,7 +168,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
 
         //
-        // GET: /Bedrijf/BulkImport
+        // GET: /Bedrijf/BulkInvoerBedrijf
         [Authorize(Roles = "Beheerder")]
         public ActionResult BulkInvoerBedrijf()
         {
@@ -180,7 +180,7 @@ namespace PVB_Stage_Applicatie.Controllers
         {
             ExcelHelper eh = new ExcelHelper();
             DataSet Bedrijven = eh.excelToDS(file, Server);
-            eh.dataSetToBedrijf(Bedrijven);
+            ViewData["feedback"] = eh.dataSetToBedrijf(Bedrijven);
             return View("~/Views/Bedrijf/BulkInvoerBedrijf.cshtml");
         }
     }
