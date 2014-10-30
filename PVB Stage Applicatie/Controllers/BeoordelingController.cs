@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using PVB_Stage_Applicatie.Models;
 using System.Web.Script.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Collections.Generic;
 
 namespace PVB_Stage_Applicatie.Controllers
 {
@@ -18,11 +19,11 @@ namespace PVB_Stage_Applicatie.Controllers
         //
         // GET: /Beoordeling/
 
-        public ActionResult Index()
-        {
-            var beoordeling = db.Beoordeling.Include(b => b.Stage1);
-            return View(beoordeling.ToList());
-        }
+        //public ActionResult Index()
+        //{
+        //    var beoordeling = db.Beoordeling.Include(b => b.Stage1);
+        //    return View(beoordeling.ToList());
+        //}
 
         //
         // GET: /Beoordeling/Details/5
@@ -37,7 +38,7 @@ namespace PVB_Stage_Applicatie.Controllers
             return View(beoordeling);
         }
 
-        public ActionResult Selecteer()
+        public ActionResult Index()
         {
             List<Periode> Periodelijst = 
                 new List<Periode>(db.Periode
@@ -50,37 +51,66 @@ namespace PVB_Stage_Applicatie.Controllers
 	        {
                 foreach(var stageItem in item.Stage)
                 {
-                    if (stageItem.Stagedocent.ToString() == User.Identity.Name)
-                        Studentlijstje.Add(new StudentViewModel(stageItem.Persoonsgegevens.PersoonsgegevensID, stageItem.Persoonsgegevens.Voornaam, stageItem.Persoonsgegevens.Achternaam, stageItem.StageID, stageItem.Persoonsgegevens.Toevoeging, stageItem.Persoonsgegevens.StudentNummer));
+                    if (User.IsInRole("docent"))
+                    {
+                        if (stageItem.Stagedocent.ToString() == User.Identity.Name)
+                            Studentlijstje.Add(new StudentViewModel(
+                                stageItem.Persoonsgegevens.PersoonsgegevensID,
+                                stageItem.Persoonsgegevens.Voornaam,
+                                stageItem.Persoonsgegevens.Achternaam,
+                                stageItem.StageID,
+                                stageItem.Persoonsgegevens.Toevoeging,
+                                stageItem.Persoonsgegevens.StudentNummer));
+                    }
+                    else
+                    {
+                        Studentlijstje.Add(new StudentViewModel(
+                            stageItem.Persoonsgegevens.PersoonsgegevensID,
+                            stageItem.Persoonsgegevens.Voornaam,
+                            stageItem.Persoonsgegevens.Achternaam,
+                            stageItem.StageID,
+                            stageItem.Persoonsgegevens.Toevoeging,
+                            stageItem.Persoonsgegevens.StudentNummer));
+                    }
                 }
 	        }
+
             ViewBag.DropDownList = new SelectList(Studentlijstje, "StageId", "Naam");
             return View(svm);
         }
 
         [HttpPost]
-        public ActionResult Selecteer(StudentViewModel student)
+        public ActionResult Index(StudentViewModel student)
         {
-            Stage Stage = db.Stage.Where(s => s.StageID == student.stageId).FirstOrDefault();
-            return View("~/Views/Beoordeling/CreateFormulier.cshtml", Stage);
-        }
-        //
-        // GET: /Beoordeling/Create
+            Stage stage = db.Stage.Where(s => s.StageID == student.stageId).FirstOrDefault();
+            
+            ViewData["Stage"] = stage;
 
-        public ActionResult Create()
+            var beoordelingen = db.Beoordeling.Where(s => s.Stage == stage.StageID).ToList();
+
+
+            return View("~/Views/Beoordeling/StudentIndex.cshtml", beoordelingen);
+        }
+
+        public ActionResult StudentIndex()
         {
-            ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID");
             return View();
         }
 
         //
+        // GET: /Beoordeling/Create
+
+        //public ActionResult Create()
+        //{
+        //    ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID");
+        //    return View();
+        //}
+
+        //
         // POST: /Beoordeling/CreateFormulier
-        [HttpPost]
-        public ActionResult CreateFormulier(StudentViewModel stage)
+        public ActionResult CreateFormulier(int stageID = 0)
         {
-            int stageId = Convert.ToInt32(stage);
-            Stage Stage = db.Stage.Find(stageId);
-            return View("~/Views/Beoordeling/CreateFormulier", stage);
+            return View(db.Stage.Where(i => i.StageID == stageID).FirstOrDefault());
         }
 
         //
@@ -116,6 +146,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Beoordeling/Delete/5
+        [HttpPost]
         public void OpsturenEind(string beoordelingenJson, string handtekeningenJson, string stageID)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
@@ -189,6 +220,7 @@ namespace PVB_Stage_Applicatie.Controllers
             db.SaveChanges();
         }
 
+        [HttpPost]
         public void Opsturen(string beoordelingenJson, string handtekeningenJson, string stageID)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();

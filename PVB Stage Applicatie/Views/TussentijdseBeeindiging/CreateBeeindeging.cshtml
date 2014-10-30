@@ -1,17 +1,23 @@
-﻿@{
+﻿@model PVB_Stage_Applicatie.Models.Stage
+@{
     ViewBag.Title = "CreateBeeindeging";
     
     PVB_Stage_Applicatie.Models.StageApplicatieEntities db = new PVB_Stage_Applicatie.Models.StageApplicatieEntities();
 }
 
 <h2>CreateBeeindeging</h2>
+<div class="velden">
+    <p>Beëindigings datum<input id="WerkelijkeEindDatum" type="date" value="WerkelijkeEindDatum" /> </p>
+    <p>Opleiding <input id="opleiding" type="text" /> </p>
+    <p>CREBO <input id="crebo" type="text" /> </p>    
+</div>
 
-Beëindigings datum<input id="WerkelijkeEindDatum" type="date" value="WerkelijkeEindDatum" /> <br />
-Opleiding <input id="opleiding" type="text" /> <br />
-Leerweg <input id="leerweg" type="text" /> <br />
-CREBO <input id="crebo" type="text" /> <br />
+<div class="leerweg">
+    <p>Leerweg BOL<input name="leerweg" type="radio" value="0" /> BBL<input name="leerweg" type="radio" value="1" /></p>
+</div>
+
 <br />
-<div>
+<div id="onderwijs" class="checkboxes">
     <h1>Redenen onderwijsinstelling</h1>
     @foreach (PVB_Stage_Applicatie.Models.RedenOnderwijsinstelling item in db.RedenOnderwijsinstelling)
     {
@@ -21,7 +27,7 @@ CREBO <input id="crebo" type="text" /> <br />
 
 <br />
 
-<div id="organisatie">
+<div id="organisatie" class="checkboxes">
     <h1>Redenen praktijkbiedende organisatie</h1>
     @foreach (PVB_Stage_Applicatie.Models.RedenOrganisatie item in db.RedenOrganisatie)
     {
@@ -31,11 +37,11 @@ CREBO <input id="crebo" type="text" /> <br />
 
 <br />
 
-<div id="student">
+<div id="student" class="checkboxes">
     <h1>Redenen student</h1>
     @foreach (PVB_Stage_Applicatie.Models.RedenStudent item in db.RedenStudent)
     {
-        @:<input id="@item.Reden.Replace(" ", "").Replace("/", "")" type="checkbox" data-id="@item.RedenID"/> @item.Reden <br />
+        @:<input id="@item.Reden.Replace(" ", "").Replace("/", "")" type="checkbox" data-id="@item.RedenID" /> @item.Reden <br />
     }
 </div>
 
@@ -43,10 +49,41 @@ CREBO <input id="crebo" type="text" /> <br />
 
 <input type="button" value="Submit" onclick="JahoorStuurMaar()"/>
 
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
 <script type="text/javascript">
 
     function JahoorStuurMaar() {
+        var jsonToPost = {};
 
+        d3.selectAll(".checkboxes").each(function () {
+            var group = this.id;
+            jsonToPost[group] = [];
+
+            d3.select(this).selectAll("input").each(function () {
+                if (this.checked) {
+                    jsonToPost[group].push(parseInt(this.dataset.id));
+                }
+            });
+        });
+        
+        d3.select(".velden").selectAll("input").each(function () {
+            jsonToPost[this.id] = this.value;
+        });
+
+        jsonToPost.leerweg =  parseInt($("input[name=leerweg]:checked").val());
+
+        jsonToPost = JSON.stringify(jsonToPost);
+
+        $.ajax({
+            url: '/TussentijdseBeeindiging/Opsturen',
+            type: 'POST',
+            data:
+            {
+                tussentijdseBeeindigingJson: jsonToPost,
+                stageID: @Model.StageID
+            }
+        });
     }
 
 </script>

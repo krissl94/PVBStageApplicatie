@@ -2,7 +2,7 @@
 @{
     var menus = new[]
                 {
-                   new { LinkText="Home", ActionName="Index",ControllerName="Home",Roles= "Beheerder" + "," + "Docent"},
+                   new { LinkText="Home", ActionName="Index",ControllerName="Home",Roles= "Beheerder, Docent"},
                     //Menu Beheerder                   
                    new { LinkText="Beheren Bedrijf", ActionName="Index",ControllerName="Bedrijf",Roles= "Beheerder"},
                    new { LinkText="Beheren Stagiair", ActionName="Index",ControllerName="Stagiair",Roles= "Beheerder"},                 
@@ -18,8 +18,10 @@
                    new { LinkText="Mijn Stageperiodes", ActionName="Index",ControllerName="Periode",Roles= "Docent" },
                    new { LinkText="Beoordelingen", ActionName="Index",ControllerName="Beoordeling",Roles= "Docent" },
                    new { LinkText="Gespreksformulieren", ActionName="Index",ControllerName="Gespreksformulier",Roles= "Docent" },
+                   new { LinkText="Tussentijdse Beeindiging", ActionName="Index",ControllerName="TussentijdseBeeindiging",Roles= "Docent" },
+                   
                    //Algemeen
-                   new { LinkText="Uitloggen", ActionName="logUit",ControllerName="Login",Roles= "Beheerder"+ ","+ "Docent" },
+                   new { LinkText="Uitloggen", ActionName="logUit",ControllerName="Login",Roles= "Beheerder ,Docent" },
                    new { LinkText="Inloggen", ActionName="Index",ControllerName="Login",Roles= "Anonymous"}
                 };
 } 
