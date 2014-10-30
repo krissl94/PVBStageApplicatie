@@ -21,7 +21,7 @@
                    new { LinkText="Tussentijdse Beeindiging", ActionName="Index",ControllerName="TussentijdseBeeindiging",Roles= "Docent" },
                    
                    //Algemeen
-                   new { LinkText="Uitloggen", ActionName="logUit",ControllerName="Login",Roles= "Beheerder ,Docent" },
+                   new { LinkText="Uitloggen", ActionName="logUit",ControllerName="Login",Roles= "Beheerder" +","+"Docent" },
                    new { LinkText="Inloggen", ActionName="Index",ControllerName="Login",Roles= "Anonymous"}
                 };
 } 
