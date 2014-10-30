@@ -78,7 +78,24 @@ namespace PVB_Stage_Applicatie.Controllers
             return View(stage);
         }
 
-       
+        //
+        // GET: /Koppeling/BulkInvoerKoppeling
+        [Authorize(Roles = "Beheerder")]
+        public ActionResult BulkInvoerKoppeling()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult BulkInvoerKoppeling(HttpPostedFileBase file, Periode periode)
+        {
+            ExcelHelper eh = new ExcelHelper();
+            Periode fullPeriode = db.Periode.Where(p => p.Periode1 == periode.Periode1).SingleOrDefault();
+            DataSet Koppelingen = eh.excelToDS(file, Server);
+            ViewData["feedback"] = eh.dataSetToKoppeling(Koppelingen, fullPeriode);
+            return View();
+        }
+
 
         protected override void Dispose(bool disposing)
         {

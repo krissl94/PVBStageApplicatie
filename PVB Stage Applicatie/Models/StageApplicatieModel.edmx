@@ -177,21 +177,21 @@
           <Key>
             <PropertyRef Name="RedenID" />
           </Key>
-          <Property Name="RedenID" Type="int" Nullable="false" />
+          <Property Name="RedenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Reden" Type="varchar" MaxLength="75" Nullable="false" />
         </EntityType>
         <EntityType Name="RedenOrganisatie">
           <Key>
             <PropertyRef Name="RedenOrganisatie" />
           </Key>
-          <Property Name="RedenOrganisatie" Type="int" Nullable="false" />
+          <Property Name="RedenOrganisatie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Reden" Type="varchar" MaxLength="75" Nullable="false" />
         </EntityType>
         <EntityType Name="RedenStudent">
           <Key>
             <PropertyRef Name="RedenID" />
           </Key>
-          <Property Name="RedenID" Type="int" Nullable="false" />
+          <Property Name="RedenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Reden" Type="varchar" MaxLength="75" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">

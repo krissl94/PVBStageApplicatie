@@ -1,0 +1,23 @@
+﻿@model PVB_Stage_Applicatie.Models.Periode
+@{
+    //ViewBag.Title = "BulkInvoerKoppeling";
+    //var lijst = ViewData["periodeLijst"];
+
+    PVB_Stage_Applicatie.Models.StageApplicatieEntities db = new PVB_Stage_Applicatie.Models.StageApplicatieEntities();
+    List<PVB_Stage_Applicatie.Models.Periode> list = db.Periode.Where(p => p.Begindatum > DateTime.Now).ToList(); 
+    var items = new SelectList((from s in list
+                    select new
+                    {
+                        PeriodeID = s.Periode1,
+                        Periode = s.Begindatum + " - " + s.Einddatum
+                    }), "PeriodeID", "Periode");
+}
+
+<h2>BulkInvoerKoppeling</h2>
+@using (Html.BeginForm("BulkInvoerKoppeling", "Koppeling", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.DropDownListFor(x => x.Periode1, @items);
+    <input type="file" name="file" />
+    <input type="submit" value="OK" />
+}
+<p>@Html.Encode(ViewData["Feedback"])</p>
