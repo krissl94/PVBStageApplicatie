@@ -165,5 +165,23 @@ namespace PVB_Stage_Applicatie.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+
+        //
+        // GET: /Bedrijf/BulkImport
+        [Authorize(Roles = "Beheerder")]
+        public ActionResult BulkInvoerBedrijf()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult BulkInvoer(HttpPostedFileBase file)
+        {
+            ExcelHelper eh = new ExcelHelper();
+            DataSet Bedrijven = eh.excelToDS(file, Server);
+            eh.dataSetToBedrijf(Bedrijven);
+            return View("~/Views/Bedrijf/BulkInvoerBedrijf.cshtml");
+        }
     }
 }

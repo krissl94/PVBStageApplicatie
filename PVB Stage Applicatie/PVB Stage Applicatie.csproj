@@ -39,6 +39,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FileHelpers">
+      <HintPath>..\packages\FileHelpers.2.0.0.0\lib\FileHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="FileHelpers.ExcelStorage">
+      <HintPath>..\packages\FileHelpers.2.0.0.0\lib\FileHelpers.ExcelStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Excel">
+      <HintPath>..\packages\FileHelpers.2.0.0.0\lib\Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Interop.Office">
+      <HintPath>..\packages\FileHelpers.2.0.0.0\lib\Interop.Office.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -152,6 +166,7 @@
     </Compile>
     <Compile Include="Models\BeoordelingsJson.cs" />
     <Compile Include="Models\CustomRoleProvider.cs" />
+    <Compile Include="Models\ExcelHelper.cs" />
     <Compile Include="Models\Gespreksformulier.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
@@ -376,9 +391,12 @@
     <Content Include="Views\TussentijdseBeeindiging\Selecteer.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\CreateBeeindeging.cshtml" />
     <Content Include="Views\Beoordeling\CreateEindbeoordeling.cshtml" />
+    <Content Include="Views\Stagiair\BulkInvoerStagiair.cshtml" />
+    <Content Include="Views\Stagiair\BulkNonActiefStagiair.cshtml" />
+    <Content Include="Views\Bedrijf\BulkInvoerBedrijf.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\uploads\" />
     <Folder Include="Views\Menu\" />
   </ItemGroup>
   <ItemGroup>

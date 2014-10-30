@@ -1,0 +1,13 @@
+﻿@model PVB_Stage_Applicatie.Models.StudentViewModel
+
+@{
+    ViewBag.Title = "BulkNonActiefStagiair";
+}
+
+<h2>BulkNonActiefStagiair</h2>
+
+@using (Html.BeginForm("BulkNonActief", "Stagiair", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" />
+    <input type="submit" value="OK" />
+}  

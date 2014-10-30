@@ -6,6 +6,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PVB_Stage_Applicatie.Models;
+using System.IO;
+using System.Data.OleDb;
+using System.Xml;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace PVB_Stage_Applicatie.Controllers
 {
@@ -125,5 +130,36 @@ namespace PVB_Stage_Applicatie.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        //
+        // GET: /Bedrijf/BulkImport
+        [Authorize(Roles = "Beheerder")]
+        public ActionResult BulkInvoerStagiair()
+        {
+            return View();
+        }
+        public ViewResult BulkNonActiefStagiair()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ViewResult BulkInvoer(HttpPostedFileBase file)
+        {
+            ExcelHelper eh = new ExcelHelper();
+            DataSet studentDs = eh.excelToDS(file, Server);
+            eh.dataSetToStudent(studentDs);
+            return View("~/Views/Stagiair/BulkImportStagiair.cshtml");
+        }
+
+        [HttpPost]
+        public ViewResult BulkNonActief(HttpPostedFileBase file)
+        {
+            ExcelHelper eh = new ExcelHelper();
+            DataSet studentDs = eh.excelToDS(file, Server);
+            eh.dataSetToNonActiefStudent(studentDs);
+            return View("~/Views/Stagiair/BulkNonActiefStagiair.cshtml");
+        }
+            
+        
     }
 }
