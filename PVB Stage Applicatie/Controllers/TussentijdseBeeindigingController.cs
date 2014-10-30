@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PVB_Stage_Applicatie.Models;
+using System.Web.Script.Serialization;
 
 namespace PVB_Stage_Applicatie.Controllers
 {
@@ -51,8 +52,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         public ActionResult CreateBeeindeging(Stage stage)
         {
-            ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID");
-            return View();
+            return View(db.Stage.Where(i => i.StageID == stage.StageID));
         }
 
         //
@@ -162,6 +162,40 @@ namespace PVB_Stage_Applicatie.Controllers
         {
             Stage Stage = db.Stage.Where(s => s.StageID == student.stageId).FirstOrDefault();
             return View("~/Views/TussentijdseBeeindiging/CreateBeeindeging.cshtml", Stage);
+        }
+
+        [HttpPost]
+        public ActionResult Opsturen(string tussentijdseBeeindigingJson, int stageID)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+            BeeindigingJson bj = serializer.Deserialize<BeeindigingJson>(tussentijdseBeeindigingJson);
+            TussentijdseBeindeging be = new TussentijdseBeindeging();
+
+            be.CREBO = bj.crebo;
+            be.Leerweg = bj.leerweg;
+            be.Einddatum = Convert.ToDateTime(bj.WerkelijkeEindDatum);
+            be.Stage = stageID;
+
+            foreach (int item in bj.onderwijs)
+            {
+                be.RedenOnderwijsinstelling.Add(db.RedenOnderwijsinstelling.Where(i => i.RedenID == item).SingleOrDefault());
+            }
+
+            foreach (int item in bj.organisatie)
+            {
+                be.RedenOrganisatie.Add(db.RedenOrganisatie.Where(i => i.RedenOrganisatie1 == item).SingleOrDefault());
+            }
+
+            foreach (int item in bj.student)
+            {
+                be.RedenStudent.Add(db.RedenStudent.Where(i => i.RedenID == item).SingleOrDefault());
+            }
+
+            db.TussentijdseBeindeging.Add(be);
+            db.SaveChanges();
+
+            return null;
         }
     }
 }

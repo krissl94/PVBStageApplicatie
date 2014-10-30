@@ -147,6 +147,7 @@
     <Compile Include="Models\Bedrijf.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BeeindigingJson.cs" />
     <Compile Include="Models\Beoordeling.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
