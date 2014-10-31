@@ -10,18 +10,18 @@
                    new { LinkText="Beheren Periodes", ActionName="Index",ControllerName="Periode",Roles= "Beheerder"},
                    new { LinkText="Beheren Koppelingen", ActionName="Index",ControllerName="Koppeling",Roles= "Beheerder"},
                    new { LinkText="Beheren Begeleiders", ActionName="Index",ControllerName="Begeleider",Roles= "Beheerder"},
+                   new { LinkText="Formulieren", ActionName="Index", ControllerName="Formulier", Roles= "Beheerder" },
+                   
                    //Menu Docent
                    new { LinkText="Mijn Gegevens", ActionName="Index",ControllerName="Docent",Roles= "Docent" },
                    new { LinkText="Mijn Bedrijven", ActionName="Index",ControllerName="Bedrijf",Roles= "Docent" },
                    new { LinkText="Mijn Stagiaires", ActionName="Index",ControllerName="Stagiair",Roles= "Docent" },
                    new { LinkText="Mijn Stages", ActionName="Index",ControllerName="Koppeling",Roles= "Docent" },
                    new { LinkText="Mijn Stageperiodes", ActionName="Index",ControllerName="Periode",Roles= "Docent" },
-                   new { LinkText="Beoordelingen", ActionName="Index",ControllerName="Beoordeling",Roles= "Docent" },
-                   new { LinkText="Gespreksformulieren", ActionName="Index",ControllerName="Gespreksformulier",Roles= "Docent" },
-                   new { LinkText="Tussentijdse Beeindiging", ActionName="Index",ControllerName="TussentijdseBeeindiging",Roles= "Docent" },
+                   new { LinkText="Formulieren", ActionName="Index", ControllerName="Formulier", Roles= "Docent" },
                    
                    //Algemeen
-                   new { LinkText="Uitloggen", ActionName="logUit",ControllerName="Login",Roles= "Beheerder" +","+"Docent" },
+                   new { LinkText="Uitloggen", ActionName="logUit",ControllerName="Login",Roles= "Beheerder, Docent" },
                    new { LinkText="Inloggen", ActionName="Index",ControllerName="Login",Roles= "Anonymous"}
                 };
 } 
