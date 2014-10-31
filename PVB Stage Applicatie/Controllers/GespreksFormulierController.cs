@@ -25,7 +25,7 @@ namespace PVB_Stage_Applicatie.Controllers
             }
             return View(gespreksformulier);
         }
-        [HttpPost]
+
         public ActionResult CreateGespreksFormulier(int stageID = 0)
         {
             GespreksformulierViewModel GespreksFormulierStage = new GespreksformulierViewModel();
