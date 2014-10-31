@@ -51,17 +51,44 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Create(Persoonsgegevens persoonsgegevens)
         {
-            persoonsgegevens.Rol = 3;
-            persoonsgegevens.Actief = true;
-            if (ModelState.IsValid)
+            ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam");
+            try
             {
-                db.Persoonsgegevens.Add(persoonsgegevens);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf.Where(p => p.Actief), "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
+                bool BestaatEmail;
+                if (db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Email).FirstOrDefault() != null)
+                {
+                    BestaatEmail = true;
+                }
+                else
+                {
+                    BestaatEmail = false;
+                }
 
-            return View(persoonsgegevens);
+                if (BestaatEmail == false)
+                {
+                    persoonsgegevens.Rol = 3;
+                    persoonsgegevens.Actief = true;
+                    if (ModelState.IsValid)
+                    {
+                        db.Persoonsgegevens.Add(persoonsgegevens);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                    return View(persoonsgegevens);
+                }
+                else
+                {
+                    ViewData["Foutmelding"] = "Email adres staat al in ons systeem";
+                    return View();
+                }
+            }
+            catch(Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
+          
         }
 
         //
@@ -81,19 +108,40 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // POST: /Begeleider/Edit/5
+        [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(Persoonsgegevens persoonsgegevens)
         {
-            persoonsgegevens.Rol = 3;
-            if (ModelState.IsValid)
-            {
-                db.Entry(persoonsgegevens).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            EmailDuplicaatHelper edh = new EmailDuplicaatHelper();
             ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
-            return View(persoonsgegevens);
+
+            try
+            {
+                bool BestaatEmail = edh.bestaatEmail(persoonsgegevens);
+
+                if (BestaatEmail == false)
+                {
+                    persoonsgegevens.Rol = 3;
+                    if (ModelState.IsValid)
+                    {
+                        db.Entry(persoonsgegevens).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    return View(persoonsgegevens);
+                }
+                else
+                {
+                    ViewData["Foutmelding"] = "Email adres staat al in ons systeem";
+                    return View(persoonsgegevens);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View(persoonsgegevens);
+            }
         }
 
         //

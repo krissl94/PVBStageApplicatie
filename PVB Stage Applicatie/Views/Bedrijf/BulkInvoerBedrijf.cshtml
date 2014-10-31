@@ -1,7 +1,11 @@
 ﻿@{
     ViewBag.Title = "Bulk Invoer Bedrijf";
 }
-
+    @section zijMenu{
+        <ul>
+            <li>@Html.ActionLink("Terug", "index")</li>
+        </ul>
+    }
 <h2>Bulk Invoer Bedrijf</h2>
 @using (Html.BeginForm("BulkInvoer", "Bedrijf", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

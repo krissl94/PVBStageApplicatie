@@ -79,15 +79,40 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Create(Bedrijf bedrijf)
         {
-            bedrijf.Actief = true;
-            if (ModelState.IsValid)
+            try
             {
-                db.Bedrijf.Add(bedrijf);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                bool bestaatbedrijf;
+                if (db.Bedrijf.Where(b => b.Naam == bedrijf.Naam).FirstOrDefault() != null)
+                {
+                    bestaatbedrijf = true;
+                }
+                else
+                {
+                    bestaatbedrijf = false;
+                }
 
-            return View(bedrijf);
+                if (bestaatbedrijf == false)
+                {
+                    bedrijf.Actief = true;
+                    if (ModelState.IsValid)
+                    {
+                        db.Bedrijf.Add(bedrijf);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                }
+                else
+                {
+                    ViewData["Foutmelding"] = "Deze bedrijfsnaam staat al in ons systeem";
+                    return View();
+                }
+                return View(bedrijf);
+            }
+            catch(Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         //
@@ -132,40 +157,7 @@ namespace PVB_Stage_Applicatie.Controllers
             }
             return View(bedrijf);
         }
-
-        //
-        // GET: /Bedrijf/Delete/5
-        [Authorize(Roles = "Beheerder")]
-        public ActionResult Delete(int id = 0)
-        {
-            Bedrijf bedrijf = db.Bedrijf.Find(id);
-            if (bedrijf == null)
-            {
-                return HttpNotFound();
-            }
-            return View(bedrijf);
-        }
-
-        //
-        // POST: /Bedrijf/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Beheerder")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Bedrijf bedrijf = db.Bedrijf.Find(id);
-            db.Bedrijf.Remove(bedrijf);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
-
+        
 
         //
         // GET: /Bedrijf/BulkInvoerBedrijf
@@ -185,6 +177,12 @@ namespace PVB_Stage_Applicatie.Controllers
                 ViewData["feedback"] = eh.dataSetToBedrijf(Bedrijven);
             }
             return View("~/Views/Bedrijf/BulkInvoerBedrijf.cshtml");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

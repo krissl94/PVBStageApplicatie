@@ -167,7 +167,9 @@
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BeoordelingsJson.cs" />
+    <Compile Include="Models\CreateLoginViewModel.cs" />
     <Compile Include="Models\CustomRoleProvider.cs" />
+    <Compile Include="Models\EmailDuplicaatHelper.cs" />
     <Compile Include="Models\ExcelHelper.cs" />
     <Compile Include="Models\Gespreksformulier.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
