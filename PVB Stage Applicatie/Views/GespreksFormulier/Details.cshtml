@@ -3,41 +3,47 @@
 @{
     ViewBag.Title = "Details";
 }
-
+<script>
+    $(document).ready(function () {
+        if ($("#type")[0].innerText == "1") {
+            $(".handtekeningen").hide();
+        }
+    })
+</script>
 <h2>Details</h2>
 
-<fieldset>
+<fieldset class="details-field">
     <legend>Gespreksformulier</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Stage1.StageID)
+        @Html.DisplayNameFor(model => model.Stage1.StageID)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Stage1.StageID)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Datum)
+        @Html.DisplayNameFor(model => model.Datum)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Datum)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.ContactType)
+        @Html.DisplayNameFor(model => model.ContactType)
     </div>
-    <div class="display-field">
+    <div class="display-field" id="type">
         @Html.DisplayFor(model => model.ContactType)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Gesprek)
+        @Html.DisplayNameFor(model => model.Gesprek)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Gesprek)
     </div>
 
-    <table>
+    <table class="handtekeningen">
         <tr>
             <th align="center" valign="middle">Handtekening Docent</th>
             <th align="center" valign="middle">Handtekening Begeleider</th>
