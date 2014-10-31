@@ -127,3 +127,42 @@ legend {
 .details-field{
            width:400px;
 }
+
+#subMenuLinks ul li a {
+    color:white;
+    text-decoration:none;
+}
+a.menuknop{
+    color:black;
+    text-decoration:none;
+    font-weight:700;
+}
+
+td a{
+    color:blue;
+    font-weight:inherit;
+    text-decoration:underline;
+}
+
+#subMenuLinks ul li {
+    list-style:none;
+    display:inline-block;
+    border:1px solid black;
+    width:130px;
+    margin-bottom:10px;
+    text-align:center;
+}
+
+#subMenuLinks ul li:hover{
+    list-style:none;
+    display:inline-block;
+    border:1px solid black;
+    width:130px;
+    margin-bottom:10px;
+    box-shadow: 3px 3px 3px 0px;
+}
+
+
+#subMenuLinks ul {
+    padding-left:0px;
+}
