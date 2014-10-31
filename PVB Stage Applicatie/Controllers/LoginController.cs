@@ -49,13 +49,14 @@ namespace PVB_Stage_Applicatie.Controllers
                 HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
 
                 Response.Cookies.Add(cookie);
-            }
-            Response.Redirect("/Home/Index");
 
-            return null;
+                Response.Redirect("/Home/Index");
+            }
+
+            return View(new LoginForm { correct = false });
         }
 
-        [Authorize(Roles = "Beheerder, Rollen.Docent")]
+        [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult logUit()
         {
             HttpCookie authCookie = HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];
