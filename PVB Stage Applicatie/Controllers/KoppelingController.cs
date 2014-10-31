@@ -82,6 +82,7 @@ namespace PVB_Stage_Applicatie.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Beheerder")]
         public ActionResult BulkInvoerKoppeling(HttpPostedFileBase file, Periode periode)
         {
             ExcelHelper eh = new ExcelHelper();

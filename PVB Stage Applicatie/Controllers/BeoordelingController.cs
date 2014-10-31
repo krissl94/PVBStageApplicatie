@@ -19,6 +19,7 @@ namespace PVB_Stage_Applicatie.Controllers
         //
         // GET: /Beoordeling/Details/5
 
+        [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Details(int id = 0)
         {
             Beoordeling beoordeling = db.Beoordeling.Find(id);
@@ -33,6 +34,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // POST: /Beoordeling/CreateFormulier
+        [Authorize(Roles = "Docent")]
         public ActionResult CreateFormulier(int stageID = 0)
         {
             return View(db.Stage.Where(i => i.StageID == stageID).FirstOrDefault());
@@ -40,6 +42,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // POST: /Beoordeling/CreateEindbeoordeling
+        [Authorize(Roles = "Docent")]
         public ActionResult CreateEindbeoordeling(int stageID = 0)
         {
             return View(db.Stage.Where(i => i.StageID == stageID).FirstOrDefault());
@@ -47,7 +50,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /Beoordeling/Edit/5
-
+        [Authorize(Roles = "Docent")]
         public ActionResult Edit(int id = 0)
         {
             Beoordeling beoordeling = db.Beoordeling.Find(id);
@@ -64,6 +67,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Docent")]
         public ActionResult Edit(Beoordeling beoordeling)
         {
             if (ModelState.IsValid)
@@ -79,6 +83,7 @@ namespace PVB_Stage_Applicatie.Controllers
         //
         // GET: /Beoordeling/Delete/5
         [HttpPost]
+        [Authorize(Roles = "Docent")]
         public int OpsturenEind(string beoordelingenJson, string handtekeningenJson, int stageID)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
@@ -157,6 +162,7 @@ namespace PVB_Stage_Applicatie.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Docent")]
         public int Opsturen(string beoordelingenJson, string handtekeningenJson, int stageID)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();

@@ -167,6 +167,7 @@ namespace PVB_Stage_Applicatie.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Beheerder")]
         public ViewResult BulkInvoer(HttpPostedFileBase file)
         {
             ExcelHelper eh = new ExcelHelper();

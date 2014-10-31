@@ -15,7 +15,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /GespreksFormulier/Details/5
-
+        [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Details(int id = 0)
         {
             Gespreksformulier gespreksformulier = db.Gespreksformulier.Find(id);
@@ -26,6 +26,7 @@ namespace PVB_Stage_Applicatie.Controllers
             return View(gespreksformulier);
         }
 
+        [Authorize(Roles = "Docent")]
         public ActionResult CreateGespreksFormulier(int stageID = 0)
         {
             GespreksformulierViewModel GespreksFormulierStage = new GespreksformulierViewModel();
@@ -35,6 +36,7 @@ namespace PVB_Stage_Applicatie.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "Docent")]
         public ActionResult CreateGespreksFormulier(GespreksformulierViewModel formulier)
          {
             Stage stageToAdd = db.Stage.Where(s => s.StageID == formulier.StageID.StageID).FirstOrDefault();

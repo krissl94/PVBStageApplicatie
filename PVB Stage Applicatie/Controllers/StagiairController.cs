@@ -139,12 +139,15 @@ namespace PVB_Stage_Applicatie.Controllers
         {
             return View();
         }
+
+        [Authorize(Roles = "Beheerder")]
         public ViewResult BulkNonActiefStagiair()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Beheerder")]
         public ViewResult BulkInvoer(HttpPostedFileBase file)
         {
             ExcelHelper eh = new ExcelHelper();
@@ -157,6 +160,7 @@ namespace PVB_Stage_Applicatie.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Beheerder")]
         public ViewResult BulkNonActief(HttpPostedFileBase file)
         {
             ExcelHelper eh = new ExcelHelper();
