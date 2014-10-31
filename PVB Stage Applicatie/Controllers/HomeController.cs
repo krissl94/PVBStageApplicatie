@@ -16,6 +16,7 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
+
             return View();
         }
     }
