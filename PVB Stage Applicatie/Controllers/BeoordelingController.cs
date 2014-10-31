@@ -221,7 +221,6 @@ namespace PVB_Stage_Applicatie.Controllers
             bobj.WerkTempoOpm = b.WerkTempo.opmerking;
             bobj.ZelfstandigWerken = b.ZelfstandigWerken.beoordeling;
             bobj.ZelfstandigWerkenOpm = b.ZelfstandigWerken.opmerking;
-
             bobj.HandtekeningBegeleider = System.Text.Encoding.ASCII.GetBytes(h.b.handtekening);
             bobj.HandtekeningDocent = System.Text.Encoding.ASCII.GetBytes(h.d.handtekening);
             bobj.HandtekeningStudent = System.Text.Encoding.ASCII.GetBytes(h.s.handtekening);

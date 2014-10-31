@@ -372,8 +372,23 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.EindBeoordeling)
     </div>
+
+    <table>
+        <tr>
+            <th align="center" valign="middle">Handtekening Docent</th>
+            <th align="center" valign="middle">Handtekening Begeleider</th>
+            <th align="center" valign="middle">Handtekening Stagiair</th>
+        </tr>
+        <tr>
+            <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningDocent)" alt="Handtekening docent" /></td>
+            <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningBegeleider)" alt="Handtekening begeleider" /></td>
+            <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningStudent)" alt="Handtekening student" /></td>
+        </tr>
+    </table>
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.BeoordelingID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+

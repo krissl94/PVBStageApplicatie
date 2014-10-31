@@ -42,7 +42,6 @@ namespace PVB_Stage_Applicatie.Controllers
             if (ModelState.IsValid)
             {
                 Gespreksformulier toAdd = (new Gespreksformulier
-                
                 {
                     GespreksformulierID = 0,
                     ContactType = formulier.Type,
@@ -64,20 +63,7 @@ namespace PVB_Stage_Applicatie.Controllers
             // IS FOUT GEGAAN G
             return View("~/Views/Formulier/StudentIndex.cshtml", stageToAdd);
         }
-        
-
-        // POST: /GespreksFormulier/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Gespreksformulier gespreksformulier = db.Gespreksformulier.Find(id);
-            db.Gespreksformulier.Remove(gespreksformulier);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
+       
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
