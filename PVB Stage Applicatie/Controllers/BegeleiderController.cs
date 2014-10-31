@@ -145,32 +145,6 @@ namespace PVB_Stage_Applicatie.Controllers
         }
 
         //
-        // GET: /Begeleider/Delete/5
-        [Authorize(Roles = "Beheerder")]
-        public ActionResult Delete(int id = 0)
-        {
-            Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            if (persoonsgegevens == null)
-            {
-                return HttpNotFound();
-            }
-            return View(persoonsgegevens);
-        }
-
-        //
-        // POST: /Begeleider/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Beheerder")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            db.Persoonsgegevens.Remove(persoonsgegevens);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        //
         // GET: /Begeleider/BulkInvoerBegeleider
         [Authorize(Roles = "Beheerder")]
         public ActionResult BulkInvoerBegeleider()
@@ -182,8 +156,11 @@ namespace PVB_Stage_Applicatie.Controllers
         public ViewResult BulkInvoer(HttpPostedFileBase file)
         {
             ExcelHelper eh = new ExcelHelper();
-            DataSet Begeleiders = eh.excelToDS(file, Server);
-            ViewData["feedback"] = eh.dataSetToBegeleider(Begeleiders);
+            if (eh.excelToDS(file, Server) != null)
+            {
+                DataSet Begeleiders = eh.excelToDS(file, Server);
+                ViewData["feedback"] = eh.dataSetToBegeleider(Begeleiders);
+            }
             return View("~/Views/Begeleider/BulkInvoerBegeleider.cshtml");
         }
 

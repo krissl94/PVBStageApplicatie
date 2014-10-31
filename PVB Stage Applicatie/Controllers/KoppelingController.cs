@@ -70,11 +70,6 @@ namespace PVB_Stage_Applicatie.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            //ViewBag.Stageperiode = new SelectList(db.Periode.Where(x=> x.Einddatum < DateTime.Now), "Periode1", "Periode1", stage.Stageperiode);
-            //ViewBag.Student = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true), "PersoonsgegevensID", "Voornaam", stage.Student);
-            //ViewBag.Stagedocent = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true), "PersoonsgegevensID", "Voornaam", stage.Stagedocent);
-            //ViewBag.Stagebegeleider = new SelectList(db.Persoonsgegevens.Where(x => x.Actief == true), "PersoonsgegevensID", "Voornaam", stage.Stagebegeleider);
             return View(stage);
         }
 
@@ -90,9 +85,12 @@ namespace PVB_Stage_Applicatie.Controllers
         public ActionResult BulkInvoerKoppeling(HttpPostedFileBase file, Periode periode)
         {
             ExcelHelper eh = new ExcelHelper();
-            Periode fullPeriode = db.Periode.Where(p => p.Periode1 == periode.Periode1).SingleOrDefault();
-            DataSet Koppelingen = eh.excelToDS(file, Server);
-            ViewData["feedback"] = eh.dataSetToKoppeling(Koppelingen, fullPeriode);
+            if (eh.excelToDS(file, Server) != null)
+            {
+                Periode fullPeriode = db.Periode.Where(p => p.Periode1 == periode.Periode1).SingleOrDefault();
+                DataSet Koppelingen = eh.excelToDS(file, Server);
+                ViewData["feedback"] = eh.dataSetToKoppeling(Koppelingen, fullPeriode);
+            }
             return View();
         }
 

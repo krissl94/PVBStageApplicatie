@@ -60,7 +60,6 @@ namespace PVB_Stage_Applicatie.Controllers
                 return View("~/Views/Formulier/StudentIndex.cshtml", stageToAdd);
             }
 
-            // IS FOUT GEGAAN G
             return View("~/Views/Formulier/StudentIndex.cshtml", stageToAdd);
         }
        
