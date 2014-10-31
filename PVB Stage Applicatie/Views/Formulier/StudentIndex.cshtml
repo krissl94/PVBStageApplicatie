@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "StudentIndex";
+
+    var eindbeoordeling = Model.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault();
 }
 
 <h2>StudentIndex</h2>
@@ -11,10 +13,13 @@
     <ul>
         @if (User.IsInRole("Docent"))
         {
-            <li>@Html.ActionLink("Beoordeling invullen", "CreateFormulier", "Beoordeling", new { stageID = Model.StageID}, null)</li>
-            <li>@Html.ActionLink("Gespreksformulier invullen", "CreateGespreksFormulier", "GespreksFormulier", new { stageID = Model.StageID }, null)</li>
-            <li>@Html.ActionLink("Eindbeoordeling invullen", "CreateEindbeoordeling", "Beoordeling", new { stageID = Model.StageID }, null)</li>
-            <li>@Html.ActionLink("Tussentijdse beëindiging invullen", "CreateBeeindeging", "TussentijdseBeeindiging", new { stageID = Model.StageID }, null)</li>
+            if (Model.TussentijdseBeindeging.Count == 0 && eindbeoordeling == null)
+            {
+                <li>@Html.ActionLink("Beoordeling invullen", "CreateFormulier", "Beoordeling", new { stageID = Model.StageID}, null)</li>
+                <li>@Html.ActionLink("Gespreksformulier invullen", "CreateGespreksFormulier", "GespreksFormulier", new { stageID = Model.StageID }, null)</li>
+                <li>@Html.ActionLink("Eindbeoordeling invullen", "CreateEindbeoordeling", "Beoordeling", new { stageID = Model.StageID }, null)</li>
+                <li>@Html.ActionLink("Tussentijdse beëindiging invullen", "CreateBeeindeging", "TussentijdseBeeindiging", new { stageID = Model.StageID }, null)</li>
+            }
         }
     </ul>
 }
