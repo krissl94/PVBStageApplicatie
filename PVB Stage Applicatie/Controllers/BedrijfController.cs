@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PVB_Stage_Applicatie.Models;
+using System.IO;
 
 namespace PVB_Stage_Applicatie.Controllers
 {
@@ -177,6 +178,13 @@ namespace PVB_Stage_Applicatie.Controllers
                 ViewData["feedback"] = eh.dataSetToBedrijf(Bedrijven);
             }
             return View("~/Views/Bedrijf/BulkInvoerBedrijf.cshtml");
+        }
+
+        public FileResult download()
+        {
+            string file = @"C:\Users\Kris\Desktop\PVBStageApplicatie\PVB Stage Applicatie\App_Data\ExcelTemplates\NonActief.xlsx";
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            return File(file, contentType, Path.GetFileName(file));
         }
 
         protected override void Dispose(bool disposing)

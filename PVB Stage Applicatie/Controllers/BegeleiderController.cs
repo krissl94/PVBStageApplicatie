@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PVB_Stage_Applicatie.Models;
+using System.IO;
 
 namespace PVB_Stage_Applicatie.Controllers
 {
@@ -104,6 +105,15 @@ namespace PVB_Stage_Applicatie.Controllers
 
             ViewBag.Bedrijf = new SelectList(db.Bedrijf.Where(p => p.Actief) , "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
             return View(persoonsgegevens);
+        }
+
+
+
+        public FileResult download()
+        {
+            string file = @"C:\Users\Kris\Desktop\PVBStageApplicatie\PVB Stage Applicatie\App_Data\ExcelTemplates\BegeleiderInvoegen.xlsx";
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            return File(file, contentType, Path.GetFileName(file));
         }
 
         //
