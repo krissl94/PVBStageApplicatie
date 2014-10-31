@@ -37,7 +37,6 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Docent,Beheerder")]
         public ActionResult Details(int id = 0)
         {
-            //Bedrijf bedrijf = db.Bedrijf.Where(b => b.BedrijfID == id).FirstOrDefault();
             Bedrijf bedrijf = db.Bedrijf.Find(id);
             bool bekendBedrijf = false;
             if (HttpContext.User.IsInRole("Docent"))

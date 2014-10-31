@@ -148,8 +148,11 @@ namespace PVB_Stage_Applicatie.Controllers
         public ViewResult BulkInvoer(HttpPostedFileBase file)
         {
             ExcelHelper eh = new ExcelHelper();
-            DataSet studentDs = eh.excelToDS(file, Server);
-            eh.dataSetToStudent(studentDs);
+            if (eh.excelToDS(file, Server) != null)
+            {
+                DataSet studentDs = eh.excelToDS(file, Server);
+                eh.dataSetToStudent(studentDs);
+            }
             return View("~/Views/Stagiair/BulkImportStagiair.cshtml");
         }
 
@@ -157,8 +160,11 @@ namespace PVB_Stage_Applicatie.Controllers
         public ViewResult BulkNonActief(HttpPostedFileBase file)
         {
             ExcelHelper eh = new ExcelHelper();
-            DataSet studentDs = eh.excelToDS(file, Server);
-            eh.dataSetToNonActiefStudent(studentDs);
+            if (eh.excelToDS(file, Server) != null)
+            {
+                DataSet studentDs = eh.excelToDS(file, Server);
+                eh.dataSetToNonActiefStudent(studentDs);
+            }
             return View("~/Views/Stagiair/BulkNonActiefStagiair.cshtml");
         }
             

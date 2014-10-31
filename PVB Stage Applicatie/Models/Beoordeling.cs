@@ -11,11 +11,13 @@ namespace PVB_Stage_Applicatie.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Beoordeling
     {
         public int BeoordelingID { get; set; }
         public int Stage { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public System.DateTime Datum { get; set; }
         public int Beoordeling1 { get; set; }
         public int VoorbereidWerk { get; set; }

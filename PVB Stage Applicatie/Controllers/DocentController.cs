@@ -44,7 +44,6 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Create()
         {
-         //   ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam");
             return View();
         }
 
@@ -55,7 +54,6 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Create(CreateLoginViewModel persoonsgegevens)
         {
-            //ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Docent.Bedrijf);
             try
             {
                 bool BestaatEmail;
@@ -166,32 +164,6 @@ namespace PVB_Stage_Applicatie.Controllers
         }
 
         //
-        // GET: /Docent/Delete/5
-        [Authorize(Roles = "Beheerder")]
-        public ActionResult Delete(int id = 0)
-        {
-            Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            if (persoonsgegevens == null)
-            {
-                return HttpNotFound();
-            }
-            return View(persoonsgegevens);
-        }
-
-        //
-        // POST: /Docent/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Beheerder")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            db.Persoonsgegevens.Remove(persoonsgegevens);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        //
         // GET: /Docent/BulkInvoerDocent
         [Authorize(Roles = "Beheerder")]
         public ActionResult BulkInvoerDocent()
@@ -203,8 +175,11 @@ namespace PVB_Stage_Applicatie.Controllers
         public ViewResult BulkInvoer(HttpPostedFileBase file)
         {
             ExcelHelper eh = new ExcelHelper();
-            DataSet Docenten = eh.excelToDS(file, Server);
-            ViewData["feedback"] = eh.dataSetToDocent(Docenten);
+            if (eh.excelToDS(file, Server) != null)
+            {
+                DataSet Docenten = eh.excelToDS(file, Server);
+                ViewData["feedback"] = eh.dataSetToDocent(Docenten);
+            }
             return View("~/Views/Docent/BulkInvoerDocent.cshtml");
         }
 
