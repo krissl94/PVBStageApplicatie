@@ -13,12 +13,7 @@
     }
 }
 <h2>Index</h2>
-@if (User.IsInRole("Beheerder"))
-{
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-}
+
 
 <table>
     <tr>
@@ -49,7 +44,7 @@
                 @Html.DisplayFor(modelItem => item.Persoonsgegevens1.Achternaam)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Periode.Periode1)
+                @Html.DisplayFor(modelItem => item.Periode.Begindatum) - @Html.DisplayFor(modelItem => item.Periode.Begindatum) 
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Persoonsgegevens2.Voornaam)
