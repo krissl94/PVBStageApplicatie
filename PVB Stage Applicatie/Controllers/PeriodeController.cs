@@ -65,11 +65,25 @@ namespace PVB_Stage_Applicatie.Controllers
         public ActionResult Edit(int id = 0)
         {
             Periode periode = db.Periode.Find(id);
+            bool periodeLeeg = false;
+            if (periode.Stage.Count() == 0)
+            {
+                periodeLeeg = true;
+            }
             if (periode == null)
             {
                 return HttpNotFound();
             }
-            return View(periode);
+            if (periodeLeeg)
+            {
+                return View(periode);
+            }
+            else
+            {
+                ViewData["KanAanpassen"] = "De periode kan niet worden aangepast, omdat er andere objecten afhankelijk van zijn. ";
+
+                return View("~/Views/Periode/Index.cshtml", db.Periode.ToList());
+            }
         }
 
         //

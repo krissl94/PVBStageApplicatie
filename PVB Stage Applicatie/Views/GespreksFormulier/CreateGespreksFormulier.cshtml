@@ -39,7 +39,18 @@
             $("#HandtekeningBegeleider")[0].value = Canvas2Image.convertToImage(d3.select("#b").node(), 200, 100, "png").src
             $("#HandtekeningDocent")[0].value = Canvas2Image.convertToImage(d3.select("#d").node(), 200, 100, "png").src
         })
+
+
+        $('input[type=radio][name=Type]').change(function () {
+            if (this.value == '1') {
+                $('.handtekening').hide();
+            }
+            else {
+                $('.handtekening').show();
+            }
+        });
     });
+
 </script>
 @using (Html.BeginForm("CreateGespreksFormulier", "GespreksFormulier", FormMethod.Post, new { id = "form" }))
 {
@@ -102,12 +113,12 @@
                         @Html.ValidationMessageFor(model => model.Gesprek)
                 </td>
             </tr>
-            <tr>
+            <tr class="handtekening">
                 <th align="center" valign="middle">Handtekening Docent</th>
                 <th align="center" valign="middle">Handtekening Begeleider</th>
                 <th align="center" valign="middle">Handtekening Stagiair</th>
             </tr>
-            <tr>
+            <tr class="handtekening">
                 @Html.HiddenFor(m => m.HandtekeningDocent)
                 @Html.HiddenFor(m => m.HandtekeningBegeleider)
                 @Html.HiddenFor(m => m.HandtekeningStudent)
@@ -117,7 +128,7 @@
                 <td><canvas id="s" width="200" height="100" class="cvs"></canvas> </td>
                 <td><canvas id="d" width="200" height="100" class="cvs"></canvas> </td>
             </tr>
-            <tr>
+            <tr class="handtekening">
                 <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('b')" /></td>
                 <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('s')" /></td>
                 <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('d')" /></td>
