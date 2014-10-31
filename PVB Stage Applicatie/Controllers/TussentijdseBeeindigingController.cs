@@ -17,7 +17,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /TussentijdseBeeindiging/Details/5
-
+        [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Details(int id = 0)
         {
             TussentijdseBeindeging tussentijdsebeindeging = db.TussentijdseBeindeging.Find(id);
@@ -30,13 +30,14 @@ namespace PVB_Stage_Applicatie.Controllers
 
         //
         // GET: /TussentijdseBeeindiging/CreateBeindeging
-
+        [Authorize(Roles = "Docent")]
         public ActionResult CreateBeeindeging(int stageID = 0)
         {
             return View(db.Stage.Where(i => i.StageID == stageID).FirstOrDefault());
         }
 
         [HttpPost]
+        [Authorize(Roles = "Docent")]
         public int Opsturen(string tussentijdseBeeindigingJson, int stageID)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();

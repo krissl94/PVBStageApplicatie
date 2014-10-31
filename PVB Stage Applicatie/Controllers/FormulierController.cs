@@ -11,6 +11,7 @@ namespace PVB_Stage_Applicatie.Controllers
     {
         StageApplicatieEntities db = new StageApplicatieEntities();
 
+        [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
             List<Periode> Periodelijst =
@@ -52,6 +53,7 @@ namespace PVB_Stage_Applicatie.Controllers
             return View(svm);
         }
 
+        [Authorize(Roles = "Beheerder,Docent")]
         [HttpPost]
         public ActionResult Index(StudentViewModel student)
         {
@@ -62,7 +64,7 @@ namespace PVB_Stage_Applicatie.Controllers
             return View("~/Views/Formulier/StudentIndex.cshtml", stage);
         }
 
-       
+        [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult StudentIndex(int stageID)
         {
             Stage stage = db.Stage.Where(s => s.StageID == stageID).FirstOrDefault();
