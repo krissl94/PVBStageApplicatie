@@ -23,25 +23,25 @@
 
 <h2>Details</h2>
 
-<fieldset>
+<fieldset class="details-field">
     <legend>Bedrijf</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Naam)
+        @Html.DisplayNameFor(model => model.Naam)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Naam)
     </div>
 
     <div class="display-label">
-         Actief
+        Actief
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Actief)
     </div>
 
     <div id="NonActiefReden" class="display-label">
-         Non-actief reden
+        Non-actief reden
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.NonActiefReden)
