@@ -339,6 +339,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\mousecontroller.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Formulier\StudentIndex.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -373,7 +374,6 @@
     <Content Include="Views\GespreksFormulier\Selecteer.cshtml" />
     <Content Include="Views\GespreksFormulier\Edit.cshtml" />
     <Content Include="Views\GespreksFormulier\Delete.cshtml" />
-    <Content Include="Views\Formulier\StudentIndex.cshtml" />
     <Content Include="Views\Beoordeling\Details.cshtml" />
     <Content Include="Views\Beoordeling\Edit.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\Index.cshtml" />
@@ -405,6 +405,8 @@
     <Content Include="Views\Begeleider\BulkInvoerBegeleider.cshtml" />
     <Content Include="Views\Docent\BulkInvoerDocent.cshtml" />
     <Content Include="Views\Koppeling\BulkInvoerKoppeling.cshtml" />
+    <Content Include="Views\Formulier\Gesprek.cshtml" />
+    <Content Include="Views\Formulier\Eind.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

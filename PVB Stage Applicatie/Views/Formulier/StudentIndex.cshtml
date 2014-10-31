@@ -1,0 +1,108 @@
+﻿@model PVB_Stage_Applicatie.Models.Stage
+
+@{
+    ViewBag.Title = "StudentIndex";
+}
+
+<h2>StudentIndex</h2>
+
+<h2>Index</h2>
+@section zijMenu{
+    <ul>
+        @if (User.IsInRole("Docent"))
+        {
+            <li>@Html.ActionLink("Beoordeling invullen", "CreateFormulier", "Beoordeling", new { stageID = Model.StageID}, null)</li>
+            <li>@Html.ActionLink("Gespreksformulier invullen", "CreateGespreksFormulier", "GespreksFormulier", new { stageID = Model.StageID }, null)</li>
+            <li>@Html.ActionLink("Eindbeoordeling invullen", "CreateEindbeoordeling", "Beoordeling", new { stageID = Model.StageID }, null)</li>
+            <li>@Html.ActionLink("Tussentijdse beëindiging invullen", "CreateBeeindeging", "TussentijdseBeeindiging", new { stageID = Model.StageID }, null)</li>
+        }
+    </ul>
+}
+
+<h2>Beoordeling</h2>
+<table>
+    <tr>
+        <th>
+            Datum
+        </th>
+        <th>
+            Beoordeling
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Beoordeling) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Datum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Beoordeling1)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", "Beoordeling", new { id = item.BeoordelingID }, null)
+        </td>
+    </tr>
+}
+
+</table>
+
+<h2>Tussentijdse Beindeging</h2>
+
+<table>
+    <tr>
+        <th>
+            Einddatum
+        </th>
+        <th>
+            Leerweg
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.TussentijdseBeindeging)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Einddatum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Leerweg)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", "TussentijdseBeeindiging", new { id=item.TussentijdsebeoordelingID }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<h2>Gesprek</h2>
+
+<table>
+    <tr>
+        <th>
+            Datum
+        </th>
+        <th>
+            Contacttype
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Gespreksformulier)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Datum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactType)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "GespreksFormulier", new { id = item.GespreksformulierID }, null) |
+                @Html.ActionLink("Details", "Details", "GespreksFormulier", new { id = item.GespreksformulierID }, null)
+            </td>
+        </tr>
+    }
+</table>
