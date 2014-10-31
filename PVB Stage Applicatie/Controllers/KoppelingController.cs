@@ -52,7 +52,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
             ViewBag.Stageperiode = new SelectList(db.Periode, "Periode1", "Periode1");
             ViewBag.Student = new SelectList((from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x=>x.Rol == 4).ToList() select new{Voornaam = s.Voornaam + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID}), "PersoonsgegevensID", "Voornaam");
-            ViewBag.Stagedocent = new SelectList((from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2) select new{Voornaam = s.Voornaam + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID}), "PersoonsgegevensID", "Voornaam");)
+            ViewBag.Stagedocent = new SelectList((from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2) select new{Voornaam = s.Voornaam + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID}), "PersoonsgegevensID", "Voornaam");
             ViewBag.Stagebegeleider = new SelectList((from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 3) select new{Voornaam = s.Voornaam + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID}), "PersoonsgegevensID", "Voornaam");
             return View();
         }
