@@ -1,4 +1,4 @@
-﻿@model PVB_Stage_Applicatie.Models.Persoonsgegevens
+﻿@model PVB_Stage_Applicatie.Models.CreateLoginViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -19,89 +19,107 @@
     <fieldset>
         <legend>Persoonsgegevens</legend>
 
-               <div class="editor-label">
-            @Html.LabelFor(model => model.Voornaam)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Docent.Voornaam)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Voornaam)
-            @Html.ValidationMessageFor(model => model.Voornaam)
+            @Html.EditorFor(model => model.Docent.Voornaam)
+            @Html.ValidationMessageFor(model => model.Docent.Voornaam)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Achternaam)
+            @Html.LabelFor(model => model.Docent.Achternaam)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Achternaam)
-            @Html.ValidationMessageFor(model => model.Achternaam)
+            @Html.EditorFor(model => model.Docent.Achternaam)
+            @Html.ValidationMessageFor(model => model.Docent.Achternaam)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Tussenvoegsel)
+            @Html.LabelFor(model => model.Docent.Tussenvoegsel)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Tussenvoegsel)
-            @Html.ValidationMessageFor(model => model.Tussenvoegsel)
+            @Html.EditorFor(model => model.Docent.Tussenvoegsel)
+            @Html.ValidationMessageFor(model => model.Docent.Tussenvoegsel)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
+            @Html.LabelFor(model => model.Docent.Email)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
+            @Html.EditorFor(model => model.Docent.Email)
+            @Html.ValidationMessageFor(model => model.Docent.Email)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Straat)
+            @Html.LabelFor(model => model.Docent.Straat)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Straat)
-            @Html.ValidationMessageFor(model => model.Straat)
+            @Html.EditorFor(model => model.Docent.Straat)
+            @Html.ValidationMessageFor(model => model.Docent.Straat)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Huisnummer)
+            @Html.LabelFor(model => model.Docent.Huisnummer)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Huisnummer)
-            @Html.ValidationMessageFor(model => model.Huisnummer)
+            @Html.EditorFor(model => model.Docent.Huisnummer)
+            @Html.ValidationMessageFor(model => model.Docent.Huisnummer)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Toevoeging)
+            @Html.LabelFor(model => model.Docent.Toevoeging)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Toevoeging)
-            @Html.ValidationMessageFor(model => model.Toevoeging)
+            @Html.EditorFor(model => model.Docent.Toevoeging)
+            @Html.ValidationMessageFor(model => model.Docent.Toevoeging)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Postcode)
+            @Html.LabelFor(model => model.Docent.Postcode)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Postcode)
-            @Html.ValidationMessageFor(model => model.Postcode)
+            @Html.EditorFor(model => model.Docent.Postcode)
+            @Html.ValidationMessageFor(model => model.Docent.Postcode)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Plaats)
+            @Html.LabelFor(model => model.Docent.Plaats)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Plaats)
-            @Html.ValidationMessageFor(model => model.Plaats)
+            @Html.EditorFor(model => model.Docent.Plaats)
+            @Html.ValidationMessageFor(model => model.Docent.Plaats)
+        </div>
+               
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Docent.MedewerkerID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Docent.MedewerkerID)
+            @Html.ValidationMessageFor(model => model.Docent.MedewerkerID)
         </div>
 
-       
         <div class="editor-label">
-            @Html.LabelFor(model => model.MedewerkerID)
+            @Html.LabelFor(model => model.Login.Gebruikersnaam)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.MedewerkerID)
-            @Html.ValidationMessageFor(model => model.MedewerkerID)
+            @Html.EditorFor(model => model.Login.Gebruikersnaam)
+            @Html.ValidationMessageFor(model => model.Login.Gebruikersnaam)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Login.Wachtwoord)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Login.Wachtwoord)
+            @Html.ValidationMessageFor(model => model.Login.Wachtwoord)
         </div>
         <p>
             <input type="submit" value="Toevoegen" />
         </p>
+        <p>@Html.Encode(ViewData["Foutmelding"])</p>
+
     </fieldset>
 }
 

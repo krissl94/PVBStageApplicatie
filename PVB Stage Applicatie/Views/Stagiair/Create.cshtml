@@ -3,7 +3,14 @@
 @{
     ViewBag.Title = "Create";
 }
+@section zijMenu{
+    <ul>
+        <li>
+            @Html.ActionLink("Terug", "Index")
+        </li>
+    </ul>
 
+}
 <h2>Create</h2>
 
 @using (Html.BeginForm()) {
@@ -12,14 +19,6 @@
 
     <fieldset>
         <legend>Persoonsgegevens</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Rol)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Rol)
-            @Html.ValidationMessageFor(model => model.Rol)
-        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Voornaam)
@@ -94,30 +93,6 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Actief)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Actief)
-            @Html.ValidationMessageFor(model => model.Actief)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NonActiefReden)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NonActiefReden)
-            @Html.ValidationMessageFor(model => model.NonActiefReden)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.MedewerkerID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.MedewerkerID)
-            @Html.ValidationMessageFor(model => model.MedewerkerID)
-        </div>
-
-        <div class="editor-label">
             @Html.LabelFor(model => model.StudentNummer)
         </div>
         <div class="editor-field">
@@ -140,24 +115,14 @@
             @Html.EditorFor(model => model.Opleidingsniveau)
             @Html.ValidationMessageFor(model => model.Opleidingsniveau)
         </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Bedrijf, "Bedrijf1")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Bedrijf", String.Empty)
-            @Html.ValidationMessageFor(model => model.Bedrijf)
-        </div>
-
         <p>
             <input type="submit" value="Create" />
         </p>
+        <p>@Html.Encode(ViewData["Foutmelding"])</p>
+
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

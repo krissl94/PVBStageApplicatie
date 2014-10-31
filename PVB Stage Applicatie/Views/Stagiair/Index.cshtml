@@ -7,9 +7,18 @@
 <h2>Index</h2>
 @if (User.IsInRole("Beheerder"))
 {
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+    @section zijMenu
+    {
+        <ul>
+            <li>
+                @Html.ActionLink("Create New", "Create")
+            </li>
+            <li>
+                @Html.ActionLink("Bulk invoer", "BulkInvoerStagiair")
+            </li>
+        </ul>
+    }
+
 }
 <table>
     <tr>
@@ -25,7 +34,8 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Voornaam)
@@ -39,12 +49,12 @@
             <td>
                 @if (User.IsInRole("Beheerder"))
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id=item.PersoonsgegevensID }) 
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PersoonsgegevensID })
                 }
-                @Html.ActionLink("Details", "Details", new { id=item.PersoonsgegevensID })
+                @Html.ActionLink("Details", "Details", new { id = item.PersoonsgegevensID })
             </td>
 
         </tr>
-}
+    }
 
 </table>

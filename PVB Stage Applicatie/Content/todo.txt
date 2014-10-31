@@ -14,14 +14,14 @@
  Naamgevingen en in tekst
  Invullen entity voor tussentijdstebeeindiging
  Details pagina style
- Bedrijf, unieke naam afvangen
+ ----------------------------------------------------------Bedrijf, unieke naam afvangen
  Stagiair create new in sidebar
- Stagiair edit & create unieke velden
+ ----------------------------------------------------------Stagiair edit & create unieke velden
  Stagiair create velden
  Stagiair bulk invoer link
  Docent login creatie
  Docent bulk invoerlink
- Docent edit 404
+----------------------------------------------------------- Docent edit 404
  Periode edit alleen als die leeg is
  Periode details link achterin
  Koppeling index periode

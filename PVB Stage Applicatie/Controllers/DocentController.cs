@@ -18,7 +18,8 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
-            if(HttpContext.User.IsInRole("Docent")){
+            if (HttpContext.User.IsInRole("Docent"))
+            {
                 return RedirectToAction("Details/" + HttpContext.User.Identity.Name);
             };
             var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 2);
@@ -43,7 +44,7 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Create()
         {
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam");
+         //   ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam");
             return View();
         }
 
@@ -52,17 +53,49 @@ namespace PVB_Stage_Applicatie.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Beheerder")]
-        public ActionResult Create(Persoonsgegevens persoonsgegevens)
+        public ActionResult Create(CreateLoginViewModel persoonsgegevens)
         {
-            if (ModelState.IsValid)
+            //ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Docent.Bedrijf);
+            try
             {
-                db.Persoonsgegevens.Add(persoonsgegevens);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                bool BestaatEmail;
+                if (db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Docent.Email).FirstOrDefault() != null)
+                {
+                    BestaatEmail = true;
+                }
+                else
+                {
+                    BestaatEmail = false;
+                }
+
+                if (BestaatEmail == false)
+                {
+                    persoonsgegevens.Docent.Rol = 2;
+                    persoonsgegevens.Docent.Actief = true;
+                    persoonsgegevens.Login.Persoonsgegevens = persoonsgegevens.Docent.PersoonsgegevensID;
+                    if (ModelState.IsValid)
+                    {
+                        persoonsgegevens.Login.Wachtwoord = Hashing.HashString(persoonsgegevens.Login.Gebruikersnaam, persoonsgegevens.Login.Wachtwoord);
+                        db.Persoonsgegevens.Add(persoonsgegevens.Docent);
+                        db.Login.Add(persoonsgegevens.Login);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                    return View(persoonsgegevens);
+                }
+                else
+                {
+                    ViewData["Foutmelding"] = "Email adres staat al in ons systeem";
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
             }
 
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
-            return View(persoonsgegevens);
         }
 
         //
@@ -71,19 +104,6 @@ namespace PVB_Stage_Applicatie.Controllers
         public ActionResult Edit(int id = 0)
         {
             Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            if (HttpContext.User.IsInRole("Docent") && persoonsgegevens.PersoonsgegevensID.ToString() == HttpContext.User.Identity.Name)
-            {
-                return View(persoonsgegevens);
-            }
-            else
-            {
-                return HttpNotFound();
-            }
-            if (persoonsgegevens == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
             return View(persoonsgegevens);
         }
 
@@ -94,14 +114,55 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder, Docent")]
         public ActionResult Edit(Persoonsgegevens persoonsgegevens)
         {
-            if (ModelState.IsValid)
+            var persoonsgegevensList = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 2);
+            EmailDuplicaatHelper edh = new EmailDuplicaatHelper();
+            try
             {
-                db.Entry(persoonsgegevens).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                persoonsgegevens.Rol = 2;
+                bool BestaatEmail = edh.bestaatEmail(persoonsgegevens);
+                //Check of email uniek is
+                if (BestaatEmail == false)
+                {
+                    //Check of gebruiker docent is en  rechten heeft
+                    if (HttpContext.User.IsInRole("Docent") && persoonsgegevens.PersoonsgegevensID.ToString() == HttpContext.User.Identity.Name)
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            db.Entry(persoonsgegevens).State = EntityState.Modified;
+                            db.SaveChanges();
+                            return View("~/Views/Docent/Index.cshtml", persoonsgegevensList);
+                        }
+                        return View(persoonsgegevensList);
+                    }
+                        //Check of beheerder is
+                    else if(HttpContext.User.IsInRole("Beheerder"))
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            db.Entry(persoonsgegevens).State = EntityState.Modified;
+                            db.SaveChanges();
+                            return View("~/Views/Docent/Index.cshtml", persoonsgegevensList);
+                        }
+                        return View(persoonsgegevensList);
+                    }
+                    if (persoonsgegevens == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
+                    return View(persoonsgegevens);
+                }
+                else
+                {
+                    ViewData["Foutmelding"] = "Email adres staat al in ons systeem";
+                    return View(persoonsgegevens);
+                }
             }
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
-            return View(persoonsgegevens);
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View(persoonsgegevens);
+            }
         }
 
         //
@@ -130,12 +191,6 @@ namespace PVB_Stage_Applicatie.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
-
         //
         // GET: /Docent/BulkInvoerDocent
         [Authorize(Roles = "Beheerder")]
@@ -151,6 +206,12 @@ namespace PVB_Stage_Applicatie.Controllers
             DataSet Docenten = eh.excelToDS(file, Server);
             ViewData["feedback"] = eh.dataSetToDocent(Docenten);
             return View("~/Views/Docent/BulkInvoerDocent.cshtml");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

@@ -45,6 +45,7 @@
         @Html.HiddenFor(model => model.Voornaam)
         @Html.HiddenFor(model => model.Achternaam)
         @Html.HiddenFor(model => model.Tussenvoegsel)
+        @Html.HiddenFor(model => model.MedewerkerID)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Voornaam)
@@ -140,6 +141,8 @@
         </div>
         <p>
             <input type="submit" value="Save" />
+        <p>@Html.Encode(ViewData["Foutmelding"])</p>
+
         </p>
     </fieldset>
 }

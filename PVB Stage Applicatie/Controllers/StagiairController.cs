@@ -83,6 +83,7 @@ namespace PVB_Stage_Applicatie.Controllers
         public ActionResult Create(Persoonsgegevens persoonsgegevens)
         {
             persoonsgegevens.Rol = 4;
+            persoonsgegevens.Actief = true;
             if (ModelState.IsValid)
             {
                 db.Persoonsgegevens.Add(persoonsgegevens);
@@ -142,6 +143,7 @@ namespace PVB_Stage_Applicatie.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ViewResult BulkInvoer(HttpPostedFileBase file)
         {
