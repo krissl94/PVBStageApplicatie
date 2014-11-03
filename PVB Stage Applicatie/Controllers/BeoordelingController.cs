@@ -8,7 +8,6 @@ using System.Web.Mvc;
 using PVB_Stage_Applicatie.Models;
 using System.Web.Script.Serialization;
 using System.Runtime.Serialization.Json;
-using System.Collections.Generic;
 
 namespace PVB_Stage_Applicatie.Controllers
 {
@@ -37,7 +36,14 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Docent")]
         public ActionResult CreateFormulier(int stageID = 0)
         {
-            return View(db.Stage.Where(i => i.StageID == stageID).FirstOrDefault());
+            Stage stage = db.Stage.Where(s => s.StageID == stageID).FirstOrDefault();
+
+            if (stage != null)
+                if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
+                    if (User.Identity.Name == stage.Stagedocent.ToString())
+                        return View(stage);
+
+            return RedirectToAction("StudentIndex", "Formulier", new { stageID = stageID });
         }
 
         //
@@ -45,7 +51,14 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Docent")]
         public ActionResult CreateEindbeoordeling(int stageID = 0)
         {
-            return View(db.Stage.Where(i => i.StageID == stageID).FirstOrDefault());
+            Stage stage = db.Stage.Where(s => s.StageID == stageID).FirstOrDefault();
+
+            if (stage != null)
+                if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
+                    if (User.Identity.Name == stage.Stagedocent.ToString())
+                        return View(stage);
+
+            return RedirectToAction("StudentIndex", "Formulier", new { stageID = stageID });
         }
 
         //

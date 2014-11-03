@@ -7,15 +7,22 @@
 @Html.Hidden("Studenten", string.Join(",", (object)ViewBag.student))
 @Html.Hidden("Periodes", string.Join(",", (object)ViewBag.stageperiode))
 
-<h2>Selecteer een student</h2>
-@using (Html.BeginForm())
+@if ((ViewBag.DropDownList as IEnumerable<SelectListItem>).Count() > 0)
 {
+    <h2>Selecteer een student</h2>
+    using (Html.BeginForm())
+    {
         @Html.DropDownListFor(model => model.stageId,
-   (IEnumerable<SelectListItem>)ViewBag.DropDownList, "---Select a value---")
+   (IEnumerable<SelectListItem>)ViewBag.DropDownList, "Selecteer een student")
 
         <p>
             <input type="submit" value="Create" />
         </p>
-
+    }
 }
+else
+{
+    <h2> Er zijn nog geen stages aan u toegewezen</h2>
+}
+
 
