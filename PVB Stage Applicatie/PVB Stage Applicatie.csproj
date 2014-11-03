@@ -422,7 +422,7 @@
     <Content Include="Views\Begeleider\BulkInvoerBegeleider.cshtml" />
     <Content Include="Views\Docent\BulkInvoerDocent.cshtml" />
     <Content Include="Views\Koppeling\BulkInvoerKoppeling.cshtml" />
-    <Content Include="Views\Bedrijf\lijstjeG.cshtml" />
+    <Content Include="Views\Bedrijf\View1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />

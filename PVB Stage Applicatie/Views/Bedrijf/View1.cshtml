@@ -1,105 +1,92 @@
 ﻿@model PVB_Stage_Applicatie.Models.Bedrijf
-<script>
-    $(document).ready(function () {
-        debugger;
-        if($(".display-field .check-box")[0].checked)
-        {
-            $("#NonActiefReden")[0].hidden = true;
-        }
-    });
-</script>
-@section zijMenu{
-    <ul>
-@if (User.IsInRole("Beheerder"))
-{
-    <li>@Html.ActionLink("Edit", "Edit", new { id = Model.BedrijfID })</li>
-}
-    <li>@Html.ActionLink("Back to List", "Index")</li>
-</ul>
-}
+
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "View1";
 }
 
-<h2>Details</h2>
+<h2>View1</h2>
 
 <fieldset>
     <legend>Bedrijf</legend>
 
     <div class="display-label">
-        @Html.DisplayNameFor(model => model.Naam)
+         @Html.DisplayNameFor(model => model.Naam)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Naam)
     </div>
 
     <div class="display-label">
-        Actief
+         @Html.DisplayNameFor(model => model.Actief)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Actief)
     </div>
-    
-    <div id="NonActiefReden" class="display-label">
-        Non-actief reden
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NonActiefReden)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.NonActiefReden)
     </div>
 
     <div class="display-label">
-        @Html.DisplayNameFor(model => model.KvKNummer)
+         @Html.DisplayNameFor(model => model.KvKNummer)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.KvKNummer)
     </div>
 
     <div class="display-label">
-        @Html.DisplayNameFor(model => model.Plaats)
+         @Html.DisplayNameFor(model => model.Plaats)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Plaats)
     </div>
 
     <div class="display-label">
-        @Html.DisplayNameFor(model => model.Straatnaam)
+         @Html.DisplayNameFor(model => model.Straatnaam)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Straatnaam)
     </div>
 
     <div class="display-label">
-        @Html.DisplayNameFor(model => model.Huisnummer)
+         @Html.DisplayNameFor(model => model.Huisnummer)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Huisnummer)
     </div>
 
     <div class="display-label">
-        @Html.DisplayNameFor(model => model.Toevoeging)
+         @Html.DisplayNameFor(model => model.Toevoeging)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Toevoeging)
     </div>
 
     <div class="display-label">
-        @Html.DisplayNameFor(model => model.Postcode)
+         @Html.DisplayNameFor(model => model.Postcode)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Postcode)
     </div>
 
     <div class="display-label">
-        @Html.DisplayNameFor(model => model.Telefoonnummer)
+         @Html.DisplayNameFor(model => model.Telefoonnummer)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Telefoonnummer)
     </div>
 
     <div class="display-label">
-        @Html.DisplayNameFor(model => model.Email)
+         @Html.DisplayNameFor(model => model.Email)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Email)
     </div>
 </fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.BedrijfID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
