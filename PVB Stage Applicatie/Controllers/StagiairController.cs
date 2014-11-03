@@ -82,11 +82,11 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Create(Persoonsgegevens persoonsgegevens)
         {
-
             try
             {
+                bool BestaatStudentNr;
                 bool BestaatEmail;
-                if (db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Email).FirstOrDefault() != null)
+                if(db.Persoonsgegevens.Where(p=>p.Email == persoonsgegevens.Email).FirstOrDefault() != null)
                 {
                     BestaatEmail = true;
                 }
@@ -95,13 +95,27 @@ namespace PVB_Stage_Applicatie.Controllers
                     BestaatEmail = false;
                 }
 
-                if (BestaatEmail == false)
+                if (db.Persoonsgegevens.Where(p => p.StudentNummer == persoonsgegevens.StudentNummer).FirstOrDefault() != null)
+                {
+                    BestaatStudentNr = true;
+                }
+                else
+                {
+                    BestaatStudentNr = false;
+                }
+
+                if (BestaatEmail == false && BestaatStudentNr == false)
                 {
                     persoonsgegevens.Rol = 4;
                     persoonsgegevens.Actief = true;
+                    ModelState.Remove("Bedrijf");
+                    ModelState.Remove("MedewerkerID");
                     if (ModelState.IsValid)
                     {
-                        db.Persoonsgegevens.Add(persoonsgegevens);
+                        db.sp_PersoonToevoegen(4, persoonsgegevens.Voornaam,
+                        persoonsgegevens.Achternaam, persoonsgegevens.Tussenvoegsel, persoonsgegevens.Email, 
+                        persoonsgegevens.Straat, persoonsgegevens.Huisnummer, persoonsgegevens.Toevoeging, persoonsgegevens.Postcode
+                        , persoonsgegevens.Plaats, null, null, persoonsgegevens.StudentNummer, null, persoonsgegevens.Opleidingsniveau, null);
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -109,17 +123,23 @@ namespace PVB_Stage_Applicatie.Controllers
                     ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
                     return View(persoonsgegevens);
                 }
-                else
+                else if(BestaatStudentNr == true)
+                {
+                    ViewData["Foutmelding"] = "Studentnummer staat al in ons systeem";
+                    return View();
+                }
+                else 
                 {
                     ViewData["Foutmelding"] = "Email adres staat al in ons systeem";
                     return View();
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 ViewData["Foutmelding"] = ex.ToString();
                 return View();
             }
+ 
         }
 
         //
@@ -143,14 +163,37 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(Persoonsgegevens persoonsgegevens)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(persoonsgegevens).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                EmailDuplicaatHelper edh = new EmailDuplicaatHelper();
+                bool BestaatEmail = edh.bestaatEmail(persoonsgegevens);
+                if (BestaatEmail == false)
+                {
+                    ModelState.Remove("Bedrijf");
+                    ModelState.Remove("MedewerkerID");
+                    if (ModelState.IsValid)
+                    {
+                        db.sp_PersoonUpdaten(persoonsgegevens.PersoonsgegevensID,
+                            persoonsgegevens.Email, persoonsgegevens.Straat,
+                            persoonsgegevens.Huisnummer, persoonsgegevens.Toevoeging,
+                            persoonsgegevens.Postcode, persoonsgegevens.Plaats,
+                            persoonsgegevens.Actief, persoonsgegevens.NonActiefReden);
+                        return RedirectToAction("Index");
+                    }
+                    ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
+                    return View("~/Views/Stagiair");
+                }
+                else 
+                {
+                    ViewData["Foutmelding"] = "Email adres staat al in ons systeem";
+                    return View();
+                }
             }
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
-            return View(persoonsgegevens);
+            catch(Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         protected override void Dispose(bool disposing)
