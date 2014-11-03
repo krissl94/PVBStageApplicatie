@@ -65,11 +65,19 @@ namespace PVB_Stage_Applicatie.Controllers
                         persoonsgegevens.Docent.Rol = 2;
                         persoonsgegevens.Docent.Actief = true;
                         persoonsgegevens.Login.Persoonsgegevens = persoonsgegevens.Docent.PersoonsgegevensID;
-
+                        ModelState.Remove("Docent.StudentNummer");
+                        ModelState.Remove("Docent.Opleiding");
+                        ModelState.Remove("Docent.Opleidingsniveau");
+                        ModelState.Remove("Docent.Bedrijf");
                         if (ModelState.IsValid)
                         {
                             persoonsgegevens.Login.Wachtwoord = Hashing.HashString(persoonsgegevens.Login.Gebruikersnaam, persoonsgegevens.Login.Wachtwoord);
-                            db.Persoonsgegevens.Add(persoonsgegevens.Docent);
+                             db.sp_PersoonToevoegen(2, persoonsgegevens.Docent.Voornaam,
+                            persoonsgegevens.Docent.Achternaam, persoonsgegevens.Docent.Tussenvoegsel, persoonsgegevens.Docent.Email,
+                            persoonsgegevens.Docent.Straat, persoonsgegevens.Docent.Huisnummer, persoonsgegevens.Docent.Toevoeging, persoonsgegevens.Docent.Postcode
+                            , persoonsgegevens.Docent.Plaats, null, persoonsgegevens.Docent.MedewerkerID, null, null, null, null);
+
+                             persoonsgegevens.Login.Persoonsgegevens = db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Docent.Email).FirstOrDefault().PersoonsgegevensID;
                             db.Login.Add(persoonsgegevens.Login);
                             db.SaveChanges();
 

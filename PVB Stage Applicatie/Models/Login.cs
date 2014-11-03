@@ -17,11 +17,9 @@ namespace PVB_Stage_Applicatie.Models
     {
         [Required]
         public string Gebruikersnaam { get; set; }
-
-        [DataType(DataType.Password)]
         [Required]
+        [DataType(DataType.Password)]        
         public string Wachtwoord { get; set; }
-
         public int Persoonsgegevens { get; set; }
     
         public virtual Persoonsgegevens Persoonsgegevens1 { get; set; }

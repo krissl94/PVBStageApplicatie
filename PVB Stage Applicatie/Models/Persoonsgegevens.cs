@@ -77,7 +77,7 @@ namespace PVB_Stage_Applicatie.Models
         [Required]
         [RegularExpression(@"[1-4]{1,50}", ErrorMessage = "Kies uit niveau 1 t/m 4")]
         public Nullable<int> Opleidingsniveau { get; set; }
-        
+
 
         //Begeleider specifiek
         [Required]

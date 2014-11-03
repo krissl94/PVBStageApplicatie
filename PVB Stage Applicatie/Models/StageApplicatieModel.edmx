@@ -583,7 +583,7 @@
           <Parameter Name="Postcode" Type="varchar" Mode="In" />
           <Parameter Name="Plaats" Type="varchar" Mode="In" />
           <Parameter Name="NonActiefReden" Type="varchar" Mode="In" />
-          <Parameter Name="MedewerkerID" Type="int" Mode="In" />
+          <Parameter Name="MedewerkerID" Type="varchar" Mode="In" />
           <Parameter Name="StudentNummer" Type="varchar" Mode="In" />
           <Parameter Name="Opleiding" Type="int" Mode="In" />
           <Parameter Name="Opleidingsniveau" Type="int" Mode="In" />
@@ -1269,7 +1269,7 @@
             <Parameter Name="Postcode" Mode="In" Type="String" />
             <Parameter Name="Plaats" Mode="In" Type="String" />
             <Parameter Name="NonActiefReden" Mode="In" Type="String" />
-            <Parameter Name="MedewerkerID" Mode="In" Type="Int32" />
+            <Parameter Name="MedewerkerID" Mode="In" Type="String" />
             <Parameter Name="StudentNummer" Mode="In" Type="String" />
             <Parameter Name="Opleiding" Mode="In" Type="Int32" />
             <Parameter Name="Opleidingsniveau" Mode="In" Type="Int32" />
