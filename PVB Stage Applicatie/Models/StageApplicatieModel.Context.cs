@@ -600,5 +600,10 @@ namespace PVB_Stage_Applicatie.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_StagiairPerDocent_Result>("sp_StagiairPerDocent", stagedocentParameter);
         }
+
+        public virtual Persoonsgegevens ZoekPersoon(int id)
+        {
+            return Persoonsgegevens.Where(x => x.PersoonsgegevensID == id).SingleOrDefault();
+        }
     }
 }

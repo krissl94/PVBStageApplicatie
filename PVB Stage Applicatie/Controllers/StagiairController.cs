@@ -82,17 +82,44 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Create(Persoonsgegevens persoonsgegevens)
         {
-            persoonsgegevens.Rol = 4;
-            persoonsgegevens.Actief = true;
-            if (ModelState.IsValid)
-            {
-                db.Persoonsgegevens.Add(persoonsgegevens);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
-            return View(persoonsgegevens);
+            try
+            {
+                bool BestaatEmail;
+                if (db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Email).FirstOrDefault() != null)
+                {
+                    BestaatEmail = true;
+                }
+                else
+                {
+                    BestaatEmail = false;
+                }
+
+                if (BestaatEmail == false)
+                {
+                    persoonsgegevens.Rol = 4;
+                    persoonsgegevens.Actief = true;
+                    if (ModelState.IsValid)
+                    {
+                        db.Persoonsgegevens.Add(persoonsgegevens);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+
+                    ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
+                    return View(persoonsgegevens);
+                }
+                else
+                {
+                    ViewData["Foutmelding"] = "Email adres staat al in ons systeem";
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         //
