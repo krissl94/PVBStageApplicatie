@@ -8,7 +8,6 @@ using System.Web.Mvc;
 using PVB_Stage_Applicatie.Models;
 using System.Web.Script.Serialization;
 using System.Runtime.Serialization.Json;
-using System.Collections.Generic;
 
 namespace PVB_Stage_Applicatie.Controllers
 {

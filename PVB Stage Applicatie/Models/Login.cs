@@ -11,11 +11,15 @@ namespace PVB_Stage_Applicatie.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Login
     {
         public string Gebruikersnaam { get; set; }
+
+        [DataType(DataType.Password)]
         public string Wachtwoord { get; set; }
+
         public int Persoonsgegevens { get; set; }
     
         public virtual Persoonsgegevens Persoonsgegevens1 { get; set; }
