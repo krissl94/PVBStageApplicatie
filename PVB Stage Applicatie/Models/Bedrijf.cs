@@ -23,6 +23,14 @@ namespace PVB_Stage_Applicatie.Models
         public string Naam { get; set; }
         public bool Actief { get; set; }
         public string NonActiefReden { get; set; }
+        public string KvKNummer { get; set; }
+        public string Plaats { get; set; }
+        public string Straatnaam { get; set; }
+        public int Huisnummer { get; set; }
+        public string Toevoeging { get; set; }
+        public string Postcode { get; set; }
+        public string Telefoonnummer { get; set; }
+        public string Email { get; set; }
     
         public virtual ICollection<Persoonsgegevens> Persoonsgegevens { get; set; }
     }

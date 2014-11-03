@@ -13,6 +13,14 @@
           <Property Name="Naam" Type="varchar" MaxLength="70" Nullable="false" />
           <Property Name="Actief" Type="bit" Nullable="false" />
           <Property Name="NonActiefReden" Type="varchar" MaxLength="150" />
+          <Property Name="KvKNummer" Type="nchar" MaxLength="8" Nullable="false" />
+          <Property Name="Plaats" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Straatnaam" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Huisnummer" Type="int" Nullable="false" />
+          <Property Name="Toevoeging" Type="char" MaxLength="1" />
+          <Property Name="Postcode" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="Telefoonnummer" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Beoordeling">
           <Key>
@@ -708,6 +716,14 @@
           <Property Name="Actief" Type="Boolean" Nullable="false" />
           <Property Name="NonActiefReden" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Persoonsgegevens" Relationship="Self.FK_Persoonsgegevens_Bedrijf" FromRole="Bedrijf" ToRole="Persoonsgegevens" />
+          <Property Name="KvKNummer" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="Plaats" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Straatnaam" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Huisnummer" Type="Int32" Nullable="false" />
+          <Property Name="Toevoeging" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="Telefoonnummer" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Beoordeling">
           <Key>
@@ -1369,6 +1385,14 @@
           <EntitySetMapping Name="Bedrijf">
             <EntityTypeMapping TypeName="StageApplicatieModel.Bedrijf">
               <MappingFragment StoreEntitySet="Bedrijf">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefoonnummer" ColumnName="Telefoonnummer" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Toevoeging" ColumnName="Toevoeging" />
+                <ScalarProperty Name="Huisnummer" ColumnName="Huisnummer" />
+                <ScalarProperty Name="Straatnaam" ColumnName="Straatnaam" />
+                <ScalarProperty Name="Plaats" ColumnName="Plaats" />
+                <ScalarProperty Name="KvKNummer" ColumnName="KvKNummer" />
                 <ScalarProperty Name="BedrijfID" ColumnName="BedrijfID" />
                 <ScalarProperty Name="Naam" ColumnName="Naam" />
                 <ScalarProperty Name="Actief" ColumnName="Actief" />
