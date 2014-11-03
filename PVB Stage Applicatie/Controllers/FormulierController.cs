@@ -25,7 +25,7 @@ namespace PVB_Stage_Applicatie.Controllers
             {
                 foreach (var stageItem in item.Stage)
                 {
-                    if (User.IsInRole("docent"))
+                    if (User.IsInRole("Docent"))
                     {
                         if (stageItem.Stagedocent.ToString() == User.Identity.Name)
                             Studentlijstje.Add(new StudentViewModel(
@@ -50,6 +50,7 @@ namespace PVB_Stage_Applicatie.Controllers
             }
 
             ViewBag.DropDownList = new SelectList(Studentlijstje, "StageId", "Naam");
+
             return View(svm);
         }
 
@@ -57,19 +58,20 @@ namespace PVB_Stage_Applicatie.Controllers
         [HttpPost]
         public ActionResult Index(StudentViewModel student)
         {
-            Stage stage = db.Stage.Where(s => s.StageID == student.stageId).FirstOrDefault();
-
-            ViewData["Stage"] = stage;
-
-            return View("~/Views/Formulier/StudentIndex.cshtml", stage);
+            return RedirectToAction("StudentIndex", "Formulier", new { stageID = student.stageId });
         }
+
 
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult StudentIndex(int stageID)
         {
             Stage stage = db.Stage.Where(s => s.StageID == stageID).FirstOrDefault();
 
-            return View(stage);
+            if (stage != null)
+                if(User.IsInRole("Beheerder") || User.Identity.Name == stage.Stagedocent.ToString())
+                    return View(stage);
+            
+            return RedirectToAction("Index", "Formulier");
         }
     }
 }
