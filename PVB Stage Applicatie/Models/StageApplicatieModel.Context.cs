@@ -434,7 +434,7 @@ namespace PVB_Stage_Applicatie.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_PersoonNonActief", persoonIDParameter, actiefParameter, nonActiefRedenParameter);
         }
     
-        public virtual int sp_PersoonToevoegen(Nullable<int> rol, string voornaam, string achternaam, string tussenvoegsel, string email, string straat, Nullable<int> huisnummer, string toevoeging, string postcode, string plaats, string nonActiefReden, Nullable<int> medewerkerID, Nullable<int> studentNummer, Nullable<int> opleiding, Nullable<int> opleidingsniveau, Nullable<int> bedrijf)
+        public virtual int sp_PersoonToevoegen(Nullable<int> rol, string voornaam, string achternaam, string tussenvoegsel, string email, string straat, Nullable<int> huisnummer, string toevoeging, string postcode, string plaats, string nonActiefReden, string medewerkerID, string studentNummer, Nullable<int> opleiding, Nullable<int> opleidingsniveau, Nullable<int> bedrijf)
         {
             var rolParameter = rol.HasValue ?
                 new ObjectParameter("Rol", rol) :
@@ -480,13 +480,13 @@ namespace PVB_Stage_Applicatie.Models
                 new ObjectParameter("NonActiefReden", nonActiefReden) :
                 new ObjectParameter("NonActiefReden", typeof(string));
     
-            var medewerkerIDParameter = medewerkerID.HasValue ?
+            var medewerkerIDParameter = medewerkerID != null ?
                 new ObjectParameter("MedewerkerID", medewerkerID) :
-                new ObjectParameter("MedewerkerID", typeof(int));
+                new ObjectParameter("MedewerkerID", typeof(string));
     
-            var studentNummerParameter = studentNummer.HasValue ?
+            var studentNummerParameter = studentNummer != null ?
                 new ObjectParameter("StudentNummer", studentNummer) :
-                new ObjectParameter("StudentNummer", typeof(int));
+                new ObjectParameter("StudentNummer", typeof(string));
     
             var opleidingParameter = opleiding.HasValue ?
                 new ObjectParameter("Opleiding", opleiding) :
@@ -600,7 +600,6 @@ namespace PVB_Stage_Applicatie.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_StagiairPerDocent_Result>("sp_StagiairPerDocent", stagedocentParameter);
         }
-
         public virtual Persoonsgegevens ZoekPersoon(int id)
         {
             return Persoonsgegevens.Where(x => x.PersoonsgegevensID == id).SingleOrDefault();

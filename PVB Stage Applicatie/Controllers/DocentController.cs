@@ -66,35 +66,45 @@ namespace PVB_Stage_Applicatie.Controllers
         {
             try
             {
-                bool BestaatEmail;
-                if (db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Docent.Email).FirstOrDefault() != null)
-                {
-                    BestaatEmail = true;
-                }
-                else
-                {
-                    BestaatEmail = false;
-                }
+                persoonsgegevens.Login.Gebruikersnaam = persoonsgegevens.Login.Gebruikersnaam.ToLower();
 
-                if (BestaatEmail == false)
+                if (db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Docent.Email).FirstOrDefault() == null)
                 {
-                    persoonsgegevens.Docent.Rol = 2;
-                    persoonsgegevens.Docent.Actief = true;
-                    persoonsgegevens.Login.Persoonsgegevens = persoonsgegevens.Docent.PersoonsgegevensID;
-                    if (ModelState.IsValid)
+                    if (db.Login.Where(l => l.Gebruikersnaam == persoonsgegevens.Login.Gebruikersnaam).FirstOrDefault() == null)
                     {
-                        persoonsgegevens.Login.Wachtwoord = Hashing.HashString(persoonsgegevens.Login.Gebruikersnaam, persoonsgegevens.Login.Wachtwoord);
-                        db.Persoonsgegevens.Add(persoonsgegevens.Docent);
-                        db.Login.Add(persoonsgegevens.Login);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
+                        persoonsgegevens.Docent.Rol = 2;
+                        persoonsgegevens.Docent.Actief = true;
+                        persoonsgegevens.Login.Persoonsgegevens = persoonsgegevens.Docent.PersoonsgegevensID;
+                        ModelState.Remove("Docent.StudentNummer");
+                        ModelState.Remove("Docent.Opleiding");
+                        ModelState.Remove("Docent.Opleidingsniveau");
+                        ModelState.Remove("Docent.Bedrijf");
+                        if (ModelState.IsValid)
+                        {
+                            persoonsgegevens.Login.Wachtwoord = Hashing.HashString(persoonsgegevens.Login.Gebruikersnaam, persoonsgegevens.Login.Wachtwoord);
+                             db.sp_PersoonToevoegen(2, persoonsgegevens.Docent.Voornaam,
+                            persoonsgegevens.Docent.Achternaam, persoonsgegevens.Docent.Tussenvoegsel, persoonsgegevens.Docent.Email,
+                            persoonsgegevens.Docent.Straat, persoonsgegevens.Docent.Huisnummer, persoonsgegevens.Docent.Toevoeging, persoonsgegevens.Docent.Postcode
+                            , persoonsgegevens.Docent.Plaats, null, persoonsgegevens.Docent.MedewerkerID, null, null, null, null);
 
-                    return View(persoonsgegevens);
+                             persoonsgegevens.Login.Persoonsgegevens = db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Docent.Email).FirstOrDefault().PersoonsgegevensID;
+                            db.Login.Add(persoonsgegevens.Login);
+                            db.SaveChanges();
+
+                            return RedirectToAction("Index");
+                        }
+
+                        return View(persoonsgegevens);
+                    }
+                    else
+                    {
+                        ViewData["Foutmelding"] = "Deze gebruikers naam is reeds gebruikt";
+                        return View();
+                    }
                 }
                 else
                 {
-                    ViewData["Foutmelding"] = "Email adres staat al in ons systeem";
+                    ViewData["Foutmelding"] = "Dit email-adres is reeds gebruikt";
                     return View();
                 }
             }
@@ -103,7 +113,6 @@ namespace PVB_Stage_Applicatie.Controllers
                 ViewData["Foutmelding"] = ex.ToString();
                 return View();
             }
-
         }
 
         //

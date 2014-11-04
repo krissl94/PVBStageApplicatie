@@ -23,7 +23,7 @@
 
 <h2>Details</h2>
 
-<fieldset class="details-field">
+<fieldset>
     <legend>Bedrijf</legend>
 
     <div class="display-label">
@@ -39,11 +39,67 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.Actief)
     </div>
-
+    
     <div id="NonActiefReden" class="display-label">
         Non-actief reden
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.NonActiefReden)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.KvKNummer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.KvKNummer)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Plaats)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Plaats)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Straatnaam)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Straatnaam)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Huisnummer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Huisnummer)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Toevoeging)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Toevoeging)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Postcode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Postcode)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Telefoonnummer)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Telefoonnummer)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
     </div>
 </fieldset>
