@@ -71,7 +71,36 @@ namespace PVB_Stage_Applicatie.Controllers
 
             return View("~/Views/Formulier/StudentIndex.cshtml", stageToAdd);
         }
-       
+
+        [Authorize(Roles = "Docent")]
+        public ActionResult Edit(int id = 0)
+        {
+            Gespreksformulier gesprek = db.Gespreksformulier.Where(i => i.GespreksformulierID == id).FirstOrDefault();
+            Stage stage = gesprek.Stage1;
+
+            if (stage != null)
+                if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
+                    if (User.Identity.Name == stage.Stagedocent.ToString())
+                        return View(gesprek);
+
+            return RedirectToAction("StudentIndex", "Formulier", new { stageID = stage.StageID });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Docent")]
+        public ActionResult Edit(Gespreksformulier gesprek)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(gesprek).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("StudentIndex", "Formulier", new { stageID = gesprek.Stage });
+            }
+
+            return View(gesprek);
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
