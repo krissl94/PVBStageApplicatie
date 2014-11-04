@@ -159,6 +159,20 @@ namespace PVB_Stage_Applicatie.Controllers
             return View("~/Views/Stagiair/BulkImportStagiair.cshtml");
         }
 
+        public FileResult downloadStagiair()
+        {
+            string file = @"~/App_Data/ExcelTemplates/StagiairInvoegen.xlsx";
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            return File(file, contentType, Path.GetFileName(file));
+        }
+
+        public FileResult downloadNonActief()
+        {
+            string file = @"~/App_Data/ExcelTemplates/NonActief.xlsx";
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            return File(file, contentType, Path.GetFileName(file));
+        }
+
         [HttpPost]
         [Authorize(Roles = "Beheerder")]
         public ViewResult BulkNonActief(HttpPostedFileBase file)

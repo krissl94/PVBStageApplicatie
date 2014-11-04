@@ -182,7 +182,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         public FileResult download()
         {
-            string file = @"C:\Users\Kris\Desktop\PVBStageApplicatie\PVB Stage Applicatie\App_Data\ExcelTemplates\NonActief.xlsx";
+            string file = @"~/App_Data/ExcelTemplates/BedrijfInvoegen.xlsx";
             string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             return File(file, contentType, Path.GetFileName(file));
         }

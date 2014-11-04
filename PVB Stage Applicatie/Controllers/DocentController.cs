@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PVB_Stage_Applicatie.Models;
+using System.IO;
 
 namespace PVB_Stage_Applicatie.Controllers
 {
@@ -24,6 +25,15 @@ namespace PVB_Stage_Applicatie.Controllers
             };
             var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 2);
             return View(persoonsgegevens.ToList());
+        }
+
+
+
+        public FileResult download()
+        {
+            string file = @"~/App_Data/ExcelTemplates/DocentInvoegen.xlsx";
+            string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            return File(file, contentType, Path.GetFileName(file));
         }
 
         //
