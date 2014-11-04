@@ -84,12 +84,12 @@ namespace PVB_Stage_Applicatie.Controllers
                     return View();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewData["Foutmelding"] = ex.ToString();
                 return View();
             }
-          
+
         }
 
         //
@@ -103,7 +103,7 @@ namespace PVB_Stage_Applicatie.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf.Where(p => p.Actief) , "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
+            ViewBag.Bedrijf = new SelectList(db.Bedrijf.Where(p => p.Actief), "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
             return View(persoonsgegevens);
         }
 
@@ -165,15 +165,43 @@ namespace PVB_Stage_Applicatie.Controllers
         [HttpPost]
         public ViewResult BulkInvoer(HttpPostedFileBase file)
         {
-            ExcelHelper eh = new ExcelHelper();
-            if (eh.excelToDS(file, Server) != null)
+            try
             {
-                DataSet Begeleiders = eh.excelToDS(file, Server);
-                ViewData["feedback"] = eh.dataSetToBegeleider(Begeleiders);
-            }
-            return View("~/Views/Begeleider/BulkInvoerBegeleider.cshtml");
-        }
+                ExcelHelper eh = new ExcelHelper();
+                DataSet begeleiderDs = eh.excelToDS(file, Server);
 
+                if (begeleiderDs != null)
+                {
+                    List<Persoonsgegevens> lijstje = eh.dataSetToBegeleider(begeleiderDs);
+
+                    foreach (Persoonsgegevens item in lijstje)
+                    {
+                        if (db.Persoonsgegevens.Where(p => p.Email == item.Email).FirstOrDefault() == null)
+                        {
+                            int bedrijfsId = db.Bedrijf.Where(b => b.BedrijfID == item.Bedrijf).FirstOrDefault().BedrijfID;
+                            ModelState.Remove("Docent.StudentNummer");
+                            ModelState.Remove("Docent.Opleiding");
+                            ModelState.Remove("Docent.Opleidingsniveau");
+                            ModelState.Remove("MedewerkerID");
+                            if (ModelState.IsValid)
+                            {
+                                db.sp_PersoonToevoegen(3, item.Voornaam,
+                                item.Achternaam, item.Tussenvoegsel, item.Email,
+                                item.Straat, item.Huisnummer, item.Toevoeging, item.Postcode
+                                , item.Plaats, null, null, null, null, null, bedrijfsId);
+
+                            }
+                        }
+
+
+                        //ViewData["feedback"] = eh.dataSetToBegeleider(Begeleiders);
+                    }
+                }
+                return View("~/Views/Begeleider/BulkInvoerBegeleider.cshtml");
+
+            }
+            catch { return null; ; }
+        }
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

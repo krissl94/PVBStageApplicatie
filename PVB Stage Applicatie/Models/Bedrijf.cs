@@ -11,6 +11,7 @@ namespace PVB_Stage_Applicatie.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Bedrijf
     {
@@ -20,16 +21,40 @@ namespace PVB_Stage_Applicatie.Models
         }
     
         public int BedrijfID { get; set; }
+
+        [Required]
+        [RegularExpression(@"[A-z' ']{1,50}", ErrorMessage = "Vul alleen letters in")]
         public string Naam { get; set; }
         public bool Actief { get; set; }
         public string NonActiefReden { get; set; }
+
+        [Required]
+        [RegularExpression(@"[0-9]{8}", ErrorMessage = "Please enter proper contact details.")]
         public string KvKNummer { get; set; }
+        [Required]
         public string Plaats { get; set; }
+
+        [Required]
+        [RegularExpression(@"[A-z' ']{1,70}", ErrorMessage = "Vul alleen letters in")]
         public string Straatnaam { get; set; }
+
+        [Required]
+        [RegularExpression(@"[0-9]{1,3}", ErrorMessage = "Vul een geldig Huisnummer in")]
         public int Huisnummer { get; set; }
+
+        [RegularExpression(@"[A-z]{1}", ErrorMessage = "Vul een geldige toevoeging in")]
         public string Toevoeging { get; set; }
+
+        [Required]
+        [RegularExpression(@"[0-9]{4}[A-z]{2}", ErrorMessage = "Vul een geldige postcode in")]
         public string Postcode { get; set; }
+
+        [Required]
+        [RegularExpression(@"[0-9]{10}", ErrorMessage = "Vul een geldig telefoonnummer in")]
         public string Telefoonnummer { get; set; }
+
+        [Required]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Please enter proper contact details.")]
         public string Email { get; set; }
     
         public virtual ICollection<Persoonsgegevens> Persoonsgegevens { get; set; }

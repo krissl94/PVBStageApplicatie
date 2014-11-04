@@ -86,10 +86,11 @@ namespace PVB_Stage_Applicatie.Controllers
         public ActionResult BulkInvoerKoppeling(HttpPostedFileBase file, Periode periode)
         {
             ExcelHelper eh = new ExcelHelper();
-            if (eh.excelToDS(file, Server) != null)
+            DataSet Koppelingen = eh.excelToDS(file, Server);
+
+            if (Koppelingen != null)
             {
                 Periode fullPeriode = db.Periode.Where(p => p.Periode1 == periode.Periode1).SingleOrDefault();
-                DataSet Koppelingen = eh.excelToDS(file, Server);
                 ViewData["feedback"] = eh.dataSetToKoppeling(Koppelingen, fullPeriode);
             }
             return View();

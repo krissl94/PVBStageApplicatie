@@ -40,11 +40,11 @@ namespace PVB_Stage_Applicatie.Models
         public string Tussenvoegsel { get; set; }
 
         [Required(ErrorMessage = "Email is een verplicht veld")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Please enter proper contact details.")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Vul een geldig email in")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Straatnaam is een verplicht veld")]
-        [RegularExpression(@"[A-z0-9' ']{1,70}", ErrorMessage = "Please enter proper contact details.")]
+        [RegularExpression(@"[A-z0-9' ']{1,70}", ErrorMessage = "Vul alleen letters in")]
         public string Straat { get; set; }
 
         [Required(ErrorMessage = "Huisnummer is een verplicht veld")]
