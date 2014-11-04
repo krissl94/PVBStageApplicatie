@@ -216,19 +216,6 @@ namespace PVB_Stage_Applicatie.Controllers
             return View();
         }
 
-        [HttpPost]
-        [Authorize(Roles = "Beheerder")]
-        public ViewResult BulkInvoer(HttpPostedFileBase file)
-        {
-            ExcelHelper eh = new ExcelHelper();
-            if (eh.excelToDS(file, Server) != null)
-            {
-                DataSet studentDs = eh.excelToDS(file, Server);
-                eh.dataSetToStudent(studentDs);
-            }
-            return View("~/Views/Stagiair/BulkImportStagiair.cshtml");
-        }
-
         public FileResult downloadStagiair()
         {
             string file = @"~/App_Data/ExcelTemplates/StagiairInvoegen.xlsx";
@@ -248,14 +235,65 @@ namespace PVB_Stage_Applicatie.Controllers
         public ViewResult BulkNonActief(HttpPostedFileBase file)
         {
             ExcelHelper eh = new ExcelHelper();
-            if (eh.excelToDS(file, Server) != null)
+            DataSet studentDs = eh.excelToDS(file, Server);
+            if (studentDs != null)
             {
-                DataSet studentDs = eh.excelToDS(file, Server);
-                eh.dataSetToNonActiefStudent(studentDs);
+                ViewData["FeedbackNonActief"] = eh.dataSetToNonActiefStudent(studentDs);
             }
-            return View("~/Views/Stagiair/BulkNonActiefStagiair.cshtml");
-        }
             
-        
+            return View("~/Views/Stagiair/BulkInvoerStagiair.cshtml");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Beheerder")]
+        public ViewResult BulkInvoer(HttpPostedFileBase file)
+        {
+            ExcelHelper eh = new ExcelHelper();
+            DataSet studentDs = eh.excelToDS(file, Server);
+
+            if (studentDs != null)  
+            {
+                List<Persoonsgegevens> lijstje = eh.dataSetToStudent(studentDs);
+                foreach (Persoonsgegevens item in lijstje)
+                {
+                    bool BestaatStudentNr;
+                    bool BestaatEmail;
+                    if (db.Persoonsgegevens.Where(p => p.Email == item.Email).FirstOrDefault() != null)
+                    {
+                        BestaatEmail = true;
+                    }
+                    else
+                    {
+                        BestaatEmail = false;
+                    }
+
+                    if (db.Persoonsgegevens.Where(p => p.StudentNummer == item.StudentNummer).FirstOrDefault() != null)
+                    {
+                        BestaatStudentNr = true;
+                    }
+                    else
+                    {
+                        BestaatStudentNr = false;
+                    }
+                    ModelState.Remove("Bedrijf");
+                    ModelState.Remove("MedewerkerID");
+                    if (ModelState.IsValid && BestaatEmail == false && BestaatStudentNr == false) 
+                    {
+                        db.sp_PersoonToevoegen(4, item.Voornaam,
+                        item.Achternaam, item.Tussenvoegsel, item.Email,
+                        item.Straat, item.Huisnummer, item.Toevoeging, item.Postcode
+                        , item.Plaats, null, null, item.StudentNummer, null, item.Opleidingsniveau, null);
+                        ViewData["FeedbackInvoer"] = "Alle studenten zijn toegevoegd";
+
+                    }
+                    else
+                    {
+                        ViewData["FeedbackInvoer"] = "Er zit verkeerde data in het bestand";
+                    }
+                }
+            }
+            return View("~/Views/Stagiair/BulkInvoerStagiair.cshtml");
+        }
+
     }
 }

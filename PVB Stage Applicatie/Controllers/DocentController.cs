@@ -195,10 +195,43 @@ namespace PVB_Stage_Applicatie.Controllers
         public ViewResult BulkInvoer(HttpPostedFileBase file)
         {
             ExcelHelper eh = new ExcelHelper();
-            if (eh.excelToDS(file, Server) != null)
+            DataSet DocentDs = eh.excelToDS(file, Server);
+
+            if (DocentDs != null)
             {
-                DataSet Docenten = eh.excelToDS(file, Server);
-                ViewData["feedback"] = eh.dataSetToDocent(Docenten);
+                List<CreateLoginViewModel> lijstje = eh.dataSetToDocent(DocentDs);
+
+                foreach (CreateLoginViewModel persoonsgegevens in lijstje)
+                {
+                    if (db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Docent.Email).FirstOrDefault() == null)
+                    {
+                        persoonsgegevens.Docent.Rol = 2;
+                        persoonsgegevens.Docent.Actief = true;
+                        persoonsgegevens.Login.Persoonsgegevens = persoonsgegevens.Docent.PersoonsgegevensID;
+                        ModelState.Remove("Docent.StudentNummer");
+                        ModelState.Remove("Docent.Opleiding");
+                        ModelState.Remove("Docent.Opleidingsniveau");
+                        ModelState.Remove("Docent.Bedrijf");
+                        if (ModelState.IsValid)
+                        {
+                           db.sp_PersoonToevoegen(2, persoonsgegevens.Docent.Voornaam,
+                           persoonsgegevens.Docent.Achternaam, persoonsgegevens.Docent.Tussenvoegsel, persoonsgegevens.Docent.Email,
+                           persoonsgegevens.Docent.Straat, persoonsgegevens.Docent.Huisnummer, persoonsgegevens.Docent.Toevoeging, persoonsgegevens.Docent.Postcode
+                           , persoonsgegevens.Docent.Plaats, null, persoonsgegevens.Docent.MedewerkerID, null, null, null, null);
+
+
+                           db.Login.Add(new Login
+                           {
+                               Gebruikersnaam = persoonsgegevens.Login.Gebruikersnaam,
+                               Wachtwoord = Hashing.HashString(persoonsgegevens.Login.Gebruikersnaam, persoonsgegevens.Login.Wachtwoord),
+                               Persoonsgegevens = db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Docent.Email).FirstOrDefault().PersoonsgegevensID
+                           });
+                           db.SaveChanges();
+                        }
+                    }
+                }
+                List<Persoonsgegevens> lijst = eh.dataSetToStudent(DocentDs);
+                ViewData["feedback"] = "Alle docenten zijn toegevoegd";
             }
             return View("~/Views/Docent/BulkInvoerDocent.cshtml");
         }

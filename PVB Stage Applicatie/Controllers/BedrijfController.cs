@@ -172,9 +172,10 @@ namespace PVB_Stage_Applicatie.Controllers
         public ViewResult BulkInvoer(HttpPostedFileBase file)
         {
             ExcelHelper eh = new ExcelHelper();
-            if (eh.excelToDS(file, Server) != null)
+            DataSet Bedrijven = eh.excelToDS(file, Server);
+
+            if (Bedrijven != null)
             {
-                DataSet Bedrijven = eh.excelToDS(file, Server);
                 ViewData["feedback"] = eh.dataSetToBedrijf(Bedrijven);
             }
             return View("~/Views/Bedrijf/BulkInvoerBedrijf.cshtml");
