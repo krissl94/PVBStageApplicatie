@@ -364,20 +364,16 @@
     <Content Include="Views\Begeleider\Create.cshtml" />
     <Content Include="Views\Begeleider\Details.cshtml" />
     <Content Include="Views\Begeleider\Edit.cshtml" />
-    <Content Include="Views\GespreksFormulier\Details.cshtml" />
-    <Content Include="Views\GespreksFormulier\Edit.cshtml" />
     <Content Include="Views\Begeleider\Index.cshtml" />
     <Content Include="Views\Beoordeling\CreateEindbeoordeling.cshtml" />
     <Content Include="Views\Beoordeling\CreateFormulier.cshtml" />
     <Content Include="Views\Beoordeling\Details.cshtml" />
-    <Content Include="Views\Docent\BulkInvoerDocent.cshtml" />
     <Content Include="Views\Docent\Create.cshtml" />
     <Content Include="Views\Docent\Details.cshtml" />
     <Content Include="Views\Docent\Edit.cshtml" />
     <Content Include="Views\Docent\Index.cshtml" />
     <Content Include="Views\Formulier\Index.cshtml" />
     <Content Include="Views\Formulier\StudentIndex.cshtml" />
-    <Content Include="Views\GespreksFormulier\CreateGespreksFormulier.cshtml" />
     <Content Include="Views\GespreksFormulier\Details.cshtml" />
     <Content Include="Views\GespreksFormulier\Edit.cshtml" />
     <Content Include="Views\Koppeling\BulkInvoerKoppeling.cshtml" />
@@ -394,11 +390,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
-    <Content Include="Views\Login\index.cshtml" />
-    <Content Include="Views\Beoordeling\CreateFormulier.cshtml" />
     <Content Include="Views\GespreksFormulier\CreateGespreksFormulier.cshtml" />
-    <Content Include="Views\TussentijdseBeeindiging\CreateBeeindeging.cshtml" />
-    <Content Include="Views\Beoordeling\CreateEindbeoordeling.cshtml" />
     <Content Include="Views\Stagiair\BulkInvoerStagiair.cshtml" />
     <Content Include="Views\Stagiair\BulkNonActiefStagiair.cshtml" />
     <Content Include="Views\Stagiair\Create.cshtml" />
@@ -408,11 +400,8 @@
     <Content Include="Views\TussentijdseBeeindiging\CreateBeeindeging.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\Details.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Bedrijf\BulkInvoerBedrijf.cshtml" />
     <Content Include="Views\Formulier\Index.cshtml" />
-    <Content Include="Views\Begeleider\BulkInvoerBegeleider.cshtml" />
     <Content Include="Views\Docent\BulkInvoerDocent.cshtml" />
-    <Content Include="Views\Koppeling\BulkInvoerKoppeling.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
