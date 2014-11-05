@@ -103,3 +103,22 @@
         @Html.DisplayFor(model => model.Email)
     </div>
 </fieldset>
+
+<h2>Mederwerkers</h2>
+<table>
+    <tr>
+        <th>Medewerker</th>
+        <th></th>
+    </tr>
+    @foreach(var item in Model.Persoonsgegevens)
+    {
+        <tr>
+            <td>
+                @item.Voornaam @item.Toevoeging @item.Achternaam
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", "Begeleider", new { id = item.PersoonsgegevensID }, null)
+            </td>
+        </tr>
+    }
+</table>
