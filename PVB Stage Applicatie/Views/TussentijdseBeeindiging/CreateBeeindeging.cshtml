@@ -84,7 +84,7 @@
                 stageID: @Model.StageID
             },
             success:function(dataresponse){
-                window.location = '/Formulier/StudentIndex?StageID=' + dataresponse
+                window.location = '/Formulier/StudentIndex/' + dataresponse;
             }
         });
     }

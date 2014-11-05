@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Details";
+
+    var beeindigd = !(Model.Stage1.TussentijdseBeindeging.Count == 0 && Model.Stage1.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null);
 }
 <script>
     $(document).ready(function () {
@@ -57,6 +59,9 @@
     </table>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.GespreksformulierID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (!beeindigd)
+    {
+        Html.ActionLink("Edit", "Edit", new { id = Model.GespreksformulierID }); <div>|</div>
+    }
+    @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
 </p>

@@ -384,7 +384,6 @@
     <Content Include="Views\Koppeling\Create.cshtml" />
     <Content Include="Views\Koppeling\Details.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\Details.cshtml" />
-    <Content Include="Views\TussentijdseBeeindiging\Create.cshtml" />
     <Content Include="Views\Koppeling\Index.cshtml" />
     <Content Include="Views\Login\index.cshtml" />
     <Content Include="Views\Periode\Create.cshtml" />
@@ -406,7 +405,6 @@
     <Content Include="Views\Stagiair\Details.cshtml" />
     <Content Include="Views\Stagiair\Edit.cshtml" />
     <Content Include="Views\Stagiair\Index.cshtml" />
-    <Content Include="Views\TussentijdseBeeindiging\Create.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\CreateBeeindeging.cshtml" />
     <Content Include="Views\TussentijdseBeeindiging\Details.cshtml" />
     <Content Include="Views\Web.config" />

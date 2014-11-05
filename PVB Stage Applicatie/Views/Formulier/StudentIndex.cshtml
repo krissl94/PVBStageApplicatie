@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "StudentIndex";
 
-    var eindbeoordeling = Model.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault();
+    var beeindigd = !(Model.TussentijdseBeindeging.Count == 0 && Model.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null);
 }
 
 <h2>StudentIndex</h2>
@@ -13,12 +13,12 @@
     <ul>
         @if (User.IsInRole("Docent"))
         {
-            if (Model.TussentijdseBeindeging.Count == 0 && eindbeoordeling == null)
+            if (!beeindigd)
             {
-                <li>@Html.ActionLink("Beoordeling invullen", "CreateFormulier", "Beoordeling", new { stageID = Model.StageID}, null)</li>
-                <li>@Html.ActionLink("Gespreksformulier invullen", "CreateGespreksFormulier", "GespreksFormulier", new { stageID = Model.StageID }, null)</li>
-                <li>@Html.ActionLink("Eindbeoordeling invullen", "CreateEindbeoordeling", "Beoordeling", new { stageID = Model.StageID }, null)</li>
-                <li>@Html.ActionLink("Tussentijdse beëindiging invullen", "CreateBeeindeging", "TussentijdseBeeindiging", new { stageID = Model.StageID }, null)</li>
+                <li>@Html.ActionLink("Beoordeling invullen", "CreateFormulier", "Beoordeling", new { id = Model.StageID}, null)</li>
+                <li>@Html.ActionLink("Gespreksformulier invullen", "CreateGespreksFormulier", "GespreksFormulier", new { id = Model.StageID }, null)</li>
+                <li>@Html.ActionLink("Eindbeoordeling invullen", "CreateEindbeoordeling", "Beoordeling", new { id = Model.StageID }, null)</li>
+                <li>@Html.ActionLink("Tussentijdse beëindiging invullen", "CreateBeeindeging", "TussentijdseBeeindiging", new { id = Model.StageID }, null)</li>
             }
         }
     </ul>
@@ -105,7 +105,11 @@
                 @Html.DisplayFor(modelItem => item.ContactType)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", "GespreksFormulier", new { id = item.GespreksformulierID }, null) |
+                @if (!beeindigd)
+                {
+                    Html.ActionLink("Edit", "Edit", "GespreksFormulier", new { id = item.GespreksformulierID }, null);<div>|</div>
+                }
+                
                 @Html.ActionLink("Details", "Details", "GespreksFormulier", new { id = item.GespreksformulierID }, null)
             </td>
         </tr>

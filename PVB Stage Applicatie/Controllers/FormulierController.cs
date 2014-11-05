@@ -58,14 +58,14 @@ namespace PVB_Stage_Applicatie.Controllers
         [HttpPost]
         public ActionResult Index(StudentViewModel student)
         {
-            return RedirectToAction("StudentIndex", "Formulier", new { stageID = student.stageId });
+            return RedirectToAction("StudentIndex", "Formulier", new { id = student.stageId });
         }
 
 
         [Authorize(Roles = "Beheerder,Docent")]
-        public ActionResult StudentIndex(int stageID)
+        public ActionResult StudentIndex(int id)
         {
-            Stage stage = db.Stage.Where(s => s.StageID == stageID).FirstOrDefault();
+            Stage stage = db.Stage.Where(s => s.StageID == id).FirstOrDefault();
 
             if (stage != null)
                 if(User.IsInRole("Beheerder") || User.Identity.Name == stage.Stagedocent.ToString())

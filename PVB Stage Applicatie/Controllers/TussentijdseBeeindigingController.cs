@@ -31,16 +31,16 @@ namespace PVB_Stage_Applicatie.Controllers
         //
         // GET: /TussentijdseBeeindiging/CreateBeindeging
         [Authorize(Roles = "Docent")]
-        public ActionResult CreateBeeindeging(int stageID = 0)
+        public ActionResult CreateBeeindeging(int id = 0)
         {
-            Stage stage = db.Stage.Where(s => s.StageID == stageID).FirstOrDefault();
+            Stage stage = db.Stage.Where(s => s.StageID == id).FirstOrDefault();
 
             if (stage != null)
                 if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
                     if (User.Identity.Name == stage.Stagedocent.ToString())
                         return View(stage);
 
-            return RedirectToAction("StudentIndex", "Formulier", new { stageID = stageID });
+            return RedirectToAction("StudentIndex", "Formulier", new { id = id });
         }
 
         [HttpPost]

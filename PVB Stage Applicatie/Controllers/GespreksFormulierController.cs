@@ -27,19 +27,19 @@ namespace PVB_Stage_Applicatie.Controllers
         }
 
         [Authorize(Roles = "Docent")]
-        public ActionResult CreateGespreksFormulier(int stageID = 0)
+        public ActionResult CreateGespreksFormulier(int id = 0)
         {
             GespreksformulierViewModel GespreksFormulierStage = new GespreksformulierViewModel();
-            GespreksFormulierStage.StageID = db.Stage.Where(i => i.StageID == stageID).FirstOrDefault();
+            GespreksFormulierStage.StageID = db.Stage.Where(i => i.StageID == id).FirstOrDefault();
 
-            Stage stage = db.Stage.Where(s => s.StageID == stageID).FirstOrDefault();
+            Stage stage = db.Stage.Where(s => s.StageID == id).FirstOrDefault();
 
             if (stage != null)
                 if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
                     if (User.Identity.Name == stage.Stagedocent.ToString())
                         return View(GespreksFormulierStage);
 
-            return RedirectToAction("StudentIndex", "Formulier", new { stageID = stageID });
+            return RedirectToAction("StudentIndex", "Formulier", new { id = id });
         }
         
         [HttpPost]
@@ -88,7 +88,7 @@ namespace PVB_Stage_Applicatie.Controllers
                     if (User.Identity.Name == stage.Stagedocent.ToString())
                         return View(gespreksformulier);
 
-            return RedirectToAction("StudentIndex", "Formulier", new { stageID = stage.StageID });
+            return RedirectToAction("StudentIndex", "Formulier", new { id = stage.StageID });
         }
 
         [HttpPost]
@@ -110,7 +110,7 @@ namespace PVB_Stage_Applicatie.Controllers
                 db.Entry(gespreksformulierOriginal).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("StudentIndex", "Formulier", new { stageID = gespreksformulierOriginal.Stage });
+                return RedirectToAction("StudentIndex", "Formulier", new { id = gespreksformulierOriginal.Stage });
             }
             return View(gespreksformulier);
         }
