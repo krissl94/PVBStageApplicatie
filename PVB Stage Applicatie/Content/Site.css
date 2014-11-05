@@ -81,20 +81,18 @@ legend {
     height:40px;
 }
 
-#subMenuLinks{
-    position:absolute;
-    float:left;
-    padding-left:10px;
-    margin-right:50px;
-    width:150px;
-    background-color:#788895;
-    height: 100%;
+
+#contentArea{
+    margin-right: auto;
+    margin-left: auto;
+    width:90%;
 }
 
 #content{
-    position:absolute;
-    margin-left:200px;
-    width:1000px;
+    display:inline-block;
+    width:auto;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .display-label, 
@@ -140,23 +138,6 @@ a.menuknop{
 
 
 
-#subMenuLinks ul li {
-    list-style:none;
-    display:inline-block;
-    border:1px solid black;
-    width:130px;
-    margin-bottom:10px;
-    text-align:center;
-}
-
-#subMenuLinks ul li:hover{
-    list-style:none;
-    display:inline-block;
-    border:1px solid black;
-    width:130px;
-    margin-bottom:10px;
-    box-shadow: 3px 3px 3px 0px;
-}
 
 
 #subMenuLinks ul {

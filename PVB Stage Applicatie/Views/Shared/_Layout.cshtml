@@ -13,23 +13,24 @@
     @Scripts.Render("~/bundles/jqueryui")
 </head>
 <body>
-    <div id="bovenbalk">
-        
-        <nav class="navbar navbar-default"  >
-            <a class="navbar-brand" href='/Home/Index'>Stage Applicatie</a>
-            <div class="navbar-collapse collapse">
-                @Html.Partial("~/Views/Shared/_Menu.cshtml")
-            </div>
-        </nav>
+
+    <nav class="navbar navbar-default">
+        <a class="navbar-brand" href='/Home/Index'>Stage Applicatie</a>
+        <div class="navbar-collapse collapse">
+            @Html.Partial("~/Views/Shared/_Menu.cshtml")
         </div>
-    <div>
+
+
         <ul class="nav nav-tabs" role="tablist">
 
             @RenderSection("zijMenu", false)
-            </ul>
-</div>
-    <div id="content">
-        @RenderBody()
+        </ul>
+    </nav>
+
+    <div id="contentArea">
+        <div id="content">
+            @RenderBody()
+        </div>
     </div>
 
     @RenderSection("scripts", required: false)
@@ -39,7 +40,12 @@
     $(window).load(function () {
         debugger;
         var pathname = window.location.pathname;
-        var controllername = "/" + pathname.split('/')[1];
+        if (pathname == "/" || pathname == "/Home/Index") {
+            controllername = "/";
+        }
+        else {
+            var controllername = "/" + pathname.split('/')[1];
+        }
         $('a[href="' + controllername + '"]').parent().addClass("active");
 
         $(".nav-tabs > .active a").addClass("glyphicon glyphicon-arrow-left");
