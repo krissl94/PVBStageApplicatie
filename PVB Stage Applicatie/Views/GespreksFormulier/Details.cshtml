@@ -61,7 +61,7 @@
 <p>
     @if (!beeindigd)
     {
-        Html.ActionLink("Edit", "Edit", new { id = Model.GespreksformulierID }); <div>|</div>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.GespreksformulierID }); <thisdoesnottink>|</thisdoesnottink>
     }
     @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
 </p>

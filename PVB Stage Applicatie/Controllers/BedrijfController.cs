@@ -81,19 +81,10 @@ namespace PVB_Stage_Applicatie.Controllers
         {
             try
             {
-                bool bestaatbedrijf;
-                if (db.Bedrijf.Where(b => b.Naam == bedrijf.Naam).FirstOrDefault() != null)
-                {
-                    bestaatbedrijf = true;
-                }
-                else
-                {
-                    bestaatbedrijf = false;
-                }
-
-                if (bestaatbedrijf == false)
+                if (db.Bedrijf.Where(b => b.Naam == bedrijf.Naam).FirstOrDefault() == null)
                 {
                     bedrijf.Actief = true;
+
                     if (ModelState.IsValid)
                     {
                         db.Bedrijf.Add(bedrijf);
@@ -104,14 +95,15 @@ namespace PVB_Stage_Applicatie.Controllers
                 else
                 {
                     ViewData["Foutmelding"] = "Deze bedrijfsnaam staat al in ons systeem";
-                    return View();
+                    return View(bedrijf);
                 }
+
                 return View(bedrijf);
             }
             catch(Exception ex)
             {
                 ViewData["Foutmelding"] = ex.ToString();
-                return View();
+                return View(bedrijf);
             }
         }
 

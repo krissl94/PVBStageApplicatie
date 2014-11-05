@@ -50,7 +50,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
                 Response.Cookies.Add(cookie);
 
-                Response.Redirect("/Home/Index");
+                Response.Redirect(Request.QueryString["ReturnURL"] == null ? "~/Home" : Request.QueryString["ReturnURL"]);
             }
 
             return View(new LoginForm { correct = false });

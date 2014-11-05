@@ -107,7 +107,7 @@
             <td>
                 @if (!beeindigd)
                 {
-                    Html.ActionLink("Edit", "Edit", "GespreksFormulier", new { id = item.GespreksformulierID }, null);<div>|</div>
+                    @Html.ActionLink("Edit", "Edit", "GespreksFormulier", new { id = item.GespreksformulierID }, null);<nay>|</nay>
                 }
                 
                 @Html.ActionLink("Details", "Details", "GespreksFormulier", new { id = item.GespreksformulierID }, null)

@@ -61,40 +61,6 @@ namespace PVB_Stage_Applicatie.Controllers
             return RedirectToAction("StudentIndex", "Formulier", new { id = id });
         }
 
-        //
-        // GET: /Beoordeling/Edit/5
-        [Authorize(Roles = "Docent")]
-        public ActionResult Edit(int id = 0)
-        {
-            Beoordeling beoordeling = db.Beoordeling.Find(id);
-            if (beoordeling == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID", beoordeling.Stage);
-            return View(beoordeling);
-        }
-
-        //
-        // POST: /Beoordeling/Edit/5
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Docent")]
-        public ActionResult Edit(Beoordeling beoordeling)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(beoordeling).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID", beoordeling.Stage);
-            return View(beoordeling);
-        }
-
-        //
-        // GET: /Beoordeling/Delete/5
         [HttpPost]
         [Authorize(Roles = "Docent")]
         public int OpsturenEind(string beoordelingenJson, string handtekeningenJson, int stageID)
@@ -169,9 +135,7 @@ namespace PVB_Stage_Applicatie.Controllers
             db.Beoordeling.Add(bobj);
             db.SaveChanges();
 
-            Stage stageToPost = db.Stage.Where(i => i.StageID == stageID).FirstOrDefault();
-            RedirectToAction("StudentIndex", "Formulier", stageToPost);
-            return stageToPost.StageID;
+            return stageID;
         }
 
         [HttpPost]
@@ -247,9 +211,7 @@ namespace PVB_Stage_Applicatie.Controllers
             db.Beoordeling.Add(bobj);
             db.SaveChanges();
 
-            Stage stageToPost = db.Stage.Where(i => i.StageID == stageID).FirstOrDefault();
-            RedirectToAction("StudentIndex", "Formulier", stageToPost);
-            return stageToPost.StageID;
+            return stageID;
         }
 
         protected override void Dispose(bool disposing)
