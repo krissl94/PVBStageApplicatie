@@ -75,30 +75,44 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Docent")]
         public ActionResult Edit(int id = 0)
         {
-            Gespreksformulier gesprek = db.Gespreksformulier.Where(i => i.GespreksformulierID == id).FirstOrDefault();
-            Stage stage = gesprek.Stage1;
+            Gespreksformulier gespreksformulier = db.Gespreksformulier.Where(i => i.GespreksformulierID == id).FirstOrDefault();
+            Stage stage;
 
-            if (stage != null)
+            if (gespreksformulier != null)
+                stage = gespreksformulier.Stage1;
+            else
+                stage = new Stage { StageID = 0 };
+
+            if (gespreksformulier != null)
                 if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
                     if (User.Identity.Name == stage.Stagedocent.ToString())
-                        return View(gesprek);
+                        return View(gespreksformulier);
 
             return RedirectToAction("StudentIndex", "Formulier", new { stageID = stage.StageID });
         }
 
         [HttpPost]
         [Authorize(Roles = "Docent")]
-        public ActionResult Edit(Gespreksformulier gesprek)
+        public ActionResult Edit(Gespreksformulier gespreksformulier)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(gesprek).State = EntityState.Modified;
+                Gespreksformulier gespreksformulierOriginal = db.Gespreksformulier.Where(i => i.GespreksformulierID == gespreksformulier.GespreksformulierID).FirstOrDefault();
+
+                gespreksformulierOriginal.Gesprek = gespreksformulier.Gesprek;
+
+                //gespreksformulier.Stage1 = db.Stage.Where(i => i.StageID == gespreksformulier.Stage).FirstOrDefault();
+                //gespreksformulier.HandtekeningBegeleider = gespreksformulierOriginal.HandtekeningBegeleider;
+                //gespreksformulier.HandtekeningDocent = gespreksformulier.HandtekeningDocent;
+                //gespreksformulier.HandtekeningStudent = gespreksformulier.HandtekeningStudent;
+
+                //db.Entry(gespreksformulierOriginal).State = EntityState.Detached;
+                db.Entry(gespreksformulierOriginal).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("StudentIndex", "Formulier", new { stageID = gesprek.Stage });
+                return RedirectToAction("StudentIndex", "Formulier", new { stageID = gespreksformulierOriginal.Stage });
             }
-
-            return View(gesprek);
+            return View(gespreksformulier);
         }
 
         protected override void Dispose(bool disposing)
