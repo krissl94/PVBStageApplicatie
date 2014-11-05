@@ -9,52 +9,52 @@
 {
     @section zijMenu
     {
-        <ul>
             <li>
                 @Html.ActionLink("Create New", "Create")
             </li>
             <li>
                 @Html.ActionLink("Bulk invoer", "BulkInvoerStagiair")
             </li>
-        </ul>
     }
 
 }
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Voornaam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Achternaam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StudentNummer)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="col-md-6">
+    <table class="table table-striped">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Voornaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Achternaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StudentNummer)
-            </td>
-            <td>
-                @if (User.IsInRole("Beheerder"))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.PersoonsgegevensID })
-                }
-                @Html.ActionLink("Details", "Details", new { id = item.PersoonsgegevensID })
-            </td>
-
+            <th>
+                @Html.DisplayNameFor(model => model.Voornaam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Achternaam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentNummer)
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Voornaam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Achternaam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentNummer)
+                </td>
+                <td>
+                    @if (User.IsInRole("Beheerder"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PersoonsgegevensID}, new { @class = "btn btn-xs btn-info" })
+                    }
+                    @Html.ActionLink("Details", "Details", new { id = item.PersoonsgegevensID }, new { @class = "btn btn-xs btn-info" })
+                </td>
+
+            </tr>
+        }
+
+    </table>
+</div>

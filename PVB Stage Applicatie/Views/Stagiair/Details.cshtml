@@ -5,13 +5,11 @@
 }
 
 @section ZijMenu{
-    <ul>
         @if(User.IsInRole("Beheerder"))
         {
         <li>@Html.ActionLink("Edit", "Edit", new { id = Model.PersoonsgegevensID }) </li>
         }
 <li>@Html.ActionLink("Back to List", "Index") </li>
-</ul>
 }
 
 <h2>Details</h2>

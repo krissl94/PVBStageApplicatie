@@ -7,20 +7,27 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/base/css")
 
+
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
 </head>
 <body>
     <div id="bovenbalk">
-        <img src="~/Images/logo.png"/>
-        <div id="menubalk">
-            @Html.Partial("~/Views/Shared/_Menu.cshtml")
+        
+        <nav class="navbar navbar-default"  >
+            <a class="navbar-brand" href='/Home/Index'>Stage Applicatie</a>
+            <div class="navbar-collapse collapse">
+                @Html.Partial("~/Views/Shared/_Menu.cshtml")
+            </div>
+        </nav>
         </div>
-    </div>
-    <div id="subMenuLinks">
-        @RenderSection("zijMenu", false)
-    </div>
+    <div>
+        <ul class="nav nav-tabs" role="tablist">
+
+            @RenderSection("zijMenu", false)
+            </ul>
+</div>
     <div id="content">
         @RenderBody()
     </div>
@@ -28,3 +35,15 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+<script>
+    $(window).load(function () {
+        debugger;
+        var pathname = window.location.pathname;
+        var controllername = "/" + pathname.split('/')[1];
+        $('a[href="' + controllername + '"]').parent().addClass("active");
+
+        $(".nav-tabs > .active a").addClass("glyphicon glyphicon-arrow-left");
+
+        $(".nav-tabs > .active a").text("");
+    });
+</script>

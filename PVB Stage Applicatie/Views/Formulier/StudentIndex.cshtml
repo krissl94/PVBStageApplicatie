@@ -10,7 +10,6 @@
 
 <h2>Index</h2>
 @section zijMenu{
-    <ul>
         @if (User.IsInRole("Docent"))
         {
             if (!beeindigd)
@@ -21,7 +20,6 @@
                 <li>@Html.ActionLink("Tussentijdse beëindiging invullen", "CreateBeeindeging", "TussentijdseBeeindiging", new { id = Model.StageID }, null)</li>
             }
         }
-    </ul>
 }
 
 <h2>Beoordeling</h2>

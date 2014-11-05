@@ -12,7 +12,11 @@
                         Periode = s.Begindatum + " - " + s.Einddatum
                     }), "PeriodeID", "Periode");
 }
-
+@section zijMenu{
+    <li>
+        @Html.ActionLink("Terug", "Index")
+    </li>
+}
 <h2>BulkInvoerKoppeling</h2>
 @using (Html.BeginForm("BulkInvoerKoppeling", "Koppeling", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

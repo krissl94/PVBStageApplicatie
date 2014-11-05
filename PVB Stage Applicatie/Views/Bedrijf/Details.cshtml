@@ -9,13 +9,11 @@
     });
 </script>
 @section zijMenu{
-    <ul>
 @if (User.IsInRole("Beheerder"))
 {
     <li>@Html.ActionLink("Edit", "Edit", new { id = Model.BedrijfID })</li>
 }
     <li>@Html.ActionLink("Back to List", "Index")</li>
-</ul>
 }
 @{
     ViewBag.Title = "Details";

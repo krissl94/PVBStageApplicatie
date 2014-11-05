@@ -9,10 +9,8 @@
 @if (User.IsInRole("Beheerder"))
 {
     @section zijMenu{
-        <ul>
             <li>@Html.ActionLink("Nieuw bedrijf", "Create")</li>
             <li>@Html.ActionLink("Bulk invoer", "BulkInvoerBedrijf")</li>
-        </ul>
     }
 }
 

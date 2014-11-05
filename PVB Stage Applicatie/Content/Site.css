@@ -138,11 +138,7 @@ a.menuknop{
     font-weight:700;
 }
 
-td a{
-    color:blue;
-    font-weight:inherit;
-    text-decoration:underline;
-}
+
 
 #subMenuLinks ul li {
     list-style:none;
@@ -165,4 +161,12 @@ td a{
 
 #subMenuLinks ul {
     padding-left:0px;
+}
+
+.nav-tabs {
+    padding-left:125px !important;
+}
+
+.active > .glyphicon-arrow-left{
+cursor: pointer !important; 
 }
