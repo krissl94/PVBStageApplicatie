@@ -29,7 +29,7 @@ namespace PVB_Stage_Applicatie.Controllers
         }
 
         //
-        // GET: /TussentijdseBeeindiging/CreateBeindeging
+        // GET: /TussentijdseBeeindiging/CreateBeeindeging
         [Authorize(Roles = "Docent")]
         public ActionResult CreateBeeindeging(int id = 0)
         {
@@ -38,9 +38,90 @@ namespace PVB_Stage_Applicatie.Controllers
             if (stage != null)
                 if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
                     if (User.Identity.Name == stage.Stagedocent.ToString())
-                        return View(stage);
+                    {
+                        TussentijdseEindBeoordelingModel thisIsTheEndMyOnlyFriendTheEnd = new TussentijdseEindBeoordelingModel()
+                        {
+                            TussentijdseBeeindegingModel = new TussentijdseBeindeging()
+                            {
+                                Stage = stage.StageID,
+                                Stage1 = stage
+                            }
+                        };
+
+                        return View(thisIsTheEndMyOnlyFriendTheEnd);
+                    }
 
             return RedirectToAction("StudentIndex", "Formulier", new { id = id });
+        }
+
+        //
+        // POST: /TussentijdseBeeindiging/CreateBeeindeging
+        [HttpPost]
+        [Authorize(Roles = "Docent")]
+        public ActionResult CreateBeeindeging(TussentijdseEindBeoordelingModel tussentijdseEindBeoordelingModel)
+        {
+            TussentijdseBeindeging tb = tussentijdseEindBeoordelingModel.TussentijdseBeeindegingModel;
+
+            if (ModelState.IsValid)
+            {
+
+                if (tussentijdseEindBeoordelingModel.RedenenStudent != null)
+                {
+                    foreach (string item in tussentijdseEindBeoordelingModel.RedenenStudent.Split(','))
+                    {
+                        int id = Convert.ToInt32(item);
+                        tb.RedenStudent.Add(db.RedenStudent.Where(i => i.RedenID == id).SingleOrDefault());
+                    }
+                }
+
+                if (tussentijdseEindBeoordelingModel.RedenenOnderwijsinstelling != null)
+                {
+                    foreach (string item in tussentijdseEindBeoordelingModel.RedenenOnderwijsinstelling.Split(','))
+                    {
+                        int id = Convert.ToInt32(item);
+                        tb.RedenOnderwijsinstelling.Add(db.RedenOnderwijsinstelling.Where(i => i.RedenID == id).SingleOrDefault());
+                    }
+                }
+
+                if (tussentijdseEindBeoordelingModel.RedenenOrganisatie != null)
+                {
+                    foreach (string item in tussentijdseEindBeoordelingModel.RedenenOrganisatie.Split(','))
+                    {
+                        int id = Convert.ToInt32(item);
+                        tb.RedenOrganisatie.Add(db.RedenOrganisatie.Where(i => i.RedenOrganisatie1 == id).SingleOrDefault());
+                    }
+                }
+
+                tb.Stage1 = db.Stage.Where(s => s.StageID == tb.Stage).FirstOrDefault();
+
+                db.TussentijdseBeindeging.Add(tb);
+
+                db.SaveChanges();
+
+                return RedirectToAction("StudentIndex", "Formulier", new { id = tb.Stage });
+            }
+
+            return CreateBeeindeging(tb.Stage);
+
+            //Stage stage = db.Stage.Where(s => s.StageID == id).FirstOrDefault();
+
+            //if (stage != null)
+            //    if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
+            //        if (User.Identity.Name == stage.Stagedocent.ToString())
+            //        {
+            //            TussentijdseEindBeoordelingModel thisIsTheEndMyOnlyFriendTheEnd = new TussentijdseEindBeoordelingModel()
+            //            {
+            //                TussentijdseBeeindegingModel = new TussentijdseBeindeging()
+            //                {
+            //                    Stage = stage.StageID,
+            //                    Stage1 = stage
+            //                }
+            //            };
+
+            //            return View(thisIsTheEndMyOnlyFriendTheEnd);
+            //        }
+
+            //return RedirectToAction("StudentIndex", "Formulier", new { id = id });
         }
 
         [HttpPost]

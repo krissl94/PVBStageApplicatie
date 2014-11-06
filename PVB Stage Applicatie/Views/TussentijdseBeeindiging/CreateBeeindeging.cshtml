@@ -1,91 +1,153 @@
-﻿@model PVB_Stage_Applicatie.Models.Stage
+﻿@model PVB_Stage_Applicatie.Models.TussentijdseEindBeoordelingModel
 @{
     ViewBag.Title = "CreateBeeindeging";
-    
-    PVB_Stage_Applicatie.Models.StageApplicatieEntities db = new PVB_Stage_Applicatie.Models.StageApplicatieEntities();
 }
 
-<h2>CreateBeeindeging</h2>
-<div class="velden">
-    <p>Beëindigings datum<input id="WerkelijkeEindDatum" type="date" value="WerkelijkeEindDatum" /> </p>
-    <p>Opleiding <input id="opleiding" type="text" /> </p>
-    <p>CREBO <input id="crebo" type="text" /> </p>    
-</div>
-
-<div class="leerweg">
-    <p>Leerweg BOL<input name="leerweg" type="radio" value="0" /> BBL<input name="leerweg" type="radio" value="1" /></p>
-</div>
-
-<br />
-<div id="onderwijs" class="checkboxes">
-    <h1>Redenen onderwijsinstelling</h1>
-    @foreach (PVB_Stage_Applicatie.Models.RedenOnderwijsinstelling item in db.RedenOnderwijsinstelling)
-    {
-        @:<input id="@item.Reden.Replace(" ", "").Replace("/","")" type="checkbox" data-id="@item.RedenID" /> @item.Reden <br />
+<style type="text/css">
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
     }
-</div>
 
-<br />
-
-<div id="organisatie" class="checkboxes">
-    <h1>Redenen praktijkbiedende organisatie</h1>
-    @foreach (PVB_Stage_Applicatie.Models.RedenOrganisatie item in db.RedenOrganisatie)
-    {
-        @:<input id="@item.Reden.Replace(" ", "").Replace("/", "")" type="checkbox" data-id="@item.RedenOrganisatie1" /> @item.Reden <br />
+    th, td {
+        padding: 5px;
     }
-</div>
 
-<br />
-
-<div id="student" class="checkboxes">
-    <h1>Redenen student</h1>
-    @foreach (PVB_Stage_Applicatie.Models.RedenStudent item in db.RedenStudent)
-    {
-        @:<input id="@item.Reden.Replace(" ", "").Replace("/", "")" type="checkbox" data-id="@item.RedenID" /> @item.Reden <br />
+    cvsmaster {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
-</div>
 
-<br />
 
-<input type="button" value="Create" onclick="JahoorStuurMaar()"/>
+
+    .clsbtn {
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+
+@using (Html.BeginForm("CreateBeeindeging", "TussentijdseBeeindiging", FormMethod.Post, new { id = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.TussentijdseBeeindegingModel.Stage)
+    @Html.HiddenFor(m => m.RedenenOrganisatie)
+    @Html.HiddenFor(m => m.RedenenOnderwijsinstelling)
+    @Html.HiddenFor(m => m.RedenenStudent)
+    
+    <h2>CreateBeeindeging</h2>
+
+    <table>
+        <tr>
+            <td>
+                Student:
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.TussentijdseBeeindegingModel.Stage1.Persoonsgegevens.Voornaam) @Html.DisplayFor(m => m.TussentijdseBeeindegingModel.Stage1.Persoonsgegevens.Achternaam)
+            </td>
+            <td>
+                Bedrijf:
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.TussentijdseBeeindegingModel.Stage1.Persoonsgegevens2.Bedrijf1.Naam)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Stagedocent:
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.TussentijdseBeeindegingModel.Stage1.Persoonsgegevens1.Voornaam) @Html.DisplayFor(m => m.TussentijdseBeeindegingModel.Stage1.Persoonsgegevens1.Achternaam)
+            </td>
+            <td>
+                Stagebegeleider:
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.TussentijdseBeeindegingModel.Stage1.Persoonsgegevens2.Voornaam) @Html.DisplayFor(m => m.TussentijdseBeeindegingModel.Stage1.Persoonsgegevens2.Achternaam)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Periode
+            </td>
+            <td colspan="3">
+                @Html.DisplayFor(m => m.TussentijdseBeeindegingModel.Stage1.Periode.Begindatum) @Html.DisplayFor(m => m.TussentijdseBeeindegingModel.Stage1.Periode.Einddatum)
+            </td>
+        </tr>
+    </table>
+    
+    <div class="velden">
+        <p>
+            <h3>CREBO</h3>
+
+            @Html.EditorFor(m => m.TussentijdseBeeindegingModel.CREBO)
+            @Html.ValidationMessageFor(model => model.TussentijdseBeeindegingModel.CREBO)
+        </p>
+
+        <p>
+            <h3>Beoogde einddatum</h3>
+
+            @Html.EditorFor(m => m.TussentijdseBeeindegingModel.Einddatum)
+            @Html.ValidationMessageFor(model => model.TussentijdseBeeindegingModel.Einddatum)
+        </p>
+        <p>
+            <h3>Leerweg</h3>
+
+            @Html.RadioButtonFor(m => m.TussentijdseBeeindegingModel.Leerweg, 0) BOL
+            @Html.RadioButtonFor(m => m.TussentijdseBeeindegingModel.Leerweg, 1) BBL
+            @Html.ValidationMessageFor(model => model.TussentijdseBeeindegingModel.Leerweg)
+        </p>
+    </div>
+    <br />
+    <div data-veld="RedenenOnderwijsinstelling" class="checkboxes">
+        <h3>Redenen onderwijsinstelling</h3>
+        @foreach (var item in Model.RedenOnderwijsinstelling)
+        {
+            @:<input type="checkbox" data-id="@item.RedenID" /> @item.Reden <br />
+        }
+        @Html.ValidationMessageFor(model => model.RedenOnderwijsinstelling)
+    </div>
+    <br />
+    <div data-veld="RedenenOrganisatie" class="checkboxes">
+        <h3>Redenen praktijkbiedende organisatie</h3>
+        @foreach (var item in Model.RedenOrganisatie)
+        {
+            @:<input type="checkbox" data-id="@item.RedenOrganisatie1" /> @item.Reden <br />
+        }
+        @Html.ValidationMessageFor(model => model.RedenenOrganisatie)
+    </div>
+    <br />
+    <div data-veld="RedenenStudent" class="checkboxes">
+        <h3>Redenen student</h3>
+        @foreach (var item in Model.RedenStudent)
+        {
+            @:<input type="checkbox" data-id="@item.RedenID" /> @item.Reden <br />
+        }
+        @Html.ValidationMessageFor(model => model.RedenenStudent)
+    </div>
+    <br />
+    <input type="submit" value="Create" onclick="JahoorStuurMaar()"/>
+}
 
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
 <script type="text/javascript">
 
     function JahoorStuurMaar() {
-        var jsonToPost = {};
 
         d3.selectAll(".checkboxes").each(function () {
-            var group = this.id;
-            jsonToPost[group] = [];
+            var group = this.dataset.veld;
+            var temp = "";
 
             d3.select(this).selectAll("input").each(function () {
                 if (this.checked) {
-                    jsonToPost[group].push(parseInt(this.dataset.id));
+                    temp += this.dataset.id + ",";
                 }
             });
-        });
-        
-        d3.select(".velden").selectAll("input").each(function () {
-            jsonToPost[this.id] = this.value;
-        });
 
-        jsonToPost.leerweg =  parseInt($("input[name=leerweg]:checked").val());
-
-        jsonToPost = JSON.stringify(jsonToPost);
-
-        $.ajax({
-            url: '/TussentijdseBeeindiging/Opsturen',
-            type: 'POST',
-            data:
-            {
-                tussentijdseBeeindigingJson: jsonToPost,
-                stageID: @Model.StageID
-            },
-            success:function(dataresponse){
-                window.location = '/Formulier/StudentIndex/' + dataresponse;
-            }
+            $("#" + group)[0].value = temp.slice(0, -1);
         });
     }
 

@@ -63,13 +63,13 @@ namespace PVB_Stage_Applicatie.Controllers
                     Stage = formulier.StageID.StageID
                 });
                 db.Gespreksformulier.Add(toAdd);
-
                 
                 db.SaveChanges();
-                return View("~/Views/Formulier/StudentIndex.cshtml", stageToAdd);
+
+                return RedirectToAction("StudentIndex", "Formulier", new { id = formulier.StageID.StageID });
             }
 
-            return View("~/Views/Formulier/StudentIndex.cshtml", stageToAdd);
+            return View(formulier);
         }
 
         [Authorize(Roles = "Docent")]

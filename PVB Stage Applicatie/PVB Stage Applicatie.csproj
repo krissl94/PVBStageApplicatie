@@ -165,6 +165,7 @@
     <Compile Include="Models\Beoordeling.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BeoordelingModel.cs" />
     <Compile Include="Models\BeoordelingsJson.cs" />
     <Compile Include="Models\CreateLoginViewModel.cs" />
     <Compile Include="Models\CustomRoleProvider.cs" />
@@ -238,6 +239,7 @@
     <Compile Include="Models\TussentijdseBeindeging.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TussentijdseEindBeoordelingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -418,7 +420,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Formulier\Index.cshtml" />
     <Content Include="Views\Docent\BulkInvoerDocent.cshtml" />
-    <Content Include="Views\Bedrijf\Edit2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
