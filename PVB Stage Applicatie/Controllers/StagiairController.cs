@@ -34,7 +34,7 @@ namespace PVB_Stage_Applicatie.Controllers
                 return View(studentenDocent);
             };
             var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 4);
-            return View(persoonsgegevens.ToList());
+            return View(persoonsgegevens.OrderBy(p=>p.StudentNummer).ToList());
         }
 
         //

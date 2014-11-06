@@ -4,94 +4,117 @@
     ViewBag.Title = "Details";
 }
 @section zijMenu{
-    <ul>
-        <li>@Html.ActionLink("Terug", "Index")</li>
-    </ul>
+    @if (User.IsInRole("Beheerder"))
+    {
+        <li>@Html.ActionLink("Edit", "Edit", new { id = Model.StageID })</li>
+    }
+    <li>@Html.ActionLink("Terug", "Index")</li>
 }
-<h2>Details</h2>
-
-<fieldset class="stage-field">
-    <legend>Stagiair</legend>
-    <div class="display-row">
-
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.Persoonsgegevens.Voornaam): 
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Persoonsgegevens.Voornaam)
-        </div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Koppeling details</h3>
     </div>
-    <div class="display-row">
+    <div class="panel-body">
+        <div class="col-md-3">
+            <table class="table table-striped">
+                <tr>
+                    <th colspan="2">
+                        <h4>Stagiair</h4>
+                    </th>
+                </tr>
+                    <tr>
+                        <td class="display-label">
+                            @Html.DisplayNameFor(model => model.Persoonsgegevens.Voornaam):
+                        </td>
+                        <td class="display-field">
+                            @Html.DisplayFor(model => model.Persoonsgegevens.Voornaam)
+                        </td>
+                    </tr>
+                    <tr>
 
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.Persoonsgegevens.Achternaam):
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Persoonsgegevens.Achternaam)
-        </div>
+            <td class="display-label">
+                @Html.DisplayNameFor(model => model.Persoonsgegevens.Achternaam):
+            </td>
+            <td class="display-field">
+                @Html.DisplayFor(model => model.Persoonsgegevens.Achternaam)
+            </td>
+        </table>
     </div>
-</fieldset>
+        <div class="col-md-3">
+            <table class="table table-striped">
+                <tr>
+                    <th colspan="2">
+                        <h4>Docent</h4>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Persoonsgegevens1.Voornaam):
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Persoonsgegevens1.Voornaam)
+                    </td>
+                </tr>
+                <tr>
 
-<fieldset class="stage-field">
-    <legend>Docent</legend>
-    <div class="display-row">
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.Persoonsgegevens1.Voornaam):
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Persoonsgegevens1.Achternaam):
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Persoonsgegevens1.Achternaam)
+                    </td>
+            </table>
         </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Persoonsgegevens1.Voornaam)
-        </div>
-    </div>
-    <div class="display-row">
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.Persoonsgegevens1.Achternaam):
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Persoonsgegevens1.Achternaam)
-        </div>
-    </div>
-</fieldset>
-<fieldset class="stage-field">
-    <legend>Begeleider</legend>
+        <div class="col-md-3">
+            <table class="table table-striped">
+                <tr>
+                    <th colspan="2">
+                        <h4>Begeleider</h4>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Persoonsgegevens2.Voornaam):
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Persoonsgegevens2.Voornaam)
+                    </td>
+                </tr>
+                <tr>
 
-    <div class="display-row">
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.Persoonsgegevens2.Voornaam):
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Persoonsgegevens2.Achternaam):
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Persoonsgegevens2.Achternaam)
+                    </td>
+            </table>
         </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Persoonsgegevens2.Voornaam)
-        </div>
-    </div>
+        <div class="col-md-3">
+            <table class="table table-striped">
+                <tr>
+                    <th colspan="2">
+                        <h4>Begeleider</h4>
+                    </th>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        Begindatum:
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Periode.Begindatum)
+                    </td>
+                </tr>
+                <tr>
 
-    <div class="display-row">
-        <div class="display-label">
-            @Html.DisplayNameFor(model => model.Persoonsgegevens2.Achternaam):
+                    <td class="display-label">
+                        Einddatum:
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Periode.Einddatum)
+                    </td>
+            </table>
         </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Persoonsgegevens2.Achternaam)
         </div>
-    </div>
-
-</fieldset>
-<fieldset class="stage-field">
-    <legend>Periode</legend>
-    <div class="display-row">
-        <div class="display-label">
-            Begindatum:
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Periode.Begindatum)
-        </div>
-    </div>
-    <div class="display-row">
-        <div class="display-label">
-            Einddatum:
-        </div>
-        <div class="display-field">
-            @Html.DisplayFor(model => model.Periode.Einddatum)
-        </div>
-    </div>
-
-</fieldset>
 
 

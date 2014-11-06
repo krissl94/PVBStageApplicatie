@@ -4,56 +4,65 @@
     ViewBag.Title = "Index";
 }
 @section zijMenu{
-        <li>@Html.ActionLink("Nieuwe docent", "Create")</li>
-        <li>@Html.ActionLink("Bulk invoer", "BulkInvoerDocent")</li>
+    <li>@Html.ActionLink("Nieuwe docent", "Create")</li>
+    <li>@Html.ActionLink("Bulk invoer", "BulkInvoerDocent")</li>
 }
 <h2>Index</h2>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Bedrijven</h3>
+    </div>
+    <div class="panel-body">
 
-<table>
-    <tr>
-        <th>
-            Medewerker ID
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Voornaam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Achternaam)
-        </th>
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        Medewerker ID
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Voornaam)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Achternaam)
+                    </th>
 
-        <th>
-            Actief
-        </th>
-        <th>
-            Non-actief Reden
-        </th>
-        <th></th>
-    </tr>
+                    <th>
+                        Actief
+                    </th>
+                    <th>
+                        Non-actief Reden
+                    </th>
+                    <th></th>
+                </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink("" + item.MedewerkerID, "Details", new { id = item.PersoonsgegevensID })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Voornaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Achternaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Actief)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NonActiefReden)
-            </td>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink("" + item.MedewerkerID, "Details", new { id = item.PersoonsgegevensID })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voornaam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Achternaam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Actief)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NonActiefReden)
+                        </td>
 
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.PersoonsgegevensID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PersoonsgegevensID }) 
-            </td>
-        </tr>
-    }
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.PersoonsgegevensID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.PersoonsgegevensID })
+                        </td>
+                    </tr>
+                }
 
-</table>
+            </table>
+        </div>
+    </div>
+</div>
