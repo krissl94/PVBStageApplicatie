@@ -24,7 +24,7 @@ namespace PVB_Stage_Applicatie.Controllers
                 return RedirectToAction("Details/" + HttpContext.User.Identity.Name);
             };
             var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 2);
-            return View(persoonsgegevens.ToList());
+            return View(persoonsgegevens.ToList().OrderBy(x=>x.MedewerkerID));
         }
 
 

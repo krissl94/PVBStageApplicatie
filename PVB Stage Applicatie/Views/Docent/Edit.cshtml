@@ -14,7 +14,7 @@
         }
     });
 
-    $("#Actief").live("click", function () {
+    $("#Actief").click(function () {
         if ($("#Actief")[0].checked) {
             debugger;
             $("#NonActiefReden")[0].disabled = true;
@@ -141,7 +141,6 @@
             <input type="submit" value="Save" />
         <p>@Html.Encode(ViewData["Foutmelding"])</p>
 
-        </p>
     </fieldset>
 }
 

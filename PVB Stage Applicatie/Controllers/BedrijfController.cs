@@ -27,10 +27,10 @@ namespace PVB_Stage_Applicatie.Controllers
                 {
                     bedrijvenDocent.Add(db.Bedrijf.Where(x => x.BedrijfID == item.BedrijfID).FirstOrDefault());
                 }
-                return View(bedrijvenDocent);
+                return View(bedrijvenDocent.OrderBy(x => x.Naam));
             };
 
-            return View(db.Bedrijf);
+            return View(db.Bedrijf.OrderBy(x=>x.Naam));
         }
 
         //

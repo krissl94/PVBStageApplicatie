@@ -107,6 +107,12 @@ legend {
 .display-label{
     display:inline-block;
     vertical-align:top;
+    width:50%;
+
+}
+
+.panel-heading{
+    margin-bottom:1px;
 }
 
 .display-field{
@@ -136,9 +142,6 @@ a.menuknop{
 }
 
 
-
-
-
 #subMenuLinks ul {
     padding-left:0px;
 }
@@ -155,6 +158,6 @@ cursor: pointer !important;
     padding:0!important;
 }
 
-.col-md-6{
+.col-md-12{
     padding:0!important;
 }
