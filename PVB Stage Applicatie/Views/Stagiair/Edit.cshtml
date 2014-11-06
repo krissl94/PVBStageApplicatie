@@ -9,17 +9,16 @@
         else {
             $("#NonActiefReden")[0].disabled = false;
         }
-    });
 
-    $("#Actief").live("click", function () {
-        if ($("#Actief")[0].checked) {
-            debugger;
-            $("#NonActiefReden")[0].disabled = true;
-            $("#NonActiefReden")[0].value = "";
-        }
-        else {
-            $("#NonActiefReden")[0].disabled = false;
-        }
+        $("#Actief").change(function () {
+            if ($("#Actief")[0].checked) {
+                $("#NonActiefReden")[0].disabled = true;
+                $("#NonActiefReden")[0].value = "";
+            }
+            else {
+                $("#NonActiefReden")[0].disabled = false;
+            }
+        });
     });
 </script>
 
