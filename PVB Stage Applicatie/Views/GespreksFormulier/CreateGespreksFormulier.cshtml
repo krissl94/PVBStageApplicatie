@@ -33,7 +33,6 @@
 <script>
     $(document).ready(function () {
         $("#snelwatdoen").on('click', function () {
-            debugger;
             $("#HandtekeningStudent")[0].value = Canvas2Image.convertToImage(d3.select("#s").node(), 200, 100, "png").src
             $("#HandtekeningBegeleider")[0].value = Canvas2Image.convertToImage(d3.select("#b").node(), 200, 100, "png").src
             $("#HandtekeningDocent")[0].value = Canvas2Image.convertToImage(d3.select("#d").node(), 200, 100, "png").src
