@@ -3,13 +3,11 @@
 @{
     ViewBag.Title = "Details";
 }
+
 @section zijMenu{
-    @if (User.IsInRole("Beheerder"))
-    {
-        <li>@Html.ActionLink("Edit", "Edit", new { id = Model.StageID })</li>
-    }
     <li>@Html.ActionLink("Terug", "Index")</li>
 }
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3>Koppeling details</h3>
@@ -22,24 +20,32 @@
                         <h4>Stagiair</h4>
                     </th>
                 </tr>
-                    <tr>
-                        <td class="display-label">
-                            @Html.DisplayNameFor(model => model.Persoonsgegevens.Voornaam):
-                        </td>
-                        <td class="display-field">
-                            @Html.DisplayFor(model => model.Persoonsgegevens.Voornaam)
-                        </td>
-                    </tr>
-                    <tr>
-
-            <td class="display-label">
-                @Html.DisplayNameFor(model => model.Persoonsgegevens.Achternaam):
-            </td>
-            <td class="display-field">
-                @Html.DisplayFor(model => model.Persoonsgegevens.Achternaam)
-            </td>
-        </table>
-    </div>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Persoonsgegevens.Voornaam):
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Persoonsgegevens.Voornaam)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Persoonsgegevens.Achternaam):
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Persoonsgegevens.Tussenvoegsel) @Html.DisplayFor(model => model.Persoonsgegevens.Achternaam)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Persoonsgegevens.Email):
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Persoonsgegevens.Email)
+                    </td>
+                </tr>
+            </table>
+        </div>
         <div class="col-md-3">
             <table class="table table-striped">
                 <tr>
@@ -56,13 +62,21 @@
                     </td>
                 </tr>
                 <tr>
-
                     <td class="display-label">
                         @Html.DisplayNameFor(model => model.Persoonsgegevens1.Achternaam):
                     </td>
                     <td class="display-field">
-                        @Html.DisplayFor(model => model.Persoonsgegevens1.Achternaam)
+                        @Html.DisplayFor(model => model.Persoonsgegevens1.Tussenvoegsel) @Html.DisplayFor(model => model.Persoonsgegevens1.Achternaam)
                     </td>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Persoonsgegevens1.Email):
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Persoonsgegevens1.Email)
+                    </td>
+                </tr>
             </table>
         </div>
         <div class="col-md-3">
@@ -86,8 +100,17 @@
                         @Html.DisplayNameFor(model => model.Persoonsgegevens2.Achternaam):
                     </td>
                     <td class="display-field">
-                        @Html.DisplayFor(model => model.Persoonsgegevens2.Achternaam)
+                        @Html.DisplayFor(model => model.Persoonsgegevens2.Tussenvoegsel)  @Html.DisplayFor(model => model.Persoonsgegevens2.Achternaam)
                     </td>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Persoonsgegevens1.Email):
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Persoonsgegevens1.Email)
+                    </td>
+                </tr>
             </table>
         </div>
         <div class="col-md-3">
@@ -106,15 +129,15 @@
                     </td>
                 </tr>
                 <tr>
-
                     <td class="display-label">
                         Einddatum:
                     </td>
                     <td class="display-field">
                         @Html.DisplayFor(model => model.Periode.Einddatum)
                     </td>
+                </tr>
             </table>
         </div>
-        </div>
-
+    </div>
+</div>
 
