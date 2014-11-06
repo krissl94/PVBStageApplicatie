@@ -25,6 +25,14 @@
         vertical-align: middle;
     }
 </style>
+@section zijMenu{
+
+
+    <li>
+        @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.TussentijdseBeeindegingModel.Stage }, null)
+    </li>
+}
+
 
 @using (Html.BeginForm("CreateBeeindeging", "TussentijdseBeeindiging", FormMethod.Post, new { id = "form" }))
 {
@@ -80,14 +88,14 @@
         <p>
             <h3>CREBO</h3>
 
-            @Html.EditorFor(m => m.TussentijdseBeeindegingModel.CREBO)
+            @Html.TextBoxFor(m => m.TussentijdseBeeindegingModel.CREBO)
             @Html.ValidationMessageFor(model => model.TussentijdseBeeindegingModel.CREBO)
         </p>
 
         <p>
             <h3>Beoogde einddatum</h3>
 
-            @Html.EditorFor(m => m.TussentijdseBeeindegingModel.Einddatum)
+            @Html.TextBoxFor(model => model.TussentijdseBeeindegingModel.Einddatum, new { @class = "kalender begin", @readonly = "true"  })<span class="glyphicon glyphicon-calendar"></span>
             @Html.ValidationMessageFor(model => model.TussentijdseBeeindegingModel.Einddatum)
         </p>
         <p>
@@ -149,4 +157,18 @@
         });
     }
 
+    $("Document").ready(function () {
+        $(".kalender")[0].value = "";
+
+        $(".kalender").datepicker({
+            defaultDate: "+1w",
+            changeMonth: true,
+            numberOfMonths: 1,
+            dateFormat: "mm-dd-yy",
+            onClose: function (selectedDate) {
+                $(".eind").datepicker("option", "minDate", selectedDate);
+            }
+        });
+    });
 </script>
+

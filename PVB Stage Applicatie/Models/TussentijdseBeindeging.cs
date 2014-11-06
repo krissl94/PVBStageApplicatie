@@ -26,7 +26,7 @@ namespace PVB_Stage_Applicatie.Models
         public int Stage { get; set; }
 
         [Required(ErrorMessage = "Beoogde einddatum is een verplicht veld")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime Einddatum { get; set; }
 
         [RegularExpression(@"[0-9]{5}", ErrorMessage = "Een CREBO nummer is 5 cijfers")]
