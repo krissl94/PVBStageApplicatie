@@ -7,52 +7,52 @@
 @section zijMenu{
     <li>@Html.ActionLink("Terug", "Index")</li>
 }
-
+<div class="col-sm-3">
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3>Koppeling details</h3>
+            <h3>Student details</h3>
     </div>
     <div class="panel-body">
-        <div class="col-md-3">
+            <div class="col-md-12">
             <table class="table table-striped">
                 <tr>
-                    <th colspan="2">
-                        <h4>Stagiair</h4>
-                    </th>
-                </tr>
-                <tr>
-                    <td class="display-label">
-                        @Html.DisplayNameFor(model => model.Persoonsgegevens.Voornaam):
-                    </td>
-                    <td class="display-field">
-                        @Html.DisplayFor(model => model.Persoonsgegevens.Voornaam)
-                    </td>
-                </tr>
-                <tr>
-                    <td class="display-label">
-                        @Html.DisplayNameFor(model => model.Persoonsgegevens.Achternaam):
-                    </td>
-                    <td class="display-field">
+                        <td class="display-label">
+                            @Html.DisplayNameFor(model => model.Persoonsgegevens.Voornaam):
+                        </td>
+                        <td class="display-field">
+                            @Html.DisplayFor(model => model.Persoonsgegevens.Voornaam)
+                        </td>
+                    </tr>
+                    <tr>
+            <td class="display-label">
+                @Html.DisplayNameFor(model => model.Persoonsgegevens.Achternaam):
+            </td>
+            <td class="display-field">
                         @Html.DisplayFor(model => model.Persoonsgegevens.Tussenvoegsel) @Html.DisplayFor(model => model.Persoonsgegevens.Achternaam)
                     </td>
                 </tr>
                 <tr>
                     <td class="display-label">
                         @Html.DisplayNameFor(model => model.Persoonsgegevens.Email):
-                    </td>
+            </td>
                     <td class="display-field">
                         @Html.DisplayFor(model => model.Persoonsgegevens.Email)
                     </td>
                 </tr>
-            </table>
+        </table>
+    </div>
         </div>
-        <div class="col-md-3">
+    </div>
+</div>
+<div class="col-sm-3">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Docent details</h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
             <table class="table table-striped">
-                <tr>
-                    <th colspan="2">
-                        <h4>Docent</h4>
-                    </th>
-                </tr>
                 <tr>
                     <td class="display-label">
                         @Html.DisplayNameFor(model => model.Persoonsgegevens1.Voornaam):
@@ -79,13 +79,18 @@
                 </tr>
             </table>
         </div>
-        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Begeleider details</h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
             <table class="table table-striped">
-                <tr>
-                    <th colspan="2">
-                        <h4>Begeleider</h4>
-                    </th>
-                </tr>
                 <tr>
                     <td class="display-label">
                         @Html.DisplayNameFor(model => model.Persoonsgegevens2.Voornaam):
@@ -113,13 +118,22 @@
                 </tr>
             </table>
         </div>
-        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+
+
+
+<div class="col-sm-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Periode details</h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+
             <table class="table table-striped">
-                <tr>
-                    <th colspan="2">
-                        <h4>Begeleider</h4>
-                    </th>
-                </tr>
+
                 <tr>
                     <td class="display-label">
                         Begindatum:
@@ -137,7 +151,10 @@
                     </td>
                 </tr>
             </table>
+
+            </div>
         </div>
-    </div>
+        </div>
+        </div>
 </div>
 
