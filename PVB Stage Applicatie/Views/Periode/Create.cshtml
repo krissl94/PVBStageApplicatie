@@ -1,40 +1,36 @@
 ﻿@model PVB_Stage_Applicatie.Models.Periode
-<script>
-    $.validator.methods.date = function (value, element) {
-        return this.optional(element) || Globalize.parseDate(value);
-    }
-</script>
+
 @section zijMenu{
-    <ul>
         <li>
             @Html.ActionLink("Terug", "Index")
         </li>
-    </ul>
 }
 <script type="text/javascript">
-$(function () {
-    $(".begin").datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        numberOfMonths: 1,
-        dateFormat: "dd-mm-yy",
-        onClose: function (selectedDate) {
-            $(".eind").datepicker("option", "minDate", selectedDate);
-        }
-    });
-    $(".eind").datepicker({
-        defaultDate: "+1w",
-        changeMonth: true,
-        numberOfMonths: 1,
-        dateFormat: "dd-mm-yy",
-        onClose: function (selectedDate) {
-            $(".begin").datepicker("option", "maxDate", selectedDate);
-        }
-    });
-    $.validator.methods.date = function (value, element) {
-        return this.optional(element) || Globalize.parseDate(value, "dd-mm-yyyy") !== null;
-    }
-});
+    $(document).ready(function () {
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+        var checkin = $('#dpd1').datepicker({
+            onRender: function (date) {
+                return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            if (ev.date.valueOf() > checkout.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate() + 1);
+                checkout.setValue(newDate);
+            }
+            checkin.hide();
+            $('#dpd2')[0].focus();
+        }).data('datepicker');
+        var checkout = $('#dpd2').datepicker({
+            onRender: function (date) {
+                return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+            }
+        }).on('changeDate', function (ev) {
+            checkout.hide();
+        }).data('datepicker');
+    }); 
 </script>
 
 @{
@@ -45,7 +41,6 @@ $(function () {
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
 
     <fieldset class="datum">
         <legend>Periode</legend>
@@ -53,7 +48,7 @@ $(function () {
             Begindatum
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Begindatum, new { @class="kalender begin", @readonly="true"})
+            @Html.TextBoxFor(model => model.Begindatum, new { @class="begin", id="dpd1", @readonly="true"})
             @Html.ValidationMessageFor(model => model.Begindatum)
         </div>
 
@@ -61,7 +56,7 @@ $(function () {
             Einddatum
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Einddatum, new { @class = "kalender eind", @readonly = "true" })
+            @Html.TextBoxFor(model => model.Einddatum, new { @class = "eind", id = "dpd2", @readonly = "true" })
             @Html.ValidationMessageFor(model => model.Einddatum)
         </div>
 

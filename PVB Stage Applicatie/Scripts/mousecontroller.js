@@ -17,7 +17,7 @@
         last[this.id].y = d3.mouse(this)[1];
     });
 
-    canvas.on("mouseup", function () {
+    d3.select("body").on("mouseup", function () {
         mouseIsDown = false;
     });
 

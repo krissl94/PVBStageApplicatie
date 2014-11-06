@@ -1,12 +1,34 @@
-﻿
+﻿@model PVB_Stage_Applicatie.Models.StudentViewModel
+
 @{
     ViewBag.Title = "Bulk Invoer Stagiair";
 }
+@section zijMenu{
+        <li>@Html.ActionLink("Terug", "index")</li>
+        <li>
+            @Html.ActionLink("Download Template invoer", "downloadStagiair", "Stagiair")
+        </li>
+        <li>
+            @Html.ActionLink("Download Template non-actief", "downloadNonActief", "Stagiair")
+        </li>
+}
 
-<h2>BulkImportStagiair</h2>
+<h2>Bulk invoeren stagiaires</h2>
 @using (Html.BeginForm("BulkInvoer", "Stagiair", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <input type="file" name="file" />
     <input type="submit" value="OK" />
 }  
-<p>@Html.Encode(ViewData["Feedback"])</p>
+
+
+<p>@Html.Encode(ViewData["FeedbackInvoer"])</p>
+
+<h2>Bulk non-actief stellen</h2>
+
+@using (Html.BeginForm("BulkNonActief", "Stagiair", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" />
+    <input type="submit" value="OK" />
+}  
+
+<p>@Html.Encode(ViewData["FeedbackNonActief"])</p>

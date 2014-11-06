@@ -7,7 +7,6 @@
 
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
-
 <style type="text/css">
     table, th, td {
         border: 1px solid black;
@@ -39,7 +38,6 @@
             $("#HandtekeningBegeleider")[0].value = Canvas2Image.convertToImage(d3.select("#b").node(), 200, 100, "png").src
             $("#HandtekeningDocent")[0].value = Canvas2Image.convertToImage(d3.select("#d").node(), 200, 100, "png").src
         })
-
 
         $('input[type=radio][name=Type]').change(function () {
             if (this.value == '1') {
@@ -95,54 +93,52 @@
             </td>
         </tr>
     </table>
-        <table>
-            <tr>
-                <td>
-                    @Html.LabelFor(m => m.Datum)
-                    @Html.DisplayFor(m => m.Datum)
-                </td>
-                <td colspan="2">
-                    @Html.RadioButtonFor(m => m.Type, 1) Telefonisch
-                    @Html.RadioButtonFor(m => m.Type, 2) Bezoek
-                    @Html.ValidationMessageFor(model => model.Type)
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                        @Html.TextAreaFor(model => model.Gesprek, new { @rows = 10, @cols = 75 })
-                        @Html.ValidationMessageFor(model => model.Gesprek)
-                </td>
-            </tr>
-            <tr class="handtekening">
-                <th align="center" valign="middle">Handtekening Docent</th>
-                <th align="center" valign="middle">Handtekening Begeleider</th>
-                <th align="center" valign="middle">Handtekening Stagiair</th>
-            </tr>
-            <tr class="handtekening">
-                @Html.HiddenFor(m => m.HandtekeningDocent)
-                @Html.HiddenFor(m => m.HandtekeningBegeleider)
-                @Html.HiddenFor(m => m.HandtekeningStudent)
+    <table>
+        <tr>
+            <td>
+                @Html.LabelFor(m => m.Datum)
+                @Html.DisplayFor(m => m.Datum)
+            </td>
+            <td colspan="2">
+                @Html.RadioButtonFor(m => m.Type, 1) Telefonisch
+                @Html.RadioButtonFor(m => m.Type, 2) Bezoek
+                @Html.ValidationMessageFor(model => model.Type)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                    @Html.TextAreaFor(model => model.Gesprek, new { @rows = 10, @cols = 75 })
+                    @Html.ValidationMessageFor(model => model.Gesprek)
+            </td>
+        </tr>
+        <tr class="handtekening">
+            <th align="center" valign="middle">Handtekening Docent</th>
+            <th align="center" valign="middle">Handtekening Begeleider</th>
+            <th align="center" valign="middle">Handtekening Stagiair</th>
+        </tr>
+        <tr class="handtekening">
+            @Html.HiddenFor(m => m.HandtekeningDocent)
+            @Html.HiddenFor(m => m.HandtekeningBegeleider)
+            @Html.HiddenFor(m => m.HandtekeningStudent)
 
-                <td><canvas id="d" width="200" height="100" class="cvs"></canvas> </td>
-                <td><canvas id="b" width="200" height="100" class="cvs"></canvas> </td>
-                <td><canvas id="s" width="200" height="100" class="cvs"></canvas> </td>
-            </tr>
-            <tr class="handtekening">
-                <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('b')" /></td>
-                <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('s')" /></td>
-            </tr>
-
-        </table>
-<script src="~/Scripts/mousecontroller.js"></script>
+            <td><canvas id="d" width="200" height="100" class="cvs"></canvas> </td>
+            <td><canvas id="b" width="200" height="100" class="cvs"></canvas> </td>
+            <td><canvas id="s" width="200" height="100" class="cvs"></canvas> </td>
+        </tr>
+        <tr class="handtekening">
+            <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('d')" /></td>
+            <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('b')" /></td>
+            <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('s')" /></td>
+        </tr>
+    </table>
     
-                <input type="submit" value="Create" id="snelwatdoen"/>
-    
+    <input type="submit" value="Create" id="snelwatdoen"/>
 }
-<input type="button" id="klikje" />
 
+<script src="~/Scripts/mousecontroller.js"></script>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.StageID }, null)
 </div>
 
 @section Scripts {

@@ -6,10 +6,8 @@
 @if (User.IsInRole("Beheerder"))
 {
     @section zijMenu{
-        <ul>
             <li>@Html.ActionLink("Nieuwe koppeling", "Create")</li>
             <li>@Html.ActionLink("Bulk invoer", "BulkInvoerKoppeling")</li>
-        </ul>
     }
 }
 <h2>Index</h2>
@@ -52,7 +50,7 @@
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.StageID })
-                @Html.ActionLink("Formulieren", "StudentIndex", "Formulier", new { stageID = item.StageID }, null)
+                @Html.ActionLink("Formulieren", "StudentIndex", "Formulier", new { id = item.StageID }, null)
             </td>
         </tr>
     }

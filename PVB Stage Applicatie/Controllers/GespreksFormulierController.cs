@@ -27,19 +27,19 @@ namespace PVB_Stage_Applicatie.Controllers
         }
 
         [Authorize(Roles = "Docent")]
-        public ActionResult CreateGespreksFormulier(int stageID = 0)
+        public ActionResult CreateGespreksFormulier(int id = 0)
         {
             GespreksformulierViewModel GespreksFormulierStage = new GespreksformulierViewModel();
-            GespreksFormulierStage.StageID = db.Stage.Where(i => i.StageID == stageID).FirstOrDefault();
+            GespreksFormulierStage.StageID = db.Stage.Where(i => i.StageID == id).FirstOrDefault();
 
-            Stage stage = db.Stage.Where(s => s.StageID == stageID).FirstOrDefault();
+            Stage stage = db.Stage.Where(s => s.StageID == id).FirstOrDefault();
 
             if (stage != null)
                 if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
                     if (User.Identity.Name == stage.Stagedocent.ToString())
                         return View(GespreksFormulierStage);
 
-            return RedirectToAction("StudentIndex", "Formulier", new { stageID = stageID });
+            return RedirectToAction("StudentIndex", "Formulier", new { id = id });
         }
         
         [HttpPost]
@@ -63,15 +63,58 @@ namespace PVB_Stage_Applicatie.Controllers
                     Stage = formulier.StageID.StageID
                 });
                 db.Gespreksformulier.Add(toAdd);
-
                 
                 db.SaveChanges();
-                return View("~/Views/Formulier/StudentIndex.cshtml", stageToAdd);
+
+                return RedirectToAction("StudentIndex", "Formulier", new { id = formulier.StageID.StageID });
             }
 
-            return View("~/Views/Formulier/StudentIndex.cshtml", stageToAdd);
+            return View(formulier);
         }
-       
+
+        [Authorize(Roles = "Docent")]
+        public ActionResult Edit(int id = 0)
+        {
+            Gespreksformulier gespreksformulier = db.Gespreksformulier.Where(i => i.GespreksformulierID == id).FirstOrDefault();
+            Stage stage;
+
+            if (gespreksformulier != null)
+                stage = gespreksformulier.Stage1;
+            else
+                stage = new Stage { StageID = 0 };
+
+            if (gespreksformulier != null)
+                if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
+                    if (User.Identity.Name == stage.Stagedocent.ToString())
+                        return View(gespreksformulier);
+
+            return RedirectToAction("StudentIndex", "Formulier", new { id = stage.StageID });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Docent")]
+        public ActionResult Edit(Gespreksformulier gespreksformulier)
+        {
+            if (ModelState.IsValid)
+            {
+                Gespreksformulier gespreksformulierOriginal = db.Gespreksformulier.Where(i => i.GespreksformulierID == gespreksformulier.GespreksformulierID).FirstOrDefault();
+
+                gespreksformulierOriginal.Gesprek = gespreksformulier.Gesprek;
+
+                //gespreksformulier.Stage1 = db.Stage.Where(i => i.StageID == gespreksformulier.Stage).FirstOrDefault();
+                //gespreksformulier.HandtekeningBegeleider = gespreksformulierOriginal.HandtekeningBegeleider;
+                //gespreksformulier.HandtekeningDocent = gespreksformulier.HandtekeningDocent;
+                //gespreksformulier.HandtekeningStudent = gespreksformulier.HandtekeningStudent;
+
+                //db.Entry(gespreksformulierOriginal).State = EntityState.Detached;
+                db.Entry(gespreksformulierOriginal).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("StudentIndex", "Formulier", new { id = gespreksformulierOriginal.Stage });
+            }
+            return View(gespreksformulier);
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

@@ -11,6 +11,7 @@ namespace PVB_Stage_Applicatie.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class TussentijdseBeindeging
     {
@@ -23,8 +24,16 @@ namespace PVB_Stage_Applicatie.Models
     
         public int TussentijdsebeoordelingID { get; set; }
         public int Stage { get; set; }
+
+        [Required(ErrorMessage = "Beoogde einddatum is een verplicht veld")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime Einddatum { get; set; }
+
+        [RegularExpression(@"[0-9]{5}", ErrorMessage = "Een CREBO nummer is 5 cijfers")]
+        [Required(ErrorMessage = "CREBO is een verplicht veld")]
         public string CREBO { get; set; }
+
+        [Required(ErrorMessage = "Leerweg is een verplicht veld")]
         public int Leerweg { get; set; }
     
         public virtual Stage Stage1 { get; set; }

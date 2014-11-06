@@ -3,25 +3,23 @@
 @{
     ViewBag.Title = "StudentIndex";
 
-    var eindbeoordeling = Model.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault();
+    var beeindigd = !(Model.TussentijdseBeindeging.Count == 0 && Model.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null);
 }
 
 <h2>StudentIndex</h2>
 
 <h2>Index</h2>
 @section zijMenu{
-    <ul>
-        @if (User.IsInRole("Docent"))
+    @if (User.IsInRole("Docent"))
+    {
+        if (!beeindigd)
         {
-            if (Model.TussentijdseBeindeging.Count == 0 && eindbeoordeling == null)
-            {
-                <li>@Html.ActionLink("Beoordeling invullen", "CreateFormulier", "Beoordeling", new { stageID = Model.StageID}, null)</li>
-                <li>@Html.ActionLink("Gespreksformulier invullen", "CreateGespreksFormulier", "GespreksFormulier", new { stageID = Model.StageID }, null)</li>
-                <li>@Html.ActionLink("Eindbeoordeling invullen", "CreateEindbeoordeling", "Beoordeling", new { stageID = Model.StageID }, null)</li>
-                <li>@Html.ActionLink("Tussentijdse beëindiging invullen", "CreateBeeindeging", "TussentijdseBeeindiging", new { stageID = Model.StageID }, null)</li>
-            }
+            <li>@Html.ActionLink("Beoordeling invullen", "CreateFormulier", "Beoordeling", new { id = Model.StageID}, null)</li>
+            <li>@Html.ActionLink("Gespreksformulier invullen", "CreateGespreksFormulier", "GespreksFormulier", new { id = Model.StageID }, null)</li>
+            <li>@Html.ActionLink("Eindbeoordeling invullen", "CreateEindbeoordeling", "Beoordeling", new { id = Model.StageID }, null)</li>
+            <li>@Html.ActionLink("Tussentijdse beëindiging invullen", "CreateBeeindeging", "TussentijdseBeeindiging", new { id = Model.StageID }, null)</li>
         }
-    </ul>
+    }
 }
 
 <h2>Beoordeling</h2>
@@ -31,7 +29,7 @@
             Datum
         </th>
         <th>
-            Beoordeling
+            Type
         </th>
         <th></th>
     </tr>
@@ -42,7 +40,7 @@
             @Html.DisplayFor(modelItem => item.Datum)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Beoordeling1)
+            @Html.DisplayFor(modelItem => item.EindBeoordeling)
         </td>
         <td>
             @Html.ActionLink("Details", "Details", "Beoordeling", new { id = item.BeoordelingID }, null)
@@ -69,7 +67,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Einddatum)
+                @Html.DisplayFor(modelItem => item.Einddatum, "{0:dd/MM/yyyy}")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Leerweg)
@@ -99,13 +97,17 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Datum)
+                @Html.DisplayFor(modelItem => item.Datum, "{0:dd/MM/yyyy}")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ContactType)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", "GespreksFormulier", new { id = item.GespreksformulierID }, null) |
+                @if (!beeindigd)
+                {
+                    @Html.ActionLink("Edit", "Edit", "GespreksFormulier", new { id = item.GespreksformulierID }, null);<nay> |</nay>
+                }
+                
                 @Html.ActionLink("Details", "Details", "GespreksFormulier", new { id = item.GespreksformulierID }, null)
             </td>
         </tr>

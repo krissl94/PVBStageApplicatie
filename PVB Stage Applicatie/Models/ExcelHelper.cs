@@ -5,6 +5,7 @@ using System.Data.OleDb;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Mvc;
 
 namespace PVB_Stage_Applicatie.Models
 {
@@ -12,10 +13,13 @@ namespace PVB_Stage_Applicatie.Models
     {
         StageApplicatieEntities db = new StageApplicatieEntities();
 
+
         public DataSet excelToDS(HttpPostedFileBase file, HttpServerUtilityBase Server)
+        
         {
             try
             {
+                
                 DataSet ds = new DataSet();
                 if (file.ContentLength > 0)
                 {
@@ -24,7 +28,7 @@ namespace PVB_Stage_Applicatie.Models
 
                     if (fileExtension == ".xls" || fileExtension == ".xlsx")
                     {
-                        string fileLocation = Server.MapPath("~/App_Data/uploads") + file.FileName;
+                        string fileLocation = Server.MapPath("~/App_Data/uploads/") + file.FileName;
                         if (System.IO.File.Exists(fileLocation))
                         {
                             System.IO.File.Delete(fileLocation);
@@ -76,14 +80,17 @@ namespace PVB_Stage_Applicatie.Models
                 }
                 return ds;
             }
-            catch(Exception ex)
-            {  
+            catch (Exception ex)
+            {
+                file.InputStream.Dispose();
+                file.InputStream.Close();
             }
             return null;
         }
 
-        public String dataSetToStudent(DataSet ds)
+        public List<Persoonsgegevens> dataSetToStudent(DataSet ds)
         {
+            List<Persoonsgegevens> studentlijst = new List<Persoonsgegevens>();
             try
             {
                 foreach (DataTable table in ds.Tables)
@@ -91,39 +98,30 @@ namespace PVB_Stage_Applicatie.Models
                     foreach (DataRow row in table.Rows)
                     {
                         object[] values = row.ItemArray;
-                        if (Regex.IsMatch(values[7].ToString(), "[0-9]{4}[A-Z/a-z]{2}") && Regex.IsMatch(values[9].ToString(), "[0-9]{7}"))
+                        studentlijst.Add(new Persoonsgegevens
                         {
-                            db.Persoonsgegevens.Add(new Persoonsgegevens
-                            {
-                                Rol = 4,
-                                Actief = true,
-                                Voornaam = values[0].ToString(),
-                                Achternaam = values[1].ToString(),
-                                Tussenvoegsel = values[2].ToString(),
-                                Email = values[3].ToString(),
-                                Straat = values[4].ToString(),
-                                Huisnummer = Convert.ToInt32(values[5]),
-                                Toevoeging = values[6].ToString(),
-                                Postcode = values[7].ToString(),
-                                Plaats = values[8].ToString(),
-                                StudentNummer = values[9].ToString(),
-                                Opleiding = values[10].ToString()
-                            });
-                        }
-                        else
-                        {
-                            db.Dispose();
-                            db = new StageApplicatieEntities();
-                            return "In het bestand zit verkeerde data";
-                        }
+                            Rol = 4,
+                            Actief = true,
+                            Voornaam = values[0].ToString(),
+                            Achternaam = values[1].ToString(),
+                            Tussenvoegsel = values[2].ToString(),
+                            Email = values[3].ToString(),
+                            Straat = values[4].ToString(),
+                            Huisnummer = Convert.ToInt32(values[5]),
+                            Toevoeging = values[6].ToString(),
+                            Postcode = values[7].ToString(),
+                            Plaats = values[8].ToString(),
+                            StudentNummer = values[9].ToString(),
+                            Opleiding = values[10].ToString()
+                        });
                     }
                 }
-                db.SaveChanges();
-                return "Alle stagiaires zijn toegevoegd";
+                return studentlijst;
+
             }
             catch (Exception ex)
             {
-                return ex.ToString();
+                return null;
             }
         }
 
@@ -138,23 +136,26 @@ namespace PVB_Stage_Applicatie.Models
                         string studentNummer = row.ItemArray[0].ToString();
                         if (Regex.IsMatch(studentNummer.ToString(), "[0-9]{7}"))
                         {
-                            foreach (Persoonsgegevens item in db.Persoonsgegevens.Where(p => p.StudentNummer == studentNummer))
+                            foreach (Persoonsgegevens persoonsgegevens in db.Persoonsgegevens.Where(p => p.StudentNummer == studentNummer))
                             {
-                                item.Actief = false;
-                                item.NonActiefReden = "Geslaagd";
-                                db.Entry(item).State = EntityState.Modified;
+                                db.sp_PersoonUpdaten(persoonsgegevens.PersoonsgegevensID,
+                                persoonsgegevens.Email, persoonsgegevens.Straat,
+                                persoonsgegevens.Huisnummer, persoonsgegevens.Toevoeging,
+                                persoonsgegevens.Postcode, persoonsgegevens.Plaats,
+                                false, "Geslaagd");
+                                //db.Entry(item).State = EntityState.Modified;
                             }
                         }
                         else
                         {
-                            db.Dispose();
-                            db = new StageApplicatieEntities();
+                            //db.Dispose();
+                            //db = new StageApplicatieEntities();
                             return "Er zit een fout in de data";
                         }
 
                     }
                 }
-                db.SaveChanges();
+                //db.SaveChanges();
                 return "Alle stagiaires zijn op non-actief gesteld.";
             }
             catch (Exception ex)
@@ -163,52 +164,9 @@ namespace PVB_Stage_Applicatie.Models
             }
         }
 
-        public String dataSetToDocent(DataSet ds)
+        public List<CreateLoginViewModel> dataSetToDocent(DataSet ds)
         {
-            try 
-            { 
-                foreach (DataTable table in ds.Tables)
-                {
-                    foreach (DataRow row in table.Rows)
-                    {
-                        object[] values = row.ItemArray;
-                        if (Regex.IsMatch(values[7].ToString(), "[0-9]{4}[A-Z/a-z]{2}"))
-                        {
-                            db.Persoonsgegevens.Add(new Persoonsgegevens
-                            {
-                                Rol = 2,
-                                Actief = true,
-                                Voornaam = values[0].ToString(),
-                                Achternaam = values[1].ToString(),
-                                Tussenvoegsel = values[2].ToString(),
-                                Email = values[3].ToString(),
-                                Straat = values[4].ToString(),
-                                Huisnummer = Convert.ToInt32(values[5]),
-                                Toevoeging = values[6].ToString(),
-                                Postcode = values[7].ToString(),
-                                Plaats = values[8].ToString(),
-                                MedewerkerID = values[9].ToString(),
-                            });
-                        }
-                        else
-                        {
-                            db.Dispose();
-                            db = new StageApplicatieEntities();
-                            return "Er zit een fout in de data";
-                        }
-                    }
-                }
-                db.SaveChanges();
-                return "Alle docenten zijn toegevoegd";
-            }
-            catch (Exception ex)
-            {
-                return ex.ToString();
-            }
-        }
-
-        public String dataSetToBegeleider(DataSet ds)
-        {
+            List<CreateLoginViewModel> docentlijst = new List<CreateLoginViewModel>();
             try
             {
                 foreach (DataTable table in ds.Tables)
@@ -216,11 +174,57 @@ namespace PVB_Stage_Applicatie.Models
                     foreach (DataRow row in table.Rows)
                     {
                         object[] values = row.ItemArray;
-                        if (Regex.IsMatch(values[7].ToString(), "[0-9]{4}[A-Z/a-z]{2}"))
-                        {
+
+
+                        docentlijst.Add(new CreateLoginViewModel
+                            {
+                                Docent = new Persoonsgegevens
+                                {
+                                    Rol = 2,
+                                    Actief = true,
+                                    Voornaam = values[0].ToString(),
+                                    Achternaam = values[1].ToString(),
+                                    Tussenvoegsel = values[2].ToString(),
+                                    Email = values[3].ToString(),
+                                    Straat = values[4].ToString(),
+                                    Huisnummer = Convert.ToInt32(values[5]),
+                                    Toevoeging = values[6].ToString(),
+                                    Postcode = values[7].ToString(),
+                                    Plaats = values[8].ToString(),
+                                    MedewerkerID = values[9].ToString()
+                                },
+                                Login = new Login
+                                {
+                                    Gebruikersnaam = values[10].ToString().ToLower(),
+                                    Wachtwoord = values[11].ToString()
+                                }
+                            });
+                        
+
+                    }
+                }
+                return docentlijst;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public List<Persoonsgegevens> dataSetToBegeleider(DataSet ds)
+        {
+            List<Persoonsgegevens> begeleiderlijst = new List<Persoonsgegevens>();
+            try
+            {
+                foreach (DataTable table in ds.Tables)
+                {
+                    foreach (DataRow row in table.Rows)
+                    {
+                        object[] values = row.ItemArray;
                             string bedrijfsnaam = values[9].ToString();
                             Bedrijf bedrijfToAdd = db.Bedrijf.Where(b => b.Naam == bedrijfsnaam).FirstOrDefault();
-                            db.Persoonsgegevens.Add(new Persoonsgegevens
+                            begeleiderlijst.Add(new Persoonsgegevens
                             {
                                 Rol = 2,
                                 Actief = true,
@@ -235,21 +239,13 @@ namespace PVB_Stage_Applicatie.Models
                                 Plaats = values[8].ToString(),
                                 Bedrijf = bedrijfToAdd.BedrijfID,
                             });
-                        }
-                        else
-                        {
-                            db.Dispose();
-                            db = new StageApplicatieEntities();
-                            return "Er zit een fout in de data";
-                        }
                     }
                 }
-                db.SaveChanges();
-                return "Alle begeleiders zijn toegevoegd.";
+                return begeleiderlijst;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return ex.ToString();
+                return null;
             }
         }
 
@@ -266,7 +262,16 @@ namespace PVB_Stage_Applicatie.Models
                             db.Bedrijf.Add(new Bedrijf
                             {
                                 Naam = values[0].ToString(),
-                                Actief = true
+                                Actief = true,
+                                NonActiefReden = null,
+                                KvKNummer = values[1].ToString(),
+                                Plaats = values[2].ToString(),
+                                Straatnaam = values[3].ToString(),
+                                Huisnummer = Convert.ToInt32(values[4]),
+                                Toevoeging = values[5].ToString(),
+                                Postcode = values[6].ToString(),
+                                Telefoonnummer = values[7].ToString(),
+                                Email = values[8].ToString()
                             });
                         }
                     }
@@ -274,7 +279,7 @@ namespace PVB_Stage_Applicatie.Models
                 db.SaveChanges();
                 return "Alle begeleiders zijn toegevoegd.";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return ex.ToString();
             }
@@ -282,10 +287,10 @@ namespace PVB_Stage_Applicatie.Models
 
         public String dataSetToKoppeling(DataSet ds, PVB_Stage_Applicatie.Models.Periode periode)
         {
-            
+
             try
             {
-                
+
                 foreach (DataTable table in ds.Tables)
                 {
                     foreach (DataRow row in table.Rows)
@@ -314,7 +319,7 @@ namespace PVB_Stage_Applicatie.Models
             }
             catch (Exception ex)
             {
-                
+
                 return ex.ToString();
             }
         }

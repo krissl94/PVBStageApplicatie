@@ -4,98 +4,105 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
 @if (User.IsInRole("Beheerder"))
 {
     @section zijMenu{
-        <ul>
-            <li>@Html.ActionLink("Nieuw bedrijf", "Create")</li>
-            <li>@Html.ActionLink("Bulk invoer", "BulkInvoerBedrijf")</li>
-        </ul>
+        <li>@Html.ActionLink("Nieuw bedrijf", "Create")</li>
+        <li>@Html.ActionLink("Bulk invoer", "BulkInvoerBedrijf")</li>
     }
 }
 
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Naam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Actief)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NonActiefReden)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.KvKNummer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Plaats)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Straatnaam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Huisnummer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Toevoeging)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Postcode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Telefoonnummer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th></th>
-    </tr>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Bedrijven</h3>
+    </div>
+    <div class="panel-body">
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.ActionLink("" + item.Naam, "Details", new { id = item.BedrijfID })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Actief)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NonActiefReden)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KvKNummer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Plaats)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Straatnaam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Huisnummer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Toevoeging)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Postcode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefoonnummer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-            @if (User.IsInRole("Beheerder"))
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.BedrijfID })
-            }
-            </td>
-        </tr>
-    }
-</table>
+        <div class="col-md-6">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Naam)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Actief)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NonActiefReden)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.KvKNummer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Plaats)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Straatnaam)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Huisnummer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Toevoeging)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Postcode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefoonnummer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink("" + item.Naam, "Details", new { id = item.BedrijfID })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Actief)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NonActiefReden)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.KvKNummer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Plaats)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Straatnaam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Huisnummer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Toevoeging)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Postcode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefoonnummer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @if (User.IsInRole("Beheerder"))
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = item.BedrijfID }, new { @class = "btn btn-xs btn-info" })
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

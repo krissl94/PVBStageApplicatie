@@ -81,19 +81,10 @@ namespace PVB_Stage_Applicatie.Controllers
         {
             try
             {
-                bool bestaatbedrijf;
-                if (db.Bedrijf.Where(b => b.Naam == bedrijf.Naam).FirstOrDefault() != null)
-                {
-                    bestaatbedrijf = true;
-                }
-                else
-                {
-                    bestaatbedrijf = false;
-                }
-
-                if (bestaatbedrijf == false)
+                if (db.Bedrijf.Where(b => b.Naam == bedrijf.Naam).FirstOrDefault() == null)
                 {
                     bedrijf.Actief = true;
+
                     if (ModelState.IsValid)
                     {
                         db.Bedrijf.Add(bedrijf);
@@ -104,14 +95,15 @@ namespace PVB_Stage_Applicatie.Controllers
                 else
                 {
                     ViewData["Foutmelding"] = "Deze bedrijfsnaam staat al in ons systeem";
-                    return View();
+                    return View(bedrijf);
                 }
+
                 return View(bedrijf);
             }
             catch(Exception ex)
             {
                 ViewData["Foutmelding"] = ex.ToString();
-                return View();
+                return View(bedrijf);
             }
         }
 
@@ -172,9 +164,10 @@ namespace PVB_Stage_Applicatie.Controllers
         public ViewResult BulkInvoer(HttpPostedFileBase file)
         {
             ExcelHelper eh = new ExcelHelper();
-            if (eh.excelToDS(file, Server) != null)
+            DataSet Bedrijven = eh.excelToDS(file, Server);
+
+            if (Bedrijven != null)
             {
-                DataSet Bedrijven = eh.excelToDS(file, Server);
                 ViewData["feedback"] = eh.dataSetToBedrijf(Bedrijven);
             }
             return View("~/Views/Bedrijf/BulkInvoerBedrijf.cshtml");
@@ -182,7 +175,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
         public FileResult download()
         {
-            string file = @"C:\Users\Kris\Desktop\PVBStageApplicatie\PVB Stage Applicatie\App_Data\ExcelTemplates\NonActief.xlsx";
+            string file = @"~/App_Data/ExcelTemplates/BedrijfInvoegen.xlsx";
             string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             return File(file, contentType, Path.GetFileName(file));
         }

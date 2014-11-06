@@ -1,14 +1,24 @@
 ﻿@model PVB_Stage_Applicatie.Models.Persoonsgegevens
+<script>
+    $(document).ready(function (event) {
+        $('form').on('submit', function () {
+            if($("#StudentNummer")[0].value == "")
+            {
+                debugger;
+                $("#StudentNummerMessage")[0].innerHTML = "OEPSIE";
+                event.preventDefault();
+            }
+        });
+    })
 
+</script>
 @{
     ViewBag.Title = "Create";
 }
 @section zijMenu{
-    <ul>
         <li>
             @Html.ActionLink("Terug", "Index")
         </li>
-    </ul>
 
 }
 <h2>Create</h2>
@@ -97,7 +107,7 @@
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.StudentNummer)
-            @Html.ValidationMessageFor(model => model.StudentNummer)
+            @Html.ValidationMessageFor(model => model.StudentNummer, "", new { id = "studentNummerMessage"  })
         </div>
 
         <div class="editor-label">
@@ -127,3 +137,4 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+

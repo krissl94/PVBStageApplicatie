@@ -14,30 +14,10 @@
         <legend>Gespreksformulier</legend>
 
         @Html.HiddenFor(model => model.GespreksformulierID)
+        @Html.HiddenFor(model => model.Datum)
+        @Html.HiddenFor(model => model.ContactType)
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Stage, "Stage1")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("Stage", String.Empty)
-            @Html.ValidationMessageFor(model => model.Stage)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Datum)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Datum)
-            @Html.ValidationMessageFor(model => model.Datum)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ContactType)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ContactType)
-            @Html.ValidationMessageFor(model => model.ContactType)
-        </div>
+        @Html.HiddenFor(model => model.Stage)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Gesprek)
@@ -54,7 +34,9 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
+
+
 </div>
 
 @section Scripts {

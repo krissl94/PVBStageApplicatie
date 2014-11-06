@@ -6,25 +6,53 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/base/css")
+    <link href="/Content/themes/datepicker/css/datepicker.css" rel="stylesheet">
+
 
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Content/themes/datepicker/js/bootstrap-datepicker.js"></script>
 </head>
 <body>
-    <div id="bovenbalk">
-        <img src="~/Images/logo.png"/>
-        <div id="menubalk">
+
+    <nav class="navbar navbar-default">
+        <a class="navbar-brand" href='/Home/Index'>Stage Applicatie</a>
+        <div class="navbar-collapse collapse">
             @Html.Partial("~/Views/Shared/_Menu.cshtml")
         </div>
-    </div>
-    <div id="subMenuLinks">
-        @RenderSection("zijMenu", false)
-    </div>
-    <div id="content">
-        @RenderBody()
+
+
+        <ul class="nav nav-tabs" role="tablist">
+
+            @RenderSection("zijMenu", false)
+        </ul>
+    </nav>
+
+    <div id="contentArea">
+        <div id="content">
+            @RenderBody()
+        </div>
     </div>
 
     @RenderSection("scripts", required: false)
 </body>
 </html>
+<script>
+    $(window).load(function () {
+        debugger;
+        var pathname = window.location.pathname;
+        if (pathname == "/" || pathname == "/Home/Index") {
+            controllername = "/";
+        }
+        else {
+            var controllername = "/" + pathname.split('/')[1];
+        }
+        $('a[href="' + controllername + '"]').parent().addClass("active");
+
+        $(".nav-tabs > .active a").addClass("glyphicon glyphicon-arrow-left");
+
+        $(".nav-tabs > .active a").text("");
+    });
+</script>

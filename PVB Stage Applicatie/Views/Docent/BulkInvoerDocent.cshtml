@@ -1,7 +1,12 @@
 ﻿@{
     ViewBag.Title = "BulkInvoerDocent";
 }
-
+@section zijMenu{
+        <li>@Html.ActionLink("Terug", "index")</li>
+        <li>
+            @Html.ActionLink("Download Template", "Download", "Docent")
+        </li>
+}
 @using (Html.BeginForm("BulkInvoer", "Docent", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <input type="file" name="file" />

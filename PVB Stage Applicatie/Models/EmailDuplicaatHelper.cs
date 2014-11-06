@@ -7,9 +7,10 @@ namespace PVB_Stage_Applicatie.Models
 {
     public class EmailDuplicaatHelper
     {
-        StageApplicatieEntities db = new StageApplicatieEntities();
         public bool bestaatEmail(Persoonsgegevens persoon)
         {
+            StageApplicatieEntities db = new StageApplicatieEntities();
+
             try
             {
                 bool BestaatEmail;
@@ -39,6 +40,7 @@ namespace PVB_Stage_Applicatie.Models
             }
             catch (Exception Exception)
             {
+                string var = Exception.ToString();
                 return true;
             }
 

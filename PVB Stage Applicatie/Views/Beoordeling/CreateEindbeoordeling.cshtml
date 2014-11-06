@@ -1,4 +1,4 @@
-﻿@model PVB_Stage_Applicatie.Models.Stage
+﻿@model PVB_Stage_Applicatie.Models.BeoordelingModel
 
 @{
     ViewBag.Title = "Create";
@@ -29,161 +29,11 @@
     }
 </style>
 <script>
-    var beoordelingen =
-        [
-            {
-                Beoordeling: "Beoordeling1",
-                Opmerking: "Beoordeling1opm"
-            },
-            {
-                Beoordeling: "VoorbereidWerk",
-                Opmerking: "VoorbereidWerkOpm"
-            },
-            {
-                Beoordeling: "PlanEnOrganiserenWerk",
-                Opmerking: "PlanEnOrganiserenWerkOpm"
-            },
-            {
-                Beoordeling: "TheoretischInzicht",
-                Opmerking: "TheoretischInzichtOpm"
-            },
-            {
-                Beoordeling: "TechnischInzicht",
-                Opmerking: "TechnischInzichtOpm"
-            },
-            {
-                Beoordeling: "KwalGeleverdWerk",
-                Opmerking: "KwalGeleverdWerkOpm"
-            },
-            {
-                Beoordeling: "RapportWerk",
-                Opmerking: "RapportWerkOpm"
-            },
-            {
-                Beoordeling: "HoudtBedrRegels",
-                Opmerking: "HoudtBedrRegelsOpm"
-            },
-            {
-                Beoordeling: "HoudtARBORegels",
-                Opmerking: "HoudtARBORegelsOpm"
-            },
-            {
-                Beoordeling: "WerkTempo",
-                Opmerking: "WerkTempoOpm"
-            },
-            {
-                Beoordeling: "VerloopEersteContact",
-                Opmerking: "VerloopEersteContactOpm"
-            },
-            {
-                Beoordeling: "HoudingTAVCollegas",
-                Opmerking: "HoudingTAVCollegasOpm"
-            },
-            {
-                Beoordeling: "HoudingTAVLeiding",
-                Opmerking: "HoudingTAVLeidingOpm"
-            },
-            {
-                Beoordeling: "HoudingTAVDerden",
-                Opmerking: "HoudingTAVDerdenOpm"
-            },
-            {
-                Beoordeling: "OmgaanKritiek",
-                Opmerking: "OmgaanKritiekOpm"
-            },
-            {
-                Beoordeling: "OpTijd",
-                Opmerking: "OpTijdOpm"
-            },
-            {
-                Beoordeling: "ToontInitiatief",
-                Opmerking: "ToontInitiatiefOpm"
-            },
-            {
-                Beoordeling: "Inzet",
-                Opmerking: "IntzetOpm"
-            },
-            {
-                Beoordeling: "ToontBelangstellingVak",
-                Opmerking: "ToontBelangstellingVakOpm"
-            },
-            {
-                Beoordeling: "GrenzenAangeven",
-                Opmerking: "GrenzenAangevenOpm"
-            },
-            {
-                Beoordeling: "KomtAfsprakenNa",
-                Opmerking: "KomtAfsprakenNaOpm"
-            },
-            {
-                Beoordeling: "ZelfstandigWerken",
-                Opmerking: "ZelfstandigWerkenOpm"
-            },
-            {
-                Beoordeling: "Gemotiveerd",
-                Opmerking: "GemotiveerdOpm"
-            },
-            {
-                Beoordeling: "HoudingsAspecten",
-                Opmerking: "HoudingAspectenOpm"
-            },
-            {
-                Beoordeling: "BeoordelingTechAspect",
-                Opmerking: "BeoordelingTechAspectOpm"
-            },
-            {
-                Beoordeling: "Verslag",
-                Opmerking: "VerslagOpm"
-            }
-    ];
-
-    var Handtekeningen = ["d", "b", "s"];
-
-    $("#klikje").live('click', function () {
-
-        var beoordelingenToPost = {};
-        beoordelingen.forEach(function (item) {
-            var radio = $("input[name=" + item.Beoordeling + "]:checked").val();
-            var opmerking = $("#" + item.Opmerking).val();
-
-            if (radio) {
-                var temp = {};
-
-                temp.beoordeling = parseInt(radio);
-
-                temp.opmerking = opmerking ? opmerking : "Geen opmerkingen";
-
-                beoordelingenToPost[item.Beoordeling] = temp;
-            }
-            else {
-                //Moet aborten en foutmelding geven
-            }
-        });
-
-        var handtekeningenToPost = {};
-        Handtekeningen.forEach(function (item) {
-            var temp = {}
-
-            temp.handtekening = Canvas2Image.convertToImage(d3.select("#" + item).node(), 200, 100, "png").src
-
-            handtekeningenToPost[item] = temp;
-        });
-
-        beoordelingenToPost = JSON.stringify(beoordelingenToPost);
-        handtekeningenToPost = JSON.stringify(handtekeningenToPost);
-
-        $.ajax({
-            url: '/Beoordeling/OpsturenEind',
-            type: 'POST',
-            data:
-            {
-                beoordelingenJson: beoordelingenToPost,
-                handtekeningenJson: handtekeningenToPost,
-                stageID: @Model.StageID
-            },
-            success:function(dataresponse){
-                window.location = '/Formulier/StudentIndex?StageID=' + dataresponse
-            }
+    $(document).ready(function () {
+        $("#submitBtn").on('click', function () {
+            $("#HandtekeningStudent")[0].value = Canvas2Image.convertToImage(d3.select("#s").node(), 200, 100, "png").src
+            $("#HandtekeningBegeleider")[0].value = Canvas2Image.convertToImage(d3.select("#b").node(), 200, 100, "png").src
+            $("#HandtekeningDocent")[0].value = Canvas2Image.convertToImage(d3.select("#d").node(), 200, 100, "png").src
         });
     });
 </script>
@@ -191,317 +41,400 @@
 <script src="~/Scripts/canvas2image.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
-    Beoordeling1
-<input name="Beoordeling1" type="radio" value="1"> O Onvoldoende
-<input name="Beoordeling1" type="radio" value="2"> M Matig
-<input name="Beoordeling1" type="radio" value="3"> V Voldoende
-<input name="Beoordeling1" type="radio" value="4"> G Goed
-<input name="Beoordeling1" type="radio" value="5"> X Niet van toepassing
+@using (Html.BeginForm())
+{ 
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.Beoordeling.Stage)
+    @Html.HiddenFor(m => m.Beoordeling.Datum)
+    
+    <table>
+        <tr>
+            <td>
+                Student:
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.Beoordeling.Stage1.Persoonsgegevens.Voornaam) @Html.DisplayFor(m => m.Beoordeling.Stage1.Persoonsgegevens.Achternaam)
+            </td>
+            <td>
+                Bedrijf:
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.Beoordeling.Stage1.Persoonsgegevens2.Bedrijf1.Naam)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Stagedocent:
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.Beoordeling.Stage1.Persoonsgegevens1.Voornaam) @Html.DisplayFor(m => m.Beoordeling.Stage1.Persoonsgegevens1.Achternaam)
+            </td>
+            <td>
+                Stagebegeleider:
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.Beoordeling.Stage1.Persoonsgegevens2.Voornaam) @Html.DisplayFor(m => m.Beoordeling.Stage1.Persoonsgegevens2.Achternaam)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Periode
+            </td>
+            <td colspan="3">
+                @Html.DisplayFor(m => m.Beoordeling.Stage1.Periode.Begindatum) @Html.DisplayFor(m => m.Beoordeling.Stage1.Periode.Einddatum)
+            </td>
+        </tr>
+    </table>
+
+    <p>
+        <h3>Beoordeling</h3>
+        @Html.RadioButtonFor(m => m.Beoordeling.Beoordeling1, 1) O onvoldoende
+        @Html.RadioButtonFor(m => m.Beoordeling.Beoordeling1, 2) M matig
+        @Html.RadioButtonFor(m => m.Beoordeling.Beoordeling1, 3) V voldoende
+        @Html.RadioButtonFor(m => m.Beoordeling.Beoordeling1, 4) G goed
+        @Html.RadioButtonFor(m => m.Beoordeling.Beoordeling1, 5) X niet van toepassing
+        @Html.ValidationMessageFor(model => model.Beoordeling.Beoordeling1)
+    </p>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Technische aspecten</th>
+                <th>O</th>
+                <th>M</th>
+                <th>V</th>
+                <th>G</th>
+                <th>X</th>
+                <th>Opmerking</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Voorbereding werkzaamheden</td>
+
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.VoorbereidWerk, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.VoorbereidWerk, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.VoorbereidWerk, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.VoorbereidWerk, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.VoorbereidWerk, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.VoorbereidWerkOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.VoorbereidWerk) </td>
+
+            </tr>
+            <tr>
+                <td>Plannen en organiseren werkzaamheden</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.PlanEnOrganiserenWerk, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.PlanEnOrganiserenWerk, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.PlanEnOrganiserenWerk, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.PlanEnOrganiserenWerk, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.PlanEnOrganiserenWerk, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.PlanEnOrganiserenWerkOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.PlanEnOrganiserenWerk) </td>
+            </tr>
+            <tr>
+                <td>Theoretisch inzicht</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.TheoretischInzicht, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.TheoretischInzicht, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.TheoretischInzicht, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.TheoretischInzicht, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.TheoretischInzicht, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.TheoretischInzichtOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.TheoretischInzicht) </td>
+            </tr>
+            <tr>
+                <td>Technisch inzicht</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.TechnischInzicht, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.TechnischInzicht, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.TechnischInzicht, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.TechnischInzicht, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.TechnischInzicht, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.TechnischInzichtOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.TechnischInzicht) </td>
+            </tr>
+            <tr>
+                <td>Kwaliteit geleverd werk</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.KwalGeleverdWerk, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.KwalGeleverdWerk, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.KwalGeleverdWerk, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.KwalGeleverdWerk, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.KwalGeleverdWerk, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.KwalGeleverdWerkOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.KwalGeleverdWerk) </td>
+            </tr>
+            <tr>
+                <td>Rapporterem werkzaamheden</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.RapportWerk, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.RapportWerk, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.RapportWerk, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.RapportWerk, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.RapportWerk, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.RapportWerkOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.RapportWerk) </td>
+            </tr>
+            <tr>
+                <td>Houdt zich aan bedrijfsregels</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudtBedrRegels, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudtBedrRegels, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudtBedrRegels, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudtBedrRegels, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudtBedrRegels, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.HoudtBedrRegelsOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.HoudtBedrRegels) </td>
+            </tr>
+            <tr>
+                <td>Houdt zich aan ARBO regels</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudtARBORegels, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudtARBORegels, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudtARBORegels, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudtARBORegels, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudtARBORegels, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.HoudtARBORegelsOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.HoudtARBORegels) </td>
+            </tr>
+            <tr>
+                <td>Werktempo</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.WerkTempo, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.WerkTempo, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.WerkTempo, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.WerkTempo, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.WerkTempo, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.WerkTempoOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.WerkTempo) </td>
+            </tr>
+            <tr>
+                <td>Beoordeling Technische aspecten</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.BeoordelingTechAspect, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.BeoordelingTechAspect, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.BeoordelingTechAspect, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.BeoordelingTechAspect, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.BeoordelingTechAspect, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.BeoordelingTechAspectOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.BeoordelingTechAspect) </td>
+            </tr>
+        </tbody>
+    </table>
 
     <br />
+
+    <table>
+        <thead>
+            <tr>
+                <th>Houdingsaspecten</th>
+                <th>O</th>
+                <th>M</th>
+                <th>V</th>
+                <th>G</th>
+                <th>X</th>
+                <th>Opmerking</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Verloop eerste contacten bedrijf</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.VerloopEersteContact, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.VerloopEersteContact, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.VerloopEersteContact, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.VerloopEersteContact, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.VerloopEersteContact, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.VerloopEersteContactOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.VerloopEersteContact) </td>
+            </tr>
+            <tr>
+                <td>Houdingen ten aanzien van collega's</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVCollegas, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVCollegas, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVCollegas, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVCollegas, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVCollegas, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.HoudingTAVCollegasOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.HoudingTAVCollegas) </td>
+            </tr>
+            <tr>
+                <td>Houding ten aanzien van leidinggevenden</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVLeiding, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVLeiding, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVLeiding, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVLeiding, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVLeiding, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.HoudingTAVLeidingOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.HoudingTAVLeiding) </td>
+            </tr>
+            <tr>
+                <td>Houding ten aanzien van derden</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVDerden, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVDerden, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVDerden, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVDerden, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingTAVDerden, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.HoudingTAVDerdenOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.HoudingTAVDerden) </td>
+            </tr>
+            <tr>
+                <td>Omgaan met kritiek</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.OmgaanKritiek, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.OmgaanKritiek, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.OmgaanKritiek, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.OmgaanKritiek, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.OmgaanKritiek, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.OmgaanKritiekOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.OmgaanKritiek) </td>
+            </tr>
+            <tr>
+                <td>Komt op tijd</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.OpTijd, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.OpTijd, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.OpTijd, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.OpTijd, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.OpTijd, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.OpTijdOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.OpTijd) </td>
+            </tr>
+            <tr>
+                <td>Toont eigen initiatief</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ToontInitiatief, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ToontInitiatief, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ToontInitiatief, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ToontInitiatief, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ToontInitiatief, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.ToontInitiatiefOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.ToontInitiatief) </td>
+            </tr>
+            <tr>
+                <td>Inzet</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Inzet, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Inzet, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Inzet, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Inzet, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Inzet, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.IntzetOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.Inzet) </td>
+            </tr>
+            <tr>
+                <td>Toont belangstelling voor het vak</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ToontBelangstellingVak, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ToontBelangstellingVak, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ToontBelangstellingVak, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ToontBelangstellingVak, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ToontBelangstellingVak, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.ToontBelangstellingVakOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.ToontBelangstellingVak) </td>
+            </tr>
+            <tr>
+                <td>Grenzen aangeven</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.GrenzenAangeven, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.GrenzenAangeven, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.GrenzenAangeven, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.GrenzenAangeven, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.GrenzenAangeven, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.GrenzenAangevenOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.GrenzenAangeven) </td>
+            </tr>
+            <tr>
+                <td>Komt afspraken na</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.KomtAfsprakenNa, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.KomtAfsprakenNa, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.KomtAfsprakenNa, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.KomtAfsprakenNa, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.KomtAfsprakenNa, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.KomtAfsprakenNaOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.KomtAfsprakenNa) </td>
+            </tr>
+            <tr>
+                <td>Kan zelfstandig werken</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ZelfstandigWerken, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ZelfstandigWerken, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ZelfstandigWerken, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ZelfstandigWerken, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.ZelfstandigWerken, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.ZelfstandigWerkenOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.ZelfstandigWerken) </td>
+            </tr>
+            <tr>
+                <td>Gemotiveerd</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Gemotiveerd, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Gemotiveerd, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Gemotiveerd, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Gemotiveerd, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Gemotiveerd, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.GemotiveerdOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.Gemotiveerd) </td>
+            </tr>
+            <tr>
+                <td>HoudingsAspecten</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingsAspecten, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingsAspecten, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingsAspecten, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingsAspecten, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.HoudingsAspecten, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.HoudingAspectenOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.HoudingsAspecten) </td>
+            </tr>
+        </tbody>
+    </table>
+
     <br />
 
-<table>
-    <thead>
-        <tr>
-            <th>Technische aspecten</th>
-            <th>O</th>
-            <th>M</th>
-            <th>V</th>
-            <th>G</th>
-            <th>X</th>
-            <th>Opmerking</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Voorbereding werkzaamheden</td>
-            <td><input name="VoorbereidWerk" type="radio" value="1" /></td>
-            <td><input name="VoorbereidWerk" type="radio" value="2" /></td>
-            <td><input name="VoorbereidWerk" type="radio" value="3" /></td>
-            <td><input name="VoorbereidWerk" type="radio" value="4" /></td>
-            <td><input name="VoorbereidWerk" type="radio" value="0" /></td>
-            <td><textarea id="VoorbereidWerkOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Plannen en organiseren werkzaamheden</td>
-            <td><input name="PlanEnOrganiserenWerk" type="radio" value="1" /></td>
-            <td><input name="PlanEnOrganiserenWerk" type="radio" value="2" /></td>
-            <td><input name="PlanEnOrganiserenWerk" type="radio" value="3" /></td>
-            <td><input name="PlanEnOrganiserenWerk" type="radio" value="4" /></td>
-            <td><input name="PlanEnOrganiserenWerk" type="radio" value="0" /></td>
-            <td><textarea id="PlanEnOrganiserenWerkOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Theoretisch inzicht</td>
-            <td><input name="TheoretischInzicht" type="radio" value="1" /></td>
-            <td><input name="TheoretischInzicht" type="radio" value="2" /></td>
-            <td><input name="TheoretischInzicht" type="radio" value="3" /></td>
-            <td><input name="TheoretischInzicht" type="radio" value="4" /></td>
-            <td><input name="TheoretischInzicht" type="radio" value="0" /></td>
-            <td><textarea id="TheoretischInzichtOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Technisch inzicht</td>
-            <td><input name="TechnischInzicht" type="radio" value="1" /></td>
-            <td><input name="TechnischInzicht" type="radio" value="2" /></td>
-            <td><input name="TechnischInzicht" type="radio" value="3" /></td>
-            <td><input name="TechnischInzicht" type="radio" value="4" /></td>
-            <td><input name="TechnischInzicht" type="radio" value="0" /></td>
-            <td><textarea id="TechnischInzichtOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Kwaliteit geleverd werk</td>
-            <td><input name="KwalGeleverdWerk" type="radio" value="1" /></td>
-            <td><input name="KwalGeleverdWerk" type="radio" value="2" /></td>
-            <td><input name="KwalGeleverdWerk" type="radio" value="3" /></td>
-            <td><input name="KwalGeleverdWerk" type="radio" value="4" /></td>
-            <td><input name="KwalGeleverdWerk" type="radio" value="0" /></td>
-            <td><textarea id="KwalGeleverdWerkOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Rapporterem werkzaamheden</td>
-            <td><input name="RapportWerk" type="radio" value="1" /></td>
-            <td><input name="RapportWerk" type="radio" value="2" /></td>
-            <td><input name="RapportWerk" type="radio" value="3" /></td>
-            <td><input name="RapportWerk" type="radio" value="4" /></td>
-            <td><input name="RapportWerk" type="radio" value="0" /></td>
-            <td><textarea id="RapportWerkOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Houdt zich aan bedrijfsregels</td>
-            <td><input name="HoudtBedrRegels" type="radio" value="1" /></td>
-            <td><input name="HoudtBedrRegels" type="radio" value="2" /></td>
-            <td><input name="HoudtBedrRegels" type="radio" value="3" /></td>
-            <td><input name="HoudtBedrRegels" type="radio" value="4" /></td>
-            <td><input name="HoudtBedrRegels" type="radio" value="0" /></td>
-            <td><textarea id="HoudtBedrRegelsOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Houdt zich aan ARBO regels</td>
-            <td><input name="HoudtARBORegels" type="radio" value="1" /></td>
-            <td><input name="HoudtARBORegels" type="radio" value="2" /></td>
-            <td><input name="HoudtARBORegels" type="radio" value="3" /></td>
-            <td><input name="HoudtARBORegels" type="radio" value="4" /></td>
-            <td><input name="HoudtARBORegels" type="radio" value="0" /></td>
-            <td><textarea id="HoudtARBORegelsOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Werktempo</td>
-            <td><input name="WerkTempo" type="radio" value="1" /></td>
-            <td><input name="WerkTempo" type="radio" value="2" /></td>
-            <td><input name="WerkTempo" type="radio" value="3" /></td>
-            <td><input name="WerkTempo" type="radio" value="4" /></td>
-            <td><input name="WerkTempo" type="radio" value="0" /></td>
-            <td><textarea id="WerkTempoOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Beoordeling Technische aspecten</td>
-            <td><input name="BeoordelingTechAspect" type="radio" value="1" /></td>
-            <td><input name="BeoordelingTechAspect" type="radio" value="2" /></td>
-            <td><input name="BeoordelingTechAspect" type="radio" value="3" /></td>
-            <td><input name="BeoordelingTechAspect" type="radio" value="4" /></td>
-            <td><input name="BeoordelingTechAspect" type="radio" value="0" /></td>
-            <td><textarea id="BeoordelingTechAspectOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-    </tbody>
-</table>
+    <table>
+        <thead>
+            <tr>
+                <th>Technische aspecten</th>
+                <th>O</th>
+                <th>M</th>
+                <th>V</th>
+                <th>G</th>
+                <th>X</th>
+                <th>Opmerking</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Verslag</td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Verslag, 1) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Verslag, 2) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Verslag, 3) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Verslag, 4) </td>
+                <td>@Html.RadioButtonFor(m => m.Beoordeling.Verslag, 5) </td>
+                <td>@Html.TextAreaFor(model => model.Beoordeling.VerslagOpm, new { @rows = 1, @cols = 50 })</td>
+                <td>@Html.ValidationMessageFor(model => model.Beoordeling.Verslag) </td>
+            </tr>
+        </tbody>
+    </table>
 
-<br />
+    <br />
+    <table>
+        <tr>
+            <th align="center" valign="middle">Handtekening Docent</th>
+            <th align="center" valign="middle">Handtekening Begeleider</th>
+            <th align="center" valign="middle">Handtekening Stagiair</th>
+        </tr>
+        <tr>
+            @Html.HiddenFor(m => m.HandtekeningDocent)
+            @Html.HiddenFor(m => m.HandtekeningBegeleider)
+            @Html.HiddenFor(m => m.HandtekeningStudent)
 
-<table>
-    <thead>
-        <tr>
-            <th>Houdingsaspecten</th>
-            <th>O</th>
-            <th>M</th>
-            <th>V</th>
-            <th>G</th>
-            <th>X</th>
-            <th>Opmerking</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Verloop eerste contacten bedrijf</td>
-            <td><input name="VerloopEersteContact" type="radio" value="1" /></td>
-            <td><input name="VerloopEersteContact" type="radio" value="2" /></td>
-            <td><input name="VerloopEersteContact" type="radio" value="3" /></td>
-            <td><input name="VerloopEersteContact" type="radio" value="4" /></td>
-            <td><input name="VerloopEersteContact" type="radio" value="0" /></td>
-            <td><textarea id="VerloopEersteContactOpm" rows="1" cols="50"></textarea></td>
+            <td><canvas id="d" width="200" height="100" class="cvs"></canvas> </td>
+            <td><canvas id="b" width="200" height="100" class="cvs"></canvas> </td>
+            <td><canvas id="s" width="200" height="100" class="cvs"></canvas> </td>
         </tr>
         <tr>
-            <td>Houdingen ten aanzien van collega's</td>
-            <td><input name="HoudingTAVCollegas" type="radio" value="1" /></td>
-            <td><input name="HoudingTAVCollegas" type="radio" value="2" /></td>
-            <td><input name="HoudingTAVCollegas" type="radio" value="3" /></td>
-            <td><input name="HoudingTAVCollegas" type="radio" value="4" /></td>
-            <td><input name="HoudingTAVCollegas" type="radio" value="0" /></td>
-            <td><textarea id="HoudingTAVCollegasOpm" rows="1" cols="50"></textarea></td>
+            <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('d')" /></td>
+            <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('b')" /></td>
+            <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('s')" /></td>
         </tr>
-        <tr>
-            <td>Houding ten aanzien van leidinggevenden</td>
-            <td><input name="HoudingTAVLeiding" type="radio" value="1" /></td>
-            <td><input name="HoudingTAVLeiding" type="radio" value="2" /></td>
-            <td><input name="HoudingTAVLeiding" type="radio" value="3" /></td>
-            <td><input name="HoudingTAVLeiding" type="radio" value="4" /></td>
-            <td><input name="HoudingTAVLeiding" type="radio" value="0" /></td>
-            <td><textarea id="HoudingTAVLeidingOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Houding ten aanzien van derden</td>
-            <td><input name="HoudingTAVDerden" type="radio" value="1" /></td>
-            <td><input name="HoudingTAVDerden" type="radio" value="2" /></td>
-            <td><input name="HoudingTAVDerden" type="radio" value="3" /></td>
-            <td><input name="HoudingTAVDerden" type="radio" value="4" /></td>
-            <td><input name="HoudingTAVDerden" type="radio" value="0" /></td>
-            <td><textarea id="HoudingTAVDerdenOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Omgaan met kritiek</td>
-            <td><input name="OmgaanKritiek" type="radio" value="1" /></td>
-            <td><input name="OmgaanKritiek" type="radio" value="2" /></td>
-            <td><input name="OmgaanKritiek" type="radio" value="3" /></td>
-            <td><input name="OmgaanKritiek" type="radio" value="4" /></td>
-            <td><input name="OmgaanKritiek" type="radio" value="0" /></td>
-            <td><textarea id="OmgaanKritiekOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Komt op tijd</td>
-            <td><input name="OpTijd" type="radio" value="1" /></td>
-            <td><input name="OpTijd" type="radio" value="2" /></td>
-            <td><input name="OpTijd" type="radio" value="3" /></td>
-            <td><input name="OpTijd" type="radio" value="4" /></td>
-            <td><input name="OpTijd" type="radio" value="0" /></td>
-            <td><textarea id="OpTijdOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Toont eigen initiatief</td>
-            <td><input name="ToontInitiatief" type="radio" value="1" /></td>
-            <td><input name="ToontInitiatief" type="radio" value="2" /></td>
-            <td><input name="ToontInitiatief" type="radio" value="3" /></td>
-            <td><input name="ToontInitiatief" type="radio" value="4" /></td>
-            <td><input name="ToontInitiatief" type="radio" value="0" /></td>
-            <td><textarea id="ToontInitiatiefOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Inzet</td>
-            <td><input name="Inzet" type="radio" value="1" /></td>
-            <td><input name="Inzet" type="radio" value="2" /></td>
-            <td><input name="Inzet" type="radio" value="3" /></td>
-            <td><input name="Inzet" type="radio" value="4" /></td>
-            <td><input name="Inzet" type="radio" value="0" /></td>
-            <td><textarea id="IntzetOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Toont belangstelling voor het vak</td>
-            <td><input name="ToontBelangstellingVak" type="radio" value="1" /></td>
-            <td><input name="ToontBelangstellingVak" type="radio" value="2" /></td>
-            <td><input name="ToontBelangstellingVak" type="radio" value="3" /></td>
-            <td><input name="ToontBelangstellingVak" type="radio" value="4" /></td>
-            <td><input name="ToontBelangstellingVak" type="radio" value="0" /></td>
-            <td><textarea id="ToontBelangstellingVakOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Grenzen aangeven</td>
-            <td><input name="GrenzenAangeven" type="radio" value="1" /></td>
-            <td><input name="GrenzenAangeven" type="radio" value="2" /></td>
-            <td><input name="GrenzenAangeven" type="radio" value="3" /></td>
-            <td><input name="GrenzenAangeven" type="radio" value="4" /></td>
-            <td><input name="GrenzenAangeven" type="radio" value="0" /></td>
-            <td><textarea id="GrenzenAangevenOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Komt afspraken na</td>
-            <td><input name="KomtAfsprakenNa" type="radio" value="1" /></td>
-            <td><input name="KomtAfsprakenNa" type="radio" value="2" /></td>
-            <td><input name="KomtAfsprakenNa" type="radio" value="3" /></td>
-            <td><input name="KomtAfsprakenNa" type="radio" value="4" /></td>
-            <td><input name="KomtAfsprakenNa" type="radio" value="0" /></td>
-            <td><textarea id="KomtAfsprakenNaOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Kan zelfstandig werken</td>
-            <td><input name="ZelfstandigWerken" type="radio" value="1" /></td>
-            <td><input name="ZelfstandigWerken" type="radio" value="2" /></td>
-            <td><input name="ZelfstandigWerken" type="radio" value="3" /></td>
-            <td><input name="ZelfstandigWerken" type="radio" value="4" /></td>
-            <td><input name="ZelfstandigWerken" type="radio" value="0" /></td>
-            <td><textarea id="ZelfstandigWerkenOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>Gemotiveerd</td>
-            <td><input name="Gemotiveerd" type="radio" value="1" /></td>
-            <td><input name="Gemotiveerd" type="radio" value="2" /></td>
-            <td><input name="Gemotiveerd" type="radio" value="3" /></td>
-            <td><input name="Gemotiveerd" type="radio" value="4" /></td>
-            <td><input name="Gemotiveerd" type="radio" value="0" /></td>
-            <td><textarea id="GemotiveerdOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-        <tr>
-            <td>HoudingsAspecten</td>
-            <td><input name="HoudingsAspecten" type="radio" value="1" /></td>
-            <td><input name="HoudingsAspecten" type="radio" value="2" /></td>
-            <td><input name="HoudingsAspecten" type="radio" value="3" /></td>
-            <td><input name="HoudingsAspecten" type="radio" value="4" /></td>
-            <td><input name="HoudingsAspecten" type="radio" value="0" /></td>
-            <td colspan="6"><textarea id="HoudingAspectenOpm" rows="1" cols="50"></textarea></td>
+    </table>
 
-        </tr>
-    </tbody>
-</table>
+    <input type="submit" id="submitBtn" value="Create" />
 
-<br />
+}
 
-<table>
-    <thead>
-        <tr>
-            <th>Technische aspecten</th>
-            <th>O</th>
-            <th>M</th>
-            <th>V</th>
-            <th>G</th>
-            <th>X</th>
-            <th>Opmerking</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Verslag</td>
-            <td><input name="Verslag" type="radio" value="1" /></td>
-            <td><input name="Verslag" type="radio" value="2" /></td>
-            <td><input name="Verslag" type="radio" value="3" /></td>
-            <td><input name="Verslag" type="radio" value="4" /></td>
-            <td><input name="Verslag" type="radio" value="0" /></td>
-            <td><textarea id="VerslagOpm" rows="1" cols="50"></textarea></td>
-        </tr>
-    </tbody>
-</table>
-
-<br />
-<table>
-    <tr>
-        <th align="center" valign="middle">Handtekening Docent</th>
-        <th align="center" valign="middle">Handtekening Begeleider</th>
-        <th align="center" valign="middle">Handtekening Stagiair</th>
-    </tr>
-    <tr>
-        <td><canvas id="d" width="200" height="100" class="cvs"></canvas> </td>
-        <td><canvas id="b" width="200" height="100" class="cvs"></canvas> </td>
-        <td><canvas id="s" width="200" height="100" class="cvs"></canvas> </td>
-    </tr>
-    <tr>
-        <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('d')" /></td>
-        <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('b')" /></td>
-        <td align="center" valign="middle"><input class="clsbtn" value="Clear" type="button" onclick="ClearCanvas('s')" /></td>
-    </tr>
-</table>
-<input type="button" id="klikje" />
 <script src="~/Scripts/mousecontroller.js"></script>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Beoordeling.Stage }, null)
 </div>
 
 @section Scripts {

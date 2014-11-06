@@ -50,13 +50,12 @@ namespace PVB_Stage_Applicatie.Controllers
 
                 Response.Cookies.Add(cookie);
 
-                Response.Redirect("/Home/Index");
+                Response.Redirect(Request.QueryString["ReturnURL"] == null ? "~/Home" : Request.QueryString["ReturnURL"]);
             }
 
             return View(new LoginForm { correct = false });
         }
 
-        [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult logUit()
         {
             HttpCookie authCookie = HttpContext.Request.Cookies[FormsAuthentication.FormsCookieName];

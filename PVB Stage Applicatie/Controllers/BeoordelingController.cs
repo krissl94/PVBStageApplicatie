@@ -34,222 +34,91 @@ namespace PVB_Stage_Applicatie.Controllers
         //
         // POST: /Beoordeling/CreateFormulier
         [Authorize(Roles = "Docent")]
-        public ActionResult CreateFormulier(int stageID = 0)
+        public ActionResult CreateFormulier(int id = 0)
         {
-            Stage stage = db.Stage.Where(s => s.StageID == stageID).FirstOrDefault();
+            Stage stage = db.Stage.Where(s => s.StageID == id).FirstOrDefault();
 
             if (stage != null)
                 if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
                     if (User.Identity.Name == stage.Stagedocent.ToString())
-                        return View(stage);
+                    {
+                        BeoordelingModel beoordlingModel = new BeoordelingModel()
+                        {
+                            Beoordeling = new Beoordeling()
+                            {
+                                Stage = stage.StageID,
+                                Stage1 = stage
+                            }
+                        };
 
-            return RedirectToAction("StudentIndex", "Formulier", new { stageID = stageID });
+                        return View(beoordlingModel);
+                    }
+
+            return RedirectToAction("StudentIndex", "Formulier", new { id = id });
         }
-
-        //
-        // POST: /Beoordeling/CreateEindbeoordeling
-        [Authorize(Roles = "Docent")]
-        public ActionResult CreateEindbeoordeling(int stageID = 0)
-        {
-            Stage stage = db.Stage.Where(s => s.StageID == stageID).FirstOrDefault();
-
-            if (stage != null)
-                if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
-                    if (User.Identity.Name == stage.Stagedocent.ToString())
-                        return View(stage);
-
-            return RedirectToAction("StudentIndex", "Formulier", new { stageID = stageID });
-        }
-
-        //
-        // GET: /Beoordeling/Edit/5
-        [Authorize(Roles = "Docent")]
-        public ActionResult Edit(int id = 0)
-        {
-            Beoordeling beoordeling = db.Beoordeling.Find(id);
-            if (beoordeling == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID", beoordeling.Stage);
-            return View(beoordeling);
-        }
-
-        //
-        // POST: /Beoordeling/Edit/5
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Docent")]
-        public ActionResult Edit(Beoordeling beoordeling)
+        public ActionResult CreateFormulier(BeoordelingModel beoordelingModel)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(beoordeling).State = EntityState.Modified;
+                beoordelingModel.Beoordeling.Datum = DateTime.Now;
+                beoordelingModel.Beoordeling.Stage1 = db.Stage.Where(i => i.StageID == beoordelingModel.Beoordeling.Stage).FirstOrDefault();
+                beoordelingModel.Beoordeling.EindBeoordeling = false;
+
+                db.Beoordeling.Add(beoordelingModel.Beoordeling);
+
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                return RedirectToAction("StudentIndex", "Formulier", new { id = beoordelingModel.Beoordeling.Stage });
             }
-            ViewBag.Stage = new SelectList(db.Stage, "StageID", "StageID", beoordeling.Stage);
-            return View(beoordeling);
+
+            return View(beoordelingModel);
         }
 
-        //
-        // GET: /Beoordeling/Delete/5
-        [HttpPost]
         [Authorize(Roles = "Docent")]
-        public int OpsturenEind(string beoordelingenJson, string handtekeningenJson, int stageID)
+        public ActionResult CreateEindbeoordeling(int id = 0)
         {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            Stage stage = db.Stage.Where(s => s.StageID == id).FirstOrDefault();
 
-            Beoordelingen b = serializer.Deserialize<Beoordelingen>(beoordelingenJson);
-            Handetekeningen h = serializer.Deserialize<Handetekeningen>(handtekeningenJson);
+            if (stage != null)
+                if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
+                    if (User.Identity.Name == stage.Stagedocent.ToString())
+                    {
+                        BeoordelingModel beoordlingModel = new BeoordelingModel()
+                        {
+                            Beoordeling = new Beoordeling()
+                            {
+                                Stage = stage.StageID,
+                                Stage1 = stage
+                            }
+                        };
 
-            Beoordeling bobj = new Beoordeling();
+                        return View(beoordlingModel);
+                    }
 
-            bobj.Datum = DateTime.Today;
-            bobj.EindBeoordeling = true;
-            bobj.Stage = stageID;
-
-            bobj.Beoordeling1 = b.Beoordeling1.beoordeling;
-            bobj.BeoordelingTechAspect = b.BeoordelingTechAspect.beoordeling;
-            bobj.BeoordelingTechAspectOpm = b.BeoordelingTechAspect.opmerking;
-            bobj.Gemotiveerd = b.Gemotiveerd.beoordeling;
-            bobj.GemotiveerdOpm = b.Gemotiveerd.opmerking;
-            bobj.GrenzenAangeven = b.GrenzenAangeven.beoordeling;
-            bobj.GrenzenAangevenOpm = b.GrenzenAangeven.opmerking;
-            bobj.HoudingAspectenOpm = b.HoudingsAspecten.opmerking;
-            bobj.HoudingsAspecten = b.HoudingsAspecten.beoordeling;
-            bobj.HoudingTAVCollegas = b.HoudingTAVCollegas.beoordeling;
-            bobj.HoudingTAVCollegasOpm = b.HoudingTAVCollegas.opmerking;
-            bobj.HoudingTAVDerden = b.HoudingTAVDerden.beoordeling;
-            bobj.HoudingTAVDerdenOpm = b.HoudingTAVDerden.opmerking;
-            bobj.HoudingTAVLeiding = b.HoudingTAVLeiding.beoordeling;
-            bobj.HoudingTAVLeidingOpm = b.HoudingTAVLeiding.opmerking;
-            bobj.HoudtARBORegels = b.HoudtARBORegels.beoordeling;
-            bobj.HoudtARBORegelsOpm = b.HoudtARBORegels.opmerking;
-            bobj.HoudtBedrRegels = b.HoudtBedrRegels.beoordeling;
-            bobj.HoudtBedrRegelsOpm = b.HoudtBedrRegels.opmerking;
-            bobj.IntzetOpm = b.Inzet.opmerking;
-            bobj.Inzet = b.Inzet.beoordeling;
-            bobj.KomtAfsprakenNa = b.KomtAfsprakenNa.beoordeling;
-            bobj.KomtAfsprakenNaOpm = b.KomtAfsprakenNa.opmerking;
-            bobj.KwalGeleverdWerk = b.KwalGeleverdWerk.beoordeling;
-            bobj.KwalGeleverdWerkOpm = b.KwalGeleverdWerk.opmerking;
-            bobj.OmgaanKritiek = b.OmgaanKritiek.beoordeling;
-            bobj.OmgaanKritiekOpm = b.OmgaanKritiek.opmerking;
-            bobj.OpTijd = b.OpTijd.beoordeling;
-            bobj.OpTijdOpm = b.OpTijd.opmerking;
-            bobj.PlanEnOrganiserenWerk = b.PlanEnOrganiserenWerk.beoordeling;
-            bobj.PlanEnOrganiserenWerkOpm = b.PlanEnOrganiserenWerk.opmerking;
-            bobj.RapportWerk = b.RapportWerk.beoordeling;
-            bobj.RapportWerkOpm = b.RapportWerk.opmerking;
-            bobj.TechnischInzicht = b.TechnischInzicht.beoordeling;
-            bobj.TechnischInzichtOpm = b.TheoretischInzicht.opmerking;
-            bobj.TheoretischInzicht = b.TheoretischInzicht.beoordeling;
-            bobj.TheoretischInzichtOpm = b.TheoretischInzicht.opmerking;
-            bobj.ToontBelangstellingVak = b.ToontBelangstellingVak.beoordeling;
-            bobj.ToontBelangstellingVakOpm = b.ToontBelangstellingVak.opmerking;
-            bobj.ToontInitiatief = b.ToontInitiatief.beoordeling;
-            bobj.ToontInitiatiefOpm = b.ToontInitiatief.opmerking;
-            bobj.VerloopEersteContact = b.VerloopEersteContact.beoordeling;
-            bobj.VerloopEersteContactOpm = b.VerloopEersteContact.opmerking;
-            bobj.Verslag = b.Verslag.beoordeling;
-            bobj.VerslagOpm = b.Verslag.opmerking;
-            bobj.VoorbereidWerk = b.VoorbereidWerk.beoordeling;
-            bobj.VoorbereidWerkOpm = b.VoorbereidWerk.opmerking;
-            bobj.WerkTempo = b.WerkTempo.beoordeling;
-            bobj.WerkTempoOpm = b.WerkTempo.opmerking;
-            bobj.ZelfstandigWerken = b.ZelfstandigWerken.beoordeling;
-            bobj.ZelfstandigWerkenOpm = b.ZelfstandigWerken.opmerking;
-
-            bobj.HandtekeningBegeleider = System.Text.Encoding.ASCII.GetBytes(h.b.handtekening);
-            bobj.HandtekeningDocent = System.Text.Encoding.ASCII.GetBytes(h.d.handtekening);
-            bobj.HandtekeningStudent = System.Text.Encoding.ASCII.GetBytes(h.s.handtekening);
-
-            db.Beoordeling.Add(bobj);
-            db.SaveChanges();
-
-            Stage stageToPost = db.Stage.Where(i => i.StageID == stageID).FirstOrDefault();
-            RedirectToAction("StudentIndex", "Formulier", stageToPost);
-            return stageToPost.StageID;
+            return RedirectToAction("StudentIndex", "Formulier", new { id = id });
         }
 
         [HttpPost]
         [Authorize(Roles = "Docent")]
-        public int Opsturen(string beoordelingenJson, string handtekeningenJson, int stageID)
+        public ActionResult CreateEindbeoordeling(BeoordelingModel beoordelingModel)
         {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            if (ModelState.IsValid)
+            {
+                beoordelingModel.Beoordeling.Datum = DateTime.Now;
+                beoordelingModel.Beoordeling.Stage1 = db.Stage.Where(i => i.StageID == beoordelingModel.Beoordeling.Stage).FirstOrDefault();
+                beoordelingModel.Beoordeling.EindBeoordeling = true;
 
-            Beoordelingen b = serializer.Deserialize<Beoordelingen>(beoordelingenJson);
-            Handetekeningen h = serializer.Deserialize<Handetekeningen>(handtekeningenJson);
+                db.Beoordeling.Add(beoordelingModel.Beoordeling);
 
-            Beoordeling bobj = new Beoordeling();
+                db.SaveChanges();
 
-            bobj.Datum = DateTime.Today;
-            bobj.EindBeoordeling = false;
-            bobj.Stage = stageID;
+                return RedirectToAction("StudentIndex", "Formulier", new { id = beoordelingModel.Beoordeling.Stage });
+            }
 
-            bobj.Beoordeling1 = b.Beoordeling1.beoordeling;
-            bobj.BeoordelingTechAspect = b.BeoordelingTechAspect.beoordeling;
-            bobj.BeoordelingTechAspectOpm = b.BeoordelingTechAspect.opmerking;
-            bobj.Gemotiveerd = b.Gemotiveerd.beoordeling;
-            bobj.GemotiveerdOpm = b.Gemotiveerd.opmerking;
-            bobj.GrenzenAangeven = b.GrenzenAangeven.beoordeling;
-            bobj.GrenzenAangevenOpm = b.GrenzenAangeven.opmerking;
-            bobj.HoudingAspectenOpm = b.HoudingsAspecten.opmerking;
-            bobj.HoudingsAspecten = b.HoudingsAspecten.beoordeling;
-            bobj.HoudingTAVCollegas = b.HoudingTAVCollegas.beoordeling;
-            bobj.HoudingTAVCollegasOpm = b.HoudingTAVCollegas.opmerking;
-            bobj.HoudingTAVDerden = b.HoudingTAVDerden.beoordeling;
-            bobj.HoudingTAVDerdenOpm = b.HoudingTAVDerden.opmerking;
-            bobj.HoudingTAVLeiding = b.HoudingTAVLeiding.beoordeling;
-            bobj.HoudingTAVLeidingOpm = b.HoudingTAVLeiding.opmerking;
-            bobj.HoudtARBORegels =  b.HoudtARBORegels.beoordeling;
-            bobj.HoudtARBORegelsOpm = b.HoudtARBORegels.opmerking;
-            bobj.HoudtBedrRegels = b.HoudtBedrRegels.beoordeling;
-            bobj.HoudtBedrRegelsOpm = b.HoudtBedrRegels.opmerking;
-            bobj.IntzetOpm = b.Inzet.opmerking;
-            bobj.Inzet = b.Inzet.beoordeling;
-            bobj.KomtAfsprakenNa = b.KomtAfsprakenNa.beoordeling;
-            bobj.KomtAfsprakenNaOpm = b.KomtAfsprakenNa.opmerking;
-            bobj.KwalGeleverdWerk = b.KwalGeleverdWerk.beoordeling;
-            bobj.KwalGeleverdWerkOpm = b.KwalGeleverdWerk.opmerking;
-            bobj.OmgaanKritiek = b.OmgaanKritiek.beoordeling;
-            bobj.OmgaanKritiekOpm = b.OmgaanKritiek.opmerking;
-            bobj.OpTijd = b.OpTijd.beoordeling;
-            bobj.OpTijdOpm = b.OpTijd.opmerking;
-            bobj.PlanEnOrganiserenWerk = b.PlanEnOrganiserenWerk.beoordeling;
-            bobj.PlanEnOrganiserenWerkOpm = b.PlanEnOrganiserenWerk.opmerking;
-            bobj.RapportWerk = b.RapportWerk.beoordeling;
-            bobj.RapportWerkOpm = b.RapportWerk.opmerking;
-            bobj.TechnischInzicht = b.TechnischInzicht.beoordeling;
-            bobj.TechnischInzichtOpm = b.TheoretischInzicht.opmerking;
-            bobj.TheoretischInzicht = b.TheoretischInzicht.beoordeling;
-            bobj.TheoretischInzichtOpm = b.TheoretischInzicht.opmerking;
-            bobj.ToontBelangstellingVak = b.ToontBelangstellingVak.beoordeling;
-            bobj.ToontBelangstellingVakOpm = b.ToontBelangstellingVak.opmerking;
-            bobj.ToontInitiatief = b.ToontInitiatief.beoordeling;
-            bobj.ToontInitiatiefOpm = b.ToontInitiatief.opmerking;
-            bobj.VerloopEersteContact = b.VerloopEersteContact.beoordeling;
-            bobj.VerloopEersteContactOpm = b.VerloopEersteContact.opmerking;
-            bobj.Verslag = b.Verslag.beoordeling;
-            bobj.VerslagOpm = b.Verslag.opmerking;
-            bobj.VoorbereidWerk = b.VoorbereidWerk.beoordeling;
-            bobj.VoorbereidWerkOpm = b.VoorbereidWerk.opmerking;
-            bobj.WerkTempo = b.WerkTempo.beoordeling;
-            bobj.WerkTempoOpm = b.WerkTempo.opmerking;
-            bobj.ZelfstandigWerken = b.ZelfstandigWerken.beoordeling;
-            bobj.ZelfstandigWerkenOpm = b.ZelfstandigWerken.opmerking;
-            bobj.HandtekeningBegeleider = System.Text.Encoding.ASCII.GetBytes(h.b.handtekening);
-            bobj.HandtekeningDocent = System.Text.Encoding.ASCII.GetBytes(h.d.handtekening);
-            bobj.HandtekeningStudent = System.Text.Encoding.ASCII.GetBytes(h.s.handtekening);
-
-            db.Beoordeling.Add(bobj);
-            db.SaveChanges();
-
-            Stage stageToPost = db.Stage.Where(i => i.StageID == stageID).FirstOrDefault();
-            RedirectToAction("StudentIndex", "Formulier", stageToPost);
-            return stageToPost.StageID;
+            return View(beoordelingModel);
         }
 
         protected override void Dispose(bool disposing)
