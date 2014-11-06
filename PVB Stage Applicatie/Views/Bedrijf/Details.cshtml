@@ -7,9 +7,9 @@
     });
 </script>
 @section zijMenu{
-<li>@Html.ActionLink("Back to List", "Index")</li>
- 
-       @if (User.IsInRole("Beheerder"))
+    <li>@Html.ActionLink("Back to List", "Index")</li>
+
+    @if (User.IsInRole("Beheerder"))
     {
         <li>@Html.ActionLink("Edit", "Edit", new { id = Model.BedrijfID })</li>
     }
@@ -18,118 +18,139 @@
     ViewBag.Title = "Details";
 }
 
-<div class="col-md-6">
-    <h2>Details bedrijf</h2>
-    <table class="table table-striped">
-        <tr>
-            <td class="display-label">
-                @Html.DisplayNameFor(model => model.Naam)
-            </td>
-            <td class="display-field">
-                @Html.DisplayFor(model => model.Naam)
-            </td>
-        </tr>
-        <tr>
-            <td class="display-label">
-                @Html.DisplayNameFor(model => model.KvKNummer)
-            </td>
-            <td class="display-field">
-                @Html.DisplayFor(model => model.KvKNummer)
-            </td>
-        </tr>
-        <tr>
-            <td class="display-label">
-                @Html.DisplayNameFor(model => model.Plaats)
-            </td>
-            <td class="display-field">
-                @Html.DisplayFor(model => model.Plaats)
-            </td>
-        </tr>
-        <tr>
-            <td class="display-label">
-                @Html.DisplayNameFor(model => model.Straatnaam)
-            </td>
-            <td class="display-field">
-                @Html.DisplayFor(model => model.Straatnaam)
-            </td>
-        </tr>
-        <tr>
-            <td class="display-label">
-                @Html.DisplayNameFor(model => model.Huisnummer)
-            </td>
-            <td class="display-field">
-                @Html.DisplayFor(model => model.Huisnummer)
-            </td>
-        </tr>
-        <tr>
-            <td class="display-label">
-                @Html.DisplayNameFor(model => model.Toevoeging)
-            </td>
-            <td class="display-field">
-                @Html.DisplayFor(model => model.Toevoeging)
-            </td>
-        </tr>
-        <tr>
-            <td class="display-label">
-                @Html.DisplayNameFor(model => model.Postcode)
-            </td>
-            <td class="display-field">
-                @Html.DisplayFor(model => model.Postcode)
-            </td>
-        </tr>
-        <tr>
-            <td class="display-label">
-                @Html.DisplayNameFor(model => model.Telefoonnummer)
-            </td>
-            <td class="display-field">
-                @Html.DisplayFor(model => model.Telefoonnummer)
-            </td>
-        </tr>
-        <tr>
-            <td class="display-label">
-                @Html.DisplayNameFor(model => model.Email)
-            </td>
-            <td class="display-field">
-                @Html.DisplayFor(model => model.Email)
-            </td>
-        </tr>
-        <tr>
-            <td class="display-label">
-                Actief
-            </td>
-            <td class="display-field">
-                @Html.DisplayFor(model => model.Actief)
-            </td>
-        </tr>
-        <tr>
-            <td id="NonActiefReden" class="display-label">
-                Non-actief reden
-            </td>
-            <td class="display-field">
-                @Html.DisplayFor(model => model.NonActiefReden)
-            </td>
-        </tr>
-    </table>
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Details bedrijf</h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <tr>
+                        <td class="display-label">
+                            @Html.DisplayNameFor(model => model.Naam)
+                        </td>
+                        <td class="display-field">
+                            @Html.DisplayFor(model => model.Naam)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="display-label">
+                            @Html.DisplayNameFor(model => model.KvKNummer)
+                        </td>
+                        <td class="display-field">
+                            @Html.DisplayFor(model => model.KvKNummer)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="display-label">
+                            @Html.DisplayNameFor(model => model.Plaats)
+                        </td>
+                        <td class="display-field">
+                            @Html.DisplayFor(model => model.Plaats)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="display-label">
+                            @Html.DisplayNameFor(model => model.Straatnaam)
+                        </td>
+                        <td class="display-field">
+                            @Html.DisplayFor(model => model.Straatnaam)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="display-label">
+                            @Html.DisplayNameFor(model => model.Huisnummer)
+                        </td>
+                        <td class="display-field">
+                            @Html.DisplayFor(model => model.Huisnummer)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="display-label">
+                            @Html.DisplayNameFor(model => model.Toevoeging)
+                        </td>
+                        <td class="display-field">
+                            @Html.DisplayFor(model => model.Toevoeging)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="display-label">
+                            @Html.DisplayNameFor(model => model.Postcode)
+                        </td>
+                        <td class="display-field">
+                            @Html.DisplayFor(model => model.Postcode)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="display-label">
+                            @Html.DisplayNameFor(model => model.Telefoonnummer)
+                        </td>
+                        <td class="display-field">
+                            @Html.DisplayFor(model => model.Telefoonnummer)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="display-label">
+                            @Html.DisplayNameFor(model => model.Email)
+                        </td>
+                        <td class="display-field">
+                            @Html.DisplayFor(model => model.Email)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="display-label">
+                            Actief
+                        </td>
+                        <td class="display-field">
+                            @Html.DisplayFor(model => model.Actief)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="NonActiefReden" class="display-label">
+                            Non-actief reden
+                        </td>
+                        <td class="display-field">
+                            @Html.DisplayFor(model => model.NonActiefReden)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6">
-            <h2>Medewerkers</h2>
-        <table class="table table-striped">
+</div>
 
-            <tr>
-                <th>Medeweker</th>
-                <th></th>
-            </tr>
-            @foreach (var item in Model.Persoonsgegevens)
-            {
-                <tr>
-                    <td>
-                        @item.Voornaam @item.Toevoeging @item.Achternaam
-                    </td>
-                    <td>
-                        @Html.ActionLink("Details", "Details", "Begeleider", new { id = item.PersoonsgegevensID }, null)
-                    </td>
-                </tr>
-            }
-        </table>
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Medewerkers</h3>
 
-    </div>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <table class="table table-striped">
+
+                    <tr>
+                        <th>Medeweker</th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.Persoonsgegevens)
+                    {
+                        <tr>
+                            <td>
+                                @item.Voornaam @item.Toevoeging @item.Achternaam
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "Begeleider", new { id = item.PersoonsgegevensID }, null)
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+            </div>
+
+        </div>
+        </div></div>
+
+
+
