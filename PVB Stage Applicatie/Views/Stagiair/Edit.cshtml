@@ -1,5 +1,8 @@
 ﻿@model PVB_Stage_Applicatie.Models.Persoonsgegevens
+@section ZijMenu{
+    <li>@Html.ActionLink("Back to List", "Index") </li>
 
+}
 <script>
     $(document).ready(function () {
         if ($("#Actief")[0].checked) {
@@ -25,140 +28,159 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Bewerken</h3>
+        </div>
+        <div class="panel-body">
 
-    <fieldset>
-        <legend>Persoonsgegevens</legend>
-
-        @Html.HiddenFor(model => model.PersoonsgegevensID)
-
-
-        @Html.HiddenFor(model => model.Rol)
-        @Html.HiddenFor(model => model.StudentNummer)
-
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Voornaam)
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    @Html.HiddenFor(model => model.PersoonsgegevensID)
+                    @Html.HiddenFor(model => model.Rol)
+                    @Html.HiddenFor(model => model.StudentNummer)
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Voornaam)
+                        </td>
+                        <td class="editor-field">
+                            @Html.DisplayFor(model => model.Voornaam)
+                            @Html.HiddenFor(model => model.Voornaam)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Achternaam)
+                        </td>
+                        <td class="editor-field">
+                            @Html.DisplayFor(model => model.Achternaam)
+                            @Html.HiddenFor(model => model.Achternaam)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Tussenvoegsel)
+                        </td>
+                        <td class="editor-field">
+                            @Html.DisplayFor(model => model.Tussenvoegsel)
+                            @Html.HiddenFor(model => model.Tussenvoegsel)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Email)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Email)
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Straat)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Straat)
+                            @Html.ValidationMessageFor(model => model.Straat)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Huisnummer)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Huisnummer)
+                            @Html.ValidationMessageFor(model => model.Huisnummer)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Toevoeging)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Toevoeging)
+                            @Html.ValidationMessageFor(model => model.Toevoeging)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Postcode)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Postcode)
+                            @Html.ValidationMessageFor(model => model.Postcode)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Plaats)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Plaats)
+                            @Html.ValidationMessageFor(model => model.Plaats)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Actief)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Actief)
+                            @Html.ValidationMessageFor(model => model.Actief)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.NonActiefReden)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.NonActiefReden)
+                            @Html.ValidationMessageFor(model => model.NonActiefReden)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.StudentNummer)
+                        </td>
+                        <td class="editor-field">
+                            @Html.DisplayFor(model => model.StudentNummer)
+                            @Html.ValidationMessageFor(model => model.StudentNummer)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Opleiding)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Opleiding)
+                            @Html.ValidationMessageFor(model => model.Opleiding)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Opleidingsniveau)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Opleidingsniveau)
+                            @Html.ValidationMessageFor(model => model.Opleidingsniveau)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" class="btn btn-lg btn-default" value="Opslaan" />
+                            
+                        </td>
+                        <td>@Html.Encode(ViewData["Foutmelding"])</td>
+                    </tr>
+</table>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.Voornaam)
-            @Html.HiddenFor(model => model.Voornaam)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Achternaam)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.Achternaam)
-            @Html.HiddenFor(model => model.Achternaam)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Tussenvoegsel)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.Tussenvoegsel)
-            @Html.HiddenFor(model => model.Tussenvoegsel)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Straat)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Straat)
-            @Html.ValidationMessageFor(model => model.Straat)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Huisnummer)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Huisnummer)
-            @Html.ValidationMessageFor(model => model.Huisnummer)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Toevoeging)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Toevoeging)
-            @Html.ValidationMessageFor(model => model.Toevoeging)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Postcode)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Postcode)
-            @Html.ValidationMessageFor(model => model.Postcode)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Plaats)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Plaats)
-            @Html.ValidationMessageFor(model => model.Plaats)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Actief)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Actief)
-            @Html.ValidationMessageFor(model => model.Actief)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NonActiefReden)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NonActiefReden)
-            @Html.ValidationMessageFor(model => model.NonActiefReden)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StudentNummer)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.StudentNummer)
-            @Html.ValidationMessageFor(model => model.StudentNummer)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Opleiding)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Opleiding)
-            @Html.ValidationMessageFor(model => model.Opleiding)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Opleidingsniveau)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Opleidingsniveau)
-            @Html.ValidationMessageFor(model => model.Opleidingsniveau)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-        <p>@Html.Encode(ViewData["Foutmelding"])</p>
-
-    </fieldset>
+    </div>
 }
 
 <div>

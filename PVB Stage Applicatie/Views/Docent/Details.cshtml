@@ -1,108 +1,140 @@
 ﻿@model PVB_Stage_Applicatie.Models.Persoonsgegevens
 @section zijMenu{
-        <li>
-            @Html.ActionLink("Aanpassen", "Edit", new { id = Model.PersoonsgegevensID })
-        </li>
 @if (User.IsInRole("Beheerder"))
 {
-        <li>
-            @Html.ActionLink("Terug", "Index")
+    <li>
+        @Html.ActionLink("Terug", "Index")
 
 
-        </li>
+    </li>
 }
+    <li>
+        @Html.ActionLink("Aanpassen", "Edit", new { id = Model.PersoonsgegevensID })
+    </li>
+
 }
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Docent</h3>
 
-<fieldset class="details-field">
-    <legend>Persoonsgegevens</legend>
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Voornaam)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Voornaam)
-    </div>
+        </div>
+        <div class="panel-body">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Voornaam)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Voornaam)
+                    </td>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Achternaam)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Achternaam)
-    </div>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Achternaam)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Achternaam)
+                    </td>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Tussenvoegsel)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Tussenvoegsel)
-    </div>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Tussenvoegsel)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Tussenvoegsel)
+                    </td>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Email)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Email)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Email)
+                    </td>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Straat)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Straat)
-    </div>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Straat)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Straat)
+                    </td>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Huisnummer)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Huisnummer)
-    </div>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Huisnummer)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Huisnummer)
+                    </td>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Toevoeging)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Toevoeging)
-    </div>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Toevoeging)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Toevoeging)
+                    </td>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Postcode)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Postcode)
-    </div>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Postcode)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Postcode)
+                    </td>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Plaats)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Plaats)
-    </div>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Plaats)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Plaats)
+                    </td>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Actief)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Actief)
-    </div>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Actief)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Actief)
+                    </td>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.NonActiefReden)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.NonActiefReden)
-    </div>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.NonActiefReden)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.NonActiefReden)
+                    </td>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.MedewerkerID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MedewerkerID)
-    </div>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.MedewerkerID)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.MedewerkerID)
+                    </td>
 
-</fieldset>
+            </table>
+    </div>
+</div>
+        </div>
 

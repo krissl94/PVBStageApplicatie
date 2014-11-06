@@ -6,119 +6,155 @@
 
 <h2>Create</h2>
 @section zijMenu{
-        <li>@Html.ActionLink("Terug", "Index")</li>
+    <li>@Html.ActionLink("Terug", "Index")</li>
 }
 
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Medewerkers</h3>
 
-    <fieldset>
-        <legend>Persoonsgegevens</legend>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <table class="table table-striped">
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Docent.Voornaam)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Docent.Voornaam)
-            @Html.ValidationMessageFor(model => model.Docent.Voornaam)
-        </div>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Voornaam)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Voornaam)
+                            @Html.ValidationMessageFor(model => model.Docent.Voornaam)
+                        </td>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Docent.Achternaam)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Docent.Achternaam)
-            @Html.ValidationMessageFor(model => model.Docent.Achternaam)
-        </div>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Achternaam)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Achternaam)
+                            @Html.ValidationMessageFor(model => model.Docent.Achternaam)
+                        </td>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Docent.Tussenvoegsel)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Docent.Tussenvoegsel)
-            @Html.ValidationMessageFor(model => model.Docent.Tussenvoegsel)
-        </div>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Tussenvoegsel)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Tussenvoegsel)
+                            @Html.ValidationMessageFor(model => model.Docent.Tussenvoegsel)
+                        </td>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Docent.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Docent.Email)
-            @Html.ValidationMessageFor(model => model.Docent.Email)
-        </div>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Email)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Email)
+                            @Html.ValidationMessageFor(model => model.Docent.Email)
+                        </td>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Docent.Straat)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Docent.Straat)
-            @Html.ValidationMessageFor(model => model.Docent.Straat)
-        </div>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Straat)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Straat)
+                            @Html.ValidationMessageFor(model => model.Docent.Straat)
+                        </td>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Docent.Huisnummer)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Docent.Huisnummer)
-            @Html.ValidationMessageFor(model => model.Docent.Huisnummer)
-        </div>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Huisnummer)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Huisnummer)
+                            @Html.ValidationMessageFor(model => model.Docent.Huisnummer)
+                        </td>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Docent.Toevoeging)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Docent.Toevoeging)
-            @Html.ValidationMessageFor(model => model.Docent.Toevoeging)
-        </div>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Toevoeging)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Toevoeging)
+                            @Html.ValidationMessageFor(model => model.Docent.Toevoeging)
+                        </td>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Docent.Postcode)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Docent.Postcode)
-            @Html.ValidationMessageFor(model => model.Docent.Postcode)
-        </div>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Postcode)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Postcode)
+                            @Html.ValidationMessageFor(model => model.Docent.Postcode)
+                        </td>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Docent.Plaats)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Docent.Plaats)
-            @Html.ValidationMessageFor(model => model.Docent.Plaats)
-        </div>
-               
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Docent.MedewerkerID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Docent.MedewerkerID)
-            @Html.ValidationMessageFor(model => model.Docent.MedewerkerID)
-        </div>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Plaats)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Plaats)
+                            @Html.ValidationMessageFor(model => model.Docent.Plaats)
+                        </td>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Login.Gebruikersnaam)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Login.Gebruikersnaam)
-            @Html.ValidationMessageFor(model => model.Login.Gebruikersnaam)
-        </div>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.MedewerkerID)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.MedewerkerID)
+                            @Html.ValidationMessageFor(model => model.Docent.MedewerkerID)
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Login.Gebruikersnaam)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Login.Gebruikersnaam)
+                            @Html.ValidationMessageFor(model => model.Login.Gebruikersnaam)
+                        </td>
 
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Login.Wachtwoord)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Login.Wachtwoord)
-            @Html.ValidationMessageFor(model => model.Login.Wachtwoord)
-        </div>
-        <p>
-            <input type="submit" value="Toevoegen" />
-        </p>
-        <p>@Html.Encode(ViewData["Foutmelding"])</p>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Login.Wachtwoord)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Login.Wachtwoord)
+                            @Html.ValidationMessageFor(model => model.Login.Wachtwoord)
+                        </td>
+                        </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" class="btn btn-lg btn-default" value="Opslaan" />
 
-    </fieldset>
+                        </td>
+                        <td>@Html.Encode(ViewData["Foutmelding"])</td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
 }
 
 
