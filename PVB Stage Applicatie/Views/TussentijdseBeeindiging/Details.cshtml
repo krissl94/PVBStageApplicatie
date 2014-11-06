@@ -7,8 +7,8 @@
 
 
     <li>
-    @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
-</li>
+        @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
+    </li>
 }
 
 <h2>Details</h2>
@@ -61,7 +61,26 @@
                         @Html.DisplayFor(model => model.Leerweg)
                     </td>
                 </tr>
-</table>
+            </table>
+
+            <h3>Redenen onderwijsinstelling</h3>
+            @foreach (var item in Model.RedenOnderwijsinstelling)
+            {
+                <p><input type="checkbox" data-id="@item.RedenID" checked disabled/> @item.Reden </p>
+            }
+
+            <h3>Redenen praktijkbiedende organisatie</h3>
+            @foreach (var item in Model.RedenOrganisatie)
+            {
+                <p><input type="checkbox" data-id="@item.RedenOrganisatie1" checked disabled /> @item.Reden </p>
+            }
+
+            <h3>Redenen student</h3>
+            @foreach (var item in Model.RedenStudent)
+            {
+                <p><input type="checkbox" data-id="@item.RedenID" checked disabled /> @item.Reden </p>
+            }
+            </div>
         </div>
     </div>
 </div>
