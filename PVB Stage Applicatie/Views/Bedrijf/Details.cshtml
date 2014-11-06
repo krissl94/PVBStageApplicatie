@@ -2,121 +2,135 @@
 <script>
     $(document).ready(function () {
         debugger;
-        if($(".display-field .check-box")[0].checked)
-        {
-            $("#NonActiefReden")[0].hidden = true;
+        if ($(".display-field .check-box")[0].checked) {
+            $("#NonActiefReden")[0].parentElement.hidden = true;
         }
     });
 </script>
 @section zijMenu{
-@if (User.IsInRole("Beheerder"))
-{
-    <li>@Html.ActionLink("Edit", "Edit", new { id = Model.BedrijfID })</li>
-}
-    <li>@Html.ActionLink("Back to List", "Index")</li>
+<li>@Html.ActionLink("Back to List", "Index")</li>
+ 
+       @if (User.IsInRole("Beheerder"))
+    {
+        <li>@Html.ActionLink("Edit", "Edit", new { id = Model.BedrijfID })</li>
+    }
 }
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<fieldset>
-    <legend>Bedrijf</legend>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Naam)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Naam)
-    </div>
-
-    <div class="display-label">
-        Actief
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Actief)
-    </div>
-    
-    <div id="NonActiefReden" class="display-label">
-        Non-actief reden
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.NonActiefReden)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.KvKNummer)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.KvKNummer)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Plaats)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Plaats)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Straatnaam)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Straatnaam)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Huisnummer)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Huisnummer)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Toevoeging)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Toevoeging)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Postcode)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Postcode)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Telefoonnummer)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Telefoonnummer)
-    </div>
-
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Email)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
-</fieldset>
-
-<h2>Mederwerkers</h2>
-<table>
-    <tr>
-        <th>Medewerker</th>
-        <th></th>
-    </tr>
-    @foreach(var item in Model.Persoonsgegevens)
-    {
+<div class="col-md-6">
+    <h2>Details bedrijf</h2>
+    <table class="table table-striped">
         <tr>
-            <td>
-                @item.Voornaam @item.Toevoeging @item.Achternaam
+            <td class="display-label">
+                @Html.DisplayNameFor(model => model.Naam)
             </td>
-            <td>
-                @Html.ActionLink("Details", "Details", "Begeleider", new { id = item.PersoonsgegevensID }, null)
+            <td class="display-field">
+                @Html.DisplayFor(model => model.Naam)
             </td>
         </tr>
-    }
-</table>
+        <tr>
+            <td class="display-label">
+                @Html.DisplayNameFor(model => model.KvKNummer)
+            </td>
+            <td class="display-field">
+                @Html.DisplayFor(model => model.KvKNummer)
+            </td>
+        </tr>
+        <tr>
+            <td class="display-label">
+                @Html.DisplayNameFor(model => model.Plaats)
+            </td>
+            <td class="display-field">
+                @Html.DisplayFor(model => model.Plaats)
+            </td>
+        </tr>
+        <tr>
+            <td class="display-label">
+                @Html.DisplayNameFor(model => model.Straatnaam)
+            </td>
+            <td class="display-field">
+                @Html.DisplayFor(model => model.Straatnaam)
+            </td>
+        </tr>
+        <tr>
+            <td class="display-label">
+                @Html.DisplayNameFor(model => model.Huisnummer)
+            </td>
+            <td class="display-field">
+                @Html.DisplayFor(model => model.Huisnummer)
+            </td>
+        </tr>
+        <tr>
+            <td class="display-label">
+                @Html.DisplayNameFor(model => model.Toevoeging)
+            </td>
+            <td class="display-field">
+                @Html.DisplayFor(model => model.Toevoeging)
+            </td>
+        </tr>
+        <tr>
+            <td class="display-label">
+                @Html.DisplayNameFor(model => model.Postcode)
+            </td>
+            <td class="display-field">
+                @Html.DisplayFor(model => model.Postcode)
+            </td>
+        </tr>
+        <tr>
+            <td class="display-label">
+                @Html.DisplayNameFor(model => model.Telefoonnummer)
+            </td>
+            <td class="display-field">
+                @Html.DisplayFor(model => model.Telefoonnummer)
+            </td>
+        </tr>
+        <tr>
+            <td class="display-label">
+                @Html.DisplayNameFor(model => model.Email)
+            </td>
+            <td class="display-field">
+                @Html.DisplayFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td class="display-label">
+                Actief
+            </td>
+            <td class="display-field">
+                @Html.DisplayFor(model => model.Actief)
+            </td>
+        </tr>
+        <tr>
+            <td id="NonActiefReden" class="display-label">
+                Non-actief reden
+            </td>
+            <td class="display-field">
+                @Html.DisplayFor(model => model.NonActiefReden)
+            </td>
+        </tr>
+    </table>
+    </div>
+    <div class="col-md-6">
+            <h2>Medewerkers</h2>
+        <table class="table table-striped">
+
+            <tr>
+                <th>Medeweker</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Persoonsgegevens)
+            {
+                <tr>
+                    <td>
+                        @item.Voornaam @item.Toevoeging @item.Achternaam
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", "Begeleider", new { id = item.PersoonsgegevensID }, null)
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
