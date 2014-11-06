@@ -25,6 +25,14 @@
         vertical-align: middle;
     }
 </style>
+@section zijMenu{
+
+
+    <li>
+        @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
+    </li>
+}
+
 
 @using (Html.BeginForm("CreateBeeindeging", "TussentijdseBeeindiging", FormMethod.Post, new { id = "form" }))
 {
