@@ -6,110 +6,137 @@
     var beeindigd = !(Model.TussentijdseBeindeging.Count == 0 && Model.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null);
 }
 
-<h2>StudentIndex</h2>
-
-<h2>Index</h2>
+<h2>Beoordelingen van @Model.Persoonsgegevens.Voornaam</h2>
 @section zijMenu{
     @if (User.IsInRole("Docent"))
     {
         if (!beeindigd)
         {
-            <li>@Html.ActionLink("Beoordeling invullen", "CreateFormulier", "Beoordeling", new { id = Model.StageID}, null)</li>
+            <li>@Html.ActionLink("Beoordeling invullen", "CreateFormulier", "Beoordeling", new { id = Model.StageID }, null)</li>
             <li>@Html.ActionLink("Gespreksformulier invullen", "CreateGespreksFormulier", "GespreksFormulier", new { id = Model.StageID }, null)</li>
             <li>@Html.ActionLink("Eindbeoordeling invullen", "CreateEindbeoordeling", "Beoordeling", new { id = Model.StageID }, null)</li>
             <li>@Html.ActionLink("Tussentijdse beëindiging invullen", "CreateBeeindeging", "TussentijdseBeeindiging", new { id = Model.StageID }, null)</li>
         }
     }
 }
+<div class="col-sm-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Beoordeling</h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <tr>
+                        <th>
+                            Datum
+                        </th>
+                        <th>
+                            Type
+                        </th>
+                        <th></th>
+                    </tr>
 
-<h2>Beoordeling</h2>
-<table>
-    <tr>
-        <th>
-            Datum
-        </th>
-        <th>
-            Type
-        </th>
-        <th></th>
-    </tr>
+                    @foreach (var item in Model.Beoordeling)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Datum)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EindBeoordeling)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "Beoordeling", new { id = item.BeoordelingID }, null)
+                            </td>
+                        </tr>
+                    }
 
-@foreach (var item in Model.Beoordeling) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Datum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EindBeoordeling)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", "Beoordeling", new { id = item.BeoordelingID }, null)
-        </td>
-    </tr>
-}
+                </table>
 
-</table>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h2>Tussentijdse Beindeging</h2>
+<div class="col-sm-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Tussentijdse Beëindiging</h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <tr>
+                        <th>
+                            Einddatum
+                        </th>
+                        <th>
+                            Leerweg
+                        </th>
+                        <th></th>
+                    </tr>
 
-<table>
-    <tr>
-        <th>
-            Einddatum
-        </th>
-        <th>
-            Leerweg
-        </th>
-        <th></th>
-    </tr>
+                    @foreach (var item in Model.TussentijdseBeindeging)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Einddatum, "{0:dd/MM/yyyy}")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Leerweg)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "TussentijdseBeeindiging", new { id = item.TussentijdsebeoordelingID }, null)
+                            </td>
+                        </tr>
+                    }
 
-    @foreach (var item in Model.TussentijdseBeindeging)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Einddatum, "{0:dd/MM/yyyy}")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Leerweg)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", "TussentijdseBeeindiging", new { id=item.TussentijdsebeoordelingID }, null)
-            </td>
-        </tr>
-    }
+                </table>
 
-</table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Tussentijdse Beëindiging</h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <tr>
+                        <th>
+                            Datum
+                        </th>
+                        <th>
+                            Contacttype
+                        </th>
+                        <th></th>
+                    </tr>
 
-<h2>Gesprek</h2>
+                    @foreach (var item in Model.Gespreksformulier)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Datum, "{0:dd/MM/yyyy}")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactType)
+                            </td>
+                            <td>
+                                @if (!beeindigd)
+                                {
+                                    @Html.ActionLink("Edit", "Edit", "GespreksFormulier", new { id = item.GespreksformulierID }, null);<nay> |</nay>
+                                }
 
-<table>
-    <tr>
-        <th>
-            Datum
-        </th>
-        <th>
-            Contacttype
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.Gespreksformulier)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Datum, "{0:dd/MM/yyyy}")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactType)
-            </td>
-            <td>
-                @if (!beeindigd)
-                {
-                    @Html.ActionLink("Edit", "Edit", "GespreksFormulier", new { id = item.GespreksformulierID }, null);<nay> |</nay>
-                }
-                
-                @Html.ActionLink("Details", "Details", "GespreksFormulier", new { id = item.GespreksformulierID }, null)
-            </td>
-        </tr>
-    }
-</table>
+                                @Html.ActionLink("Details", "Details", "GespreksFormulier", new { id = item.GespreksformulierID }, null)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

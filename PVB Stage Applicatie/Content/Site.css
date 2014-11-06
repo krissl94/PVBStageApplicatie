@@ -105,10 +105,8 @@ legend {
 }
 .display-field,
 .display-label{
-    display:inline-block;
     vertical-align:top;
     width:50%;
-
 }
 
 .panel-heading{
@@ -116,7 +114,6 @@ legend {
 }
 
 .display-field{
-    display:inline-block;
     width:50%;
     margin: auto;
 }

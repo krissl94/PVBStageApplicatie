@@ -3,48 +3,65 @@
 @{
     ViewBag.Title = "Details";
 }
+@section zijMenu{
+
+
+    <li>
+    @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
+</li>
+}
 
 <h2>Details</h2>
 
-<fieldset>
-    <legend>TussentijdseBeindeging</legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Periodes</h3>
+    </div>
+    <div class="panel-body">
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TussentijdsebeoordelingID)
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.TussentijdsebeoordelingID)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.TussentijdsebeoordelingID)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Stage1.StageID)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Stage1.StageID)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Einddatum)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Einddatum)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.CREBO)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.CREBO)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Leerweg)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Leerweg)
+                    </td>
+                </tr>
+</table>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TussentijdsebeoordelingID)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Stage1.StageID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Stage1.StageID)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Einddatum)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Einddatum)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CREBO)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CREBO)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Leerweg)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Leerweg)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-    @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
-</p>
+</div>

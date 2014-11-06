@@ -6,388 +6,339 @@
 
 <h2>Details</h2>
 
-<fieldset>
+<table class="table table-striped">
+
     <legend>Beoordeling</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Stage1.StageID)
-    </div>
-    <div class="display-field">
+    <td class="display-label">
+        @Html.DisplayNameFor(model => model.Stage1.StageID)
+    </td>
+    <td class="display-field">
         @Html.DisplayFor(model => model.Stage1.StageID)
-    </div>
+    </td>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Datum)
-    </div>
-    <div class="display-field">
+    <td class="display-label">
+        @Html.DisplayNameFor(model => model.Datum)
+    </td>
+    <td class="display-field">
         @Html.DisplayFor(model => model.Datum)
-    </div>
+    </td>
+</table>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Beoordeling1)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Beoordeling1)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.VoorbereidWerk)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.VoorbereidWerk)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.VoorbereidWerkOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.VoorbereidWerkOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.PlanEnOrganiserenWerk)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.PlanEnOrganiserenWerk)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.PlanEnOrganiserenWerkOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.PlanEnOrganiserenWerkOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TheoretischInzicht)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TheoretischInzicht)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.TheoretischInzichtOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.TheoretischInzichtOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.KwalGeleverdWerk)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.KwalGeleverdWerk)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.KwalGeleverdWerkOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.KwalGeleverdWerkOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.RapportWerk)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.RapportWerk)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.RapportWerkOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.RapportWerkOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.HoudtBedrRegels)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.HoudtBedrRegels)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.HoudtBedrRegelsOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.HoudtBedrRegelsOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.HoudtARBORegels)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.HoudtARBORegels)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.HoudtARBORegelsOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.HoudtARBORegelsOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.WerkTempo)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.WerkTempo)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.WerkTempoOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.WerkTempoOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.BeoordelingTechAspect)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.BeoordelingTechAspect)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.BeoordelingTechAspectOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.BeoordelingTechAspectOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.VerloopEersteContact)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.VerloopEersteContact)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.VerloopEersteContactOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.VerloopEersteContactOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.HoudingTAVCollegas)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.HoudingTAVCollegas)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.HoudingTAVCollegasOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.HoudingTAVCollegasOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.HoudingTAVLeiding)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.HoudingTAVLeiding)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.HoudingTAVLeidingOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.HoudingTAVLeidingOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.HoudingTAVDerden)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.HoudingTAVDerden)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.HoudingTAVDerdenOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.HoudingTAVDerdenOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.OmgaanKritiek)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.OmgaanKritiek)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.OmgaanKritiekOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.OmgaanKritiekOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.OpTijd)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.OpTijd)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.OpTijdOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.OpTijdOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ToontInitiatief)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ToontInitiatief)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ToontInitiatiefOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ToontInitiatiefOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Inzet)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Inzet)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.IntzetOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.IntzetOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ToontBelangstellingVak)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ToontBelangstellingVak)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ToontBelangstellingVakOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ToontBelangstellingVakOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.GrenzenAangeven)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.GrenzenAangeven)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.GrenzenAangevenOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.GrenzenAangevenOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.KomtAfsprakenNa)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.KomtAfsprakenNa)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.KomtAfsprakenNaOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.KomtAfsprakenNaOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ZelfstandigWerken)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ZelfstandigWerken)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ZelfstandigWerkenOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ZelfstandigWerkenOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Gemotiveerd)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Gemotiveerd)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.GemotiveerdOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.GemotiveerdOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.HoudingsAspecten)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.HoudingsAspecten)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.HoudingAspectenOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.HoudingAspectenOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Verslag)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Verslag)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.VerslagOpm)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.VerslagOpm)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.EindBeoordeling)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.EindBeoordeling)
-    </div>
-
-    <table>
-        <tr>
-            <th align="center" valign="middle">Handtekening Docent</th>
-            <th align="center" valign="middle">Handtekening Begeleider</th>
-            <th align="center" valign="middle">Handtekening Stagiair</th>
-        </tr>
-        <tr>
-            <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningDocent)" alt="Handtekening docent" /></td>
-            <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningBegeleider)" alt="Handtekening begeleider" /></td>
-            <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningStudent)" alt="Handtekening student" /></td>
-        </tr>
-    </table>
-</fieldset>
-<p>
-    @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
-</p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Aspect</th>
+                    <th>
+                        Beoordeling <br />
+                        O&nbsp; M&nbsp;G &nbsp;V NVT
+                    </th>
+                    <th>Opmerking</th>
+                </tr>
+            </thead>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.Beoordeling1)
+                </td>
+                <td class="display-field">
+                    @Html.RadioButtonFor(model => model.Beoordeling1, 1, new { disabled = "disabled" })
+                    @Html.RadioButtonFor(model => model.Beoordeling1, 2, new { disabled = "disabled" })
+                    @Html.RadioButtonFor(model => model.Beoordeling1, 3, new { disabled = "disabled" })
+                    @Html.RadioButtonFor(model => model.Beoordeling1, 4, new { disabled = "disabled" })
+                    @Html.RadioButtonFor(model => model.Beoordeling1, 0, new { disabled = "disabled" })
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.VoorbereidWerk)
+                </td>
+                <td class="display-field">
+                    @Html.RadioButtonFor(model => model.VoorbereidWerk, 1, new { disabled = "disabled" })
+                    @Html.RadioButtonFor(model => model.VoorbereidWerk, 2, new { disabled = "disabled" })
+                    @Html.RadioButtonFor(model => model.VoorbereidWerk, 3, new { disabled = "disabled" })
+                    @Html.RadioButtonFor(model => model.VoorbereidWerk, 4, new { disabled = "disabled" })
+                    @Html.RadioButtonFor(model => model.VoorbereidWerk, 0, new { disabled = "disabled" })
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.VoorbereidWerkOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.PlanEnOrganiserenWerk)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.PlanEnOrganiserenWerk)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.PlanEnOrganiserenWerkOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.TheoretischInzicht)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.TheoretischInzicht)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.TheoretischInzichtOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.KwalGeleverdWerk)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.KwalGeleverdWerk)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.KwalGeleverdWerkOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.RapportWerk)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.RapportWerk)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.RapportWerkOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.HoudtBedrRegels)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.HoudtBedrRegels)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.HoudtBedrRegelsOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.HoudtARBORegels)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.HoudtARBORegels)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.HoudtARBORegelsOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.WerkTempo)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.WerkTempo)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.WerkTempoOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.BeoordelingTechAspect)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.BeoordelingTechAspect)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.BeoordelingTechAspectOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.VerloopEersteContact)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.VerloopEersteContact)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.VerloopEersteContactOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.HoudingTAVCollegas)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.HoudingTAVCollegas)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.HoudingTAVCollegasOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.HoudingTAVLeiding)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.HoudingTAVLeiding)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.HoudingTAVLeidingOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.HoudingTAVDerden)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.HoudingTAVDerden)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.HoudingTAVDerdenOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.OmgaanKritiek)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.OmgaanKritiek)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.OmgaanKritiekOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.OpTijd)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.OpTijd)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.OpTijdOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.ToontInitiatief)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.ToontInitiatief)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.ToontInitiatiefOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.Inzet)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.Inzet)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.IntzetOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.ToontBelangstellingVak)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.ToontBelangstellingVak)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.ToontBelangstellingVakOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.GrenzenAangeven)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.GrenzenAangeven)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.GrenzenAangevenOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.KomtAfsprakenNa)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.KomtAfsprakenNa)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.KomtAfsprakenNaOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.ZelfstandigWerken)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.ZelfstandigWerken)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.ZelfstandigWerkenOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.Gemotiveerd)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.Gemotiveerd)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.GemotiveerdOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.HoudingsAspecten)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.HoudingsAspecten)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.HoudingAspectenOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.Verslag)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.Verslag)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.VerslagOpm)
+                </td>
+            </tr>
+            <tr>
+                <td class="display-label">
+                    @Html.DisplayNameFor(model => model.EindBeoordeling)
+                </td>
+                <td class="display-field">
+                    @Html.DisplayFor(model => model.EindBeoordeling)
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th align="center" valign="middle">Handtekening Docent</th>
+                <th align="center" valign="middle">Handtekening Begeleider</th>
+                <th align="center" valign="middle">Handtekening Stagiair</th>
+            </tr>
+            <tr>
+                <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningDocent)" alt="Handtekening docent" /></td>
+                <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningBegeleider)" alt="Handtekening begeleider" /></td>
+                <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningStudent)" alt="Handtekening student" /></td>
+            </tr>
+        </table>
+        <p>
+            @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
+        </p>
 
 
