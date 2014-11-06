@@ -89,7 +89,6 @@ legend {
 }
 
 #content{
-    display:inline-block;
     width:auto;
     margin-right: auto;
     margin-left: auto;
@@ -150,4 +149,12 @@ a.menuknop{
 
 .active > .glyphicon-arrow-left{
 cursor: pointer !important; 
+}
+
+.panel-body{
+    padding:0!important;
+}
+
+.col-md-6{
+    padding:0!important;
 }

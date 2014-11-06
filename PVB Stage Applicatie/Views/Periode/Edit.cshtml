@@ -53,7 +53,7 @@
             Begindatum
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Begindatum, new {@class = "kalender begin", @readonly = "true" })
+            @Html.TextBoxFor(model => model.Begindatum, new { @class = "kalender begin"})<span class="glyphicon glyphicon-calendar"></span>
             @Html.ValidationMessageFor(model => model.Begindatum)
         </div>
 
@@ -61,7 +61,7 @@
             Einddatum
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Einddatum, new { @class = "kalender eind", @readonly = "true" })
+            @Html.TextBoxFor(model => model.Einddatum, new { @class = "kalender eind" })<span class="glyphicon glyphicon-calendar"></span>
             @Html.ValidationMessageFor(model => model.Einddatum)
         </div>
 

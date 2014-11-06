@@ -14,6 +14,7 @@ namespace PVB_Stage_Applicatie
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
 
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
@@ -23,7 +24,7 @@ namespace PVB_Stage_Applicatie
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css", "~/Content/bootstrap.css",
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css", "~/Content/bootstrap.css", "~/Content/datepicker/css/datepicker.css",
                         "~/Content/bootstrap-theme.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
@@ -41,6 +42,8 @@ namespace PVB_Stage_Applicatie
                         "~/Content/themes/base/jquery.ui.theme.css"));
 
             }
+
+
 
 
     }
