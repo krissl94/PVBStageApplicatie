@@ -1,30 +1,44 @@
 ﻿@model PVB_Stage_Applicatie.Models.Periode
+
 @section zijMenu{
         <li>
             @Html.ActionLink("Back to List", "Index")
         </li>
 }
 <script type="text/javascript">
-    $(function () {
-        $(".begin").datepicker({
-            defaultDate: "+1w",
-            changeMonth: true,
-            numberOfMonths: 1,
-            dateFormat: "mm-dd-yy",
-            onClose: function (selectedDate) {
-                $(".eind").datepicker("option", "minDate", selectedDate);
-            }
-        });
-        $(".eind").datepicker({
-            defaultDate: "+1w",
-            changeMonth: true,
-            numberOfMonths: 1,
-            dateFormat: "mm-dd-yy",
-            onClose: function (selectedDate) {
-                $(".begin").datepicker("option", "maxDate", selectedDate);
-            }
-        });
+    $(document).ready(function () {
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element) || parseDate(value, "dd-MM-yyyy") !== null;
+        };
     });
+    $(document).ready(function () {
+        var nowTemp = new Date();
+        var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+        var checkin = $('#dpd1').datepicker({
+            onRender: function (date) {
+                return date.valueOf() < now.valueOf() ? 'disabled' : '';
+            },
+            format:"dd-mm-yyyy"
+        }).on('changeDate', function (ev) {
+            if (ev.date.valueOf() > checkout.date.valueOf()) {
+                var newDate = new Date(ev.date)
+                newDate.setDate(newDate.getDate() + 1);
+                checkout.setValue(newDate);
+            }
+            checkin.hide();
+            $('#dpd2')[0].focus();
+        }).data('datepicker');
+        var checkout = $('#dpd2').datepicker({
+            onRender: function (date) {
+                return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+            },
+            format: "dd-mm-yyyy"
+        }).on('changeDate', function (ev) {
+            checkout.hide();
+        }).data('datepicker');
+    });
+
 </script>
 @{
     ViewBag.Title = "Edit";
@@ -36,39 +50,58 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Periode</legend>
-        @Html.HiddenFor(model => model.Periode1)
 
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Periode bewerken</h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Periode1)
+                        </td>
+                        <td class="editor-field">
+                            @Html.DisplayFor(model => model.Periode1)
+                            @Html.HiddenFor(model => model.Periode1)
+                            @Html.ValidationMessageFor(model => model.Periode1)
+                        </td>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Periode1)
-        </div>
-        <div class="editor-field">
-            @Html.DisplayFor(model => model.Periode1)
-            @Html.ValidationMessageFor(model => model.Periode1)
-        </div>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            Begindatum
+                        </td>
+                        <td class="editor-field">
+                            @Html.TextBoxFor(model => model.Begindatum, "{0:dd/MM/yyyy}", new { _class = "begin", id = "dpd1", _readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.Begindatum)
+                        </td>
 
-        <div class="editor-label">
-            Begindatum
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.Begindatum, new { @class = "kalender begin"})<span class="glyphicon glyphicon-calendar"></span>
-            @Html.ValidationMessageFor(model => model.Begindatum)
-        </div>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            Einddatum
+                        </td>
+                        <td class="editor-field">
+                            @Html.TextBoxFor(model => model.Einddatum, "{0:dd/MM/yyyy}",   new { @class = "eind", id = "dpd2", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.Einddatum)
+                        </td>
+                        </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" class="btn btn-lg btn-default" value="Opslaan" />
 
-        <div class="editor-label">
-            Einddatum
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.Einddatum, new { @class = "kalender eind" })<span class="glyphicon glyphicon-calendar"></span>
-            @Html.ValidationMessageFor(model => model.Einddatum)
-        </div>
+                        </td>
+                        <td>@Html.Encode(ViewData["Foutmelding"])</td>
+                    </tr>
 
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

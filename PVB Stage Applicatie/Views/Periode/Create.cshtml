@@ -1,11 +1,16 @@
 ﻿@model PVB_Stage_Applicatie.Models.Periode
 
 @section zijMenu{
-        <li>
-            @Html.ActionLink("Terug", "Index")
-        </li>
+    <li>
+        @Html.ActionLink("Terug", "Index")
+    </li>
 }
 <script type="text/javascript">
+    $(document).ready(function () {
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element) || parseDate(value, "dd-MM-yyyy") !== null;
+        };
+    });
     $(document).ready(function () {
         var nowTemp = new Date();
         var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
@@ -13,7 +18,9 @@
         var checkin = $('#dpd1').datepicker({
             onRender: function (date) {
                 return date.valueOf() < now.valueOf() ? 'disabled' : '';
-            }
+            },
+            format: "dd-mm-yyyy"
+
         }).on('changeDate', function (ev) {
             if (ev.date.valueOf() > checkout.date.valueOf()) {
                 var newDate = new Date(ev.date)
@@ -26,11 +33,13 @@
         var checkout = $('#dpd2').datepicker({
             onRender: function (date) {
                 return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-            }
+            },
+            format: "dd-mm-yyyy"
+
         }).on('changeDate', function (ev) {
             checkout.hide();
         }).data('datepicker');
-    }); 
+    });
 </script>
 
 @{
@@ -39,31 +48,48 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
 
-    <fieldset class="datum">
-        <legend>Periode</legend>
-        <div class="editor-label">
-            Begindatum
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Bedrijf aanmaken</h3>
         </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.Begindatum, new { @class="begin", id="dpd1", @readonly="true"})
-            @Html.ValidationMessageFor(model => model.Begindatum)
-        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <tr>
+                        <td class="editor-label">
+                            Begindatum
+                        </td>
+                        <td class="editor-field">
+                            @Html.TextBoxFor(model => model.Begindatum, new { @class = "begin", id = "dpd1", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.Begindatum)
+                        </td>
+                        <tr>
+                        <td class="editor-label">
+                            Einddatum
+                        </td>
+                    <td class="editor-field">
+                        @Html.TextBoxFor(model => model.Einddatum, new { @class = "eind", id = "dpd2", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.Einddatum)
+                        </td>
+                            </tr>
+                            <tr>
+                        <td>
+                            <input type="submit" class="btn btn-lg btn-default" value="Opslaan" />
 
-        <div class="editor-label">
-            Einddatum
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(model => model.Einddatum, new { @class = "eind", id = "dpd2", @readonly = "true" })
-            @Html.ValidationMessageFor(model => model.Einddatum)
-        </div>
+                        </td>
+                        <td>
+                            @Html.Encode(ViewData["Foutmelding"])
+                        </td>
+                    </tr>
 
-        <p>
-            <input type="submit" value="Aanmaken" />
-        </p>
-    </fieldset>
+                </table>
+            </div>
+        </div>
+    </div>
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
