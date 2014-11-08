@@ -51,7 +51,7 @@ namespace PVB_Stage_Applicatie.Models
         [RegularExpression(@"[0-9]{1}", ErrorMessage = "Vul een geldig huisnummer in")]
         public int Huisnummer { get; set; }
 
-        [RegularExpression(@"[A-z]{1}", ErrorMessage = "Vul een geldige toevoeging in")]
+        [RegularExpression(@"[A-z]{1,3}", ErrorMessage = "Vul een geldige toevoeging in")]
         public string Toevoeging { get; set; }
 
         [Required(ErrorMessage = "Postcode is een verplicht veld")]

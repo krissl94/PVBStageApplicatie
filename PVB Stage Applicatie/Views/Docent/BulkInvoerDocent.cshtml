@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "BulkInvoerDocent";
+    ViewBag.Title = "Bulk Invoer Docent";
 }
 @section zijMenu{
         <li>@Html.ActionLink("Terug", "index")</li>
@@ -7,9 +7,33 @@
             @Html.ActionLink("Download Template", "Download", "Docent")
         </li>
 }
+<p>@Html.Encode(ViewData["Feedback"])</p>
+
+
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Docent bulk-invoeren</h3>
+        </div>
+        <div class="panel-body">
+
+            <table class="table table-condensed">
 @using (Html.BeginForm("BulkInvoer", "Docent", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <input type="file" name="file" />
-    <input type="submit" value="OK" />
-}
-<p>@Html.Encode(ViewData["Feedback"])</p>
+                    <tr>
+                        <td><input type="file" name="file" /></td>
+                    </tr>
+                    <tr>
+                        <td><input class="btn btn-lg btn-default" type="submit" value="OK" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>@Html.Encode(ViewData["FeedbackNonActief"])</p>
+                        </td>
+                    </tr>
+
+                }
+            </table>
+        </div>
+    </div>
+</div>

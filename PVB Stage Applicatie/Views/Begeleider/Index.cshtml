@@ -4,48 +4,57 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 @section zijMenu{
-        <li>@Html.ActionLink("Nieuwe begeleider", "Create")</li>
-        <li>@Html.ActionLink("Bulk invoer", "BulkInvoerBegeleider")</li>
+    <li>@Html.ActionLink("Nieuwe begeleider", "Create")</li>
+    <li>@Html.ActionLink("Bulk invoer", "BulkInvoerBegeleider")</li>
 }
-<table>
-    <tr>
-         <th>
-            @Html.DisplayNameFor(model => model.Voornaam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Achternaam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Actief)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bedrijf1.Naam)
-        </th>
-        <th></th>
-    </tr>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Begeleiders</h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Voornaam)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Achternaam)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Actief)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bedrijf1.Naam)
+                    </th>
+                    <th></th>
+                </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Voornaam)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Achternaam)
-        </td>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.Actief)
-        </td>       
-        <td>
-            @Html.DisplayFor(modelItem => item.Bedrijf1.Naam)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PersoonsgegevensID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PersoonsgegevensID }) 
-        </td>   
-    </tr>
-}
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Voornaam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Achternaam)
+                        </td>
 
-</table>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Actief)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Bedrijf1.Naam)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Bewerken", "Edit", new { id = item.PersoonsgegevensID }, new { @class = "btn btn-xs btn-info" })
+                            @Html.ActionLink("Details", "Details", new { id = item.PersoonsgegevensID }, new { @class = "btn btn-xs btn-info" })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

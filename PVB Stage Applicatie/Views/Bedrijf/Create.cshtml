@@ -1,7 +1,7 @@
 ﻿@model PVB_Stage_Applicatie.Models.Bedrijf
 
 @{
-    ViewBag.Title = "Bedrijf aanmaken";
+    ViewBag.Title = "Bedrijf toevoegen";
 }
 
 @section zijMenu{
@@ -15,7 +15,7 @@
     @Html.ValidationSummary(true)
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3>Bedrijf aanmaken</h3>
+            <h3>Bedrijf toevoegen</h3>
         </div>
         <div class="panel-body">
             <div class="col-md-12">
@@ -26,7 +26,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Naam)
-                            @Html.ValidationMessageFor(model => model.Naam)
+                           </td><td>@Html.ValidationMessageFor(model=> model.Naam)
                         </td>
                     </tr>
                     <tr>
@@ -35,7 +35,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.KvKNummer)
-                            @Html.ValidationMessageFor(model => model.KvKNummer)
+                           </td><td>@Html.ValidationMessageFor(model=> model.KvKNummer)
                         </td>
                     </tr>
                     <tr>
@@ -44,7 +44,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Plaats)
-                            @Html.ValidationMessageFor(model => model.Plaats)
+                           </td><td>@Html.ValidationMessageFor(model=> model.Plaats)
                         </td>
                     </tr>
                     <tr>
@@ -53,7 +53,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Straatnaam)
-                            @Html.ValidationMessageFor(model => model.Straatnaam)
+                           </td><td>@Html.ValidationMessageFor(model=> model.Straatnaam)
                         </td>
                     </tr>
                     <tr>
@@ -62,7 +62,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Huisnummer)
-                            @Html.ValidationMessageFor(model => model.Huisnummer)
+                           </td><td>@Html.ValidationMessageFor(model=> model.Huisnummer)
                         </td>
                     </tr>
                     <tr>
@@ -71,7 +71,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Toevoeging)
-                            @Html.ValidationMessageFor(model => model.Toevoeging)
+                           </td><td>@Html.ValidationMessageFor(model=> model.Toevoeging)
                         </td>
                     </tr>
                     <tr>
@@ -80,7 +80,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Postcode)
-                            @Html.ValidationMessageFor(model => model.Postcode)
+                           </td><td>@Html.ValidationMessageFor(model=> model.Postcode)
                         </td>
                     </tr>
                     <tr>
@@ -89,7 +89,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Telefoonnummer)
-                            @Html.ValidationMessageFor(model => model.Telefoonnummer)
+                           </td><td>@Html.ValidationMessageFor(model=> model.Telefoonnummer)
                         </td>
                     </tr>
                     <tr>
@@ -98,7 +98,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Email)
-                            @Html.ValidationMessageFor(model => model.Email)
+                           </td><td>@Html.ValidationMessageFor(model=> model.Email)
                         </td>
                     </tr>
                     <tr>

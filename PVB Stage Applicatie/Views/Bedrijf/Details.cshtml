@@ -11,7 +11,7 @@
 
     @if (User.IsInRole("Beheerder"))
     {
-        <li>@Html.ActionLink("Edit", "Edit", new { id = Model.BedrijfID })</li>
+        <li>@Html.ActionLink("Bewerken", "Edit", new { id = Model.BedrijfID })</li>
     }
 }
 @{
