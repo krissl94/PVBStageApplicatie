@@ -76,9 +76,14 @@ namespace PVB_Stage_Applicatie.Models
                         {
                             dataAdapter.Fill(ds);
                         }
+                        return ds;
+                    }
+                    else
+                    {
+                        //Verkeerd bestand
+                        return null;
                     }
                 }
-                return ds;
             }
             catch (Exception ex)
             {

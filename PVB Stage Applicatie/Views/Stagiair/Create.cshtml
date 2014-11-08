@@ -19,15 +19,13 @@
     </li>
 
 }
-<h2>Create</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3>Bewerken</h3>
+            <h3>Student toevoegen</h3>
         </div>
         <div class="panel-body">
 
@@ -39,7 +37,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Voornaam)
-                            @Html.ValidationMessageFor(model => model.Voornaam)
+                            </td><td>@Html.ValidationMessageFor(model => model.Voornaam)
                         </td>
                     </tr>
                     <tr>
@@ -48,8 +46,9 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Achternaam)
-                            @Html.ValidationMessageFor(model => model.Achternaam)
-                        </td>
+                            </td><td >
+    @Html.ValidationMessageFor(model => model.Achternaam)
+</td>
                     </tr>
                     <tr>
                         <td class="editor-label">
@@ -57,7 +56,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Tussenvoegsel)
-                            @Html.ValidationMessageFor(model => model.Tussenvoegsel)
+                            </td><td>@Html.ValidationMessageFor(model => model.Tussenvoegsel)
                         </td>
                     </tr>
                     <tr>
@@ -66,7 +65,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Email)
-                            @Html.ValidationMessageFor(model => model.Email)
+                            </td><td>@Html.ValidationMessageFor(model => model.Email)
                         </td>
                     </tr>
                     <tr>
@@ -75,7 +74,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Straat)
-                            @Html.ValidationMessageFor(model => model.Straat)
+                            </td><td>@Html.ValidationMessageFor(model => model.Straat)
                         </td>
                     </tr>
                     <tr>
@@ -84,7 +83,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Huisnummer)
-                            @Html.ValidationMessageFor(model => model.Huisnummer)
+                            </td><td>@Html.ValidationMessageFor(model => model.Huisnummer)
                         </td>
                     </tr>
                     <tr>
@@ -93,7 +92,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Toevoeging)
-                            @Html.ValidationMessageFor(model => model.Toevoeging)
+                            </td><td>@Html.ValidationMessageFor(model => model.Toevoeging)
                         </td>
                     </tr>
                     <tr>
@@ -102,7 +101,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Postcode)
-                            @Html.ValidationMessageFor(model => model.Postcode)
+                            </td><td>@Html.ValidationMessageFor(model => model.Postcode)
                         </td>
                     </tr>
                     <tr>
@@ -111,7 +110,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Plaats)
-                            @Html.ValidationMessageFor(model => model.Plaats)
+                            </td><td>@Html.ValidationMessageFor(model => model.Plaats)
                         </td>
                     </tr>
                     <tr>
@@ -120,7 +119,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.StudentNummer)
-                            @Html.ValidationMessageFor(model => model.StudentNummer, "", new { id = "studentNummerMessage" })
+                            </td><td>@Html.ValidationMessageFor(model => model.StudentNummer, "", new { id = "studentNummerMessage" })
                         </td>
                     </tr>
                     <tr>
@@ -129,7 +128,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Opleiding)
-                            @Html.ValidationMessageFor(model => model.Opleiding)
+                            </td><td>@Html.ValidationMessageFor(model => model.Opleiding)
                         </td>
                     </tr>
                     <tr>
@@ -138,7 +137,7 @@
                         </td>
                         <td class="editor-field">
                             @Html.EditorFor(model => model.Opleidingsniveau)
-                            @Html.ValidationMessageFor(model => model.Opleidingsniveau)
+                            </td><td>@Html.ValidationMessageFor(model => model.Opleidingsniveau)
                         </td>
                         </tr>
                     <tr>

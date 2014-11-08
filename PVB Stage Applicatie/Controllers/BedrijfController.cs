@@ -128,26 +128,43 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(Bedrijf bedrijf)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(bedrijf).State = EntityState.Modified;
-                //Zet begeleiders van bedrijf op non-actief
-                if(bedrijf.Actief == false)
+                if (db.Bedrijf.Where(b => b.Naam == bedrijf.Naam).FirstOrDefault() == null)
                 {
-                    var begeleiders = db.Persoonsgegevens.Where(p => p.Bedrijf1.BedrijfID == bedrijf.BedrijfID);
-                    foreach (var item in begeleiders)
+                    if (ModelState.IsValid)
                     {
-                        item.Actief = false;
-                        item.NonActiefReden = "Bedrijf is non-actief gesteld";
-                        item.Bedrijf1 = null;
-                        db.Entry(item).State = EntityState.Modified;
+                        db.Entry(bedrijf).State = EntityState.Modified;
+                        //Zet begeleiders van bedrijf op non-actief
+                        if (bedrijf.Actief == false)
+                        {
+                            var begeleiders = db.Persoonsgegevens.Where(p => p.Bedrijf1.BedrijfID == bedrijf.BedrijfID);
+                            foreach (var item in begeleiders)
+                            {
+                                item.Actief = false;
+                                item.NonActiefReden = "Bedrijf is non-actief gesteld";
+                                item.Bedrijf1 = null;
+                                db.Entry(item).State = EntityState.Modified;
+                            }
+                        }
+                        db.SaveChanges();
+
+                        return RedirectToAction("Index");
                     }
+                    return View(bedrijf);
                 }
-                db.SaveChanges();
-                
-                return RedirectToAction("Index");
+                else
+                {
+                    ViewData["Foutmelding"] = "Deze bedrijfsnaam staat al in ons systeem";
+                    return View(bedrijf);
+                }
+
             }
-            return View(bedrijf);
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View(bedrijf);
+            }
         }
         
 
