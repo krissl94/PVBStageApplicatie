@@ -42,6 +42,7 @@ namespace PVB_Stage_Applicatie.Controllers
         public ActionResult Create()
         {
             ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam");
+
             return View();
         }
 
@@ -53,26 +54,36 @@ namespace PVB_Stage_Applicatie.Controllers
         public ActionResult Create(Persoonsgegevens persoonsgegevens)
         {
             ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam");
+
             try
             {
-                bool BestaatEmail;
-                if (db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Email).FirstOrDefault() != null)
-                {
-                    BestaatEmail = true;
-                }
-                else
-                {
-                    BestaatEmail = false;
-                }
-
-                if (BestaatEmail == false)
+                if (db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Email).FirstOrDefault() == null)
                 {
                     persoonsgegevens.Rol = 3;
                     persoonsgegevens.Actief = true;
+
+                    ModelState.Remove("StudentNummer");
+                    ModelState.Remove("Opleiding");
+                    ModelState.Remove("Opleidingsniveau");
+                    ModelState.Remove("MedewerkerID");
                     if (ModelState.IsValid)
                     {
-                        db.Persoonsgegevens.Add(persoonsgegevens);
+                        db.sp_PersoonToevoegen(
+                            persoonsgegevens.Rol,
+                            persoonsgegevens.Voornaam,
+                            persoonsgegevens.Achternaam,
+                            persoonsgegevens.Tussenvoegsel,
+                            persoonsgegevens.Email,
+                            persoonsgegevens.Straat,
+                            persoonsgegevens.Huisnummer,
+                            persoonsgegevens.Toevoeging,
+                            persoonsgegevens.Postcode,
+                            persoonsgegevens.Plaats,
+                            null, null, null, null, null,
+                            persoonsgegevens.Bedrijf);
+
                         db.SaveChanges();
+
                         return RedirectToAction("Index");
                     }
 
@@ -89,6 +100,7 @@ namespace PVB_Stage_Applicatie.Controllers
                 ViewData["Foutmelding"] = ex.ToString();
                 return View();
             }
+
 
         }
 
@@ -128,17 +140,34 @@ namespace PVB_Stage_Applicatie.Controllers
 
             try
             {
-                bool BestaatEmail = edh.bestaatEmail(persoonsgegevens);
-
-                if (BestaatEmail == false)
+                if (!edh.bestaatEmail(persoonsgegevens))
                 {
                     persoonsgegevens.Rol = 3;
+                    persoonsgegevens.Actief = true;
+
+                    ModelState.Remove("StudentNummer");
+                    ModelState.Remove("Opleiding");
+                    ModelState.Remove("Opleidingsniveau");
+                    ModelState.Remove("MedewerkerID");
+
                     if (ModelState.IsValid)
                     {
-                        db.Entry(persoonsgegevens).State = EntityState.Modified;
+                        db.sp_PersoonUpdaten(
+                            persoonsgegevens.PersoonsgegevensID,
+                            persoonsgegevens.Email,
+                            persoonsgegevens.Straat,
+                            persoonsgegevens.Huisnummer,
+                            persoonsgegevens.Toevoeging,
+                            persoonsgegevens.Postcode,
+                            persoonsgegevens.Plaats,
+                            persoonsgegevens.Actief,
+                            persoonsgegevens.NonActiefReden);
+
                         db.SaveChanges();
+
                         return RedirectToAction("Index");
                     }
+
                     return View(persoonsgegevens);
                 }
                 else
@@ -153,6 +182,7 @@ namespace PVB_Stage_Applicatie.Controllers
                 return View(persoonsgegevens);
             }
         }
+
 
         //
         // GET: /Begeleider/BulkInvoerBegeleider
