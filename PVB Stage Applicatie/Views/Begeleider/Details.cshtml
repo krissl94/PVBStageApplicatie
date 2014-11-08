@@ -1,11 +1,14 @@
 ﻿@model PVB_Stage_Applicatie.Models.Persoonsgegevens
 @section zijMenu{
+    @if (User.IsInRole("Beheerder"))
+    {
         <li>
             @Html.ActionLink("Aanpassen", "Edit", new { id = Model.PersoonsgegevensID })
         </li>
-        <li>
-            @Html.ActionLink("Terug", "Index")
-        </li>
+    }
+    <li>
+        @Html.ActionLink("Terug", "Index")
+    </li>
 }
 @{
     ViewBag.Title = "Details";

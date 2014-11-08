@@ -35,13 +35,26 @@
             $("#HandtekeningBegeleider")[0].value = Canvas2Image.convertToImage(d3.select("#b").node(), 200, 100, "png").src
             $("#HandtekeningDocent")[0].value = Canvas2Image.convertToImage(d3.select("#d").node(), 200, 100, "png").src
         });
+
+        $("form").submit(function () {
+            for (var id in getekend) {
+                if (!getekend[id]) {
+                    alert("Elke partij moet een handtekening zetten");
+                    return false;
+                }
+            }
+
+            return true;
+        });
     });
+
+
 </script>
 <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <script src="~/Scripts/canvas2image.js"></script>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("CreateEindbeoordeling", "Beoordeling", FormMethod.Post, new { id = "form" }))
 { 
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)

@@ -62,7 +62,7 @@ namespace PVB_Stage_Applicatie.Controllers
             (
                 (
                     from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x=>x.Rol == 4).ToList()
-                    select new{Voornaam = s.Voornaam + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID}
+                    select new { Voornaam = s.Voornaam + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
                 ), 
                 "PersoonsgegevensID", "Voornaam"
             );
@@ -71,7 +71,7 @@ namespace PVB_Stage_Applicatie.Controllers
             (
                 (
                     from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2).ToList()
-                    select new{Voornaam = s.Voornaam + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID}
+                    select new { Voornaam = s.Voornaam + " " + s.Tussenvoegsel + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
                 ),
                 "PersoonsgegevensID", "Voornaam"
             );
@@ -79,8 +79,8 @@ namespace PVB_Stage_Applicatie.Controllers
             ViewBag.Stagebegeleider = new SelectList
             (
                 (
-                    from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 3).ToList() 
-                    select new{Voornaam = s.Bedrijf1.Naam + " - " + s.Voornaam + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID}
+                    from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 3).ToList()
+                    select new { Voornaam = s.Bedrijf1.Naam + " - " + s.Voornaam + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
                 ), 
                 "PersoonsgegevensID", "Voornaam"
             );
@@ -122,7 +122,7 @@ namespace PVB_Stage_Applicatie.Controllers
             (
                 (
                     from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 4).ToList()
-                    select new { Voornaam = s.Voornaam + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
+                    select new { Voornaam = s.Voornaam + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
                 ),
                 "PersoonsgegevensID", "Voornaam"
             );
@@ -131,7 +131,7 @@ namespace PVB_Stage_Applicatie.Controllers
             (
                 (
                     from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2).ToList()
-                    select new { Voornaam = s.Voornaam + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
+                    select new { Voornaam = s.Voornaam + " " + s.Tussenvoegsel + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
                 ),
                 "PersoonsgegevensID", "Voornaam"
             );
@@ -140,7 +140,7 @@ namespace PVB_Stage_Applicatie.Controllers
             (
                 (
                     from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 3).ToList()
-                    select new { Voornaam = s.Bedrijf1.Naam + " - " + s.Voornaam + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
+                    select new { Voornaam = s.Bedrijf1.Naam + " - " + s.Voornaam + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
                 ),
                 "PersoonsgegevensID", "Voornaam"
             );
