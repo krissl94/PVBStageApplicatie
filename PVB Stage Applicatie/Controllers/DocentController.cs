@@ -161,14 +161,12 @@ namespace PVB_Stage_Applicatie.Controllers
                             if(persoonsgegevens.Login.Wachtwoord != "")
                             {
                                 persoonsgegevens.Login.Wachtwoord = Hashing.HashString(persoonsgegevens.Login.Gebruikersnaam, persoonsgegevens.Login.Wachtwoord);
-
-                            db.Entry(persoonsgegevens.Login).State = EntityState.Modified;
+                                db.Entry(persoonsgegevens.Login).State = EntityState.Modified;
                             }
                             db.sp_PersoonUpdaten(persoonsgegevens.Docent.PersoonsgegevensID, persoonsgegevens.Docent.Email,
                             persoonsgegevens.Docent.Straat, persoonsgegevens.Docent.Huisnummer, persoonsgegevens.Docent.Toevoeging, persoonsgegevens.Docent.Postcode
                             , persoonsgegevens.Docent.Plaats, persoonsgegevens.Docent.Actief, persoonsgegevens.Docent.NonActiefReden);
 
-                            db.Entry(persoonsgegevens.Docent).State = EntityState.Modified;
                             db.SaveChanges();
                             return View("~/Views/Docent/Index.cshtml", persoonsgegevensList);
                         }
@@ -187,18 +185,16 @@ namespace PVB_Stage_Applicatie.Controllers
                             if (persoonsgegevens.Login.Wachtwoord != null)
                             {
                                 persoonsgegevens.Login.Wachtwoord = Hashing.HashString(persoonsgegevens.Login.Gebruikersnaam, persoonsgegevens.Login.Wachtwoord);
-
                                 db.Entry(persoonsgegevens.Login).State = EntityState.Modified;
                             }
                             db.sp_PersoonUpdaten(persoonsgegevens.Docent.PersoonsgegevensID, persoonsgegevens.Docent.Email,
                             persoonsgegevens.Docent.Straat, persoonsgegevens.Docent.Huisnummer, persoonsgegevens.Docent.Toevoeging, persoonsgegevens.Docent.Postcode
                             , persoonsgegevens.Docent.Plaats, persoonsgegevens.Docent.Actief, persoonsgegevens.Docent.NonActiefReden);
 
-                            db.Entry(persoonsgegevens.Docent).State = EntityState.Modified;
                             db.SaveChanges();
-                            return View("~/Views/Docent/Index.cshtml", persoonsgegevensList);
+                            return RedirectToAction("Index");
                         }
-                        return View();
+                        return View(persoonsgegevens);
                     }
                     if (persoonsgegevens == null)
                     {
