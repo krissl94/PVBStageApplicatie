@@ -126,7 +126,7 @@
                                 @Html.DisplayFor(modelItem => item.ContactType)
                             </td>
                             <td>
-                                @if (!beeindigd)
+                                @if (!beeindigd && User.IsInRole("Docent"))
                                 {
                                     @Html.ActionLink("Edit", "Edit", "GespreksFormulier", new { id = item.GespreksformulierID }, null);<nay> |</nay>
                                 }

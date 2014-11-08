@@ -27,33 +27,42 @@ namespace PVB_Stage_Applicatie.Controllers
         [HttpPost]
         public ActionResult Index(LoginForm inLogForm)
         {
-            inLogForm.Gebruikersnaam = inLogForm.Gebruikersnaam.ToLower();
-
-            string wachtwoord = Hashing.HashString(inLogForm.Gebruikersnaam, inLogForm.Wachtwoord);
-
-            var id = db.sp_Login(inLogForm.Gebruikersnaam, wachtwoord).ToList();
-
-            if (id.Count == 1)
+            if (inLogForm.Gebruikersnaam != null && inLogForm.Wachtwoord != null)
             {
-                Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id[0]);
+                inLogForm.Gebruikersnaam.Trim();
+                inLogForm.Wachtwoord.Trim();
+                inLogForm.Gebruikersnaam = inLogForm.Gebruikersnaam.ToLower();
 
-                if (persoonsgegevens == null)
+                string wachtwoord = Hashing.HashString(inLogForm.Gebruikersnaam, inLogForm.Wachtwoord);
+
+                var id = db.sp_Login(inLogForm.Gebruikersnaam, wachtwoord).ToList();
+
+                if (id.Count == 1)
                 {
-                    return HttpNotFound();
+                    Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id[0]);
+
+                    if (persoonsgegevens == null)
+                    {
+                        return HttpNotFound();
+                    }
+
+                    Session.Add("persoonsgegevens", persoonsgegevens);
+
+                    Session.Add("Rol", persoonsgegevens.Rol);
+                    FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, persoonsgegevens.PersoonsgegevensID.ToString(), DateTime.Now, DateTime.Now.AddMinutes(20), false, persoonsgegevens.Rol.ToString(), "/");
+                    HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
+
+                    Response.Cookies.Add(cookie);
+
+                    Response.Redirect(Request.QueryString["ReturnURL"] == null ? "~/Home" : Request.QueryString["ReturnURL"]);
                 }
 
-                Session.Add("persoonsgegevens", persoonsgegevens);
-
-                Session.Add("Rol", persoonsgegevens.Rol);
-                FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(1, persoonsgegevens.PersoonsgegevensID.ToString(), DateTime.Now, DateTime.Now.AddMinutes(20), false, persoonsgegevens.Rol.ToString(), "/");
-                HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, FormsAuthentication.Encrypt(authTicket));
-
-                Response.Cookies.Add(cookie);
-
-                Response.Redirect(Request.QueryString["ReturnURL"] == null ? "~/Home" : Request.QueryString["ReturnURL"]);
+                return View(new LoginForm { correct = false });
             }
-
-            return View(new LoginForm { correct = false });
+            else
+            {
+                return View(new LoginForm { correct = false });
+            }
         }
 
         public ActionResult logUit()

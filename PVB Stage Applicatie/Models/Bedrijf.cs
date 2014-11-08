@@ -23,7 +23,7 @@ namespace PVB_Stage_Applicatie.Models
         public int BedrijfID { get; set; }
 
         [Required]
-        [RegularExpression(@"[A-z' ']{1,50}", ErrorMessage = "Vul alleen letters in")]
+        [RegularExpression(@"[A-z' '-]{1,50}", ErrorMessage = "Vul alleen letters in")]
         public string Naam { get; set; }
         public bool Actief { get; set; }
         public string NonActiefReden { get; set; }

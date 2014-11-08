@@ -42,11 +42,14 @@ namespace PVB_Stage_Applicatie.Controllers
         public ActionResult Details(int id = 0)
         {
             Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
+            Login login = db.Login.Where(l => l.Persoonsgegevens == id).FirstOrDefault();
+            CreateLoginViewModel clvm = new CreateLoginViewModel { Docent = persoonsgegevens, Login = login };
+            ViewData["Gebruikersnaam"] = login.Gebruikersnaam;
             if (persoonsgegevens == null)
             {
                 return HttpNotFound();
             }
-            return View(persoonsgegevens);
+            return View(clvm);
         }
 
         //

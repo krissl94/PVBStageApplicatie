@@ -29,7 +29,7 @@ namespace PVB_Stage_Applicatie.Models
         public int Rol { get; set; }
 
         [Required(ErrorMessage = "Voornaam is een verplicht veld")]
-        [RegularExpression(@"[A-z]{1,50}", ErrorMessage = "Vul alleen letters in")]
+        [RegularExpression(@"[A-z' ']{1,50}", ErrorMessage = "Vul alleen letters in")]
         public string Voornaam { get; set; }
 
         [Required(ErrorMessage = "Achternaam is een verplicht veld")]
