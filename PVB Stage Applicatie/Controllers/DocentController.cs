@@ -135,41 +135,35 @@ namespace PVB_Stage_Applicatie.Controllers
         public ActionResult Edit(Persoonsgegevens persoonsgegevens)
         {
             var persoonsgegevensList = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 2);
+
             EmailDuplicaatHelper edh = new EmailDuplicaatHelper();
             try
             {
-                persoonsgegevens.Rol = 2;
-                bool BestaatEmail = edh.bestaatEmail(persoonsgegevens);
-                //Check of email uniek is
-                if (BestaatEmail == false)
+                if (!edh.bestaatEmail(persoonsgegevens))
                 {
-                    //Check of gebruiker docent is en  rechten heeft
-                    if (HttpContext.User.IsInRole("Docent") && persoonsgegevens.PersoonsgegevensID.ToString() == HttpContext.User.Identity.Name)
+                    ModelState.Remove("StudentNummer");
+                    ModelState.Remove("Opleiding");
+                    ModelState.Remove("Opleidingsniveau");
+                    ModelState.Remove("Bedrijf");
+
+                    if (ModelState.IsValid)
                     {
-                        if (ModelState.IsValid)
-                        {
-                            db.Entry(persoonsgegevens).State = EntityState.Modified;
-                            db.SaveChanges();
-                            return View("~/Views/Docent/Index.cshtml", persoonsgegevensList);
-                        }
-                        return View(persoonsgegevensList);
+                        db.sp_PersoonUpdaten(
+                            persoonsgegevens.PersoonsgegevensID,
+                            persoonsgegevens.Email,
+                            persoonsgegevens.Straat,
+                            persoonsgegevens.Huisnummer,
+                            persoonsgegevens.Toevoeging,
+                            persoonsgegevens.Postcode,
+                            persoonsgegevens.Plaats,
+                            persoonsgegevens.Actief,
+                            persoonsgegevens.NonActiefReden);
+
+                        db.SaveChanges();
+
+                        return RedirectToAction("Index");
                     }
-                        //Check of beheerder is
-                    else if(HttpContext.User.IsInRole("Beheerder"))
-                    {
-                        if (ModelState.IsValid)
-                        {
-                            db.Entry(persoonsgegevens).State = EntityState.Modified;
-                            db.SaveChanges();
-                            return View("~/Views/Docent/Index.cshtml", persoonsgegevensList);
-                        }
-                        return View(persoonsgegevensList);
-                    }
-                    if (persoonsgegevens == null)
-                    {
-                        return HttpNotFound();
-                    }
-                    ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
+
                     return View(persoonsgegevens);
                 }
                 else
