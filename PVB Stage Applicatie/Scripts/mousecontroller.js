@@ -1,13 +1,18 @@
-﻿function init(id) {
+﻿var getekend = {}
+
+function init(id) {
     var mouseIsDown = false, last = {}, canvas;
-    
+
     if (id) {
         canvas = d3.select("#" + id)
         last[id] = {};
+        getekend[id] = false;
+
     }
     else {
         canvas = d3.selectAll(".cvs").each(function () {
             last[this.id] = {};
+            getekend[this.id] = false;
         });
     }
 
@@ -25,6 +30,8 @@
         if (mouseIsDown) {
             var c = this.getContext('2d');
 
+            getekend[this.id] = true;
+
             var iX = d3.mouse(this)[0];
             var iY = d3.mouse(this)[1];
             c.moveTo(last[this.id].x, last[this.id].y);
@@ -38,6 +45,7 @@
 
 function ClearCanvas(id){
     var parent = d3.select(d3.select("#" + id).node().parentNode);
+
 
     d3.select("#" + id).remove();
 

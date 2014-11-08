@@ -49,13 +49,46 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Create()
         {
+            ViewBag.Stageperiode = new SelectList
+            (
+                (
+                    from p in db.Periode.Where(x => x.Begindatum > DateTime.Now).ToList()
+                    select new { Periode = p.Begindatum.ToString("dd/MM/yyyy") + " - " + p.Einddatum.ToString("dd/MM/yyyy"), Periode1 = p.Periode1 }
+                ),
+                "Periode1", "Periode"
+            );
 
-            ViewBag.Stageperiode = new SelectList(db.Periode, "Periode1", "Periode1");
-            ViewBag.Student = new SelectList((from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x=>x.Rol == 4).ToList() select new{Voornaam = s.Voornaam + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID}), "PersoonsgegevensID", "Voornaam");
-            ViewBag.Stagedocent = new SelectList((from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2) select new{Voornaam = s.Voornaam + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID}), "PersoonsgegevensID", "Voornaam");
-            ViewBag.Stagebegeleider = new SelectList((from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 3) select new{Voornaam = s.Voornaam + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID}), "PersoonsgegevensID", "Voornaam");
+            ViewBag.Student = new SelectList
+            (
+                (
+                    from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x=>x.Rol == 4).ToList()
+                    select new { Voornaam = s.Voornaam + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
+                ), 
+                "PersoonsgegevensID", "Voornaam"
+            );
+            
+            ViewBag.Stagedocent = new SelectList
+            (
+                (
+                    from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2).ToList()
+                    select new { Voornaam = s.Voornaam + " " + s.Tussenvoegsel + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
+                ),
+                "PersoonsgegevensID", "Voornaam"
+            );
+            
+            ViewBag.Stagebegeleider = new SelectList
+            (
+                (
+                    from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 3).ToList()
+                    select new { Voornaam = s.Bedrijf1.Naam + " - " + s.Voornaam + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
+                ), 
+                "PersoonsgegevensID", "Voornaam"
+            );
+
             return View();
         }
+
+
 
         //
         // POST: /Koppeling/Create
@@ -64,13 +97,55 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Create(Stage stage)
         {
-            if (ModelState.IsValid)
+            if (db.Stage.Where(p => p.Student == stage.Student).Where(p => p.Stageperiode == stage.Stageperiode).FirstOrDefault() == null)
             {
-                db.Stage.Add(stage);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Stage.Add(stage);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-            return View(stage);
+
+            ViewData["Foutmelding"] = "Deze student zit al in deze stage";
+
+            ViewBag.Stageperiode = new SelectList
+            (
+                (
+                    from p in db.Periode.Where(x => x.Begindatum > DateTime.Now).ToList()
+                    select new { Periode = p.Begindatum.ToString("dd/MM/yyyy") + " - " + p.Einddatum.ToString("dd/MM/yyyy"), Periode1 = p.Periode1 }
+                ),
+                "Periode1", "Periode"
+            );
+
+            ViewBag.Student = new SelectList
+            (
+                (
+                    from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 4).ToList()
+                    select new { Voornaam = s.Voornaam + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
+                ),
+                "PersoonsgegevensID", "Voornaam"
+            );
+
+            ViewBag.Stagedocent = new SelectList
+            (
+                (
+                    from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2).ToList()
+                    select new { Voornaam = s.Voornaam + " " + s.Tussenvoegsel + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
+                ),
+                "PersoonsgegevensID", "Voornaam"
+            );
+
+            ViewBag.Stagebegeleider = new SelectList
+            (
+                (
+                    from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 3).ToList()
+                    select new { Voornaam = s.Bedrijf1.Naam + " - " + s.Voornaam + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
+                ),
+                "PersoonsgegevensID", "Voornaam"
+            );
+
+            return View();
         }
 
         //

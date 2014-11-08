@@ -46,6 +46,22 @@
                 $('.handtekening').show();
             }
         });
+
+        $("#form").submit(function () {
+            if ($('input[name=Type]:checked').val() == "2")
+            {
+                for (var id in getekend)
+                {
+                    if (!getekend[id])
+                    {
+                        alert("Elke partij moet een handtekening zetten");
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        })
     });
 
 </script>
