@@ -86,6 +86,7 @@ namespace PVB_Stage_Applicatie.Controllers
 
                         return RedirectToAction("Index");
                     }
+                    ViewData["Foutmelding"] = "Er ging iets fout, neem contact op met uw beheerder";
 
                     return View(persoonsgegevens);
                 }
@@ -167,6 +168,8 @@ namespace PVB_Stage_Applicatie.Controllers
 
                         return RedirectToAction("Index");
                     }
+
+                    ViewData["Foutmelding"] = "Er ging iets fout, neem contact op met uw beheerder";
 
                     return View(persoonsgegevens);
                 }
