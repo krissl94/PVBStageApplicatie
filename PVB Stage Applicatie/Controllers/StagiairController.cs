@@ -248,51 +248,59 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ViewResult BulkInvoer(HttpPostedFileBase file)
         {
-            ExcelHelper eh = new ExcelHelper();
-            DataSet studentDs = eh.excelToDS(file, Server);
-
-            if (studentDs != null)  
+            try
             {
-                List<Persoonsgegevens> lijstje = eh.dataSetToStudent(studentDs);
-                foreach (Persoonsgegevens item in lijstje)
+                ExcelHelper eh = new ExcelHelper();
+                DataSet studentDs = eh.excelToDS(file, Server);
+
+                if (studentDs != null)
                 {
-                    bool BestaatStudentNr;
-                    bool BestaatEmail;
-                    if (db.Persoonsgegevens.Where(p => p.Email == item.Email).FirstOrDefault() != null)
+                    List<Persoonsgegevens> lijstje = eh.dataSetToStudent(studentDs);
+                    foreach (Persoonsgegevens item in lijstje)
                     {
-                        BestaatEmail = true;
-                    }
-                    else
-                    {
-                        BestaatEmail = false;
-                    }
+                        bool BestaatStudentNr;
+                        bool BestaatEmail;
+                        if (db.Persoonsgegevens.Where(p => p.Email == item.Email).FirstOrDefault() != null)
+                        {
+                            BestaatEmail = true;
+                        }
+                        else
+                        {
+                            BestaatEmail = false;
+                        }
 
-                    if (db.Persoonsgegevens.Where(p => p.StudentNummer == item.StudentNummer).FirstOrDefault() != null)
-                    {
-                        BestaatStudentNr = true;
-                    }
-                    else
-                    {
-                        BestaatStudentNr = false;
-                    }
-                    ModelState.Remove("Bedrijf");
-                    ModelState.Remove("MedewerkerID");
-                    if (ModelState.IsValid && BestaatEmail == false && BestaatStudentNr == false) 
-                    {
-                        db.sp_PersoonToevoegen(4, item.Voornaam,
-                        item.Achternaam, item.Tussenvoegsel, item.Email,
-                        item.Straat, item.Huisnummer, item.Toevoeging, item.Postcode
-                        , item.Plaats, null, null, item.StudentNummer, null, item.Opleidingsniveau, null);
-                        ViewData["FeedbackInvoer"] = "Alle studenten zijn toegevoegd";
+                        if (db.Persoonsgegevens.Where(p => p.StudentNummer == item.StudentNummer).FirstOrDefault() != null)
+                        {
+                            BestaatStudentNr = true;
+                        }
+                        else
+                        {
+                            BestaatStudentNr = false;
+                        }
+                        ModelState.Remove("Bedrijf");
+                        ModelState.Remove("MedewerkerID");
+                        if (ModelState.IsValid && BestaatEmail == false && BestaatStudentNr == false)
+                        {
+                            db.sp_PersoonToevoegen(4, item.Voornaam,
+                            item.Achternaam, item.Tussenvoegsel, item.Email,
+                            item.Straat, item.Huisnummer, item.Toevoeging, item.Postcode
+                            , item.Plaats, null, null, item.StudentNummer, null, item.Opleidingsniveau, null);
+                            ViewData["FeedbackInvoer"] = "Alle studenten zijn toegevoegd";
 
-                    }
-                    else
-                    {
-                        ViewData["FeedbackInvoer"] = "Er zit verkeerde data in het bestand";
+                        }
+                        else
+                        {
+                            ViewData["FeedbackInvoer"] = "Er zit verkeerde data in het bestand";
+                        }
                     }
                 }
+                return View("~/Views/Stagiair/BulkInvoerStagiair.cshtml");
             }
-            return View("~/Views/Stagiair/BulkInvoerStagiair.cshtml");
+            catch
+            {
+                ViewData["FeedbackInvoer"] = "Er zit verkeerde data in het bestand";
+                return View("~/Views/Stagiair/BulkInvoerStagiair.cshtml");
+            }
         }
 
     }

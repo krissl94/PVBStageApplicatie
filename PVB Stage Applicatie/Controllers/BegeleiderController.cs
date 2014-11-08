@@ -230,7 +230,10 @@ namespace PVB_Stage_Applicatie.Controllers
                 return View("~/Views/Begeleider/BulkInvoerBegeleider.cshtml");
 
             }
-            catch { return null; ; }
+            catch {
+                return View("~/Views/Begeleider/BulkInvoerBegeleider.cshtml");
+
+                }
         }
         protected override void Dispose(bool disposing)
         {

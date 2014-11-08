@@ -87,8 +87,7 @@ namespace PVB_Stage_Applicatie.Models
             }
             catch (Exception ex)
             {
-                file.InputStream.Dispose();
-                file.InputStream.Close();
+
             }
             return null;
         }
@@ -229,21 +228,28 @@ namespace PVB_Stage_Applicatie.Models
                         object[] values = row.ItemArray;
                             string bedrijfsnaam = values[9].ToString();
                             Bedrijf bedrijfToAdd = db.Bedrijf.Where(b => b.Naam == bedrijfsnaam).FirstOrDefault();
-                            begeleiderlijst.Add(new Persoonsgegevens
+                            if (bedrijfToAdd != null)
                             {
-                                Rol = 2,
-                                Actief = true,
-                                Voornaam = values[0].ToString(),
-                                Achternaam = values[1].ToString(),
-                                Tussenvoegsel = values[2].ToString(),
-                                Email = values[3].ToString(),
-                                Straat = values[4].ToString(),
-                                Huisnummer = Convert.ToInt32(values[5]),
-                                Toevoeging = values[6].ToString(),
-                                Postcode = values[7].ToString(),
-                                Plaats = values[8].ToString(),
-                                Bedrijf = bedrijfToAdd.BedrijfID,
-                            });
+                                begeleiderlijst.Add(new Persoonsgegevens
+                                {
+                                    Rol = 3,
+                                    Actief = true,
+                                    Voornaam = values[0].ToString(),
+                                    Achternaam = values[1].ToString(),
+                                    Tussenvoegsel = values[2].ToString(),
+                                    Email = values[3].ToString(),
+                                    Straat = values[4].ToString(),
+                                    Huisnummer = Convert.ToInt32(values[5]),
+                                    Toevoeging = values[6].ToString(),
+                                    Postcode = values[7].ToString(),
+                                    Plaats = values[8].ToString(),
+                                    Bedrijf = bedrijfToAdd.BedrijfID,
+                                });
+                            }
+                            else
+                            {
+                                
+                            }
                     }
                 }
                 return begeleiderlijst;
@@ -254,8 +260,9 @@ namespace PVB_Stage_Applicatie.Models
             }
         }
 
-        public String dataSetToBedrijf(DataSet ds)
+        public List<Bedrijf> dataSetToBedrijf(DataSet ds)
         {
+            List<Bedrijf> Bedrijflijst = new List<Bedrijf>();
             try
             {
                 foreach (DataTable table in ds.Tables)
@@ -264,11 +271,11 @@ namespace PVB_Stage_Applicatie.Models
                     {
                         object[] values = row.ItemArray;
                         {
-                            db.Bedrijf.Add(new Bedrijf
+                            Bedrijflijst.Add(new Bedrijf
                             {
                                 Naam = values[0].ToString(),
                                 Actief = true,
-                                NonActiefReden = null,
+                                NonActiefReden = "",
                                 KvKNummer = values[1].ToString(),
                                 Plaats = values[2].ToString(),
                                 Straatnaam = values[3].ToString(),
@@ -281,12 +288,11 @@ namespace PVB_Stage_Applicatie.Models
                         }
                     }
                 }
-                db.SaveChanges();
-                return "Alle begeleiders zijn toegevoegd.";
+                return Bedrijflijst;
             }
             catch (Exception ex)
             {
-                return ex.ToString();
+                return null;
             }
         }
 

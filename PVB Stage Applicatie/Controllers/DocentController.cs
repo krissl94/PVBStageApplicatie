@@ -124,7 +124,11 @@ namespace PVB_Stage_Applicatie.Controllers
         public ActionResult Edit(int id = 0)
         {
             Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            return View(persoonsgegevens);
+            Login login = db.Login.Where(l => l.Persoonsgegevens == id).FirstOrDefault();
+            
+            login.Wachtwoord = "";
+            CreateLoginViewModel docentlogin = new CreateLoginViewModel{ Docent = persoonsgegevens, Login = login };
+            return View(docentlogin);
         }
 
         //
@@ -132,44 +136,75 @@ namespace PVB_Stage_Applicatie.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Beheerder, Docent")]
-        public ActionResult Edit(Persoonsgegevens persoonsgegevens)
+        public ActionResult Edit(CreateLoginViewModel persoonsgegevens)
         {
             var persoonsgegevensList = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 2);
             EmailDuplicaatHelper edh = new EmailDuplicaatHelper();
             try
             {
-                persoonsgegevens.Rol = 2;
-                bool BestaatEmail = edh.bestaatEmail(persoonsgegevens);
+                persoonsgegevens.Docent.Rol = 2;
+                persoonsgegevens.Login.Persoonsgegevens = persoonsgegevens.Docent.PersoonsgegevensID;
+                bool BestaatEmail = edh.bestaatEmail(persoonsgegevens.Docent);
                 //Check of email uniek is
                 if (BestaatEmail == false)
                 {
                     //Check of gebruiker docent is en  rechten heeft
-                    if (HttpContext.User.IsInRole("Docent") && persoonsgegevens.PersoonsgegevensID.ToString() == HttpContext.User.Identity.Name)
+                    if (HttpContext.User.IsInRole("Docent") && persoonsgegevens.Docent.PersoonsgegevensID.ToString() == HttpContext.User.Identity.Name)
                     {
+                        ModelState.Remove("Docent.StudentNummer");
+                        ModelState.Remove("Docent.Opleiding");
+                        ModelState.Remove("Docent.Opleidingsniveau");
+                        ModelState.Remove("Docent.Bedrijf");
+                        ModelState.Remove("Login.Wachtwoord");
                         if (ModelState.IsValid)
                         {
-                            db.Entry(persoonsgegevens).State = EntityState.Modified;
+                            if(persoonsgegevens.Login.Wachtwoord != "")
+                            {
+                                persoonsgegevens.Login.Wachtwoord = Hashing.HashString(persoonsgegevens.Login.Gebruikersnaam, persoonsgegevens.Login.Wachtwoord);
+
+                            db.Entry(persoonsgegevens.Login).State = EntityState.Modified;
+                            }
+                            db.sp_PersoonUpdaten(persoonsgegevens.Docent.PersoonsgegevensID, persoonsgegevens.Docent.Email,
+                            persoonsgegevens.Docent.Straat, persoonsgegevens.Docent.Huisnummer, persoonsgegevens.Docent.Toevoeging, persoonsgegevens.Docent.Postcode
+                            , persoonsgegevens.Docent.Plaats, persoonsgegevens.Docent.Actief, persoonsgegevens.Docent.NonActiefReden);
+
+                            db.Entry(persoonsgegevens.Docent).State = EntityState.Modified;
                             db.SaveChanges();
                             return View("~/Views/Docent/Index.cshtml", persoonsgegevensList);
                         }
-                        return View(persoonsgegevensList);
+                        return View("~/Views/Docent/Index.cshtml", persoonsgegevensList);
                     }
                         //Check of beheerder is
                     else if(HttpContext.User.IsInRole("Beheerder"))
                     {
+                        ModelState.Remove("Docent.StudentNummer");
+                        ModelState.Remove("Docent.Opleiding");
+                        ModelState.Remove("Docent.Opleidingsniveau");
+                        ModelState.Remove("Docent.Bedrijf");
+                        ModelState.Remove("Login.Wachtwoord");
                         if (ModelState.IsValid)
                         {
-                            db.Entry(persoonsgegevens).State = EntityState.Modified;
+                            if (persoonsgegevens.Login.Wachtwoord != null)
+                            {
+                                persoonsgegevens.Login.Wachtwoord = Hashing.HashString(persoonsgegevens.Login.Gebruikersnaam, persoonsgegevens.Login.Wachtwoord);
+
+                                db.Entry(persoonsgegevens.Login).State = EntityState.Modified;
+                            }
+                            db.sp_PersoonUpdaten(persoonsgegevens.Docent.PersoonsgegevensID, persoonsgegevens.Docent.Email,
+                            persoonsgegevens.Docent.Straat, persoonsgegevens.Docent.Huisnummer, persoonsgegevens.Docent.Toevoeging, persoonsgegevens.Docent.Postcode
+                            , persoonsgegevens.Docent.Plaats, persoonsgegevens.Docent.Actief, persoonsgegevens.Docent.NonActiefReden);
+
+                            db.Entry(persoonsgegevens.Docent).State = EntityState.Modified;
                             db.SaveChanges();
                             return View("~/Views/Docent/Index.cshtml", persoonsgegevensList);
                         }
-                        return View(persoonsgegevensList);
+                        return View();
                     }
                     if (persoonsgegevens == null)
                     {
                         return HttpNotFound();
                     }
-                    ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
+                    ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Docent.Bedrijf);
                     return View(persoonsgegevens);
                 }
                 else

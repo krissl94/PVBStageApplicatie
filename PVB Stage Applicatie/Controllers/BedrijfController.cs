@@ -185,7 +185,28 @@ namespace PVB_Stage_Applicatie.Controllers
 
             if (Bedrijven != null)
             {
-                ViewData["feedback"] = eh.dataSetToBedrijf(Bedrijven);
+                List<Bedrijf> bedrijventoAdd = eh.dataSetToBedrijf(Bedrijven);
+                foreach (var item in bedrijventoAdd)
+                {
+                    if (db.Bedrijf.Where(b => b.Naam == item.Naam).FirstOrDefault() == null)
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            db.Bedrijf.Add(new Bedrijf{
+                            Naam = item.Naam,
+                            KvKNummer = item.KvKNummer,
+                            Actief = true, Email = item.Email, NonActiefReden ="", Huisnummer = item.Huisnummer, Plaats = item.Plaats, Postcode = item.Postcode, Straatnaam = item.Straatnaam, Telefoonnummer = item.Telefoonnummer, Toevoeging = item.Toevoeging});
+                            db.Configuration.ValidateOnSaveEnabled = false; 
+                            db.SaveChanges();
+                        }
+                        ViewData["toegevoegd"] += item.Naam + ", ";
+                    }
+                    else
+                    {
+                        ViewData["foutmelding"] += item.Naam + ", ";
+                    }
+                }
+
             }
             return View("~/Views/Bedrijf/BulkInvoerBedrijf.cshtml");
         }

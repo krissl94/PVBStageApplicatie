@@ -1,4 +1,4 @@
-﻿@model PVB_Stage_Applicatie.Models.Persoonsgegevens
+﻿@model PVB_Stage_Applicatie.Models.CreateLoginViewModel
 @section zijMenu{
     <li>
         @Html.ActionLink("Terug", "Index")
@@ -6,22 +6,26 @@
 }
 <script>
     $(document).ready(function () {
-        if ($("#Actief")[0].checked) {
-            $("#NonActiefReden")[0].disabled = true;
+        if ($("#Docent_Actief")[0].checked) {
+            $("#Docent_NonActiefReden")[0].disabled = true;
         }
         else {
-            $("#NonActiefReden")[0].disabled = false;
+            $("#Docent_NonActiefReden")[0].disabled = false;
         }
 
-        $("#Actief").change(function () {
-            if ($("#Actief")[0].checked) {
-                $("#NonActiefReden")[0].disabled = true;
-                $("#NonActiefReden")[0].value = "";
+        $("#Docent_Actief").change(function () {
+            if ($("#Docent_Actief")[0].checked) {
+                $("#Docent_NonActiefReden")[0].disabled = true;
+                $("#Docent_NonActiefReden")[0].value = "";
             }
             else {
-                $("#NonActiefReden")[0].disabled = false;
+                $("#Docent_NonActiefReden")[0].disabled = false;
             }
         });
+
+        $("form").validate({
+            ignore: "#Docent_Wachtwoord"
+        })
     });
 
 
@@ -45,116 +49,134 @@
             <div class="col-md-12">
                 <table class="table table-striped">
 
-                    @Html.HiddenFor(model => model.PersoonsgegevensID)
-                    @Html.HiddenFor(model => model.Voornaam)
-                    @Html.HiddenFor(model => model.Achternaam)
-                    @Html.HiddenFor(model => model.Tussenvoegsel)
-                    @Html.HiddenFor(model => model.MedewerkerID)
+                    @Html.HiddenFor(model => model.Docent.PersoonsgegevensID)
+                    @Html.HiddenFor(model => model.Docent.Voornaam)
+                    @Html.HiddenFor(model => model.Docent.Achternaam)
+                    @Html.HiddenFor(model => model.Docent.Tussenvoegsel)
+                    @Html.HiddenFor(model => model.Docent.MedewerkerID)
                     <tr>
-                    <td class="editor-label">
-                        @Html.LabelFor(model => model.Voornaam)
-                    </td>
-                    <td class="editor-field">
-                        @Html.DisplayFor(model => model.Voornaam)
-                    </td>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Voornaam)
+                        </td>
+                        <td class="editor-field">
+                            @Html.DisplayFor(model => model.Docent.Voornaam)
+                        </td>
                     </tr>
-    <tr>
-        <td class="editor-label">
-            @Html.LabelFor(model => model.Achternaam)
-        </td>
-        <td class="editor-field">
-            @Html.DisplayFor(model => model.Achternaam)
-        </td>
-    </tr>
-    <tr>
-        <td class="editor-label">
-            @Html.LabelFor(model => model.Tussenvoegsel)
-        </td>
-        <td class="editor-field">
-            @Html.DisplayFor(model => model.Tussenvoegsel)
-        </td>
-    </tr>
-    <tr>
-        <td class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </td>
-        <td class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </td>
-    </tr>
-    <tr>
-        <td class="editor-label">
-            @Html.LabelFor(model => model.Straat)
-        </td>
-        <td class="editor-field">
-            @Html.EditorFor(model => model.Straat)
-            @Html.ValidationMessageFor(model => model.Straat)
-        </td>
-    </tr>
-    <tr>
-        <td class="editor-label">
-            @Html.LabelFor(model => model.Huisnummer)
-        </td>
-        <td class="editor-field">
-            @Html.EditorFor(model => model.Huisnummer)
-            @Html.ValidationMessageFor(model => model.Huisnummer)
-        </td>
-    </tr>
-    <tr>
-        <td class="editor-label">
-            @Html.LabelFor(model => model.Toevoeging)
-        </td>
-        <td class="editor-field">
-            @Html.EditorFor(model => model.Toevoeging)
-            @Html.ValidationMessageFor(model => model.Toevoeging)
-        </td>
-    </tr>
-    <tr>
-        <td class="editor-label">
-            @Html.LabelFor(model => model.Postcode)
-        </td>
-        <td class="editor-field">
-            @Html.EditorFor(model => model.Postcode)
-            @Html.ValidationMessageFor(model => model.Postcode)
-        </td>
-    </tr>
-    <tr>
-        <td class="editor-label">
-            @Html.LabelFor(model => model.Plaats)
-        </td>
-        <td class="editor-field">
-            @Html.EditorFor(model => model.Plaats)
-            @Html.ValidationMessageFor(model => model.Plaats)
-        </td>
-    </tr>
-    <tr>
-        <td class="editor-label">
-            @Html.LabelFor(model => model.Actief)
-        </td>
-        <td class="editor-field">
-            @Html.EditorFor(model => model.Actief)
-            @Html.ValidationMessageFor(model => model.Actief)
-        </td>
-    </tr>
-    <tr>
-        <td class="editor-label">
-            @Html.LabelFor(model => model.NonActiefReden)
-        </td>
-        <td class="editor-field">
-            @Html.EditorFor(model => model.NonActiefReden)
-            @Html.ValidationMessageFor(model => model.NonActiefReden)
-        </td>
-    </tr>
-    <tr>
-        <td class="editor-label">
-            @Html.LabelFor(model => model.MedewerkerID)
-        </td>
-        <td class="editor-field">
-            @Html.DisplayFor(model => model.MedewerkerID)
-            @Html.ValidationMessageFor(model => model.MedewerkerID)
-        </td>
-    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Achternaam)
+                        </td>
+                        <td class="editor-field">
+                            @Html.DisplayFor(model => model.Docent.Achternaam)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Tussenvoegsel)
+                        </td>
+                        <td class="editor-field">
+                            @Html.DisplayFor(model => model.Docent.Tussenvoegsel)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Email)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Email)
+                            @Html.ValidationMessageFor(model => model.Docent.Email)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Straat)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Straat)
+                            @Html.ValidationMessageFor(model => model.Docent.Straat)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Huisnummer)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Huisnummer)
+                            @Html.ValidationMessageFor(model => model.Docent.Huisnummer)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Toevoeging)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Toevoeging)
+                            @Html.ValidationMessageFor(model => model.Docent.Toevoeging)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Postcode)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Postcode)
+                            @Html.ValidationMessageFor(model => model.Docent.Postcode)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Plaats)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Plaats)
+                            @Html.ValidationMessageFor(model => model.Docent.Plaats)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.Actief)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.Actief)
+                            @Html.ValidationMessageFor(model => model.Docent.Actief)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.NonActiefReden)
+                        </td>
+                        <td class="editor-field">
+                            @Html.EditorFor(model => model.Docent.NonActiefReden)
+                            @Html.ValidationMessageFor(model => model.Docent.NonActiefReden)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Docent.MedewerkerID)
+                        </td>
+                        <td class="editor-field">
+                            @Html.DisplayFor(model => model.Docent.MedewerkerID)
+                            @Html.ValidationMessageFor(model => model.Docent.MedewerkerID)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Login.Gebruikersnaam)
+                        </td>
+                        <td class="editor-field">
+                            @Html.DisplayFor(model => model.Login.Gebruikersnaam)
+                            @Html.HiddenFor(model => model.Login.Gebruikersnaam)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="editor-label">
+                            @Html.LabelFor(model => model.Login.Wachtwoord)
+                        </td>
+                        <td class="editor-field">
+                            @Html.TextBoxFor(model => model.Login.Wachtwoord, new{@class="ignore"})
+                            @Html.ValidationMessageFor(model => model.Login.Wachtwoord)
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <input type="submit" class="btn btn-lg btn-default" value="Save" />
