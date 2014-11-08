@@ -88,8 +88,6 @@ namespace PVB_Stage_Applicatie.Controllers
             return View();
         }
 
-
-
         //
         // POST: /Koppeling/Create
         [HttpPost]
@@ -99,15 +97,21 @@ namespace PVB_Stage_Applicatie.Controllers
         {
             if (db.Stage.Where(p => p.Student == stage.Student).Where(p => p.Stageperiode == stage.Stageperiode).FirstOrDefault() == null)
             {
-                if (ModelState.IsValid)
-                {
-                    db.Stage.Add(stage);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                var fromP = db.Periode.Where(p => p.Periode1 == stage.Stageperiode).FirstOrDefault().Begindatum;
+                var toP = db.Periode.Where(p => p.Periode1 == stage.Stageperiode).FirstOrDefault().Einddatum;
+
+                if (db.Stage.Where(s => s.Student == stage.Student).Where(p => fromP > p.Periode.Begindatum).Where(p => fromP < p.Periode.Einddatum) == null)
+                    if (db.Stage.Where(s => s.Student == stage.Student).Where(p => toP > p.Periode.Begindatum).Where(p => toP < p.Periode.Einddatum) == null)
+                        if (db.Stage.Where(s => s.Student == stage.Student).Where(p => fromP < p.Periode.Begindatum).Where(p => toP > p.Periode.Einddatum) == null)
+                            if (ModelState.IsValid)
+                            {
+                                db.Stage.Add(stage);
+                                db.SaveChanges();
+                                return RedirectToAction("Index");
+                            }
             }
 
-            ViewData["Foutmelding"] = "Deze student zit al in deze stage";
+            ViewData["Foutmelding"] = "Deze student is al op stage tijdens de aangegeven periode";
 
             ViewBag.Stageperiode = new SelectList
             (
