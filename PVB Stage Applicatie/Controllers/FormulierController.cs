@@ -14,37 +14,36 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
-            List<Periode> Periodelijst =
-                new List<Periode>(db.Periode
-                .Where(x => x.Begindatum < DateTime.Now)
-                .Where(x => x.Einddatum > DateTime.Now));
+            List<Periode> Periodelijst = new List<Periode>(db.Periode.Where(x => x.Begindatum < DateTime.Now).Where(x => x.Einddatum < DateTime.Now));
 
             List<StudentViewModel> Studentlijstje = new List<StudentViewModel>();
+
             StudentViewModel svm = new StudentViewModel();
-            foreach (var item in Periodelijst)
+
+            foreach (var periode in Periodelijst)
             {
-                foreach (var stageItem in item.Stage)
+                foreach (var stage in periode.Stage)
                 {
                     if (User.IsInRole("Docent"))
                     {
-                        if (stageItem.Stagedocent.ToString() == User.Identity.Name)
+                        if (stage.Stagedocent.ToString() == User.Identity.Name)
                             Studentlijstje.Add(new StudentViewModel(
-                                stageItem.Persoonsgegevens.PersoonsgegevensID,
-                                stageItem.Persoonsgegevens.Voornaam,
-                                stageItem.Persoonsgegevens.Achternaam,
-                                stageItem.StageID,
-                                stageItem.Persoonsgegevens.Toevoeging,
-                                stageItem.Persoonsgegevens.StudentNummer));
+                                stage.Persoonsgegevens.PersoonsgegevensID,
+                                stage.Persoonsgegevens.Voornaam,
+                                stage.Persoonsgegevens.Achternaam,
+                                stage.StageID,
+                                stage.Persoonsgegevens.Toevoeging,
+                                stage.Persoonsgegevens.StudentNummer));
                     }
                     else
                     {
                         Studentlijstje.Add(new StudentViewModel(
-                            stageItem.Persoonsgegevens.PersoonsgegevensID,
-                            stageItem.Persoonsgegevens.Voornaam,
-                            stageItem.Persoonsgegevens.Achternaam,
-                            stageItem.StageID,
-                            stageItem.Persoonsgegevens.Toevoeging,
-                            stageItem.Persoonsgegevens.StudentNummer));
+                            stage.Persoonsgegevens.PersoonsgegevensID,
+                            stage.Persoonsgegevens.Voornaam,
+                            stage.Persoonsgegevens.Achternaam,
+                            stage.StageID,
+                            stage.Persoonsgegevens.Toevoeging,
+                            stage.Persoonsgegevens.StudentNummer));
                     }
                 }
             }
