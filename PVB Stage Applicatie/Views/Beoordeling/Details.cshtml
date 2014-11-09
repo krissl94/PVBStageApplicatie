@@ -108,6 +108,19 @@
         </td>
     </tr>
     <tr>
+        <td>
+            @Html.DisplayNameFor(model => model.TechnischInzicht)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.TechnischInzicht, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.TechnischInzicht, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.TechnischInzicht, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.TechnischInzicht, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.TechnischInzicht, 5, new { disabled = "disabled" })</td>
+        <td>
+            @Html.DisplayFor(model => model.TechnischInzichtOpm)
+        </td>
+    </tr>
+    <tr>
         <td >
             @Html.DisplayNameFor(model => model.KwalGeleverdWerk)
         </td>
