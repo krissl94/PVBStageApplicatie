@@ -6,7 +6,7 @@
     var beeindigd = !(Model.TussentijdseBeindeging.Count == 0 && Model.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null);
 }
 
-<h2>Beoordelingen van @Model.Persoonsgegevens.Voornaam</h2>
+<h2>Beoordelingen van @Model.Persoonsgegevens.Voornaam tijdens @Html.DisplayFor(model => model.Periode.Begindatum) - @Html.DisplayFor(model => model.Periode.Einddatum)</h2>
 @section zijMenu{
     @if (User.IsInRole("Docent"))
     {

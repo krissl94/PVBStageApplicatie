@@ -100,6 +100,7 @@ namespace PVB_Stage_Applicatie.Controllers
                 var fromP = db.Periode.Where(p => p.Periode1 == stage.Stageperiode).FirstOrDefault().Begindatum;
                 var toP = db.Periode.Where(p => p.Periode1 == stage.Stageperiode).FirstOrDefault().Einddatum;
                 var temp1 = db.Stage.Where(s => s.Student == stage.Student).Where(p => fromP > p.Periode.Begindatum).Where(p => fromP < p.Periode.Einddatum);
+
                 if (db.Stage.Where(s => s.Student == stage.Student).Where(p => fromP > p.Periode.Begindatum).Where(p => fromP < p.Periode.Einddatum).FirstOrDefault() == null)
                     if (db.Stage.Where(s => s.Student == stage.Student).Where(p => toP > p.Periode.Begindatum).Where(p => toP < p.Periode.Einddatum).FirstOrDefault() == null)
                         if (db.Stage.Where(s => s.Student == stage.Student).Where(p => fromP < p.Periode.Begindatum).Where(p => toP > p.Periode.Einddatum).FirstOrDefault() == null)
