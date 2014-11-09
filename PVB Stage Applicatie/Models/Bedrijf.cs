@@ -12,14 +12,14 @@ namespace PVB_Stage_Applicatie.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class Bedrijf
     {
         public Bedrijf()
         {
             this.Persoonsgegevens = new HashSet<Persoonsgegevens>();
         }
-    
+
         public int BedrijfID { get; set; }
 
         [Required]
@@ -56,7 +56,20 @@ namespace PVB_Stage_Applicatie.Models
         [Required]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Please enter proper contact details.")]
         public string Email { get; set; }
-    
+
         public virtual ICollection<Persoonsgegevens> Persoonsgegevens { get; set; }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

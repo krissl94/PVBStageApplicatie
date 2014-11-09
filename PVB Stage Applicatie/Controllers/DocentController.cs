@@ -158,14 +158,14 @@ namespace PVB_Stage_Applicatie.Controllers
                         ModelState.Remove("Login.Wachtwoord");
                         if (ModelState.IsValid)
                         {
-                            if(persoonsgegevens.Login.Wachtwoord != "")
+                            if(persoonsgegevens.Login.Wachtwoord != null)
                             {
                                 persoonsgegevens.Login.Wachtwoord = Hashing.HashString(persoonsgegevens.Login.Gebruikersnaam, persoonsgegevens.Login.Wachtwoord);
                                 db.Entry(persoonsgegevens.Login).State = EntityState.Modified;
                             }
                             db.sp_PersoonUpdaten(persoonsgegevens.Docent.PersoonsgegevensID, persoonsgegevens.Docent.Email,
                             persoonsgegevens.Docent.Straat, persoonsgegevens.Docent.Huisnummer, persoonsgegevens.Docent.Toevoeging, persoonsgegevens.Docent.Postcode
-                            , persoonsgegevens.Docent.Plaats, persoonsgegevens.Docent.Actief, persoonsgegevens.Docent.NonActiefReden);
+                            , persoonsgegevens.Docent.Plaats, null, persoonsgegevens.Docent.Actief, persoonsgegevens.Docent.NonActiefReden, null);
 
                             db.SaveChanges();
                             return View("~/Views/Docent/Index.cshtml", persoonsgegevensList);
@@ -189,7 +189,7 @@ namespace PVB_Stage_Applicatie.Controllers
                             }
                             db.sp_PersoonUpdaten(persoonsgegevens.Docent.PersoonsgegevensID, persoonsgegevens.Docent.Email,
                             persoonsgegevens.Docent.Straat, persoonsgegevens.Docent.Huisnummer, persoonsgegevens.Docent.Toevoeging, persoonsgegevens.Docent.Postcode
-                            , persoonsgegevens.Docent.Plaats, persoonsgegevens.Docent.Actief, persoonsgegevens.Docent.NonActiefReden);
+                            , persoonsgegevens.Docent.Plaats, null, persoonsgegevens.Docent.Actief, persoonsgegevens.Docent.NonActiefReden, null);
 
                             db.SaveChanges();
                             return RedirectToAction("Index");

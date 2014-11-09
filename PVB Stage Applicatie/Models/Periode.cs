@@ -12,20 +12,20 @@ namespace PVB_Stage_Applicatie.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class Periode
     {
         public Periode()
         {
             this.Stage = new HashSet<Stage>();
         }
-    
+
         public int Periode1 { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime Begindatum { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime Einddatum { get; set; }
-    
+
         public virtual ICollection<Stage> Stage { get; set; }
     }
 }

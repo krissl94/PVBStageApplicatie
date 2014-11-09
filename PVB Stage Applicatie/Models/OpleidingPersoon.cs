@@ -12,7 +12,7 @@ namespace PVB_Stage_Applicatie.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class OpleidingPersoon
     {
         public int OpleidingID { get; set; }
@@ -23,7 +23,7 @@ namespace PVB_Stage_Applicatie.Models
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public System.DateTime EindDatum { get; set; }
-    
+
         public virtual Opleiding Opleiding { get; set; }
         public virtual Persoonsgegevens Persoonsgegevens { get; set; }
     }

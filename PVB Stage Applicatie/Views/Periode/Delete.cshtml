@@ -1,44 +1,56 @@
 ﻿@model PVB_Stage_Applicatie.Models.Periode
 @section zijMenu{
     <ul>
-            @Html.ActionLink("Terug", "Index")
+        @Html.ActionLink("Terug", "Index")
         </li>
 }
 @{
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
 
-<h3>Weet je zeker dat je dit wil verwijderen? Alle onderliggende data wordt ook verwijderd!</h3>
-<fieldset>
-    <legend>Periode</legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Weet je zeker dat je dit wil verwijderen? Alle onderliggende data wordt ook verwijderd!</h3>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Periode1)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Periode1)
-    </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Begindatum)
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Begindatum)
-    </div>
+    <div class="panel-body">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Periode1)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Periode1)
+                    </td>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Einddatum)
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Begindatum)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Begindatum)
+                    </td>
+
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Einddatum)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Einddatum)
+                    </td>
+            </table>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Einddatum)
-    </div>
-</fieldset>
+</div>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <p>
-        <input type="submit" value="Verwijderen" onclick="return confirm('Weet je het zeker? Dit is een onomkeerbare actie!')" /> 
+        <input type="submit" value="Verwijderen" onclick="return confirm('Weet je het zeker? Dit is een onomkeerbare actie!')" />
     </p>
 }

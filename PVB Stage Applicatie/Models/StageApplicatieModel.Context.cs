@@ -434,7 +434,7 @@ namespace PVB_Stage_Applicatie.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_PersoonNonActief", persoonIDParameter, actiefParameter, nonActiefRedenParameter);
         }
     
-        public virtual int sp_PersoonToevoegen(Nullable<int> rol, string voornaam, string achternaam, string tussenvoegsel, string email, string straat, Nullable<int> huisnummer, string toevoeging, string postcode, string plaats, string nonActiefReden, string medewerkerID, string studentNummer, Nullable<int> opleiding, Nullable<int> opleidingsniveau, Nullable<int> bedrijf)
+        public virtual int sp_PersoonToevoegen(Nullable<int> rol, string voornaam, string achternaam, string tussenvoegsel, string email, string straat, Nullable<int> huisnummer, string toevoeging, string postcode, string plaats, string nonActiefReden, string medewerkerID, string studentNummer, string opleiding, Nullable<int> opleidingsniveau, Nullable<int> bedrijf)
         {
             var rolParameter = rol.HasValue ?
                 new ObjectParameter("Rol", rol) :
@@ -488,9 +488,9 @@ namespace PVB_Stage_Applicatie.Models
                 new ObjectParameter("StudentNummer", studentNummer) :
                 new ObjectParameter("StudentNummer", typeof(string));
     
-            var opleidingParameter = opleiding.HasValue ?
+            var opleidingParameter = opleiding != null ?
                 new ObjectParameter("Opleiding", opleiding) :
-                new ObjectParameter("Opleiding", typeof(int));
+                new ObjectParameter("Opleiding", typeof(string));
     
             var opleidingsniveauParameter = opleidingsniveau.HasValue ?
                 new ObjectParameter("Opleidingsniveau", opleidingsniveau) :
@@ -503,7 +503,7 @@ namespace PVB_Stage_Applicatie.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_PersoonToevoegen", rolParameter, voornaamParameter, achternaamParameter, tussenvoegselParameter, emailParameter, straatParameter, huisnummerParameter, toevoegingParameter, postcodeParameter, plaatsParameter, nonActiefRedenParameter, medewerkerIDParameter, studentNummerParameter, opleidingParameter, opleidingsniveauParameter, bedrijfParameter);
         }
     
-        public virtual int sp_PersoonUpdaten(Nullable<int> persoonsgegevensID, string email, string straat, Nullable<int> huisnummer, string toevoeging, string postcode, string plaats, Nullable<bool> actief, string nonActiefReden)
+        public virtual int sp_PersoonUpdaten(Nullable<int> persoonsgegevensID, string email, string straat, Nullable<int> huisnummer, string toevoeging, string postcode, string plaats, string opleiding, Nullable<bool> actief, string nonActiefReden, Nullable<int> bedrijf)
         {
             var persoonsgegevensIDParameter = persoonsgegevensID.HasValue ?
                 new ObjectParameter("PersoonsgegevensID", persoonsgegevensID) :
@@ -533,6 +533,10 @@ namespace PVB_Stage_Applicatie.Models
                 new ObjectParameter("Plaats", plaats) :
                 new ObjectParameter("Plaats", typeof(string));
     
+            var opleidingParameter = opleiding != null ?
+                new ObjectParameter("Opleiding", opleiding) :
+                new ObjectParameter("Opleiding", typeof(string));
+    
             var actiefParameter = actief.HasValue ?
                 new ObjectParameter("Actief", actief) :
                 new ObjectParameter("Actief", typeof(bool));
@@ -541,7 +545,11 @@ namespace PVB_Stage_Applicatie.Models
                 new ObjectParameter("NonActiefReden", nonActiefReden) :
                 new ObjectParameter("NonActiefReden", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_PersoonUpdaten", persoonsgegevensIDParameter, emailParameter, straatParameter, huisnummerParameter, toevoegingParameter, postcodeParameter, plaatsParameter, actiefParameter, nonActiefRedenParameter);
+            var bedrijfParameter = bedrijf.HasValue ?
+                new ObjectParameter("Bedrijf", bedrijf) :
+                new ObjectParameter("Bedrijf", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_PersoonUpdaten", persoonsgegevensIDParameter, emailParameter, straatParameter, huisnummerParameter, toevoegingParameter, postcodeParameter, plaatsParameter, opleidingParameter, actiefParameter, nonActiefRedenParameter, bedrijfParameter);
         }
     
         public virtual int sp_StageToevoegen(Nullable<int> student, Nullable<int> stagedocent, Nullable<int> stageperiode, Nullable<int> tagebegeleider)

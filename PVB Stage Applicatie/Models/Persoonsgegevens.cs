@@ -80,7 +80,6 @@ namespace PVB_Stage_Applicatie.Models
 
 
         //Begeleider specifiek
-        [Required]
         public Nullable<int> Bedrijf { get; set; }
 
         //Docent specifiek

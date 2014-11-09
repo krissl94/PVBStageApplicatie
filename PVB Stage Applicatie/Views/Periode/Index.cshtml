@@ -43,9 +43,11 @@
                             @Html.DisplayFor(modelItem => item.Einddatum)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Periode1 }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Periode1 }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Periode1 })
+                            @Html.ActionLink("Details", "Details", new { id = item.Periode1 })
+                            @if (User.IsInRole("Beheerder")) { 
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Periode1 });
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Periode1 });
+                            }
                         </td>
                     </tr>
                 }
