@@ -5,7 +5,9 @@
 }
 
 @section zijMenu{
-    <li>@Html.ActionLink("Periode toevoegen", "Create")</li>
+    @if (User.IsInRole("Beheerder")) { 
+    <li>@Html.ActionLink("Periode toevoegen", "Create")</li>}
+                                                            
 }
 <h2>Index</h2>
 <p>@Html.Encode(ViewData["KanAanpassen"])</p>

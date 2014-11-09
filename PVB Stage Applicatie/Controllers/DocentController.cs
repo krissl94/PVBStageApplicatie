@@ -158,7 +158,7 @@ namespace PVB_Stage_Applicatie.Controllers
                         ModelState.Remove("Login.Wachtwoord");
                         if (ModelState.IsValid)
                         {
-                            if(persoonsgegevens.Login.Wachtwoord != null)
+                            if (persoonsgegevens.Login.Wachtwoord != null)
                             {
                                 persoonsgegevens.Login.Wachtwoord = Hashing.HashString(persoonsgegevens.Login.Gebruikersnaam, persoonsgegevens.Login.Wachtwoord);
                                 db.Entry(persoonsgegevens.Login).State = EntityState.Modified;
@@ -168,12 +168,12 @@ namespace PVB_Stage_Applicatie.Controllers
                             , persoonsgegevens.Docent.Plaats, null, persoonsgegevens.Docent.Actief, persoonsgegevens.Docent.NonActiefReden, null);
 
                             db.SaveChanges();
-                            return View("~/Views/Docent/Index.cshtml", persoonsgegevensList);
+                            return RedirectToAction("index");
                         }
-                        return View("~/Views/Docent/Index.cshtml", persoonsgegevensList);
+                        return RedirectToAction("index");
                     }
-                        //Check of beheerder is
-                    else if(HttpContext.User.IsInRole("Beheerder"))
+                    //Check of beheerder is
+                    else if (HttpContext.User.IsInRole("Beheerder"))
                     {
                         ModelState.Remove("Docent.StudentNummer");
                         ModelState.Remove("Docent.Opleiding");
