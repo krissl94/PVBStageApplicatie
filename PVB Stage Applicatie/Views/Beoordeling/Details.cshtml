@@ -7,338 +7,402 @@
 <h2>Details</h2>
 
 <table class="table table-striped">
-
-    <legend>Beoordeling</legend>
-
-    <td class="display-label">
-        @Html.DisplayNameFor(model => model.Stage1.StageID)
-    </td>
-    <td class="display-field">
-        @Html.DisplayFor(model => model.Stage1.StageID)
-    </td>
-
-    <td class="display-label">
-        @Html.DisplayNameFor(model => model.Datum)
-    </td>
-    <td class="display-field">
-        @Html.DisplayFor(model => model.Datum)
-    </td>
+    <tr>
+        <td>
+            Student:
+        </td>
+        <td>
+            @Html.DisplayFor(m => m.Stage1.Persoonsgegevens.Voornaam) @Html.DisplayFor(m => m.Stage1.Persoonsgegevens.Achternaam)
+        </td>
+        <td>
+            Bedrijf:
+        </td>
+        <td>
+            @Html.DisplayFor(m => m.Stage1.Persoonsgegevens2.Bedrijf1.Naam)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Stagedocent:
+        </td>
+        <td>
+            @Html.DisplayFor(m => m.Stage1.Persoonsgegevens1.Voornaam) @Html.DisplayFor(m => m.Stage1.Persoonsgegevens1.Achternaam)
+        </td>
+        <td>
+            Stagebegeleider:
+        </td>
+        <td>
+            @Html.DisplayFor(m => m.Stage1.Persoonsgegevens2.Voornaam) @Html.DisplayFor(m => m.Stage1.Persoonsgegevens2.Achternaam)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Periode
+        </td>
+        <td colspan="3">
+            @Html.DisplayFor(m => m.Stage1.Periode.Begindatum) @Html.DisplayFor(m => m.Stage1.Periode.Einddatum)
+        </td>
+    </tr>
 </table>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Aspect</th>
-                    <th>
-                        Beoordeling <br />
-                        O&nbsp; M&nbsp;G &nbsp;V NVT
-                    </th>
-                    <th>Opmerking</th>
-                </tr>
-            </thead>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.Beoordeling1)
-                </td>
-                <td class="display-field">
-                    @Html.RadioButtonFor(model => model.Beoordeling1, 1, new { disabled = "disabled" })
-                    @Html.RadioButtonFor(model => model.Beoordeling1, 2, new { disabled = "disabled" })
-                    @Html.RadioButtonFor(model => model.Beoordeling1, 3, new { disabled = "disabled" })
-                    @Html.RadioButtonFor(model => model.Beoordeling1, 4, new { disabled = "disabled" })
-                    @Html.RadioButtonFor(model => model.Beoordeling1, 5, new { disabled = "disabled" })
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.VoorbereidWerk)
-                </td>
-                <td class="display-field">
-                    @Html.RadioButtonFor(model => model.VoorbereidWerk, 1, new { disabled = "disabled" })
-                    @Html.RadioButtonFor(model => model.VoorbereidWerk, 2, new { disabled = "disabled" })
-                    @Html.RadioButtonFor(model => model.VoorbereidWerk, 3, new { disabled = "disabled" })
-                    @Html.RadioButtonFor(model => model.VoorbereidWerk, 4, new { disabled = "disabled" })
-                    @Html.RadioButtonFor(model => model.VoorbereidWerk, 5, new { disabled = "disabled" })
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.VoorbereidWerkOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.PlanEnOrganiserenWerk)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.PlanEnOrganiserenWerk)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.PlanEnOrganiserenWerkOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.TheoretischInzicht)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.TheoretischInzicht)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.TheoretischInzichtOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.KwalGeleverdWerk)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.KwalGeleverdWerk)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.KwalGeleverdWerkOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.RapportWerk)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.RapportWerk)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.RapportWerkOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.HoudtBedrRegels)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.HoudtBedrRegels)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.HoudtBedrRegelsOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.HoudtARBORegels)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.HoudtARBORegels)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.HoudtARBORegelsOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.WerkTempo)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.WerkTempo)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.WerkTempoOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.BeoordelingTechAspect)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.BeoordelingTechAspect)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.BeoordelingTechAspectOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.VerloopEersteContact)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.VerloopEersteContact)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.VerloopEersteContactOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.HoudingTAVCollegas)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.HoudingTAVCollegas)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.HoudingTAVCollegasOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.HoudingTAVLeiding)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.HoudingTAVLeiding)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.HoudingTAVLeidingOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.HoudingTAVDerden)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.HoudingTAVDerden)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.HoudingTAVDerdenOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.OmgaanKritiek)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.OmgaanKritiek)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.OmgaanKritiekOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.OpTijd)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.OpTijd)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.OpTijdOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.ToontInitiatief)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.ToontInitiatief)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.ToontInitiatiefOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.Inzet)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.Inzet)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.IntzetOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.ToontBelangstellingVak)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.ToontBelangstellingVak)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.ToontBelangstellingVakOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.GrenzenAangeven)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.GrenzenAangeven)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.GrenzenAangevenOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.KomtAfsprakenNa)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.KomtAfsprakenNa)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.KomtAfsprakenNaOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.ZelfstandigWerken)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.ZelfstandigWerken)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.ZelfstandigWerkenOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.Gemotiveerd)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.Gemotiveerd)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.GemotiveerdOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.HoudingsAspecten)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.HoudingsAspecten)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.HoudingAspectenOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.Verslag)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.Verslag)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.VerslagOpm)
-                </td>
-            </tr>
-            <tr>
-                <td class="display-label">
-                    @Html.DisplayNameFor(model => model.EindBeoordeling)
-                </td>
-                <td class="display-field">
-                    @Html.DisplayFor(model => model.EindBeoordeling)
-                </td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <th align="center" valign="middle">Handtekening Docent</th>
-                <th align="center" valign="middle">Handtekening Begeleider</th>
-                <th align="center" valign="middle">Handtekening Stagiair</th>
-            </tr>
-            <tr>
-                <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningDocent)" alt="Handtekening docent" /></td>
-                <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningBegeleider)" alt="Handtekening begeleider" /></td>
-                <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningStudent)" alt="Handtekening student" /></td>
-            </tr>
-        </table>
-        <p>
-            @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
-        </p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Aspect</th>
+            <th>O</th>
+            <th>M</th>
+            <th>V</th>
+            <th>G</th>
+            <th>NVT</th>
+            <th>Opmerking</th>
+        </tr>
+    </thead>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.Beoordeling1)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.Beoordeling1, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Beoordeling1, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Beoordeling1, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Beoordeling1, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Beoordeling1, 5, new { disabled = "disabled" })</td>
+        <td  ></td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.VoorbereidWerk)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.VoorbereidWerk, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.VoorbereidWerk, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.VoorbereidWerk, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.VoorbereidWerk, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.VoorbereidWerk, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.VoorbereidWerkOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.PlanEnOrganiserenWerk)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.PlanEnOrganiserenWerk, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.PlanEnOrganiserenWerk, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.PlanEnOrganiserenWerk, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.PlanEnOrganiserenWerk, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.PlanEnOrganiserenWerk, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.PlanEnOrganiserenWerkOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.TheoretischInzicht)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.TheoretischInzicht, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.TheoretischInzicht, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.TheoretischInzicht, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.TheoretischInzicht, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.TheoretischInzicht, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.TheoretischInzichtOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.KwalGeleverdWerk)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.KwalGeleverdWerk, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.KwalGeleverdWerk, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.KwalGeleverdWerk, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.KwalGeleverdWerk, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.KwalGeleverdWerk, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.KwalGeleverdWerkOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.RapportWerk)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.RapportWerk, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.RapportWerk, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.RapportWerk, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.RapportWerk, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.RapportWerk, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.RapportWerkOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.HoudtBedrRegels)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.HoudtBedrRegels, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudtBedrRegels, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudtBedrRegels, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudtBedrRegels, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudtBedrRegels, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.HoudtBedrRegelsOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.HoudtARBORegels)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.HoudtARBORegels, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudtARBORegels, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudtARBORegels, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudtARBORegels, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudtARBORegels, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.HoudtARBORegelsOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.WerkTempo)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.WerkTempo, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.WerkTempo, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.WerkTempo, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.WerkTempo, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.WerkTempo, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.WerkTempoOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.BeoordelingTechAspect)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.BeoordelingTechAspect, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.BeoordelingTechAspect, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.BeoordelingTechAspect, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.BeoordelingTechAspect, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.BeoordelingTechAspect, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.BeoordelingTechAspectOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.VerloopEersteContact)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.VerloopEersteContact, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.VerloopEersteContact, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.VerloopEersteContact, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.VerloopEersteContact, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.VerloopEersteContact, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.VerloopEersteContactOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.HoudingTAVCollegas)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVCollegas, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVCollegas, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVCollegas, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVCollegas, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVCollegas, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.HoudingTAVCollegasOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.HoudingTAVLeiding)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVLeiding, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVLeiding, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVLeiding, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVLeiding, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVLeiding, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.HoudingTAVLeidingOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.HoudingTAVDerden)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVDerden, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVDerden, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVDerden, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVDerden, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingTAVDerden, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.HoudingTAVDerdenOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.OmgaanKritiek)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.OmgaanKritiek, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.OmgaanKritiek, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.OmgaanKritiek, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.OmgaanKritiek, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.OmgaanKritiek, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.OmgaanKritiekOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.OpTijd)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.OpTijd, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.OpTijd, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.OpTijd, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.OpTijd, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.OpTijd, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.OpTijdOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.ToontInitiatief)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.ToontInitiatief, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.ToontInitiatief, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.ToontInitiatief, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.ToontInitiatief, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.ToontInitiatief, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.ToontInitiatiefOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.Inzet)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.Inzet, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Inzet, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Inzet, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Inzet, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Inzet, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.IntzetOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.ToontBelangstellingVak)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.ToontBelangstellingVak, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.ToontBelangstellingVak, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.ToontBelangstellingVak, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.ToontBelangstellingVak, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.ToontBelangstellingVak, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.ToontBelangstellingVakOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.GrenzenAangeven)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.GrenzenAangeven, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.GrenzenAangeven, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.GrenzenAangeven, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.GrenzenAangeven, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.GrenzenAangeven, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.GrenzenAangevenOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.KomtAfsprakenNa)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.KomtAfsprakenNa, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.KomtAfsprakenNa, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.KomtAfsprakenNa, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.KomtAfsprakenNa, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.KomtAfsprakenNa, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.KomtAfsprakenNaOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.ZelfstandigWerken)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.ZelfstandigWerken, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.ZelfstandigWerken, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.ZelfstandigWerken, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.ZelfstandigWerken, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.ZelfstandigWerken, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.ZelfstandigWerkenOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.Gemotiveerd)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.Gemotiveerd, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Gemotiveerd, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Gemotiveerd, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Gemotiveerd, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Gemotiveerd, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.GemotiveerdOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.HoudingsAspecten)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.HoudingsAspecten, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingsAspecten, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingsAspecten, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingsAspecten, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.HoudingsAspecten, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.HoudingAspectenOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.Verslag)
+        </td>
+        <td>@Html.RadioButtonFor(model => model.Verslag, 1, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Verslag, 2, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Verslag, 3, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Verslag, 4, new { disabled = "disabled" })</td>
+        <td>@Html.RadioButtonFor(model => model.Verslag, 5, new { disabled = "disabled" })</td>
+        <td  >
+            @Html.DisplayFor(model => model.VerslagOpm)
+        </td>
+    </tr>
+    <tr>
+        <td >
+            @Html.DisplayNameFor(model => model.EindBeoordeling)
+        </td>
+        <td  >
+            @Html.DisplayFor(model => model.EindBeoordeling)
+        </td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th align="center" valign="middle">Handtekening Docent</th>
+        <th align="center" valign="middle">Handtekening Begeleider</th>
+        <th align="center" valign="middle">Handtekening Stagiair</th>
+    </tr>
+    <tr>
+        <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningDocent)" alt="Handtekening docent" /></td>
+        <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningBegeleider)" alt="Handtekening begeleider" /></td>
+        <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningStudent)" alt="Handtekening student" /></td>
+    </tr>
+</table>
+<p>
+    @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
+</p>
 
 
