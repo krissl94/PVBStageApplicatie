@@ -17,34 +17,34 @@
         <tr>
             <td align="center">
                 <div class="tile">
-                    <a class="table" href='@Url.Action("index", "Stagiair")'><span class="glyphicon glyphicon-user"></span><br /> Stagiair </a>
+                    <a class="table" href='@Url.Action("index", "Stagiair")'><span class="glyphicon glyphicon-user"></span><br /> Mijn stagiaires </a>
                 </div>
             </td>
             <td align="center">
                 <div class="tile">
-                    <a class="table" href='@Url.Action("index", "Begeleider")'><span class="glyphicon glyphicon-user"></span><br /> Begeleider </a>
+                    <a class="table" href='@Url.Action("index", "Begeleider")'><span class="glyphicon glyphicon-user"></span><br /> Begeleiders </a>
                 </div>
             </td>
             <td align="center">
                 <div class="tile">
-                    <a class="table" href='@Url.Action("index", "Docent")'><span class="glyphicon glyphicon-user"></span><br /> Docent </a>
+                    <a class="table" href='@Url.Action("index", "Docent")'><span class="glyphicon glyphicon-user"></span><br /> Ik </a>
                 </div>
             </td>
             <td align="center">
                 <div class="tile">
-                    <a class="table" href='@Url.Action("index", "Bedrijf")'><span class="glyphicon glyphicon-home"></span><br /> Bedrijf </a>
+                    <a class="table" href='@Url.Action("index", "Bedrijf")'><span class="glyphicon glyphicon-home"></span><br /> Mijn bedrijfen </a>
                 </div>
             </td>
         </tr>
         <tr>
             <td align="center">
                 <div class="tile">
-                    <a class="table" href='@Url.Action("index", "Periode")'><span class="glyphicon glyphicon-calendar"></span><br /> Periode </a>
+                    <a class="table" href='@Url.Action("index", "Periode")'><span class="glyphicon glyphicon-calendar"></span><br /> Mijn periodes </a>
                 </div>
             </td>
             <td align="center">
                 <div class="tile">
-                    <a class="table" href='@Url.Action("index", "Koppeling")'><span class="glyphicon glyphicon-link"></span><br /> Koppeling </a>
+                    <a class="table" href='@Url.Action("index", "Koppeling")'><span class="glyphicon glyphicon-link"></span><br /> Mijn koppelingen </a>
                 </div>
             </td>
             <td align="center">
@@ -56,7 +56,7 @@
     </table>
 }
 
-@if (HttpContext.Current.User.IsInRole("Docent"))
+@if (HttpContext.Current.User.IsInRole("Beheerder"))
 {
     <table>
         <tr>
@@ -85,7 +85,7 @@
             <td align="center">
                 <div class="tile">
                     <a class="table" href='@Url.Action("index", "Periode")'><span class="glyphicon glyphicon-calendar"></span><br /> Periode </a>
-                <//div>
+                </div>
             </td>
             <td align="center">
                 <div class="tile">
