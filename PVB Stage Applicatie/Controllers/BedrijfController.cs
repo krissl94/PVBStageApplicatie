@@ -130,7 +130,7 @@ namespace PVB_Stage_Applicatie.Controllers
         {
             try
             {
-                if (db.Bedrijf.Where(b => b.Naam == bedrijf.Naam).FirstOrDefault() == null)
+                if (BedrijfDuplicaatHelper.NaamIsUniek(bedrijf))
                 {
                     if (ModelState.IsValid)
                     {
@@ -147,6 +147,7 @@ namespace PVB_Stage_Applicatie.Controllers
                                 db.Entry(item).State = EntityState.Modified;
                             }
                         }
+
                         db.SaveChanges();
 
                         return RedirectToAction("Index");

@@ -158,6 +158,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BedrijfDuplicaatHelper.cs" />
     <Compile Include="Models\Bedrijf.cs">
       <DependentUpon>StageApplicatieModel.tt</DependentUpon>
     </Compile>
