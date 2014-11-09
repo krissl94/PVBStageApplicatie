@@ -92,7 +92,7 @@ namespace PVB_Stage_Applicatie.Controllers
                 (
                     (
                         from s in db.Persoonsgegevens.Where(x => x.Actief == true).Where(x => x.Rol == 2).ToList()
-                        select new { Voornaam = s.Voornaam + " " + s.Tussenvoegsel + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
+                        select new { Voornaam = s.Voornaam + " " + s.Tussenvoegsel + " " + s.Achternaam, PersoonsgegevensID = s.PersoonsgegevensID }
                     ),
                     "PersoonsgegevensID", "Voornaam"
                 );
