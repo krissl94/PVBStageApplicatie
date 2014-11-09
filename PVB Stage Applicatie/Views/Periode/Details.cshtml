@@ -4,38 +4,43 @@
     ViewBag.Title = "Details";
 }
 @section zijMenu{
-        <li>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Periode1 })
-        </li>
-        <li>
-            @Html.ActionLink("Back to List", "Index")
-        </li>
+<li>
+    @Html.ActionLink("Back to List", "Index")
+</li>
+    <li>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Periode1 })
+    </li>
 }
-<h2>Details</h2>
 
-<fieldset class ="details-field">
-    <legend>Periode</legend>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>
+            Details
+        </h3>
+    </div>
+    <div class="panel-body">
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Periode1)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Periode1)
-    </div>
+        <div class="col-md-12">
+            <table class="table table-striped">
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Begindatum)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Begindatum)
-    </div>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Begindatum)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Begindatum)
+                    </td>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Einddatum)
+                </tr>
+                <tr>
+                    <td class="display-label">
+                        @Html.DisplayNameFor(model => model.Einddatum)
+                    </td>
+                    <td class="display-field">
+                        @Html.DisplayFor(model => model.Einddatum)
+                    </td>
+            </table>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Einddatum)
-    </div>
-</fieldset>
+</div>
 
-</p>
