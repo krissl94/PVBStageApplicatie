@@ -4,36 +4,106 @@
 
 <h2>Index</h2>
 <style>
-    .table {
-        margin: 500px;
+    span {
+        font-size: 7em;
     }
 
-    span {
-        font-size: 5em;
+    .tile {
+        margin: 25px;
     }
 </style>
+@if (HttpContext.Current.User.IsInRole("Docent")){
+    <table>
+        <tr>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("index", "Stagiair")'><span class="glyphicon glyphicon-user"></span><br /> Stagiair </a>
+                </div>
+            </td>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("index", "Begeleider")'><span class="glyphicon glyphicon-user"></span><br /> Begeleider </a>
+                </div>
+            </td>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("index", "Docent")'><span class="glyphicon glyphicon-user"></span><br /> Docent </a>
+                </div>
+            </td>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("index", "Bedrijf")'><span class="glyphicon glyphicon-home"></span><br /> Bedrijf </a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("index", "Periode")'><span class="glyphicon glyphicon-calendar"></span><br /> Periode </a>
+                </div>
+            </td>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("index", "Koppeling")'><span class="glyphicon glyphicon-link"></span><br /> Koppeling </a>
+                </div>
+            </td>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("logUit", "Login")'><span class="glyphicon glyphicon-log-out"></span><br /> Loguit </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+}
 
-<table>
-    <tr>
-        <td><a class="table" href='@Url.Action("index", "Stagiair")'><span class="glyphicon glyphicon-user"></span><br /> Stagiair </a></td>
-        <td><a class="table" href='@Url.Action("index", "Docent")'><span class="glyphicon glyphicon-user"></span><br /> Docent </a></td>
-        <td><a class="table" href='@Url.Action("index", "Begeleider")'><span class="glyphicon glyphicon-user"></span><br /> Begeleider </a></td>
-    </tr>
-    <tr>
-        <td><a class="table" href='@Url.Action("index", "Bedrijf")'><span class="glyphicon glyphicon-home"></span><br /> Bedrijf </a></td>
-        <td><a class="table" href='@Url.Action("index", "Periode")'><span class="glyphicon glyphicon-calendar"></span><br /> Periode </a></td>
-        <td><a class="table" href='@Url.Action("index", "Koppeling")'><span class="glyphicon glyphicon-link"></span><br /> Koppeling </a></td>
-    </tr>
-    <tr>
-        <td><a class="table" href='@Url.Action("index", "Formulier")'><span class="glyphicon glyphicon-list"></span><br /> Formulier </a></td>
-        <td><a class="table" href='@Url.Action("logUit", "Login")'><span class="glyphicon glyphicon-log-out"></span><br /> Loguit </a></td>
-    </tr>
-</table>
-
-
-
-
-
-
-
-
+@if (HttpContext.Current.User.IsInRole("Docent"))
+{
+    <table>
+        <tr>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("index", "Stagiair")'><span class="glyphicon glyphicon-user"></span><br /> Stagiair </a>
+                </div>
+            </td>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("index", "Begeleider")'><span class="glyphicon glyphicon-user"></span><br /> Begeleider </a>
+                </div>
+            </td>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("index", "Docent")'><span class="glyphicon glyphicon-user"></span><br /> Docent </a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("index", "Bedrijf")'><span class="glyphicon glyphicon-home"></span><br /> Bedrijf </a>
+                </div>
+            </td>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("index", "Periode")'><span class="glyphicon glyphicon-calendar"></span><br /> Periode </a>
+                <//div>
+            </td>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("index", "Koppeling")'><span class="glyphicon glyphicon-link"></span><br /> Koppeling </a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("index", "Formulier")'><span class="glyphicon glyphicon-list"></span><br /> Formulier </a>
+                </div>
+            </td>
+            <td align="center">
+                <div class="tile">
+                    <a class="table" href='@Url.Action("logUit", "Login")'><span class="glyphicon glyphicon-log-out"></span><br /> Loguit </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+}
