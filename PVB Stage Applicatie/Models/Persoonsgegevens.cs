@@ -48,7 +48,7 @@ namespace PVB_Stage_Applicatie.Models
         public string Straat { get; set; }
 
         [Required(ErrorMessage = "Huisnummer is een verplicht veld")]
-        [RegularExpression(@"[0-9]{1,3}", ErrorMessage = "Vul een geldig huisnummer in")]
+        [RegularExpression(@"[0-9]{1,5}", ErrorMessage = "Vul een geldig huisnummer in")]
         public int Huisnummer { get; set; }
 
         [RegularExpression(@"[A-z]{1,3}", ErrorMessage = "Vul een geldige toevoeging in")]

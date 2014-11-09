@@ -23,13 +23,13 @@ namespace PVB_Stage_Applicatie.Models
         public int BedrijfID { get; set; }
 
         [Required]
-        [RegularExpression(@"[A-z' '-]{1,50}", ErrorMessage = "Vul alleen letters in")]
+        [RegularExpression(@"[A-z0-9' '-]{1,50}", ErrorMessage = "Vul alleen letters in")]
         public string Naam { get; set; }
         public bool Actief { get; set; }
         public string NonActiefReden { get; set; }
 
         [Required]
-        [RegularExpression(@"[0-9]{8}", ErrorMessage = "Please enter proper contact details.")]
+        [RegularExpression(@"[0-9]{8}", ErrorMessage = "Vul een geldig KvKNummer in")]
         public string KvKNummer { get; set; }
         [Required]
         public string Plaats { get; set; }
@@ -54,7 +54,7 @@ namespace PVB_Stage_Applicatie.Models
         public string Telefoonnummer { get; set; }
 
         [Required]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Please enter proper contact details.")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Vul een geldig email adres in")]
         public string Email { get; set; }
 
         public virtual ICollection<Persoonsgegevens> Persoonsgegevens { get; set; }
