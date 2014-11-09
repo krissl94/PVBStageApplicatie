@@ -130,7 +130,14 @@
                                 @Html.DisplayFor(modelItem => item.Datum, "{0:dd/MM/yyyy}")
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ContactType)
+                                @if(item.ContactType == 1)
+                                {
+                                    <asd>Telefonisch</asd>
+                                }
+                                else
+                                {
+                                    <asd>Bezoek</asd>
+                                }
                             </td>
                             <td>
                                 @if (!beeindigd && User.IsInRole("Docent"))

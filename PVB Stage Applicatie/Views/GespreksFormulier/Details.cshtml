@@ -82,7 +82,14 @@
             @Html.DisplayNameFor(model => model.ContactType)
         </div>
         <div class="display-field" id="type">
-            @Html.DisplayFor(model => model.ContactType)
+            @if (item.ContactType == 1)
+            {
+                <asd>Telefonisch</asd>
+            }
+            else
+            {
+                <asd>Bezoek</asd>
+            }
         </div>
 
         <div class="display-label">
