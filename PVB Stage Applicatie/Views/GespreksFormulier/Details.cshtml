@@ -12,56 +12,110 @@
         }
     })
 </script>
-<h2>Details</h2>
+<div class="col-md-8">
 
-<fieldset class="details-field">
-    <legend>Gespreksformulier</legend>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>
+                Stage gegevens
+            </h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped">
+                <tr>
+                    <td>
+                        Student:
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.Stage1.Persoonsgegevens.Voornaam) @Html.DisplayFor(m => m.Stage1.Persoonsgegevens.Achternaam)
+                    </td>
+                    <td>
+                        Bedrijf:
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.Stage1.Persoonsgegevens2.Bedrijf1.Naam)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Stagedocent:
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.Stage1.Persoonsgegevens1.Voornaam) @Html.DisplayFor(m => m.Stage1.Persoonsgegevens1.Achternaam)
+                    </td>
+                    <td>
+                        Stagebegeleider:
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.Stage1.Persoonsgegevens2.Voornaam) @Html.DisplayFor(m => m.Stage1.Persoonsgegevens2.Achternaam)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Periode
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.Stage1.Periode.Begindatum) @Html.DisplayFor(m => m.Stage1.Periode.Einddatum)
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <fieldset class="details-field">
+        <legend>Gespreksformulier</legend>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Stage1.StageID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Stage1.StageID)
-    </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Stage1.StageID)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Stage1.StageID)
+        </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Datum)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Datum)
-    </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Datum)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Datum)
+        </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.ContactType)
-    </div>
-    <div class="display-field" id="type">
-        @Html.DisplayFor(model => model.ContactType)
-    </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.ContactType)
+        </div>
+        <div class="display-field" id="type">
+            @Html.DisplayFor(model => model.ContactType)
+        </div>
 
-    <div class="display-label">
-        @Html.DisplayNameFor(model => model.Gesprek)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Gesprek)
-    </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Gesprek)
+        </div>
+        <div class="display-field">
+            @Html.TextAreaFor(model => model.Gesprek)
+        </div>
 
-    <table class="handtekeningen">
-        <tr>
-            <th align="center" valign="middle">Handtekening Docent</th>
-            <th align="center" valign="middle">Handtekening Begeleider</th>
-            <th align="center" valign="middle">Handtekening Stagiair</th>
-        </tr>
-        <tr>
-            <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningDocent)" alt="Handtekening docent" /></td>
-            <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningBegeleider)" alt="Handtekening begeleider" /></td>
-            <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningStudent)" alt="Handtekening student" /></td>
-        </tr>
-    </table>
-</fieldset>
-<p>
-    @if (!beeindigd)
-    {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.GespreksformulierID }); <thisdoesnottink>|</thisdoesnottink>
-    }
-    @Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
-</p>
+        <table class="handtekeningen">
+            <tr>
+                <th align="center" valign="middle">Handtekening Docent</th>
+                <th align="center" valign="middle">Handtekening Begeleider</th>
+                <th align="center" valign="middle">Handtekening Stagiair</th>
+            </tr>
+            <tr>
+                <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningDocent)" alt="Handtekening docent" /></td>
+                <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningBegeleider)" alt="Handtekening begeleider" /></td>
+                <td><img src="@System.Text.Encoding.ASCII.GetString(Model.HandtekeningStudent)" alt="Handtekening student" /></td>
+            </tr>
+        </table>
+    </fieldset>
+    <p>
+       
+    </p>
+</div>
+
+@section zijMenu{
+@if (!beeindigd)
+{
+    <li>@Html.ActionLink("Edit", "Edit", new { id = Model.GespreksformulierID })</li>
+}
+<li>
+@Html.ActionLink("Terug", "StudentIndex", "Formulier", new { id = Model.Stage }, null)
+</li>
+}
