@@ -164,3 +164,8 @@ cursor: pointer !important;
 .col-md-12{
     padding:0!important;
 }
+
+canvas {
+    border:1px solid #9F9F9F;
+    border-radius: 2px;
+}
