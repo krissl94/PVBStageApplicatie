@@ -23,18 +23,27 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
-            if (HttpContext.User.IsInRole("Docent"))
+            try
             {
-                var studentResultDocent = db.sp_StagiairPerDocent(Convert.ToInt32(HttpContext.User.Identity.Name));
-                List<Persoonsgegevens> studentenDocent = new List<Persoonsgegevens>();
-                foreach (var item in studentResultDocent)
+                if (HttpContext.User.IsInRole("Docent"))
                 {
-                    studentenDocent.Add(db.Persoonsgegevens.Where(x => x.PersoonsgegevensID == item.PersoonsgegevensID).FirstOrDefault());
-                }
-                return View(studentenDocent);
-            };
-            var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 4);
-            return View(persoonsgegevens.OrderBy(p=>p.StudentNummer).ToList());
+                    var studentResultDocent = db.sp_StagiairPerDocent(Convert.ToInt32(HttpContext.User.Identity.Name));
+                    List<Persoonsgegevens> studentenDocent = new List<Persoonsgegevens>();
+                    foreach (var item in studentResultDocent)
+                    {
+                        studentenDocent.Add(db.Persoonsgegevens.Where(x => x.PersoonsgegevensID == item.PersoonsgegevensID).FirstOrDefault());
+                    }
+                    return View(studentenDocent);
+                };
+                var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 4);
+                return View(persoonsgegevens.OrderBy(p => p.StudentNummer).ToList());
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
+
         }
 
         //
@@ -42,28 +51,36 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Details(int id = 0)
         {
-            Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            bool bekendStudent = false;
-            if (HttpContext.User.IsInRole("Docent"))
+            try
             {
-                var studentResultDocent = db.sp_StagiairPerDocent(Convert.ToInt32(HttpContext.User.Identity.Name));
-                foreach (var item in studentResultDocent)
+                Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
+                bool bekendStudent = false;
+                if (HttpContext.User.IsInRole("Docent"))
                 {
-                    if (item.PersoonsgegevensID == id)
+                    var studentResultDocent = db.sp_StagiairPerDocent(Convert.ToInt32(HttpContext.User.Identity.Name));
+                    foreach (var item in studentResultDocent)
                     {
-                        bekendStudent = true;
+                        if (item.PersoonsgegevensID == id)
+                        {
+                            bekendStudent = true;
+                        }
                     }
+                    if (bekendStudent)
+                        return View(persoonsgegevens);
+                    else
+                        return HttpNotFound();
                 }
-                if (bekendStudent)
-                    return View(persoonsgegevens);
-                else
+                if (persoonsgegevens == null)
+                {
                     return HttpNotFound();
+                }
+                return View(persoonsgegevens);
             }
-            if (persoonsgegevens == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
             }
-            return View(persoonsgegevens);
         }
 
         //
@@ -71,8 +88,17 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Create()
         {
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam");
-            return View();
+            try
+            {
+                ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam");
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
+
         }
 
         //
@@ -147,13 +173,21 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(int id = 0)
         {
-            Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            if (persoonsgegevens == null)
+            try
             {
-                return HttpNotFound();
+                Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
+                if (persoonsgegevens == null)
+                {
+                    return HttpNotFound();
+                }
+                ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
+                return View(persoonsgegevens);
             }
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
-            return View(persoonsgegevens);
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         //
@@ -234,14 +268,23 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ViewResult BulkNonActief(HttpPostedFileBase file)
         {
-            ExcelHelper eh = new ExcelHelper();
-            DataSet studentDs = eh.excelToDS(file, Server);
-            if (studentDs != null)
+            try
             {
-                ViewData["FeedbackNonActief"] = eh.dataSetToNonActiefStudent(studentDs);
+                ExcelHelper eh = new ExcelHelper();
+                DataSet studentDs = eh.excelToDS(file, Server);
+                if (studentDs != null)
+                {
+                    ViewData["FeedbackNonActief"] = eh.dataSetToNonActiefStudent(studentDs);
+                }
+
+                return View("~/Views/Stagiair/BulkInvoerStagiair.cshtml");
             }
-            
-            return View("~/Views/Stagiair/BulkInvoerStagiair.cshtml");
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
+
         }
 
         [HttpPost]

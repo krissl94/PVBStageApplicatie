@@ -19,8 +19,16 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
-            var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 3);
-            return View(persoonsgegevens.ToList());
+            try
+            {
+                var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 3);
+                return View(persoonsgegevens.ToList());
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         //
@@ -28,12 +36,20 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Details(int id = 0)
         {
-            Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            if (persoonsgegevens == null)
+            try
             {
-                return HttpNotFound();
+                Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
+                if (persoonsgegevens == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(persoonsgegevens);
             }
-            return View(persoonsgegevens);
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         //
@@ -41,9 +57,17 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Create()
         {
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam");
+            try
+            {
+                ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam");
 
-            return View();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         //
@@ -110,14 +134,22 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(int id = 0)
         {
-            Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            if (persoonsgegevens == null)
+            try
             {
-                return HttpNotFound();
-            }
+                Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
+                if (persoonsgegevens == null)
+                {
+                    return HttpNotFound();
+                }
 
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf.Where(p => p.Actief), "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
-            return View(persoonsgegevens);
+                ViewBag.Bedrijf = new SelectList(db.Bedrijf.Where(p => p.Actief), "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
+                return View(persoonsgegevens);
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
 
@@ -136,11 +168,11 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(Persoonsgegevens persoonsgegevens)
         {
-            EmailDuplicaatHelper edh = new EmailDuplicaatHelper();
-            ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
-
             try
             {
+                EmailDuplicaatHelper edh = new EmailDuplicaatHelper();
+                ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);
+
                 if (!edh.bestaatEmail(persoonsgegevens))
                 {
                     persoonsgegevens.Rol = 3;

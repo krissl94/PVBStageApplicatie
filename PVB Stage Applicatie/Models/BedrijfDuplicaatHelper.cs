@@ -9,9 +9,16 @@ namespace PVB_Stage_Applicatie.Models
     {
         public static bool NaamIsUniek(Bedrijf bedrijf)
         {
-            StageApplicatieEntities db = new StageApplicatieEntities();
+            try
+            {
+                StageApplicatieEntities db = new StageApplicatieEntities();
 
-            return db.Bedrijf.Where(b => b.Naam == bedrijf.Naam).FirstOrDefault() != null ? db.Bedrijf.Where(b => b.Naam == bedrijf.Naam).FirstOrDefault().BedrijfID == bedrijf.BedrijfID : true;
+                return db.Bedrijf.Where(b => b.Naam == bedrijf.Naam).FirstOrDefault() != null ? db.Bedrijf.Where(b => b.Naam == bedrijf.Naam).FirstOrDefault().BedrijfID == bedrijf.BedrijfID : true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

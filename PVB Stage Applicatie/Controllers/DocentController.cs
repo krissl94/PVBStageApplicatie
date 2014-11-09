@@ -19,14 +19,21 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
-            if (HttpContext.User.IsInRole("Docent"))
+            try
             {
-                return RedirectToAction("Details/" + HttpContext.User.Identity.Name);
-            };
-            var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 2);
-            return View(persoonsgegevens.ToList().OrderBy(x=>x.MedewerkerID));
+                if (HttpContext.User.IsInRole("Docent"))
+                {
+                    return RedirectToAction("Details/" + HttpContext.User.Identity.Name);
+                };
+                var persoonsgegevens = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 2);
+                return View(persoonsgegevens.ToList().OrderBy(x => x.MedewerkerID));
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
-
 
 
         public FileResult download()
@@ -41,15 +48,23 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Details(int id = 0)
         {
-            Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            Login login = db.Login.Where(l => l.Persoonsgegevens == id).FirstOrDefault();
-            CreateLoginViewModel clvm = new CreateLoginViewModel { Docent = persoonsgegevens, Login = login };
-            ViewData["Gebruikersnaam"] = login.Gebruikersnaam;
-            if (persoonsgegevens == null)
+            try
             {
-                return HttpNotFound();
+                Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
+                Login login = db.Login.Where(l => l.Persoonsgegevens == id).FirstOrDefault();
+                CreateLoginViewModel clvm = new CreateLoginViewModel { Docent = persoonsgegevens, Login = login };
+                ViewData["Gebruikersnaam"] = login.Gebruikersnaam;
+                if (persoonsgegevens == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(clvm);
             }
-            return View(clvm);
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         //
@@ -123,12 +138,21 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder, Docent")]
         public ActionResult Edit(int id = 0)
         {
-            Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
-            Login login = db.Login.Where(l => l.Persoonsgegevens == id).FirstOrDefault();
-            
-            login.Wachtwoord = "";
-            CreateLoginViewModel docentlogin = new CreateLoginViewModel{ Docent = persoonsgegevens, Login = login };
-            return View(docentlogin);
+            try
+            {
+                Persoonsgegevens persoonsgegevens = db.Persoonsgegevens.Find(id);
+                Login login = db.Login.Where(l => l.Persoonsgegevens == id).FirstOrDefault();
+
+                login.Wachtwoord = "";
+                CreateLoginViewModel docentlogin = new CreateLoginViewModel { Docent = persoonsgegevens, Login = login };
+                return View(docentlogin);
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
+
         }
 
         //
@@ -138,10 +162,12 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder, Docent")]
         public ActionResult Edit(CreateLoginViewModel persoonsgegevens)
         {
-            var persoonsgegevensList = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 2);
-            EmailDuplicaatHelper edh = new EmailDuplicaatHelper();
+
             try
             {
+                var persoonsgegevensList = db.Persoonsgegevens.Include(p => p.Bedrijf1).Where(p => p.Rol == 2);
+                EmailDuplicaatHelper edh = new EmailDuplicaatHelper();
+
                 persoonsgegevens.Docent.Rol = 2;
                 persoonsgegevens.Login.Persoonsgegevens = persoonsgegevens.Docent.PersoonsgegevensID;
                 bool BestaatEmail = edh.bestaatEmail(persoonsgegevens.Docent);
@@ -228,46 +254,54 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ViewResult BulkInvoer(HttpPostedFileBase file)
         {
-            ExcelHelper eh = new ExcelHelper();
-            DataSet DocentDs = eh.excelToDS(file, Server);
-
-            if (DocentDs != null)
+            try
             {
-                List<CreateLoginViewModel> lijstje = eh.dataSetToDocent(DocentDs);
+                ExcelHelper eh = new ExcelHelper();
+                DataSet DocentDs = eh.excelToDS(file, Server);
 
-                foreach (CreateLoginViewModel persoonsgegevens in lijstje)
+                if (DocentDs != null)
                 {
-                    if (db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Docent.Email).FirstOrDefault() == null)
+                    List<CreateLoginViewModel> lijstje = eh.dataSetToDocent(DocentDs);
+
+                    foreach (CreateLoginViewModel persoonsgegevens in lijstje)
                     {
-                        persoonsgegevens.Docent.Rol = 2;
-                        persoonsgegevens.Docent.Actief = true;
-                        persoonsgegevens.Login.Persoonsgegevens = persoonsgegevens.Docent.PersoonsgegevensID;
-                        ModelState.Remove("Docent.StudentNummer");
-                        ModelState.Remove("Docent.Opleiding");
-                        ModelState.Remove("Docent.Opleidingsniveau");
-                        ModelState.Remove("Docent.Bedrijf");
-                        if (ModelState.IsValid)
+                        if (db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Docent.Email).FirstOrDefault() == null)
                         {
-                           db.sp_PersoonToevoegen(2, persoonsgegevens.Docent.Voornaam,
-                           persoonsgegevens.Docent.Achternaam, persoonsgegevens.Docent.Tussenvoegsel, persoonsgegevens.Docent.Email,
-                           persoonsgegevens.Docent.Straat, persoonsgegevens.Docent.Huisnummer, persoonsgegevens.Docent.Toevoeging, persoonsgegevens.Docent.Postcode
-                           , persoonsgegevens.Docent.Plaats, null, persoonsgegevens.Docent.MedewerkerID, null, null, null, null);
+                            persoonsgegevens.Docent.Rol = 2;
+                            persoonsgegevens.Docent.Actief = true;
+                            persoonsgegevens.Login.Persoonsgegevens = persoonsgegevens.Docent.PersoonsgegevensID;
+                            ModelState.Remove("Docent.StudentNummer");
+                            ModelState.Remove("Docent.Opleiding");
+                            ModelState.Remove("Docent.Opleidingsniveau");
+                            ModelState.Remove("Docent.Bedrijf");
+                            if (ModelState.IsValid)
+                            {
+                                db.sp_PersoonToevoegen(2, persoonsgegevens.Docent.Voornaam,
+                                persoonsgegevens.Docent.Achternaam, persoonsgegevens.Docent.Tussenvoegsel, persoonsgegevens.Docent.Email,
+                                persoonsgegevens.Docent.Straat, persoonsgegevens.Docent.Huisnummer, persoonsgegevens.Docent.Toevoeging, persoonsgegevens.Docent.Postcode
+                                , persoonsgegevens.Docent.Plaats, null, persoonsgegevens.Docent.MedewerkerID, null, null, null, null);
 
 
-                           db.Login.Add(new Login
-                           {
-                               Gebruikersnaam = persoonsgegevens.Login.Gebruikersnaam,
-                               Wachtwoord = Hashing.HashString(persoonsgegevens.Login.Gebruikersnaam, persoonsgegevens.Login.Wachtwoord),
-                               Persoonsgegevens = db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Docent.Email).FirstOrDefault().PersoonsgegevensID
-                           });
-                           db.SaveChanges();
+                                db.Login.Add(new Login
+                                {
+                                    Gebruikersnaam = persoonsgegevens.Login.Gebruikersnaam,
+                                    Wachtwoord = Hashing.HashString(persoonsgegevens.Login.Gebruikersnaam, persoonsgegevens.Login.Wachtwoord),
+                                    Persoonsgegevens = db.Persoonsgegevens.Where(p => p.Email == persoonsgegevens.Docent.Email).FirstOrDefault().PersoonsgegevensID
+                                });
+                                db.SaveChanges();
+                            }
                         }
                     }
+                    List<Persoonsgegevens> lijst = eh.dataSetToStudent(DocentDs);
+                    ViewData["feedback"] = "Alle docenten zijn toegevoegd";
                 }
-                List<Persoonsgegevens> lijst = eh.dataSetToStudent(DocentDs);
-                ViewData["feedback"] = "Alle docenten zijn toegevoegd";
+                return View("~/Views/Docent/BulkInvoerDocent.cshtml");
             }
-            return View("~/Views/Docent/BulkInvoerDocent.cshtml");
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -14,26 +14,34 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Docent")]
         public ActionResult Index()
         {
-            List<Periode> Periodelijst = new List<Periode>(db.Periode.Where(x => x.Begindatum <= DateTime.Now));
+            try
+            {
+                List<Periode> Periodelijst = new List<Periode>(db.Periode.Where(x => x.Begindatum <= DateTime.Now));
 
-            List<StudentViewModel> Studentlijstje = new List<StudentViewModel>();
+                List<StudentViewModel> Studentlijstje = new List<StudentViewModel>();
 
-            foreach (var periode in Periodelijst)
-                foreach (var stage in periode.Stage)
-                    if (User.IsInRole("Docent"))
-                        if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
-                            if (stage.Stagedocent.ToString() == User.Identity.Name)
-                                Studentlijstje.Add(new StudentViewModel(
-                                    stage.Persoonsgegevens.PersoonsgegevensID,
-                                    stage.Persoonsgegevens.Voornaam,
-                                    stage.Persoonsgegevens.Achternaam,
-                                    stage.StageID,
-                                    stage.Persoonsgegevens.Toevoeging,
-                                    stage.Persoonsgegevens.StudentNummer));
+                foreach (var periode in Periodelijst)
+                    foreach (var stage in periode.Stage)
+                        if (User.IsInRole("Docent"))
+                            if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
+                                if (stage.Stagedocent.ToString() == User.Identity.Name)
+                                    Studentlijstje.Add(new StudentViewModel(
+                                        stage.Persoonsgegevens.PersoonsgegevensID,
+                                        stage.Persoonsgegevens.Voornaam,
+                                        stage.Persoonsgegevens.Achternaam,
+                                        stage.StageID,
+                                        stage.Persoonsgegevens.Toevoeging,
+                                        stage.Persoonsgegevens.StudentNummer));
 
-            ViewBag.DropDownList = new SelectList(Studentlijstje, "StageId", "Naam");
+                ViewBag.DropDownList = new SelectList(Studentlijstje, "StageId", "Naam");
 
-            return View();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         [Authorize(Roles = "Docent")]
@@ -47,13 +55,21 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult StudentIndex(int id)
         {
-            Stage stage = db.Stage.Where(s => s.StageID == id).FirstOrDefault();
+            try
+            {
+                Stage stage = db.Stage.Where(s => s.StageID == id).FirstOrDefault();
 
-            if (stage != null)
-                if(User.IsInRole("Beheerder") || User.Identity.Name == stage.Stagedocent.ToString())
-                    return View(stage);
-            
-            return RedirectToAction("Index", "Formulier");
+                if (stage != null)
+                    if (User.IsInRole("Beheerder") || User.Identity.Name == stage.Stagedocent.ToString())
+                        return View(stage);
+
+                return RedirectToAction("Index", "Formulier");
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
     }
 }

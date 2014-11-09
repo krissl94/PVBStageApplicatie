@@ -18,7 +18,15 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Index()
         {
-            return View(db.Periode.ToList());
+            try
+            {
+                return View(db.Periode.ToList());
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         //
@@ -26,12 +34,21 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Details(int id = 0)
         {
-            Periode periode = db.Periode.Find(id);
-            if (periode == null)
+            try
             {
-                return HttpNotFound();
+                Periode periode = db.Periode.Find(id);
+                if (periode == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(periode);
             }
-            return View(periode);
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
+
         }
 
         //
@@ -49,14 +66,23 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Create(Periode periode)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Periode.Add(periode);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Periode.Add(periode);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                return View(periode);
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
             }
 
-            return View(periode);
         }
 
         //
@@ -64,26 +90,35 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(int id = 0)
         {
-            Periode periode = db.Periode.Find(id);
-            bool periodeLeeg = false;
-            if (periode.Stage.Count() == 0)
+            try
             {
-                periodeLeeg = true;
-            }
-            if (periode == null)
-            {
-                return HttpNotFound();
-            }
-            if (periodeLeeg)
-            {
-                return View(periode);
-            }
-            else
-            {
-                ViewData["KanAanpassen"] = "De periode kan niet worden aangepast, omdat er andere objecten afhankelijk van zijn. ";
+                Periode periode = db.Periode.Find(id);
+                bool periodeLeeg = false;
+                if (periode.Stage.Count() == 0)
+                {
+                    periodeLeeg = true;
+                }
+                if (periode == null)
+                {
+                    return HttpNotFound();
+                }
+                if (periodeLeeg)
+                {
+                    return View(periode);
+                }
+                else
+                {
+                    ViewData["KanAanpassen"] = "De periode kan niet worden aangepast, omdat er andere objecten afhankelijk van zijn. ";
 
-                return View("~/Views/Periode/Index.cshtml", db.Periode.ToList());
+                    return View("~/Views/Periode/Index.cshtml", db.Periode.ToList());
+                }
             }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
+
         }
 
         //
@@ -93,13 +128,22 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Edit(Periode periode)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(periode).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(periode).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(periode);
             }
-            return View(periode);
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
+
         }
 
         //
@@ -107,12 +151,21 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult Delete(int id = 0)
         {
-            Periode periode = db.Periode.Find(id);
-            if (periode == null)
+            try
             {
-                return HttpNotFound();
+                Periode periode = db.Periode.Find(id);
+                if (periode == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(periode);
             }
-            return View(periode);
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
+
         }
 
         //
@@ -122,10 +175,19 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Periode periode = db.Periode.Find(id);
-            db.Periode.Remove(periode);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Periode periode = db.Periode.Find(id);
+                db.Periode.Remove(periode);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
+
         }
 
         protected override void Dispose(bool disposing)

@@ -21,13 +21,21 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Beheerder,Docent")]
         public ActionResult Details(int id = 0)
         {
-            Beoordeling beoordeling = db.Beoordeling.Find(id);
-            if (beoordeling == null)
+            try
             {
-                return HttpNotFound();
-            }
+                Beoordeling beoordeling = db.Beoordeling.Find(id);
+                if (beoordeling == null)
+                {
+                    return HttpNotFound();
+                }
 
-            return View(beoordeling);
+                return View(beoordeling);
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         //
@@ -35,89 +43,121 @@ namespace PVB_Stage_Applicatie.Controllers
         [Authorize(Roles = "Docent")]
         public ActionResult CreateFormulier(int id = 0)
         {
-            Stage stage = db.Stage.Where(s => s.StageID == id).FirstOrDefault();
+            try
+            {
+                Stage stage = db.Stage.Where(s => s.StageID == id).FirstOrDefault();
 
-            if (stage != null)
-                if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
-                    if (User.Identity.Name == stage.Stagedocent.ToString())
-                    {
-                        BeoordelingModel beoordlingModel = new BeoordelingModel()
+                if (stage != null)
+                    if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
+                        if (User.Identity.Name == stage.Stagedocent.ToString())
                         {
-                            Beoordeling = new Beoordeling()
+                            BeoordelingModel beoordlingModel = new BeoordelingModel()
                             {
-                                Stage = stage.StageID,
-                                Stage1 = stage
-                            }
-                        };
+                                Beoordeling = new Beoordeling()
+                                {
+                                    Stage = stage.StageID,
+                                    Stage1 = stage
+                                }
+                            };
 
-                        return View(beoordlingModel);
-                    }
+                            return View(beoordlingModel);
+                        }
 
-            return RedirectToAction("StudentIndex", "Formulier", new { id = id });
+                return RedirectToAction("StudentIndex", "Formulier", new { id = id });
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         [HttpPost]
         [Authorize(Roles = "Docent")]
         public ActionResult CreateFormulier(BeoordelingModel beoordelingModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                beoordelingModel.Beoordeling.Datum = DateTime.Now;
-                beoordelingModel.Beoordeling.Stage1 = db.Stage.Where(i => i.StageID == beoordelingModel.Beoordeling.Stage).FirstOrDefault();
-                beoordelingModel.Beoordeling.EindBeoordeling = false;
+                if (ModelState.IsValid)
+                {
+                    beoordelingModel.Beoordeling.Datum = DateTime.Now;
+                    beoordelingModel.Beoordeling.Stage1 = db.Stage.Where(i => i.StageID == beoordelingModel.Beoordeling.Stage).FirstOrDefault();
+                    beoordelingModel.Beoordeling.EindBeoordeling = false;
 
-                db.Beoordeling.Add(beoordelingModel.Beoordeling);
+                    db.Beoordeling.Add(beoordelingModel.Beoordeling);
 
-                db.SaveChanges();
+                    db.SaveChanges();
 
-                return RedirectToAction("StudentIndex", "Formulier", new { id = beoordelingModel.Beoordeling.Stage });
+                    return RedirectToAction("StudentIndex", "Formulier", new { id = beoordelingModel.Beoordeling.Stage });
+                }
+
+                return View(beoordelingModel);
             }
-
-            return View(beoordelingModel);
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         [Authorize(Roles = "Docent")]
         public ActionResult CreateEindbeoordeling(int id = 0)
         {
-            Stage stage = db.Stage.Where(s => s.StageID == id).FirstOrDefault();
+            try
+            {
+                Stage stage = db.Stage.Where(s => s.StageID == id).FirstOrDefault();
 
-            if (stage != null)
-                if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
-                    if (User.Identity.Name == stage.Stagedocent.ToString())
-                    {
-                        BeoordelingModel beoordlingModel = new BeoordelingModel()
+                if (stage != null)
+                    if (stage.TussentijdseBeindeging.Count == 0 && stage.Beoordeling.Where(e => e.EindBeoordeling == true).FirstOrDefault() == null)
+                        if (User.Identity.Name == stage.Stagedocent.ToString())
                         {
-                            Beoordeling = new Beoordeling()
+                            BeoordelingModel beoordlingModel = new BeoordelingModel()
                             {
-                                Stage = stage.StageID,
-                                Stage1 = stage
-                            }
-                        };
+                                Beoordeling = new Beoordeling()
+                                {
+                                    Stage = stage.StageID,
+                                    Stage1 = stage
+                                }
+                            };
 
-                        return View(beoordlingModel);
-                    }
+                            return View(beoordlingModel);
+                        }
 
-            return RedirectToAction("StudentIndex", "Formulier", new { id = id });
+                return RedirectToAction("StudentIndex", "Formulier", new { id = id });
+            }
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         [HttpPost]
         [Authorize(Roles = "Docent")]
         public ActionResult CreateEindbeoordeling(BeoordelingModel beoordelingModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                beoordelingModel.Beoordeling.Datum = DateTime.Now;
-                beoordelingModel.Beoordeling.Stage1 = db.Stage.Where(i => i.StageID == beoordelingModel.Beoordeling.Stage).FirstOrDefault();
-                beoordelingModel.Beoordeling.EindBeoordeling = true;
+                if (ModelState.IsValid)
+                {
+                    beoordelingModel.Beoordeling.Datum = DateTime.Now;
+                    beoordelingModel.Beoordeling.Stage1 = db.Stage.Where(i => i.StageID == beoordelingModel.Beoordeling.Stage).FirstOrDefault();
+                    beoordelingModel.Beoordeling.EindBeoordeling = true;
 
-                db.Beoordeling.Add(beoordelingModel.Beoordeling);
+                    db.Beoordeling.Add(beoordelingModel.Beoordeling);
 
-                db.SaveChanges();
+                    db.SaveChanges();
 
-                return RedirectToAction("StudentIndex", "Formulier", new { id = beoordelingModel.Beoordeling.Stage });
+                    return RedirectToAction("StudentIndex", "Formulier", new { id = beoordelingModel.Beoordeling.Stage });
+                }
+
+                return View(beoordelingModel);
             }
-
-            return View(beoordelingModel);
+            catch (Exception ex)
+            {
+                ViewData["Foutmelding"] = ex.ToString();
+                return View();
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -13,32 +13,6 @@ namespace PVB_Stage_Applicatie.Models
 
             try
             {
-                //bool BestaatEmail;
-
-                //if (db.Persoonsgegevens.Where(p => p.Email == persoon.Email).FirstOrDefault().Email != null)
-                //{
-                //    if (db.Persoonsgegevens.Where(p => p.Email == persoon.Email).FirstOrDefault().PersoonsgegevensID == persoon.PersoonsgegevensID)
-                //    {
-                //        BestaatEmail = false;
-                //    }
-                //    else
-                //    {
-                //        BestaatEmail = true;
-                //    }
-                //}
-                //else
-                //{
-                //    BestaatEmail = false;
-                //}
-
-                //if (BestaatEmail == false){
-                //    return false;
-                //}
-                //else
-                //{
-                //    return true;
-                //}
-
                 return db.Persoonsgegevens.Where(p => p.Email == persoon.Email).FirstOrDefault() != null ? db.Persoonsgegevens.Where(p => p.Email == persoon.Email).FirstOrDefault().PersoonsgegevensID != persoon.PersoonsgegevensID : false;
             }
             catch (Exception Exception)
