@@ -115,7 +115,7 @@ namespace PVB_Stage_Applicatie.Controllers
                         db.sp_PersoonToevoegen(4, persoonsgegevens.Voornaam,
                         persoonsgegevens.Achternaam, persoonsgegevens.Tussenvoegsel, persoonsgegevens.Email, 
                         persoonsgegevens.Straat, persoonsgegevens.Huisnummer, persoonsgegevens.Toevoeging, persoonsgegevens.Postcode
-                        , persoonsgegevens.Plaats, null, null, persoonsgegevens.StudentNummer, null, persoonsgegevens.Opleidingsniveau, null);
+                        , persoonsgegevens.Plaats, null, null, persoonsgegevens.StudentNummer, persoonsgegevens.Opleiding, persoonsgegevens.Opleidingsniveau, null);
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }
@@ -176,8 +176,8 @@ namespace PVB_Stage_Applicatie.Controllers
                         db.sp_PersoonUpdaten(persoonsgegevens.PersoonsgegevensID,
                             persoonsgegevens.Email, persoonsgegevens.Straat,
                             persoonsgegevens.Huisnummer, persoonsgegevens.Toevoeging,
-                            persoonsgegevens.Postcode, persoonsgegevens.Plaats,
-                            persoonsgegevens.Actief, persoonsgegevens.NonActiefReden);
+                            persoonsgegevens.Postcode, persoonsgegevens.Plaats, persoonsgegevens.Opleiding,
+                            persoonsgegevens.Actief, persoonsgegevens.NonActiefReden, null);
                         return RedirectToAction("Index");
                     }
                     ViewBag.Bedrijf = new SelectList(db.Bedrijf, "BedrijfID", "Naam", persoonsgegevens.Bedrijf);

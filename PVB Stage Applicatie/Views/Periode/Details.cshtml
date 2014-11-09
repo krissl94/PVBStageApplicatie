@@ -7,10 +7,11 @@
 <li>
     @Html.ActionLink("Back to List", "Index")
 </li>
+    @if (User.IsInRole("Beheerder")) { 
     <li>
         @Html.ActionLink("Edit", "Edit", new { id = Model.Periode1 })
     </li>
-}
+}}
 
 <div class="panel panel-default">
     <div class="panel-heading">

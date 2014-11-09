@@ -58,7 +58,14 @@
                         @Html.DisplayNameFor(model => model.Leerweg)
                     </td>
                     <td class="display-field">
-                        @Html.DisplayFor(model => model.Leerweg)
+                        @if (Model.Leerweg == 0)
+                        {
+                            <p>BOL</p>
+                        }
+                        else
+                        {
+                            <p>BBL</p>
+                        }
                     </td>
                 </tr>
             </table>

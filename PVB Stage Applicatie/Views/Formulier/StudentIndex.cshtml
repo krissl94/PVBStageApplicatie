@@ -32,7 +32,7 @@
                             Datum
                         </th>
                         <th>
-                            Type
+                            Eindbeoordeling
                         </th>
                         <th></th>
                     </tr>
@@ -84,7 +84,14 @@
                                 @Html.DisplayFor(modelItem => item.Einddatum, "{0:dd/MM/yyyy}")
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Leerweg)
+                                @if(item.Leerweg == 0)
+                                {
+                                    <p>BOL</p>
+                                }
+                                else
+                                {
+                                    <p>BBL</p>
+                                }
                             </td>
                             <td>
                                 @Html.ActionLink("Details", "Details", "TussentijdseBeeindiging", new { id = item.TussentijdsebeoordelingID }, null)

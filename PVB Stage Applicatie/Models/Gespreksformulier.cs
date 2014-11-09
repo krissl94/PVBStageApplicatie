@@ -11,8 +11,8 @@ namespace PVB_Stage_Applicatie.Models
 {
     using System;
     using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Gespreksformulier
     {
         public int GespreksformulierID { get; set; }
@@ -25,7 +25,7 @@ using System.ComponentModel.DataAnnotations;
         public byte[] HandtekeningStudent { get; set; }
         public byte[] HandtekeningDocent { get; set; }
         public byte[] HandtekeningBegeleider { get; set; }
-    
+
         public virtual Stage Stage1 { get; set; }
     }
 }

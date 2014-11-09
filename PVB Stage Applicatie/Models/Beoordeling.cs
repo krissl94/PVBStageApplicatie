@@ -12,7 +12,7 @@ namespace PVB_Stage_Applicatie.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class Beoordeling
     {
         public int BeoordelingID { get; set; }
@@ -75,7 +75,7 @@ namespace PVB_Stage_Applicatie.Models
         public bool EindBeoordeling { get; set; }
         public int TechnischInzicht { get; set; }
         public string TechnischInzichtOpm { get; set; }
-    
+
         public virtual Stage Stage1 { get; set; }
     }
 }

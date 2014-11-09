@@ -144,13 +144,15 @@ namespace PVB_Stage_Applicatie.Controllers
                 if (!edh.bestaatEmail(persoonsgegevens))
                 {
                     persoonsgegevens.Rol = 3;
-                    persoonsgegevens.Actief = true;
 
                     ModelState.Remove("StudentNummer");
                     ModelState.Remove("Opleiding");
                     ModelState.Remove("Opleidingsniveau");
                     ModelState.Remove("MedewerkerID");
+                    if(persoonsgegevens.Bedrijf == null)
+                    {
 
+                    }
                     if (ModelState.IsValid)
                     {
                         db.sp_PersoonUpdaten(
@@ -161,8 +163,10 @@ namespace PVB_Stage_Applicatie.Controllers
                             persoonsgegevens.Toevoeging,
                             persoonsgegevens.Postcode,
                             persoonsgegevens.Plaats,
+                            persoonsgegevens.Opleiding,
                             persoonsgegevens.Actief,
-                            persoonsgegevens.NonActiefReden);
+                            persoonsgegevens.NonActiefReden,
+                            persoonsgegevens.Bedrijf);
 
                         db.SaveChanges();
 

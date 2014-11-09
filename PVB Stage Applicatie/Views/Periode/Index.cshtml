@@ -5,7 +5,9 @@
 }
 
 @section zijMenu{
-    <li>@Html.ActionLink("Periode toevoegen", "Create")</li>
+    @if (User.IsInRole("Beheerder")) { 
+    <li>@Html.ActionLink("Periode toevoegen", "Create")</li>}
+                                                            
 }
 <h2>Index</h2>
 <p>@Html.Encode(ViewData["KanAanpassen"])</p>
@@ -43,9 +45,11 @@
                             @Html.DisplayFor(modelItem => item.Einddatum)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Periode1 }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Periode1 }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Periode1 })
+                            @Html.ActionLink("Details", "Details", new { id = item.Periode1 })
+                            @if (User.IsInRole("Beheerder")) { 
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Periode1 });
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Periode1 });
+                            }
                         </td>
                     </tr>
                 }

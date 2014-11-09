@@ -12,7 +12,7 @@ namespace PVB_Stage_Applicatie.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class TussentijdseBeindeging
     {
         public TussentijdseBeindeging()
@@ -21,7 +21,7 @@ namespace PVB_Stage_Applicatie.Models
             this.RedenOrganisatie = new HashSet<RedenOrganisatie>();
             this.RedenStudent = new HashSet<RedenStudent>();
         }
-    
+
         public int TussentijdsebeoordelingID { get; set; }
         public int Stage { get; set; }
 
@@ -35,7 +35,7 @@ namespace PVB_Stage_Applicatie.Models
 
         [Required(ErrorMessage = "Leerweg is een verplicht veld")]
         public int Leerweg { get; set; }
-    
+
         public virtual Stage Stage1 { get; set; }
         public virtual ICollection<RedenOnderwijsinstelling> RedenOnderwijsinstelling { get; set; }
         public virtual ICollection<RedenOrganisatie> RedenOrganisatie { get; set; }

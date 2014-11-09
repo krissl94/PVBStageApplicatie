@@ -145,8 +145,8 @@ namespace PVB_Stage_Applicatie.Models
                                 db.sp_PersoonUpdaten(persoonsgegevens.PersoonsgegevensID,
                                 persoonsgegevens.Email, persoonsgegevens.Straat,
                                 persoonsgegevens.Huisnummer, persoonsgegevens.Toevoeging,
-                                persoonsgegevens.Postcode, persoonsgegevens.Plaats,
-                                false, "Geslaagd");
+                                persoonsgegevens.Postcode, persoonsgegevens.Plaats, persoonsgegevens.Opleiding,
+                                false, "Geslaagd", null);
                                 //db.Entry(item).State = EntityState.Modified;
                             }
                         }

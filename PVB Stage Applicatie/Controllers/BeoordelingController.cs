@@ -22,7 +22,6 @@ namespace PVB_Stage_Applicatie.Controllers
         public ActionResult Details(int id = 0)
         {
             Beoordeling beoordeling = db.Beoordeling.Find(id);
-            
             if (beoordeling == null)
             {
                 return HttpNotFound();
